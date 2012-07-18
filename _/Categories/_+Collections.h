@@ -28,11 +28,16 @@
 //
 
 #import "_.h"
+#import "_BlockTypes.h"
 
 @interface _ (Collections)
 
-//each
-//map
++ (void(^)(id collection, _IteratorBlock block))each;
++ (void(^)(id collection, _IteratorBlock block))forEach;
+
++ (id(^)(id collection, _MapBlock block))map;
++ (id(^)(id collection, _MapBlock block))collect;
+
 //reduce
 //reduceRight
 //find

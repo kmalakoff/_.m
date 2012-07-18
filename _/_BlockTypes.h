@@ -27,3 +27,15 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import <Foundation/Foundation.h>
+
+typedef void (^_DoBlock)();
+
+typedef BOOL (^_TestBlock)(id obj);
+typedef id   (^_ReduceBlock)(id memo, id obj);
+
+typedef void (^_IteratorBlock)(id value, id key);
+typedef id   (^_MapBlock)(id value, id key);
+
+typedef id (^_SortByBlock)(id value);
+typedef NSComparisonResult (^_CompareBlock)(id left, id right);

@@ -28,7 +28,75 @@
 //
 
 #import "_+Collections.h"
+#import "_+Objects.h"
 
 @implementation _ (Collections)
+
++ (void(^)(id, _IteratorBlock))each
+{
+  return ^(id obj, _IteratorBlock block) {
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
+
+    if (_.isNull(obj))
+      return;
+
+    else if (_.isArray(obj)) {
+      NSArray *array = obj;
+      if(!array.count) return;
+
+      NSInteger count = [array count];
+      for (NSInteger index=0; index<count; index++) {
+        block([array objectAtIndex:index], [NSNumber numberWithInteger:index]);
+      }
+    }
+    else {
+      NSDictionary *dictionary = obj;
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+          block(value, key);
+      }];
+    }
+  };
+}
++ (void(^)(id, _IteratorBlock))forEach { return self.each; }  // alias
+
++ (id(^)(id, _MapBlock))map
+{
+  return ^(id obj, _MapBlock block) {
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
+
+    if (_.isNull(obj))
+      return [NSMutableArray array];
+
+    else if (_.isArray(obj)) {
+      NSArray *array = obj;
+      if(!array.count) return [NSMutableArray array];
+
+      NSMutableArray *result = [NSMutableArray arrayWithCapacity:array.count];
+      NSInteger count = [array count];
+      for (NSInteger index=0; index<count; index++) {
+        id mapped = block([array objectAtIndex:index], [NSNumber numberWithInteger:index]);
+        if (mapped)
+          [result addObject:mapped];
+      }
+
+      return result;
+    }
+    else {
+      NSDictionary *dictionary = obj;
+      NSMutableDictionary *result = [NSMutableDictionary dictionary];
+
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+        id mapped = block(value, key);
+        if (mapped)
+          [result setObject:mapped forKey:key];
+      }];
+      
+      return (id) result;
+    }
+    
+    return nil;
+  };
+}
++ (id(^)(id, _MapBlock))collect { return self.map; }
 
 @end

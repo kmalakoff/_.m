@@ -1,5 +1,5 @@
 //
-//  _+Arrays.h
+//  _BlockTypes.h
 //  _.m
 //
 //  Created by Kevin Malakoff on 7/18/12.
@@ -27,43 +27,8 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "_.h"
-#import "_BlockTypes.h"
+#import <Foundation/Foundation.h>
 
-@interface _ (Arrays)
-
-+ (id(^)(NSArray *array, NSInteger n))first;
-+ (id(^)(NSArray *array, NSInteger n))head;
-+ (id(^)(NSArray *array, NSInteger n))take;
-//
-//+ (NSArray*(^)(NSArray *array))initial;
-//
-//+ (id (^)(NSArray *array, NSUInteger n))last;
-//
-//+ (NSArray*(^)(NSArray *array, NSUInteger n))rest;
-//+ (NSArray*(^)(NSArray *array, NSUInteger n))tail;
-//
-//+ (NSArray*(^)(NSArray *array))compact;
-//
-//+ (NSArray*(^)(NSArray *array, BOOL shallow))flatten;
-//
-//+ (NSArray*(^)(NSArray *array, NSArray*values))without;
-//
-//+ (NSArray*(^)(NSArray *arrays))union;
-//
-//+ (NSArray*(^)(NSArray *arrays))intersection;
-//
-//+ (NSArray*(^)(NSArray *array, NSArray *arrays))difference;
-//
-//+ (id (^)(NSArray *array, BOOL isSorted, _MapBlock iterator))uniq;
-//+ (id (^)(NSArray *array, BOOL isSorted, _MapBlock iterator))unique;
-//
-//+ (NSArray*(^)(NSArray *arrays))zip;
-//
-//+ (NSInteger (^)(NSArray *array, id value, BOOL isSorted))indexOf;
-//
-//+ (NSInteger (^)(NSArray *array, id value))lastIndexOf;
-//
-//+ (NSArray* (^)(NSInteger start, NSInteger stop, NSInteger step))range;
-//
-@end
+// TODO use the index of object return value
+#define _NoneInt -101001
+#define _None [NSNull null]

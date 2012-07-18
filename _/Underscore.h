@@ -31,6 +31,9 @@
 # error _.m requires Automatic Reference Counting to be enabled
 #endif
 
+#import "_Constants.h"
+#import "_BlockTypes.h"
+
 // publish _ categories
 #import "_+Arrays.h"
 #import "_+Chaining.h"

@@ -31,4 +31,35 @@
 
 @implementation _ (Objects)
 
+//keys
+//values
+//functions
+//extend
+//pick
+//defaults
+//clone
+//tap
+//has
+//isEqual
+//isEmpty
+//isElement
+
++ (BOOL(^)(id obj))isArray  { return ^(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
++ (BOOL(^)(id obj))isObject { return ^BOOL(id obj) { return _.isDictionary(obj) || _.isString(obj) || _.isArray(obj); }; }
+
+//isArguments
+//isFunction
++ (BOOL(^)(id obj))isString { return ^(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
++ (BOOL(^)(id obj))isNumber { return ^(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
+//isFinite
+//isBoolean
++ (BOOL(^)(id obj))isDate { return ^(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
+//isRegExp
+//isNaN
++ (BOOL(^)(id obj))isNull   { return ^BOOL(id obj) { return (obj==nil) || [obj isKindOfClass:[NSNull class]]; }; }
+//isUndefined
+
+// ADDED
++ (BOOL(^)(id obj))isDictionary { return ^(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
+
 @end
