@@ -11,12 +11,8 @@
 @interface NSMutableString (SS)
 
 + (NSMutableString*)new_;
-//+ (SSArrayCreateWrapper* (^)(id value))s_;
 + (NSMutableString*(^)(NSString *value))s;
 + (NSMutableString*(^)(NSString *format, ...))f;
 - (NSMutableString* (^)(NSString* value))add;
 
 @end
-
-// aliases
-#define S       NSMutableString

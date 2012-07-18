@@ -1,5 +1,5 @@
 //
-//  NSDate+SS.h
+//  NSDictionary+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (SS)
+@interface NSDictionary (SS)
 
-+ (NSDate*)new_;
+- (BOOL (^)(id key))has;
+- (id (^)(id key))get;
 
 @end
-
-// aliases
-#define D       NSDate

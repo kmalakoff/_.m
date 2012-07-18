@@ -12,6 +12,7 @@
 @interface QUnitTestCase : SenTestCase
 
 - (void (^)(id actual, id expected, NSString *message, ...))equal;
+- (void (^)(NSInteger actual, NSInteger expected, NSString *message, ...))equalI;
 - (void (^)(BOOL result, NSString *message, ...))ok;
 
 @end

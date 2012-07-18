@@ -7,7 +7,6 @@
 //
 
 #import "NSMutableString+SS.h"
-#import "SSArrayCreateWrapper+Private.h"
 
 @implementation NSMutableString (SS)
 
@@ -22,13 +21,6 @@
     return [NSMutableString stringWithString:value];
   };
 }
-
-//+ (SSArrayCreateWrapper*(^)(id))s_
-//{
-//  return ^(id value) {
-//    return [[SSArrayCreateWrapper alloc] initWithArray:[NSMutableString arrayWithObject:value]];
-//  };
-//}
 
 + (NSMutableString*(^)(NSString *format, ...))f
 {

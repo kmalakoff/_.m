@@ -10,13 +10,10 @@
 
 @implementation QUnitTestCase
 
-- (void (^)(id actual, id expected, NSString *message, ...))equal
+- (void (^)(id actual, id expected, NSString *message, va_list args))_equal
 {
-  return ^(id actual, id expected, NSString *message, ...){
-    va_list args;
-    va_start(args, message);
+  return ^(id actual, id expected, NSString *message, va_list args){
     NSString *description = [[NSString alloc] initWithFormat:message arguments:args];
-    va_end(args);
 
     @try {
       if (actual != expected) { 
@@ -41,6 +38,26 @@
                  atLine:0
         withDescription:description])]; 
     }
+  };
+}
+
+- (void (^)(id actual, id expected, NSString *message, ...))equal
+{
+  return ^(id actual, id expected, NSString *message, ...){
+    va_list args;
+    va_start(args, message);
+    self._equal(actual, expected, message, args);
+    va_end(args);
+  };
+}
+
+- (void (^)(NSInteger actual, NSInteger expected, NSString *message, ...))equalI
+{
+  return ^(NSInteger actual, NSInteger expected, NSString *message, ...){
+    va_list args;
+    va_start(args, message);
+    self._equal([NSNumber numberWithInteger:actual], [NSNumber numberWithInteger:expected], message, args);
+    va_end(args);
   };
 }
 

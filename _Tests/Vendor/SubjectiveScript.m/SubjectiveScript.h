@@ -12,12 +12,14 @@
 
 // core
 #import "SSSubjectiveScript.h"
+#import "SSTypes.h"
 
-// mutable categories
+// categories
+#import "NSArray+SS.h"
 #import "NSMutableArray+SS.h"
+#import "NSDictionary+SS.h"
 #import "NSMutableDictionary+SS.h"
+#import "NSString+SS.h"
 #import "NSMutableString+SS.h"
-
-// immutable categoies
 #import "NSNumber+SS.h"
 #import "NSDate+SS.h"

@@ -1,5 +1,5 @@
 //
-//  _BlockTypes.h
+//  _Types.h
 //  _.m
 //
 //  Created by Kevin Malakoff on 7/18/12.
@@ -29,13 +29,11 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^_DoBlock)();
-
-typedef BOOL (^_TestBlock)(id obj);
-typedef id   (^_ReduceBlock)(id memo, id obj);
-
-typedef void (^_IteratorBlock)(id value, id key);
-typedef id   (^_MapBlock)(id value, id key);
-
-typedef id (^_SortByBlock)(id value);
-typedef NSComparisonResult (^_CompareBlock)(id left, id right);
+// blocks
+//typedef void                (^_DoBlock)();
+//typedef BOOL                (^_TestBlock)(id obj);
+//typedef id                  (^_ReduceBlock)(id memo, id obj);
+//typedef void                (^_IteratorBlock)(id value, id key);
+//typedef id                  (^_MapBlock)(id value, id key);
+//typedef id                  (^_SortByBlock)(id value);
+//typedef NSComparisonResult  (^_CompareBlock)(id left, id right);

@@ -1,5 +1,5 @@
 //
-//  _BlockTypes.h
+//  _Types.h
 //  _.m
 //
 //  Created by Kevin Malakoff on 7/18/12.
@@ -29,6 +29,5 @@
 
 #import <Foundation/Foundation.h>
 
-// TODO use the index of object return value
-#define _NoneInt -101001
-#define _None [NSNull null]
+#define _NoneInt  NSNotFound
+#define _None     [NSNull null]

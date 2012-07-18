@@ -20,6 +20,3 @@
 - (float)f;
 
 @end
-
-// aliases
-#define N       NSNumber

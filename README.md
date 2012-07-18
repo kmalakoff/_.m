@@ -8,7 +8,7 @@ _.m is a port of Underscore.js to Objective-C
 
 Global Changes
 ------------
-NSObject -> integers, bools are NSNumbers -> use N* and N.i, N.b, etc when iterating and Ai1, Ai3, etc for arrays
+NSObject -> integers, bools are NSNumbers -> use N* and N.i, N.b, etc when iterating and Ai1, _IA, etc for arrays
 null -> nil
 '' and "" to @""
 

@@ -28,7 +28,10 @@
 //
 
 #import "_.h"
-#import "_BlockTypes.h"
+#import "_Types.h"
+
+typedef void (^_IteratorBlock)(id value, id key);
+typedef id   (^_MapBlock)(id value, id key);
 
 @interface _ (Collections)
 

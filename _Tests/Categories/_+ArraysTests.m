@@ -14,18 +14,19 @@
 
 - (void)test_first
 {
-  self.equal(_.first(Ai3(1,2,3), _NoneInt), N.i(1), @"can pull out the first element of an array");
+  self.equal(_.first(_IA(1, 2, 3), _NoneInt), N.i(1), @"can pull out the first element of an array");
+  // TODO: chaining - can I overload a define?
 //  self.equal(_([1, 2, 3]).first(), 1, @"can perform OO-style "first()"");
-  self.equal(((A*)_.first(Ai3(1,2,3), 0)).join(@", "), @"", @"can pass an index to first");
-  self.equal(((A*)_.first(Ai3(1,2,3), 2)).join(@", "), @"1, 2", @"can pass an index to first");
-  self.equal(((A*)_.first(Ai3(1,2,3), 5)).join(@", "), @"1, 2, 3", @"can pass an index to first");
+  self.equal(((A*)_.first(_IA(1,2,3), 0)).join(@", "), @"", @"can pass an index to first");
+  self.equal(((A*)_.first(_IA(1,2,3), 2)).join(@", "), @"1, 2", @"can pass an index to first");
+  self.equal(((A*)_.first(_IA(1,2,3), 5)).join(@", "), @"1, 2, 3", @"can pass an index to first");
 //  NSInteger iResult = (^(){ return _.first(arguments); })(4, 3, 2, 1);
 //  self.equal(iResult, 4, @"works on an arguments object.");
-//  A* result = _.map(Ai3(1,2,3),Ai3(1,2,3)), _.first);
+//  A* result = _.map(_IA(1,2,3),_IA(1,2,3)), _.first);
 //  self.equal(result.join(@","), @"1,1", @"works well with _.map");
-  A* result = (^() { return _.take(Ai3(1,2,3), 2); })();
+  A* result = (^() { return _.take(_IA(1,2,3), 2); })();
   self.equal(result.join(@","), @"1,2", @"aliased as take");
-  result = (^() { return _.head(Ai3(1,2,3), 2); })();
+  result = (^() { return _.head(_IA(1,2,3), 2); })();
   self.equal(result.join(@","), @"1,2", @"aliased as head");
 }
 

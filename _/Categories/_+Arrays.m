@@ -29,7 +29,6 @@
 
 #import "_+Arrays.h"
 #import "_Constants.h"
-#import "SubjectiveScript.h"
 
 @implementation _ (Arrays)
 

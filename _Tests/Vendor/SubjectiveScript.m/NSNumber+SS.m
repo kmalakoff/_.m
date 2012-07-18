@@ -7,7 +7,6 @@
 //
 
 #import "NSNumber+SS.h"
-#import "SSArrayCreateWrapper+Private.h"
 
 @implementation NSNumber (SS)
 

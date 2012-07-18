@@ -27,15 +27,16 @@
 
 - (void)test_isArray
 {
+
 //  self.ok(!_.isArray(arguments), @"the arguments object is not an array");
-  self.ok(_.isArray(Ai3(1, 2, 3)), @"but arrays are");
+  self.ok(_.isArray(_IA(1, 2, 3)), @"but arrays are");
 //  self.ok(_.isArray(iArray), @"even from another frame");
 }
 
 - (void)test_isObject
 {
 //  self.ok(_.isObject(arguments), @"the arguments object is object");
-  self.ok(_.isObject(Ai3(1, 2, 3)), @"and arrays");
+  self.ok(_.isObject(_IA(1, 2, 3)), @"and arrays");
 //  self.ok(_.isObject($("html")[0]), @"and DOM element");
 //  self.ok(_.isObject(iElement), @"even from another frame");
 //  self.ok(_.isObject(function () {}), @"and functions");
@@ -54,7 +55,7 @@
 - (void)test_isString
 {
 //  self.ok(!_.isString(document.body), @"the document body is not a string");
-  self.ok(_.isString(Ai3(1, 2, 3).join(@", ")), @"but strings are");
+  self.ok(_.isString(_IA(1, 2, 3).join(@", ")), @"but strings are");
 //  self.ok(_.isString(iString), @"even from another frame");
 }
 
