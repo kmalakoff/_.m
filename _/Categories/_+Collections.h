@@ -30,16 +30,15 @@
 #import "_.h"
 #import "_Types.h"
 
-typedef void (^_IteratorBlock)(id value, id key);
-typedef id   (^_MapBlock)(id value, id key);
-
 @interface _ (Collections)
 
-+ (void(^)(id collection, _IteratorBlock block))each;
-+ (void(^)(id collection, _IteratorBlock block))forEach;
++ (void(^)(id obj, _IteratorBlock block))each;
++ (void(^)(id obj, _IteratorBlock block))forEach;
++ (void(^)(id obj, _IteratorWithContextBlock block, id context))eachWithContext;
 
-+ (id(^)(id collection, _MapBlock block))map;
-+ (id(^)(id collection, _MapBlock block))collect;
++ (id(^)(id obj, _MapBlock block))map;
++ (id(^)(id obj, _MapBlock block))collect;
++ (id(^)(id obj, _MapWithContextBlock block, id context))mapWithContext;
 
 //reduce
 //reduceRight

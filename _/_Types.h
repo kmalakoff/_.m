@@ -30,10 +30,12 @@
 #import <Foundation/Foundation.h>
 
 // blocks
-//typedef void                (^_DoBlock)();
+typedef void                (^_DoBlock)();
 //typedef BOOL                (^_TestBlock)(id obj);
-//typedef id                  (^_ReduceBlock)(id memo, id obj);
-//typedef void                (^_IteratorBlock)(id value, id key);
-//typedef id                  (^_MapBlock)(id value, id key);
-//typedef id                  (^_SortByBlock)(id value);
+typedef id                  (^_ReduceBlock)(id memo, id obj);
+typedef void                (^_IteratorBlock)(id value, id key);
+typedef void                (^_IteratorWithContextBlock)(id value, id key, id context);
+typedef id                  (^_MapBlock)(id value, id key);
+typedef id                  (^_MapWithContextBlock)(id value, id key, id context);
+typedef id                  (^_SortByBlock)(id value);
 //typedef NSComparisonResult  (^_CompareBlock)(id left, id right);

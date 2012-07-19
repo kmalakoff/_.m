@@ -18,11 +18,11 @@
     self.equalI(num.i, i.i + 1, @"each iterators provide value and iteration count");
   });
 
-//  A* answers = A.new_;
-//  _.each(_IA(1, 2, 3), ^(N* num, N* i){ answers.push(num.f * this.multiplier);}, O.o_(@"multiplier", N.i(5)).__);
-//  self.equal(answers.join(@", "), @"5, 10, 15", @"context object property accessed");
-
   __block A* answers = A.new_;
+  _.eachWithContext(_IA(1, 2, 3), ^(N* num, N* i, O* this){ answers.push(N.i(num.i * ((N*)this.get(@"multiplier")).i));}, _O({@"multiplier", N.i(5)})); // CHANGE
+  self.equal(answers.join(@", "), @"5, 10, 15", @"context object property accessed");
+
+  answers = A.new_;
   _.forEach(_IA(1, 2, 3), ^(N* num, N* i){ answers.push(num); });
   self.equal(answers.join(@", "), @"1, 2, 3", @"aliased as 'forEach'");
 
@@ -50,8 +50,8 @@
   doubled = _.collect(_IA(1, 2, 3), ^(N* num, id i){ return N.i(num.i * 2); });
   self.equal(doubled.join(@", "), @"2, 4, 6", @"aliased as 'collect'");
 
-//  A* tripled = _.map(_IA(1, 2, 3), ^(num){ return num * this.multiplier; }, O.o_(@"multiplier", N.i(3)).__);
-//  self.equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
+  __block A* tripled = _.mapWithContext(_IA(1, 2, 3), ^(N* num, N* i, O* this){ return N.i(num.i * ((N*)this.get(@"multiplier")).i); }, _O({@"multiplier", N.i(3)})); // CHANGE
+  self.equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
 
   // TODO: chain
 //  doubled = _(_IA(1, 2, 3)).map(^(N* num){ return  N.i(num.i * 2); });

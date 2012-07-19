@@ -32,7 +32,7 @@
 
 @implementation _ (Collections)
 
-+ (void(^)(id, _IteratorBlock))each
++ (void(^)(id obj, _IteratorBlock block))each
 {
   return ^(id obj, _IteratorBlock block) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
@@ -57,9 +57,34 @@
     }
   };
 }
-+ (void(^)(id, _IteratorBlock))forEach { return self.each; }  // alias
++ (void(^)(id obj, _IteratorBlock block))forEach { return self.each; }  // alias
++ (void(^)(id obj, _IteratorWithContextBlock block, id context))eachWithContext
+{
+  return ^(id obj, _IteratorWithContextBlock block, id context){
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
 
-+ (id(^)(id, _MapBlock))map
+    if (_.isNull(obj))
+      return;
+
+    else if (_.isArray(obj)) {
+      NSArray *array = obj;
+      if(!array.count) return;
+
+      NSInteger count = [array count];
+      for (NSInteger index=0; index<count; index++) {
+        block([array objectAtIndex:index], [NSNumber numberWithInteger:index], context);
+      }
+    }
+    else {
+      NSDictionary *dictionary = obj;
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+          block(value, key, context);
+      }];
+    }
+  };
+}
+
++ (id(^)(id obj, _MapBlock block))map
 {
   return ^(id obj, _MapBlock block) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
@@ -97,6 +122,44 @@
     return nil;
   };
 }
-+ (id(^)(id, _MapBlock))collect { return self.map; }
++ (id(^)(id obj, _MapBlock block))collect { return self.map; }
++ (id(^)(id obj, _MapWithContextBlock block, id context))mapWithContext
+{
+  return ^(id obj, _MapWithContextBlock block, id context) {
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
+
+    if (_.isNull(obj))
+      return [NSMutableArray array];
+
+    else if (_.isArray(obj)) {
+      NSArray *array = obj;
+      if(!array.count) return [NSMutableArray array];
+
+      NSMutableArray *result = [NSMutableArray arrayWithCapacity:array.count];
+      NSInteger count = [array count];
+      for (NSInteger index=0; index<count; index++) {
+        id mapped = block([array objectAtIndex:index], [NSNumber numberWithInteger:index], context);
+        if (mapped)
+          [result addObject:mapped];
+      }
+
+      return result;
+    }
+    else {
+      NSDictionary *dictionary = obj;
+      NSMutableDictionary *result = [NSMutableDictionary dictionary];
+
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+        id mapped = block(value, key, context);
+        if (mapped)
+          [result setObject:mapped forKey:key];
+      }];
+      
+      return (id) result;
+    }
+    
+    return nil;
+  };
+}
 
 @end

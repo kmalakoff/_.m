@@ -88,13 +88,13 @@ Collections
 
 each
   var each = _.each = _.forEach = function(obj, iterator, context)
-+ (void(^)(id collection, _IteratorBlock block))each;
--> no context
++ (void(^)(id obj, _IteratorBlock block))each;
++ (void(^)(id obj, _IteratorWithContextBlock block, id context))eachWithContext; // CHANGE
 
 map
 _.map = _.collect = function(obj, iterator, context)
-+ (id(^)(id collection, _MapBlock block))map;
--> no context
++ (id(^)(id obj, _MapBlock block))map;
++ (id(^)(id obj, _MapWithContextBlock block, id context))mapWithContext; // CHANGE
 
 reduce
 reduceRight
