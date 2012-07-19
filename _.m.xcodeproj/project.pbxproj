@@ -103,6 +103,9 @@
 		0AE1B9B015B6474E00E5DDDD /* _+Chaining.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AE1B9AE15B6474E00E5DDDD /* _+Chaining.h */; };
 		0AE1B9B115B6474E00E5DDDD /* _+Chaining.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE1B9AF15B6474E00E5DDDD /* _+Chaining.m */; };
 		0AE1B9B215B6474E00E5DDDD /* _+Chaining.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE1B9AF15B6474E00E5DDDD /* _+Chaining.m */; };
+		0AEC40CA15B81C8F0035354A /* SSJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AEC40C815B81C8E0035354A /* SSJSON.h */; };
+		0AEC40CB15B81C8F0035354A /* SSJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC40C915B81C8F0035354A /* SSJSON.m */; };
+		0AEC40CC15B81C8F0035354A /* SSJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC40C915B81C8F0035354A /* SSJSON.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +211,8 @@
 		0AE1B9AA15B6471A00E5DDDD /* _Wrapper+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "_Wrapper+Utility.m"; path = "WrapperCategories/_Wrapper+Utility.m"; sourceTree = "<group>"; };
 		0AE1B9AE15B6474E00E5DDDD /* _+Chaining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "_+Chaining.h"; path = "Categories/_+Chaining.h"; sourceTree = "<group>"; };
 		0AE1B9AF15B6474E00E5DDDD /* _+Chaining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "_+Chaining.m"; path = "Categories/_+Chaining.m"; sourceTree = "<group>"; };
+		0AEC40C815B81C8E0035354A /* SSJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSJSON.h; path = Vendor/SubjectiveScript.m/SSJSON.h; sourceTree = "<group>"; };
+		0AEC40C915B81C8F0035354A /* SSJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSJSON.m; path = Vendor/SubjectiveScript.m/SSJSON.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +270,8 @@
 				0A93D50D15B7BC0E00BB331F /* SubjectiveScript.m */,
 				0A93D50915B7BC0E00BB331F /* SSSubjectiveScript.h */,
 				0A93D50A15B7BC0E00BB331F /* SSSubjectiveScript.m */,
+				0AEC40C815B81C8E0035354A /* SSJSON.h */,
+				0AEC40C915B81C8F0035354A /* SSJSON.m */,
 				0A93D50B15B7BC0E00BB331F /* SSTypes.h */,
 				0A93D4F915B7BC0A00BB331F /* NSArray+SS.h */,
 				0A93D4FA15B7BC0A00BB331F /* NSArray+SS.m */,
@@ -485,6 +492,7 @@
 				0A93D52615B7BC0E00BB331F /* SSSubjectiveScript.h in Headers */,
 				0A93D52915B7BC0E00BB331F /* SSTypes.h in Headers */,
 				0A93D52A15B7BC0E00BB331F /* SubjectiveScript.h in Headers */,
+				0AEC40CA15B81C8F0035354A /* SSJSON.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,6 +620,7 @@
 				0A93D52415B7BC0E00BB331F /* NSString+SS.m in Sources */,
 				0A93D52715B7BC0E00BB331F /* SSSubjectiveScript.m in Sources */,
 				0A93D52B15B7BC0E00BB331F /* SubjectiveScript.m in Sources */,
+				0AEC40CB15B81C8F0035354A /* SSJSON.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +667,7 @@
 				0A93D52515B7BC0E00BB331F /* NSString+SS.m in Sources */,
 				0A93D52815B7BC0E00BB331F /* SSSubjectiveScript.m in Sources */,
 				0A93D52C15B7BC0E00BB331F /* SubjectiveScript.m in Sources */,
+				0AEC40CC15B81C8F0035354A /* SSJSON.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

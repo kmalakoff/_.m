@@ -40,7 +40,14 @@
 //clone
 //tap
 //has
-//isEqual
+
++ (B(^)(id a, id b))isEqual
+{
+  return ^(id a, id b) {
+    return [a isEqual:b];
+  };
+}
+
 //isEmpty
 //isElement
 

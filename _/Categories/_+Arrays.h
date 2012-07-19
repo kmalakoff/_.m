@@ -39,34 +39,38 @@
 + (NSArray*(^)(NSArray* array, N* n))initial;   // TODO: nil terminated
 + (NSArray*(^)(NSArray* array, N* unused))initialIterator; 
 
-+ (id (^)(NSArray* array, N* n))last; // TODO: nil terminated
-+ (id (^)(NSArray* array, N* unused))lastIterator;
++ (id(^)(NSArray* array, N* n))last; // TODO: nil terminated
++ (id(^)(NSArray* array, N* unused))lastIterator;
 
 + (NSArray*(^)(NSArray* array, N* index))rest;  // TODO: nil terminated
 + (NSArray*(^)(NSArray* array, N* index))tail;
 + (NSArray*(^)(NSArray* array, N* unused))restIterator;
 
-//+ (NSArray*(^)(NSArray* array))compact;
-//
++ (NSArray*(^)(NSArray* array))compact;
+
 + (A*(^)(NSArray* array, N* shallow))flatten;
 
-//+ (NSArray*(^)(NSArray* array, id value1, ...))without;
-//
-//+ (NSArray*(^)(NSArray* array1, ...))union;
-//
-//+ (NSArray*(^)(NSArray* array1, ...))intersection;
-//
-//+ (NSArray*(^)(NSArray* array, NSArray* array1, ...))difference;
-//
-//+ (id (^)(NSArray* array, B isSorted, _MapBlock iterator))uniq;
-//+ (id (^)(NSArray* array, B isSorted, _MapBlock iterator))unique;
-//
-//+ (NSArray*(^)(NSArray* array1, NSArray* array2, ...))zip;
-//
-//+ (I (^)(NSArray* array, id value, B isSorted))indexOf;
-//
-//+ (I (^)(NSArray* array, id value))lastIndexOf;
-//
-//+ (NSArray* (^)(I start, I stop, I step))range;
-//
++ (NSArray*(^)(NSArray* array, id value1, ...))without;
+
++ (NSArray*(^)(NSArray* array1, ...))union_; // CHANGE: reserved keyword
+
++ (NSArray*(^)(NSArray* array1, ...))intersection;
+
++ (NSArray*(^)(NSArray* array, NSArray* array1, ...))difference;
+
++ (id(^)(NSArray* array))uniq;
++ (id(^)(NSArray* array, B isSorted, _MapBlock iterator))uniqCustomized;
++ (id(^)(NSArray* array, B isSorted, _MapBlock iterator))unique;
+
++ (NSArray*(^)(NSArray* array1, ...))zip;
+
++ (O*(^)(NSArray* keys, NSArray* values))zipObject;
+
++ (I(^)(NSArray* array, id value))indexOf;
++ (I(^)(NSArray* array, id value))indexOfSorted;
+
++ (I(^)(NSArray* array, id value))lastIndexOf;
+
++ (NSArray* (^)(I start, I stop, I step))range;
+
 @end

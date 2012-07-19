@@ -31,8 +31,10 @@
 
 @interface NSArray (SS)
 
+- (NSString*(^)())toString;
+
 - (I)length;
-- (id (^)(I index))get;
+- (id(^)(I index))get;
 
 - (NSString*(^)(NSString* separator))join;
 - (NSArray*(^)(UI start, UI count))slice;

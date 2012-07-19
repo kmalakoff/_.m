@@ -36,4 +36,6 @@
   return [D date];
 }
 
+- (NSString*(^)())toString { return ^() { return self.description; }; }
+
 @end

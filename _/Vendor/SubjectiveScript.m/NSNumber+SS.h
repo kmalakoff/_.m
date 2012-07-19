@@ -31,16 +31,18 @@
 
 @interface NSNumber (SS)
 
-+ (N*(^)(B value))b;
-- (B)b;
++ (N*(^)(B value))B;
+- (B)B;
 
-+ (N*(^)(I value))i;
-- (I)i;
++ (N*(^)(I value))I;
+- (I)I;
 
-+ (N*(^)(UI value))ui;
-- (UI)ui;
++ (N*(^)(UI value))UI;
+- (UI)UI;
 
-+ (N*(^)(F value))f;
-- (F)f;
++ (N*(^)(F value))F;
+- (F)F;
+
+- (NSString*(^)())toString;
 
 @end

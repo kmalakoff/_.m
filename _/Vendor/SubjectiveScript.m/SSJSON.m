@@ -1,5 +1,5 @@
 //
-//  NSMutableDictionary+SS.m
+//  SSJSON.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,39 +27,11 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSMutableDictionary+SS.h"
+#import "SSJSON.h"
+#import "SSSubjectiveScript.h"
 
-@implementation NSMutableDictionary (Object)
+@implementation JSON
 
-+ (O*)new_
-{
-  return [NSMutableDictionary dictionary];
-}
-
-+ (O*(^)(UI capacity))newWithCapacity
-{
-  return ^(UI capacity) {
-    return [O dictionaryWithCapacity:capacity];
-  };
-}
-
-+ (O*(^)(const KV* values))newAKV
-{
-  return ^(const KV* values) {
-    O* result = O.new_;
-    for (const id* value = (const id*) values; *value != OAKV_; value+=2) {
-      [result setValue:value[1] forKey:value[0]];
-    }
-    return result;
-  };
-}
-
-- (O*(^)(id key, id value))set
-{
-  return ^(id key, id value) {
-    [self setValue:value forKey:key];
-    return self;
-  };
-}
++ (NSString*(^)(id obj))stringify { return ^(id obj) { return SS.toString(obj); }; }
 
 @end

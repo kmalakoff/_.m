@@ -31,6 +31,8 @@
 
 @implementation NSDictionary (SS)
 
+- (NSString*(^)())toString { return ^() { return self.description; }; }
+
 - (B (^)(id))has
 {
   return ^(id key) {
@@ -38,7 +40,7 @@
   };
 }
 
-- (id (^)(id))get
+- (id(^)(id))get
 {
   return ^(id key) {
     return [self objectForKey:key];

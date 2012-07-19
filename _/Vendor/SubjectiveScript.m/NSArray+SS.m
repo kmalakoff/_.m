@@ -32,15 +32,17 @@
 
 @implementation NSArray (SS)
 
+- (NSString*(^)())toString { return ^() { return self.description; }; }
+
 - (NSInteger)length
 {
   return [self count];
 }
 
-- (id (^)(NSInteger))get
+- (id(^)(NSInteger))get
 {
   return ^(NSInteger index) {
-    return [self objectAtIndex:index];
+    return (index<self.count) ? [self objectAtIndex:index] : [NSNull null];
   };
 }
 

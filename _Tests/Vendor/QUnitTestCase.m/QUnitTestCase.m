@@ -31,7 +31,7 @@
 
 @implementation QUnitTestCase
 
-- (void (^)(id actual, id expected, NSString *message, va_list args))_equal
+- (void(^)(id actual, id expected, NSString *message, va_list args))_equal
 {
   return ^(id actual, id expected, NSString *message, va_list args){
     NSString *description = [[NSString alloc] initWithFormat:message arguments:args];
@@ -62,7 +62,7 @@
   };
 }
 
-- (void (^)(id actual, id expected, NSString *message, ...))equal
+- (void(^)(id actual, id expected, NSString *message, ...))equal
 {
   return ^(id actual, id expected, NSString *message, ...){
     va_list args;
@@ -72,7 +72,7 @@
   };
 }
 
-- (void (^)(NSInteger actual, NSInteger expected, NSString *message, ...))equalI
+- (void(^)(NSInteger actual, NSInteger expected, NSString *message, ...))equalI
 {
   return ^(NSInteger actual, NSInteger expected, NSString *message, ...){
     va_list args;
@@ -82,7 +82,7 @@
   };
 }
 
-- (void (^)(BOOL result, NSString *message, ...))ok
+- (void(^)(BOOL result, NSString *message, ...))ok
 {
   return ^(BOOL result, NSString *message, ...){
     if (result)

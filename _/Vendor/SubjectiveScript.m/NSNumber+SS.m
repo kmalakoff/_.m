@@ -31,36 +31,38 @@
 
 @implementation N (SS)
 
-+ (N*(^)(B value))b;
++ (N*(^)(B value))B;
 {
   return ^(B value) {
     return [N numberWithBool:value];
   };
 }
-- (B)b { return self.boolValue; }
+- (B)B { return self.boolValue; }
 
-+ (N*(^)(I))i
++ (N*(^)(I value))I
 {
   return ^(I value) {
     return [N numberWithInt:value];
   };
 }
-- (NSInteger)i { return self.integerValue; }
+- (NSInteger)I { return self.integerValue; }
 
-+ (N*(^)(UI))ui
++ (N*(^)(UI value))UI
 {
   return ^(UI value) {
     return [N numberWithInt:value];
   };
 }
-- (UI)ui { return self.unsignedIntegerValue; }
+- (UI)UI { return self.unsignedIntegerValue; }
 
-+ (N*(^)(F value))f
++ (N*(^)(F value))F
 {
   return ^(F value) {
     return [N numberWithFloat:value];
   };
 }
-- (F)f { return self.floatValue; }
+- (F)F { return self.floatValue; }
+
+- (NSString*(^)())toString { return ^() { return self.description; }; }
 
 @end

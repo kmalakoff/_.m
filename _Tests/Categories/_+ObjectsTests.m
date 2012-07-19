@@ -10,7 +10,7 @@
 #import "Underscore.h"
 #import "SubjectiveScript.h"
 
-@implementation __ObjectsTests
+@implementation _OAKVbjectsTests
 
 //keys
 //values
@@ -29,14 +29,14 @@
 {
 
 //  self.ok(!_.isArray(arguments), @"the arguments object is not an array");
-  self.ok(_.isArray(IA(1, 2, 3)), @"but arrays are");
+  self.ok(_.isArray(AI(1, 2, 3)), @"but arrays are");
 //  self.ok(_.isArray(iArray), @"even from another frame");
 }
 
 - (void)test_isObject
 {
 //  self.ok(_.isObject(arguments), @"the arguments object is object");
-  self.ok(_.isObject(IA(1, 2, 3)), @"and arrays");
+  self.ok(_.isObject(AI(1, 2, 3)), @"and arrays");
 //  self.ok(_.isObject($("html")[0]), @"and DOM element");
 //  self.ok(_.isObject(iElement), @"even from another frame");
 //  self.ok(_.isObject(function () {}), @"and functions");
@@ -44,9 +44,9 @@
   self.ok(!_.isObject(nil), @"but not null");
 //  self.ok(!_.isObject(undefined), @"and not undefined");
 //  self.ok(!_.isObject(@"string"), @"and not string");
-  self.ok(!_.isObject(N.i(12)), @"and not number");
-  self.ok(!_.isObject(N.b(true)), @"and not boolean");
-  self.ok(_.isObject(S.s(@"string")), @"but new String()");
+  self.ok(!_.isObject(N.I(12)), @"and not number");
+  self.ok(!_.isObject(N.B(true)), @"and not boolean");
+  self.ok(_.isObject(S.newS(@"string")), @"but new String()");
 }
 
 //isArguments
@@ -55,7 +55,7 @@
 - (void)test_isString
 {
 //  self.ok(!_.isString(document.body), @"the document body is not a string");
-  self.ok(_.isString(IA(1, 2, 3).join(@", ")), @"but strings are");
+  self.ok(_.isString(AI(1, 2, 3).join(@", ")), @"but strings are");
 //  self.ok(_.isString(iString), @"even from another frame");
 }
 
@@ -64,7 +64,7 @@
   self.ok(!_.isNumber(@"string"), @"a string is not a number");
 //  self.ok(!_.isNumber(arguments), @"the arguments object is not a number");
 //  self.ok(!_.isNumber(undefined), @"undefined is not a number");
-  self.ok(_.isNumber(N.f(3 * 4 - 7 / 10)), @"but numbers are");
+  self.ok(_.isNumber(N.F(3 * 4 - 7 / 10)), @"but numbers are");
 //  self.ok(_.isNumber(NaN), @"NaN *is* a number");
 //  self.ok(_.isNumber(Infinity), @"Infinity is a number");
 //  self.ok(_.isNumber(iNumber), @"even from another frame");
@@ -76,7 +76,7 @@
 
 - (void)test_isDate
 {
-  self.ok(!_.isDate(N.i(100)), @"numbers are not dates");
+  self.ok(!_.isDate(N.I(100)), @"numbers are not dates");
   self.ok(!_.isDate(O.new_), @"objects are not dates");
   self.ok(_.isDate(D.new_), @"but dates are");
 //  self.ok(_.isDate(iDate), @"even from another frame");

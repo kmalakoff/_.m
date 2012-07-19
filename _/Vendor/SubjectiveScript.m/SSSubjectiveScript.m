@@ -28,13 +28,52 @@
 //
 
 #import "SSSubjectiveScript.h"
+#import "NSArray+SS.h"
+#import "NSDictionary+SS.h"
+#import "NSString+SS.h"
+#import "NSNumber+SS.h"
+#import "NSDate+SS.h"
 
 @implementation SS
 
-+ (B(^)(id obj))isArray  { return ^(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
-+ (B(^)(id obj))isObject { return ^(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } // TODO: document difference with Underscore definition
-+ (B(^)(id obj))isString { return ^(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
-+ (B(^)(id obj))isNumber { return ^(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
-+ (B(^)(id obj))isNull   { return ^(id obj) { return [obj isKindOfClass:[NSNull class]]; }; }
++ (B(^)(id obj))isArray   { return ^(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
++ (B(^)(id obj))isObject  { return ^(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } // TODO: document difference with Underscore definition
++ (B(^)(id obj))isString  { return ^(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
++ (B(^)(id obj))isNumber  { return ^(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
++ (B(^)(id obj))isDate    { return ^(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
++ (B(^)(id obj))isNull    { return ^(id obj) { return [obj isKindOfClass:[NSNull class]]; }; }
+
++ (NSString*(^)(id obj))toString
+{
+  return ^(id obj) {
+    if(SS.isArray(obj)) {
+      return ((NSArray*)obj).toString();
+    }
+    
+    else if (SS.isObject(obj)) {
+      return ((NSDictionary*)obj).toString();
+    }
+    
+    else if (SS.isString(obj)) {
+      return ((NSString*)obj).toString();
+    }
+
+    else if (SS.isNumber(obj)) {
+      return ((NSNumber*)obj).toString();
+    }
+
+    else if (SS.isDate(obj)) {
+      return ((NSDate*)obj).toString();
+    }
+
+    else if (SS.isNull(obj)) {
+      return @"null";
+    }
+    
+    else
+      NSAssert(nil, @"object type unrecognized for toString");
+    return @"error"; 
+  };
+}
 
 @end

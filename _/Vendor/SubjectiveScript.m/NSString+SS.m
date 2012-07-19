@@ -28,7 +28,39 @@
 //
 
 #import "NSString+SS.h"
+#import "NSMutableString+SS.h"
+#import "SubjectiveScript.h"
 
 @implementation NSString (SS)
+
++ (NSString*(^)(NSString* value))newS
+{
+  return ^(NSString* value) {
+    return [NSString stringWithString:value];
+  };
+}
+
++ (NSString*(^)(NSArray* array))newA
+{
+  return ^(NSArray* array) {
+    S* result = S.new_;
+    for (id value in array)
+      result.append(SS.toString(value));
+    return result;
+  };
+}
+
++ (NSString*(^)(NSString* format, ...))formatted
+{
+  return ^(NSString* format, ...) {
+    va_list args;
+    va_start(args, format);
+    NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    return result;
+  };
+}
+
+- (NSString*(^)())toString { return ^() { return self; }; }
 
 @end

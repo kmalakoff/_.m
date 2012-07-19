@@ -8,11 +8,12 @@ _.m is a port of Underscore.js to Objective-C
 
 Global Changes
 ------------
-NSObject -> integers, bools are NSNumbers -> use N* and N.i, N.b, etc when iterating and IA, etc for arrays
+NSObject -> integers, bools are NSNumbers -> use N* and N.I, N.B, etc when iterating and AI, etc for arrays
 null -> nil
 '' and "" to @""
-_> _O({k, v}, {k, v}) syntax
--> terminators and ignorers OA_, FA_ and _FNone
+_> OAKV({k, v}, {k, v}) syntax
+-> terminators and ignorers AO_, AF_ and _FNone
+-> removed all context
 
 Other Changes
 ------------
@@ -35,7 +36,7 @@ _.initial = function(array, n, guard)
 
 last
 _.last = function(array, n, guard)
-+ (id (^)(A* array, N* n))last;
++ (id(^)(A* array, N* n))last;
 + (NSArray*(^)(A* array, N* unused))lastIterator; // CHANGE
 
 rest
@@ -70,15 +71,20 @@ _.difference = function(array)
 
 uniq
 _.uniq = _.unique = function(array, isSorted, iterator)
-+ (id (^)(A* array, array, B isSorted, _MapBlock iterator))uniq;
++ (id(^)(A* array, array, B isSorted, _MapBlock iterator))uniq;
 
 zip
 _.zip = function(...)
 + (NSArray*(^)(A* array1, A* array2, ...))zip;
 
+_.zipObject = function(keys, values)
++ (O*(^)(NSArray* keys, NSArray* values))zipObject //ADDED
+
 indexOf
 _.indexOf = function(array, item, isSorted)
 + (NSInteger (^)(A* array, id value, B isSorted))indexOf;
++ (I(^)(NSArray* array, id value))indexOf; // CHANGE: specialized sorted method -> TODO: check others with sorting
++ (I(^)(NSArray* array, id value))indexOfSorted;
 
 lastIndexOf
 _.lastIndexOf = function(array, item)
@@ -100,14 +106,12 @@ Collections
 each
   var each = _.each = _.forEach = function(obj, iterator, context)
 + (void(^)(id obj, _IteratorBlock iterator))each;
-+ (void(^)(id obj, _IteratorWithContextBlock iterator, id context))eachWithContext; // CHANGE
-CHANGE: no collection (was used for guard, but removed due to variable arguments not possible)
+CHANGE: no collection (was used for guard, but removed due to variable arguments not possible). Context is a JS language feature
 
 map
 _.map = _.collect = function(obj, iterator, context)
 + (id(^)(id obj, _MapBlock iterator))map;
-+ (id(^)(id obj, _MapWithContextBlock iterator, id context))mapWithContext; // CHANGE
-CHANGE: no collection (was used for guard, but removed due to variable arguments not possible)
+CHANGE: no collection (was used for guard, but removed due to variable arguments not possible). Context is a JS language feature
 
 reduce
 reduceRight
@@ -116,7 +120,7 @@ find
 filter
   _.filter = _.select = function(obj, iterator, context) {
 + (A*(^)(id obj, _IteratorTestBlock iterator))filter;
-+ (A*(^)(id obj, _IteratorTestBlock iterator, id context))filterWithContext;
+CHANGE: Context is a JS language feature
 
 reject
 all
@@ -124,7 +128,10 @@ any
 include
 invoke
 pluck
+
 max
+CHANGE: Context is a JS language feature
+
 min
 sortBy
 groupBy

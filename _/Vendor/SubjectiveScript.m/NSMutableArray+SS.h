@@ -32,26 +32,28 @@
 @interface NSMutableArray (SS)
 
 + (A*)new_;
-+ (A*(^)(const B* values))newBA;
-+ (A*(^)(const I* values))newIA;
-+ (A*(^)(const UI* values))newUIA;
-+ (A*(^)(const F* values))newFA;
-+ (A*(^)(const id* values))newOA;
++ (A*(^)(UI capacity))newWithCapacity;
++ (A*(^)(const B* values))newB;
++ (A*(^)(const I* values))newI;
++ (A*(^)(const UI* values))newUI;
++ (A*(^)(const F* values))newF;
++ (A*(^)(const id* values))newO;
 
+- (A*(^)(I index, id value))set;
 - (A*(^)(id value))push;
 
 @end
 
 // terminators
-#define BA_       (BOOL)2
-#define IA_       (NSInteger)NSNotFound
-#define UIA_      (NSUInteger)NSNotFound
-#define FA_       (float)NaN
-#define OA_       nil
+#define AB_       (BOOL)2
+#define AI_       (NSInteger)NSNotFound
+#define AUI_      (NSUInteger)NSNotFound
+#define AF_       (float)NaN
+#define AO_       nil
 
 // new array helpers
-#define BA(...)   A.newBA((B[]){__VA_ARGS__, BA_})
-#define IA(...)   A.newIA((I[]){__VA_ARGS__, IA_})
-#define UIA(...)  A.newUIA((UI[]){__VA_ARGS__, UIA_})
-#define FA(...)   A.newFA((F[]){__VA_ARGS__, FA_})
-#define OA(...)   A.newOA((id[]){__VA_ARGS__, OA_})
+#define AB(...)   A.newB((B[]){__VA_ARGS__, AB_})
+#define AI(...)   A.newI((I[]){__VA_ARGS__, AI_})
+#define AUI(...)  A.newUI((UI[]){__VA_ARGS__, AUI_})
+#define AF(...)   A.newF((F[]){__VA_ARGS__, AF_})
+#define AO(...)   A.newO((id[]){__VA_ARGS__, AO_})

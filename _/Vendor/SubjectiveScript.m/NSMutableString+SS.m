@@ -36,24 +36,6 @@
   return [NSMutableString string];
 }
 
-+ (NSMutableString*(^)(NSString* value))s
-{
-  return ^(NSString* value) {
-    return [NSMutableString stringWithString:value];
-  };
-}
-
-+ (NSMutableString*(^)(NSString* format, ...))f
-{
-  return ^(NSString* format, ...) {
-    va_list args;
-    va_start(args, format);
-    NSMutableString *result = [[NSMutableString alloc] initWithFormat:format arguments:args];
-    va_end(args);
-    return result;
-  };
-}
-
 - (NSMutableString* (^)(NSString* value))append
 {
   return ^(NSString* value) {

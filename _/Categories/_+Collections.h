@@ -33,11 +33,9 @@
 
 + (void(^)(id obj, _IteratorBlock iterator))each;
 + (void(^)(id obj, _IteratorBlock iterator))forEach;
-+ (void(^)(id obj, _IteratorWithContextBlock iterator, id context))eachWithContext;
 
 + (id(^)(id obj, _MapBlock iterator))map;
 + (id(^)(id obj, _MapBlock iterator))collect;
-+ (id(^)(id obj, _MapWithContextBlock iterator, id context))mapWithContext;
 
 //reduce
 //reduceRight
@@ -45,16 +43,17 @@
 
 + (A*(^)(id obj, _IteratorTestBlock iterator))filter;
 + (A*(^)(id obj, _IteratorTestBlock iterator))select;
-+ (A*(^)(id obj, _IteratorTestWithContexBlock iterator, id context))filterWithContext;
-
 
 //reject
 //all
 //any
 //include
 //invoke
-//pluck
-//max
+
++ (id(^)(id obj, NSString *keyPath))pluck;
+
++ (id(^)(id obj, _MapBlock iterator))max;
+
 //min
 //sortBy
 //groupBy

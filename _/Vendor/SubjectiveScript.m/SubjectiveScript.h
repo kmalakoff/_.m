@@ -32,8 +32,9 @@
 #endif
 
 // core
-#import "SSSubjectiveScript.h"
 #import "SSTypes.h"
+#import "SSSubjectiveScript.h"
+#import "SSJSON.h"
 
 // categories
 #import "NSArray+SS.h"

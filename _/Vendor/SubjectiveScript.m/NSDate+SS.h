@@ -33,4 +33,6 @@
 
 + (D*)new_;
 
+- (NSString*(^)())toString;
+
 @end

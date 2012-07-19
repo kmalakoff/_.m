@@ -37,58 +37,73 @@
   return [A array];
 }
 
-+ (A*(^)(const B* values))newBA
++ (A*(^)(UI capacity))newWithCapacity
+{
+  return ^(UI capacity) {
+    return [A arrayWithCapacity:capacity];
+  };
+}
+
++ (A*(^)(const B* values))newB
 {
   return ^(const B* values) {
     A* result = A.new_;
-    for (const B* value=values; *value != BA_; value++) {
-      [result addObject:N.b(*value)];
+    for (const B* value=values; *value != AB_; value++) {
+      [result addObject:N.B(*value)];
     }
     return result;
   };
 }
 
-+ (A*(^)(const I* values))newIA
++ (A*(^)(const I* values))newI
 {
   return ^(const I* values) {
     A* result = A.new_;
-    for (const I* value=values; *value != IA_; value++) {
-      [result addObject:N.i(*value)];
+    for (const I* value=values; *value != AI_; value++) {
+      [result addObject:N.I(*value)];
     }
     return result;
   };
 }
 
-+ (A*(^)(const UI* values))newUIA
++ (A*(^)(const UI* values))newUI
 {
   return ^(const UI* values) {
     A* result = A.new_;
-    for (const UI* value=values; *value != UIA_; value++) {
-      [result addObject:N.ui(*value)];
+    for (const UI* value=values; *value != AUI_; value++) {
+      [result addObject:N.UI(*value)];
     }
     return result;
   };
 }
 
-+ (A*(^)(const F* values))newFA
++ (A*(^)(const F* values))newF
 {
   return ^(const F* values) {
     A* result = A.new_;
     for (const F* value=values; *value != *value; value++) {
-      [result addObject:N.f(*value)];
+      [result addObject:N.F(*value)];
     }
     return result;
   };
 }
 
-+ (A*(^)(const id* values))newOA
++ (A*(^)(const id* values))newO
 {
   return ^(const id* values) {
     A* result = A.new_;
-    for (const id* value=values; *value != OA_; value++) {
+    for (const id* value=values; *value != AO_; value++) {
       [result addObject:*value];
     }
     return result;
+  };
+}
+
+- (A*(^)(I index, id value))set
+{
+  return ^(I index, id value) {
+    [self replaceObjectAtIndex:index withObject:value]; // TODO: test resizing of array
+    return self;
   };
 }
 
