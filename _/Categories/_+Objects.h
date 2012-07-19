@@ -44,30 +44,30 @@
 //isEmpty
 //isElement
 
-+ (BOOL(^)(id obj))isArray;
++ (B(^)(id obj))isArray;
 
-+ (BOOL(^)(id obj))isObject;
++ (B(^)(id obj))isObject;
 
 //isArguments
 //isFunction
 
-+ (BOOL(^)(id obj))isString;
++ (B(^)(id obj))isString;
 
-+ (BOOL(^)(id obj))isNumber;
++ (B(^)(id obj))isNumber;
 
 //isFinite
 //isBoolean
 
-+ (BOOL(^)(id obj))isDate;
++ (B(^)(id obj))isDate;
 
 //isRegExp
 //isNaN
 
-+ (BOOL(^)(id obj))isNull;
++ (B(^)(id obj))isNull;
 
 //isUndefined
 
 // ADDED
-+ (BOOL(^)(id obj))isDictionary;
++ (B(^)(id obj))isDictionary;
 
 @end

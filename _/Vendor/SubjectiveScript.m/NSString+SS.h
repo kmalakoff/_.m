@@ -1,5 +1,5 @@
 //
-//  SSSubjectiveScript.h
+//  NSString+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,14 +27,8 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "SSTypes.h"
 
-@interface SS
-
-+ (BOOL(^)(id obj))isArray;
-+ (BOOL(^)(id obj))isObject;
-+ (BOOL(^)(id obj))isString;
-+ (BOOL(^)(id obj))isNumber;
-+ (BOOL(^)(id obj))isNull;
+@interface NSString (SS)
 
 @end

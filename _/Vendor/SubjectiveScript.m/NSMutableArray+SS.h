@@ -1,5 +1,5 @@
 //
-//  NSNumber+SS.m
+//  NSMutableArray+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,32 +27,23 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSNumber+SS.h"
+#import "SSTypes.h"
 
-@implementation NSNumber (SS)
+@interface NSMutableArray (SS)
 
-+ (NSNumber*(^)(BOOL value))b;
-{
-  return ^(BOOL value) {
-    return [NSNumber numberWithBool:value];
-  };
-}
-- (BOOL)b { return self.boolValue; }
++ (A*)new_;
++ (A*(^)(const B* values, I count))ba;
++ (A*(^)(const I* values, I count))ia;
++ (A*(^)(const UI* values, I count))uia;
++ (A*(^)(const F* values, I count))fa;
++ (A*(^)(const id* values))oa;
 
-+ (NSNumber*(^)(NSInteger))i
-{
-  return ^(NSInteger value) {
-    return [NSNumber numberWithInt:value];
-  };
-}
-- (NSInteger)i { return self.integerValue; }
-
-+ (NSNumber*(^)(float value))f
-{
-  return ^(float value) {
-    return [NSNumber numberWithFloat:value];
-  };
-}
-- (float)f { return self.floatValue; }
+- (A*(^)(id value))push;
 
 @end
+
+#define BA(...)   A.ba((B[]){__VA_ARGS__},    sizeof((B[]){__VA_ARGS__})/sizeof(B))
+#define IA(...)   A.ia((I[]){__VA_ARGS__},    sizeof((I[]){__VA_ARGS__})/sizeof(I))
+#define UIA(...)  A.uia((UI[]){__VA_ARGS__},  sizeof((UI[]){__VA_ARGS__})/sizeof(UI))
+#define FA(...)   A.fa((F[]){__VA_ARGS__},    sizeof((F[]){__VA_ARGS__})/sizeof(F))
+#define OA(...)   A.oa((id[]){__VA_ARGS__, nil})

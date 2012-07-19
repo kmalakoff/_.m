@@ -29,6 +29,7 @@
 
 #import "_+Collections.h"
 #import "_+Objects.h"
+#import "SubjectiveScript.h"
 
 @implementation _ (Collections)
 
@@ -41,12 +42,12 @@
       return;
 
     else if (_.isArray(obj)) {
-      NSArray *array = obj;
+      NSArray* array = obj;
       if(!array.count) return;
 
       NSInteger count = [array count];
       for (NSInteger index=0; index<count; index++) {
-        block([array objectAtIndex:index], [NSNumber numberWithInteger:index]);
+        block([array objectAtIndex:index], [N numberWithInteger:index]);
       }
     }
     else {
@@ -67,12 +68,12 @@
       return;
 
     else if (_.isArray(obj)) {
-      NSArray *array = obj;
+      NSArray* array = obj;
       if(!array.count) return;
 
       NSInteger count = [array count];
       for (NSInteger index=0; index<count; index++) {
-        block([array objectAtIndex:index], [NSNumber numberWithInteger:index], context);
+        block([array objectAtIndex:index], [N numberWithInteger:index], context);
       }
     }
     else {
@@ -90,16 +91,16 @@
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
 
     if (_.isNull(obj))
-      return [NSMutableArray array];
+      return A.new_;
 
     else if (_.isArray(obj)) {
-      NSArray *array = obj;
-      if(!array.count) return [NSMutableArray array];
+      NSArray* array = obj;
+      if(!array.count) return A.new_;
 
-      NSMutableArray *result = [NSMutableArray arrayWithCapacity:array.count];
+      A* result = [A arrayWithCapacity:array.count];
       NSInteger count = [array count];
       for (NSInteger index=0; index<count; index++) {
-        id mapped = block([array objectAtIndex:index], [NSNumber numberWithInteger:index]);
+        id mapped = block([array objectAtIndex:index], [N numberWithInteger:index]);
         if (mapped)
           [result addObject:mapped];
       }
@@ -108,7 +109,7 @@
     }
     else {
       NSDictionary *dictionary = obj;
-      NSMutableDictionary *result = [NSMutableDictionary dictionary];
+      O* result = O.new_;
 
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
         id mapped = block(value, key);
@@ -129,16 +130,16 @@
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
 
     if (_.isNull(obj))
-      return [NSMutableArray array];
+      return A.new_;
 
     else if (_.isArray(obj)) {
-      NSArray *array = obj;
-      if(!array.count) return [NSMutableArray array];
+      NSArray* array = obj;
+      if(!array.count) return A.new_;
 
-      NSMutableArray *result = [NSMutableArray arrayWithCapacity:array.count];
+      A* result = [A arrayWithCapacity:array.count];
       NSInteger count = [array count];
       for (NSInteger index=0; index<count; index++) {
-        id mapped = block([array objectAtIndex:index], [NSNumber numberWithInteger:index], context);
+        id mapped = block([array objectAtIndex:index], [N numberWithInteger:index], context);
         if (mapped)
           [result addObject:mapped];
       }
@@ -147,7 +148,7 @@
     }
     else {
       NSDictionary *dictionary = obj;
-      NSMutableDictionary *result = [NSMutableDictionary dictionary];
+      O* result = O.new_;
 
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
         id mapped = block(value, key, context);

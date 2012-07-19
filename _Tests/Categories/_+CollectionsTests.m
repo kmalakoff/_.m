@@ -14,16 +14,16 @@
 
 - (void)test_each
 {
-  _.each(_IA(1, 2, 3), ^(N* num, N* i) {
+  _.each(IA(1, 2, 3), ^(N* num, N* i) {
     self.equalI(num.i, i.i + 1, @"each iterators provide value and iteration count");
   });
 
   __block A* answers = A.new_;
-  _.eachWithContext(_IA(1, 2, 3), ^(N* num, N* i, O* this){ answers.push(N.i(num.i * ((N*)this.get(@"multiplier")).i));}, _O({@"multiplier", N.i(5)})); // CHANGE
+  _.eachWithContext(IA(1, 2, 3), ^(N* num, N* i, O* this){ answers.push(N.i(num.i * ((N*)this.get(@"multiplier")).i));}, _O({@"multiplier", N.i(5)})); // CHANGE
   self.equal(answers.join(@", "), @"5, 10, 15", @"context object property accessed");
 
   answers = A.new_;
-  _.forEach(_IA(1, 2, 3), ^(N* num, N* i){ answers.push(num); });
+  _.forEach(IA(1, 2, 3), ^(N* num, N* i){ answers.push(num); });
   self.equal(answers.join(@", "), @"1, 2, 3", @"aliased as 'forEach'");
 
   answers =  A.new_;
@@ -34,7 +34,7 @@
 //  delete obj.constructor.prototype.four;
 
 //  answer = nil;
-//  _.each(_IA(1, 2, 3), ^(num, index, arr){ if (_.include(arr, num)) answer = true; });
+//  _.each(IA(1, 2, 3), ^(num, index, arr){ if (_.include(arr, num)) answer = true; });
 //  ok(answer, @"can reference the original collection from inside the iterator");
 
   __block I iAnswers = 0;
@@ -44,17 +44,17 @@
 
 - (void)test_map
 {
-  A* doubled = _.map(_IA(1, 2, 3), ^(N* num, id i){ return N.i(num.i * 2); });
+  A* doubled = _.map(IA(1, 2, 3), ^(N* num, id i){ return N.i(num.i * 2); });
   self.equal(doubled.join(@", "), @"2, 4, 6", @"doubled numbers");
 
-  doubled = _.collect(_IA(1, 2, 3), ^(N* num, id i){ return N.i(num.i * 2); });
+  doubled = _.collect(IA(1, 2, 3), ^(N* num, id i){ return N.i(num.i * 2); });
   self.equal(doubled.join(@", "), @"2, 4, 6", @"aliased as 'collect'");
 
-  __block A* tripled = _.mapWithContext(_IA(1, 2, 3), ^(N* num, N* i, O* this){ return N.i(num.i * ((N*)this.get(@"multiplier")).i); }, _O({@"multiplier", N.i(3)})); // CHANGE
+  __block A* tripled = _.mapWithContext(IA(1, 2, 3), ^(N* num, N* i, O* this){ return N.i(num.i * ((N*)this.get(@"multiplier")).i); }, _O({@"multiplier", N.i(3)})); // CHANGE
   self.equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
 
   // TODO: chain
-//  doubled = _(_IA(1, 2, 3)).map(^(N* num){ return  N.i(num.i * 2); });
+//  doubled = _(IA(1, 2, 3)).map(^(N* num){ return  N.i(num.i * 2); });
 //  self.equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
 
 //  var ids = _.map($(@"#map-test").children(), ^(n){ return n.id; });

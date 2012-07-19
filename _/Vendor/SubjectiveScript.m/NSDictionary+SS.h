@@ -1,5 +1,5 @@
 //
-//  NSArray+SS.h
+//  NSDictionary+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,13 +27,11 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import "SSTypes.h"
+#import "_Types.h"
 
-@interface NSArray (SS)
+@interface NSDictionary (SS)
 
-- (NSInteger)length;
-- (id (^)(NSInteger index))get;
-- (NSString* (^)(NSString *separator))join;
+- (B (^)(id key))has;
+- (id (^)(id key))get;
 
 @end

@@ -31,10 +31,10 @@
 
 @implementation NSDictionary (SS)
 
-- (BOOL (^)(id))has
+- (B (^)(id))has
 {
   return ^(id key) {
-    return (BOOL) ([self objectForKey:key]!=nil);
+    return (B) ([self objectForKey:key]!=nil);
   };
 }
 

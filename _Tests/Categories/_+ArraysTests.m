@@ -14,34 +14,34 @@
 
 - (void)test_first
 {
-  self.equal(_.first(_IA(1, 2, 3), _NoneInt), N.i(1), @"can pull out the first element of an array");
+  self.equal(_.first(IA(1, 2, 3), nil), N.i(1), @"can pull out the first element of an array");
   // TODO: chaining - can I overload a define?
 //  self.equal(_([1, 2, 3]).first(), 1, @"can perform OO-style "first()"");
-  self.equal(((A*)_.first(_IA(1,2,3), 0)).join(@", "), @"", @"can pass an index to first");
-  self.equal(((A*)_.first(_IA(1,2,3), 2)).join(@", "), @"1, 2", @"can pass an index to first");
-  self.equal(((A*)_.first(_IA(1,2,3), 5)).join(@", "), @"1, 2, 3", @"can pass an index to first");
+  self.equal(((A*)_.first(IA(1,2,3), N.i(0))).join(@", "), @"", @"can pass an index to first");
+  self.equal(((A*)_.first(IA(1,2,3), N.i(2))).join(@", "), @"1, 2", @"can pass an index to first");
+  self.equal(((A*)_.first(IA(1,2,3), N.i(5))).join(@", "), @"1, 2, 3", @"can pass an index to first");
 //  NSInteger iResult = (^(){ return _.first(arguments); })(4, 3, 2, 1);
 //  self.equal(iResult, 4, @"works on an arguments object.");
-//  A* result = _.map(_IA(1,2,3),_IA(1,2,3)), _.first);
+//  A* result = _.map(IA(1,2,3),IA(1,2,3)), _.first);
 //  self.equal(result.join(@","), @"1,1", @"works well with _.map");
-  A* result = (^() { return _.take(_IA(1,2,3), 2); })();
+  A* result = (^() { return _.take(IA(1,2,3), N.i(2)); })();
   self.equal(result.join(@","), @"1,2", @"aliased as take");
-  result = (^() { return _.head(_IA(1,2,3), 2); })();
+  result = (^() { return _.head(IA(1,2,3), N.i(2)); })();
   self.equal(result.join(@","), @"1,2", @"aliased as head");
 }
 
-//- (void)test_rest
-//{
-//  A* numbers = [1, 2, 3, 4];
-//  self.equal(_.rest(numbers).join(@", "), @"2, 3, 4", @"working rest()");
-//  self.equal(_.rest(numbers, 0).join(@", "), @"1, 2, 3, 4", @"working rest(0)");
-//  self.equal(_.rest(numbers, 2).join(@", "), @"3, 4", @"rest can take an index");
+- (void)test_rest
+{
+  A* numbers = IA(1, 2, 3, 4);
+  self.equal(_.rest(numbers, nil).join(@", "), @"2, 3, 4", @"working rest()");
+  self.equal(_.rest(numbers, N.i(0)).join(@", "), @"1, 2, 3, 4", @"working rest(0)");
+  self.equal(_.rest(numbers, N.i(2)).join(@", "), @"3, 4", @"rest can take an index");
 //  A* result = (^(){ return _(arguments).tail(); })(1, 2, 3, 4);
 //  self.equal(result.join(@", "), @"2, 3, 4", @"aliased as tail and works on arguments object");
-//  result = _.map([[1,2,3],[1,2,3]], _.rest);
-//  self.equal(_.flatten(result).join(@","), @"2,3,2,3", @"works well with _.map");
-//}
-//
+//  A* result = _.map(OA(IA(1,2,3),IA(1,2,3)), _.rest); // TODO: guard
+//  self.equal(_.flatten(result, nil).join(@","), @"2,3,2,3", @"works well with _.map"); // UPDATE
+}
+
 //- (void)test_initial
 //{
 //  self.equal(_.initial([1,2,3,4,5]).join(@", "), @"1, 2, 3, 4", @"working initial()");

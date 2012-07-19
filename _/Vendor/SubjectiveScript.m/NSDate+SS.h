@@ -1,8 +1,8 @@
 //
-//  _Types.h
-//  _.m
+//  NSDate+SS.h
+//  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/18/12.
+//  Created by Kevin Malakoff on 7/17/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,10 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "_Types.h"
 
-#define _NoneInt  NSNotFound
-#define _None     [NSNull null]
+@interface NSDate (SS)
+
++ (D*)new_;
+
+@end

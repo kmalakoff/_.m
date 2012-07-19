@@ -1,5 +1,5 @@
 //
-//  NSMutableArray+SS.h
+//  NSDate+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,22 +27,13 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import "SSTypes.h"
+#import "NSDate+SS.h"
 
-@interface NSMutableArray (SS)
+@implementation NSDate (SS)
 
-+ (NSMutableArray*)new_;
-+ (NSMutableArray* (^)(const BA values, I count))ba;
-+ (NSMutableArray* (^)(const IA values, I count))ia;
-+ (NSMutableArray* (^)(const FA values, I count))fa;
-+ (NSMutableArray* (^)(const OA values, I count))oa;
-
-- (NSMutableArray* (^)(id value))push;
++ (D*)new_
+{
+  return [D date];
+}
 
 @end
-
-#define _BA(...) A.ba((BA){__VA_ARGS__}, sizeof((BA){__VA_ARGS__})/sizeof(B))
-#define _IA(...) A.ia((IA){__VA_ARGS__}, sizeof((IA){__VA_ARGS__})/sizeof(I))
-#define _FA(...) A.fa((FA){__VA_ARGS__}, sizeof((FA){__VA_ARGS__})/sizeof(F))
-#define _OA(...) A.oa((OA){__VA_ARGS__}, sizeof((OA){__VA_ARGS__})/sizeof(id))

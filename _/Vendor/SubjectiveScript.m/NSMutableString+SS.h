@@ -1,5 +1,5 @@
 //
-//  NSDate+SS.m
+//  NSMutableString+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,13 +27,13 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSDate+SS.h"
+#import "SSTypes.h"
 
-@implementation NSDate (SS)
+@interface NSMutableString (SS)
 
-+ (NSDate*)new_
-{
-  return [NSDate date];
-}
++ (NSMutableString*)new_;
++ (NSMutableString*(^)(NSString* value))s;
++ (NSMutableString*(^)(NSString* format, ...))f;
+- (NSMutableString* (^)(NSString* value))append;
 
 @end

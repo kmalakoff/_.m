@@ -1,5 +1,5 @@
 //
-//  NSMutableString+SS.m
+//  SSSubjectiveScript.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,39 +27,14 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSMutableString+SS.h"
+#import "SSSubjectiveScript.h"
 
-@implementation NSMutableString (SS)
+@implementation SS
 
-+ (NSMutableString*)new_
-{
-  return [NSMutableString string];
-}
-
-+ (NSMutableString*(^)(NSString *value))s
-{
-  return ^(NSString *value) {
-    return [NSMutableString stringWithString:value];
-  };
-}
-
-+ (NSMutableString*(^)(NSString *format, ...))f
-{
-  return ^(NSString *format, ...) {
-    va_list args;
-    va_start(args, format);
-    NSMutableString *result = [[NSMutableString alloc] initWithFormat:format arguments:args];
-    va_end(args);
-    return result;
-  };
-}
-
-- (NSMutableString* (^)(NSString *value))add
-{
-  return ^(NSString *value) {
-    [self appendString:value];
-    return self;
-  };
-}
++ (B(^)(id obj))isArray  { return ^(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
++ (B(^)(id obj))isObject { return ^(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } // TODO: document difference with Underscore definition
++ (B(^)(id obj))isString { return ^(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
++ (B(^)(id obj))isNumber { return ^(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
++ (B(^)(id obj))isNull   { return ^(id obj) { return [obj isKindOfClass:[NSNull class]]; }; }
 
 @end

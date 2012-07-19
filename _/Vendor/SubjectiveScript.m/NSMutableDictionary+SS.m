@@ -31,15 +31,15 @@
 
 @implementation NSMutableDictionary (Object)
 
-+ (NSMutableDictionary*)new_
++ (O*)new_
 {
   return [NSMutableDictionary dictionary];
 }
 
-+ (NSMutableDictionary*(^)(const KVA values))kva
++ (O*(^)(const KV* values))kva
 {
-  return ^(const KVA values) {
-    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+  return ^(const KV* values) {
+    O* result = O.new_;
 
     for (const id* value = (const id*) values; value[0] != nil; value+=2) {
       [result setValue:value[1] forKey:value[0]];
@@ -48,7 +48,7 @@
   };
 }
 
-+ (NSMutableDictionary*(^)(id key, id value))set
++ (O*(^)(id key, id value))set
 {
   return ^(id key, id value) {
     [self setValue:value forKey:key];

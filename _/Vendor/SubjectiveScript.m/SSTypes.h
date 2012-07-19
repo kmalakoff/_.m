@@ -1,5 +1,5 @@
 //
-//  NSMutableDictionary+SS.h
+//  SSTypes.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -28,14 +28,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SSTypes.h"
 
-@interface NSMutableDictionary (SS)
+// fundamental types
+typedef BOOL            B;
+typedef NSInteger       I;
+typedef NSUInteger      UI;
+typedef float           F;
 
-+ (NSMutableDictionary*)new_;
-+ (NSMutableDictionary*(^)(const KVA values))kva; // TODO: NS_REQUIRES_NIL_TERMINATION
-+ (NSMutableDictionary*(^)(id key, id value))set;
+// object types
+#define A               NSMutableArray
+#define O               NSMutableDictionary
+#define S               NSMutableString
+#define D               NSDate
+#define N               NSNumber
 
-@end
-
-#define _O(...) O.kva((KVA){__VA_ARGS__, nil})
+// array types
+typedef id              KV[2];

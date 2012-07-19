@@ -8,70 +8,72 @@ _.m is a port of Underscore.js to Objective-C
 
 Global Changes
 ------------
-NSObject -> integers, bools are NSNumbers -> use N* and N.i, N.b, etc when iterating and Ai1, _IA, etc for arrays
+NSObject -> integers, bools are NSNumbers -> use N* and N.i, N.b, etc when iterating and IA, etc for arrays
 null -> nil
 '' and "" to @""
-
+_> _O({k, v}, {k, v}) syntax
 
 Arrays
 ------------
 
 first
 _.first = _.head = _.take = function(array, n, guard)
-+ (id(^)(NSArray *array, NSUInteger n))first;
++ (id(^)(A* array, N* n))first;
 Changes: 
--> optional parameter not possible. Use: _NoneInt
+-> optional parameter not possible. Use: _NoneInt or nil?? // TODO: decide on the default version -> mappable or not?
 
 initial
 _.initial = function(array, n, guard)
-+ (NSArray *(^)(NSArray *array))initial;
++ (NSArray*(^)(A* array, N* n))initial;
 
 last
 _.last = function(array, n, guard)
-+ (id (^)(NSArray *array, NSUInteger n))last;
++ (id (^)(A* array, N* n))last;
 
 rest
 _.rest = _.tail = function(array, index, guard)
-+ (NSArray *(^)(NSArray *array, NSUInteger n))rest;
++ (NSArray*(^)(A* array, N* index))rest;
 
 compact
 _.compact = function(array)
-+ (NSArray *(^)(NSArray *array))compact;
++ (NSArray*(^)(A* array))compact;
 
 flatten
 _.flatten = function(array, shallow)
-+ (NSArray *(^)(NSArray *array, BOOL shallow))flatten;
++ (NSArray*(^)(A* array, N* shallow))flatten;
+// CHANGE: shallow is mandatory or should have two versions? (N* used for compatiblity with map not as an index)
 
 without
 _.without = function(array, ...)
-+ (NSArray *(^)(NSArray *array, NSArray *values))without;
++ (NSArray*(^)(A* array, id value1, ...))without;
 
 union
 _.union = function(...)
-+ (NSArray *(^)(NSArray *arrays))union;
++ (NSArray*(^)(A* array1, ...))union;
 
 intersection
 _.intersection = function(...)
-+ (NSArray *(^)(NSArray *arrays))intersection;
++ (NSArray*(^)(A* array1, ...))intersection;
 
 difference
 _.difference = function(array)
-+ (NSArray*(^)(NSArray *array, NSArray *arrays))difference;
++ (NSArray*(^)(A* array, A* array1, ...))difference;
 
 uniq
 _.uniq = _.unique = function(array, isSorted, iterator)
-+ (id (^)(NSArray *array, array, BOOL isSorted, _MapBlock iterator))uniq;
++ (id (^)(A* array, array, B isSorted, _MapBlock iterator))uniq;
 
 zip
 _.zip = function(...)
++ (NSArray*(^)(A* array1, A* array2, ...))zip;
 
 indexOf
 _.indexOf = function(array, item, isSorted)
-+ (NSInteger (^)(NSArray *array, id value, BOOL isSorted))indexOf;
++ (NSInteger (^)(A* array, id value, B isSorted))indexOf;
 
 lastIndexOf
 _.lastIndexOf = function(array, item)
-+ (NSInteger (^)(NSArray *array, id value))lastIndexOf;
++ (NSInteger (^)(A* array, id value))lastIndexOf;
 
 range
 _.range = function(start, stop, step)
@@ -149,11 +151,11 @@ isElement
 
 isArray
 _.isArray = function(obj)
-+ (BOOL(^)(id obj))isArray;
++ (B(^)(id obj))isArray;
 
 isObject
 _.isObject = function(obj)
-+ (BOOL(^)(id obj))isObject;
++ (B(^)(id obj))isObject;
 
 isArguments
 isFunction
@@ -163,19 +165,19 @@ isFinite
 isBoolean
 isDate
 _.isDate = function(obj)
-+ (BOOL(^)(id obj))isDate;
++ (B(^)(id obj))isDate;
 
 isRegExp
 isNaN
 
 isNull
 _.isNull = function(obj)
-+ (BOOL(^)(id obj))isNull;
++ (B(^)(id obj))isNull;
 
 isUndefined
 
 // ADDED
-+ (BOOL(^)(id obj))isDictionary
++ (B(^)(id obj))isDictionary
 
 Utility
 ------------

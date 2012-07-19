@@ -1,5 +1,5 @@
 //
-//  SSTypes.h
+//  NSArray+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,23 +27,14 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "SSTypes.h"
 
-// fundamental types
-typedef BOOL            B;
-typedef NSInteger       I;
-typedef float           F;
+@interface NSArray (SS)
 
-// object types
-#define A               NSMutableArray
-#define O               NSMutableDictionary
-#define S               NSMutableString
-#define D               NSDate
-#define N               NSNumber
+- (I)length;
+- (id (^)(I index))get;
 
-// array types
-typedef B               BA[];
-typedef I               IA[];
-typedef F               FA[];
-typedef id              OA[];
-typedef id              KVA[][2];
+- (NSString*(^)(NSString* separator))join;
+- (NSArray*(^)(UI start, UI count))slice;
+
+@end

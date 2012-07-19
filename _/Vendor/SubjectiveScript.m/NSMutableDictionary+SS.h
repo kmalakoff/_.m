@@ -1,5 +1,5 @@
 //
-//  NSDictionary+SS.h
+//  NSMutableDictionary+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,11 +27,14 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "SSTypes.h"
 
-@interface NSDictionary (SS)
+@interface NSMutableDictionary (SS)
 
-- (BOOL (^)(id key))has;
-- (id (^)(id key))get;
++ (O*)new_;
++ (O*(^)(const KV* values))kva; // TODO: NS_REQUIRES_NIL_TERMINATION
++ (O*(^)(id key, id value))set;
 
 @end
+
+#define _O(...) O.kva((KV[]){__VA_ARGS__, nil})

@@ -1,5 +1,5 @@
 //
-//  NSMutableString+SS.h
+//  NSMutableString+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,13 +27,39 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "NSMutableString+SS.h"
 
-@interface NSMutableString (SS)
+@implementation NSMutableString (SS)
 
-+ (NSMutableString*)new_;
-+ (NSMutableString*(^)(NSString *value))s;
-+ (NSMutableString*(^)(NSString *format, ...))f;
-- (NSMutableString* (^)(NSString* value))add;
++ (NSMutableString*)new_
+{
+  return [NSMutableString string];
+}
+
++ (NSMutableString*(^)(NSString* value))s
+{
+  return ^(NSString* value) {
+    return [NSMutableString stringWithString:value];
+  };
+}
+
++ (NSMutableString*(^)(NSString* format, ...))f
+{
+  return ^(NSString* format, ...) {
+    va_list args;
+    va_start(args, format);
+    NSMutableString *result = [[NSMutableString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    return result;
+  };
+}
+
+- (NSMutableString* (^)(NSString* value))append
+{
+  return ^(NSString* value) {
+    [self appendString:value];
+    return self;
+  };
+}
 
 @end

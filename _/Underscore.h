@@ -31,7 +31,6 @@
 # error _.m requires Automatic Reference Counting to be enabled
 #endif
 
-#import "_Constants.h"
 #import "_Types.h"
 
 // publish _ categories

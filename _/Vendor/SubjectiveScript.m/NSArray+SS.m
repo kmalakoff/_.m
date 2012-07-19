@@ -1,5 +1,5 @@
 //
-//  NSString+SS.h
+//  NSArray+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,8 +27,37 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "NSArray+SS.h"
+#import "NSNumber+SS.h"
 
-@interface NSString (SS)
+@implementation NSArray (SS)
+
+- (NSInteger)length
+{
+  return [self count];
+}
+
+- (id (^)(NSInteger))get
+{
+  return ^(NSInteger index) {
+    return [self objectAtIndex:index];
+  };
+}
+
+- (NSString*(^)(NSString* separator))join
+{
+  return ^(NSString* separator) {
+    return [self componentsJoinedByString:separator];
+  };
+}
+
+- (NSArray*(^)(UI start, UI count))slice
+{
+  return ^(UI start, UI count) {
+    if ((start + count)>self.count-1) count = self.count - start; // clamp to end of array
+    return [self subarrayWithRange:NSMakeRange(start, count)];
+  };
+}
+
 
 @end

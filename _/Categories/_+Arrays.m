@@ -28,120 +28,128 @@
 //
 
 #import "_+Arrays.h"
-#import "_Constants.h"
+#import "_+Objects.h"
+#import "SubjectiveScript.h"
 
 @implementation _ (Arrays)
 
-+ (id(^)(NSArray *array, NSInteger n))first
++ (id(^)(NSArray* array, N* n))first
 {
-  return ^id(NSArray *array, NSInteger n) {
-    if (n==_NoneInt)
-      return array.count? [array objectAtIndex:0] : nil; 
-    else
-      return array.count? [array subarrayWithRange:NSMakeRange(0, MIN(n, array.count))] : [NSArray array];
+  return ^id(NSArray* array, N* n) {
+    return (n != nil) ? array.slice(0, n.i) : array.get(0);
   };
 }
 
-+ (id(^)(NSArray *array, NSInteger n))head { return self.first; } // alias
-+ (id(^)(NSArray *array, NSInteger n))take { return self.first; } // alias
++ (id(^)(NSArray* array, N* n))head { return self.first; } // alias
++ (id(^)(NSArray* array, N* n))take { return self.first; } // alias
 
-//+ (NSArray*(^)(NSArray *array))initial
+//+ (NSArray*(^)(NSArray* array, N* n))initial
 //{
-//  return ^(NSArray *array) {
+//  return ^(NSArray* array) {
 //    return A.new_;
 //  };
 //}
 //
-//+ (id (^)(NSArray *array, NSUInteger n))last
+//+ (id (^)(NSArray* array, NSUInteger n))last
 //{
-//  return ^(NSArray *array, NSUInteger n) {
+//  return ^(NSArray* array, NSUInteger n) {
 //    return A.new_;
 //  };
 //}
 //
-//+ (NSArray*(^)(NSArray *array, NSUInteger n))rest
-//{
-//  return ^(NSArray *array, NSUInteger n) {
-//    return A.new_;
-//  };
-//}
-//+ (NSArray*(^)(NSArray *array, NSUInteger n))tail { return self.rest; } // alias
++ (NSArray*(^)(NSArray* array, N* index))rest
+{
+  return ^(NSArray* array, N* index) {
+    return array.slice((index == nil) ? 1 : index.i, array.length);
+  };
+}
++ (NSArray*(^)(NSArray* array, N* index))tail { return self.rest; } // alias
 //
 //
-//+ (NSArray*(^)(NSArray *array))compact
+//+ (NSArray*(^)(NSArray* array))compact
 //{
-//  return ^(NSArray *array) {
-//    return A.new_;
-//  };
-//}
-//
-//+ (NSArray*(^)(NSArray *array, BOOL shallow))flatten
-//{
-//  return ^(NSArray *array, BOOL shallow) {
+//  return ^(NSArray* array) {
 //    return A.new_;
 //  };
 //}
 //
-//+ (NSArray*(^)(NSArray *array, NSArray *values))without
++ (A*(^)(NSArray* array, N* shallow))flatten
+{
+  return ^(NSArray* array, N* shallow) {
+    A* output = A.new_;
+
+    for (id value in array) {
+      if (_.isArray(value) && !shallow) {
+        [output addObjectsFromArray:_.flatten(value, shallow)];
+      } else {
+        output.push(value);
+      }
+    }
+
+    return output;
+  };
+}
+
+//+ (NSArray*(^)(NSArray* array, id value1, ...))without
 //{
-//  return ^(NSArray *array, NSArray *values) {
+//  return ^(NSArray* array, NSArray* values) {
 //    return A.new_;
 //  };
 //}
 //
-//+ (NSArray*(^)(NSArray *arrays))union
+//+ (NSArray*(^)(NSArray* array1, ...))union
 //{
-//  return ^(NSArray *arrays) {
+//  return ^(NSArray* arrays) {
 //    return A.new_;
 //  };
 //}
 //
-//+ (NSArray*(^)(NSArray *arrays))intersection
+//+ (NSArray*(^)(NSArray* array1, ...))intersection
 //{
-//  return ^(NSArray *arrays) {
+//  return ^(NSArray* arrays) {
 //    return A.new_;
 //  };
 //}
 //
-//+ (NSArray*(^)(NSArray *array, NSArray *arrays))difference
+//+ (NSArray*(^)(NSArray* array, NSArray* array1, ...))difference
 //{
-//  return ^(NSArray *array, NSArray *arrays) {
+//  return ^(NSArray* array, NSArray* arrays) {
 //    return A.new_;
 //  };
 //}
 //
-//+ (id (^)(NSArray *array, BOOL isSorted, _MapBlock iterator))uniq
+//+ (id (^)(NSArray* array, B isSorted, _MapBlock iterator))uniq
 //{
-//  return ^(NSArray *array, BOOL isSorted, _MapBlock iterator) {
+//  return ^(NSArray* array, B isSorted, _MapBlock iterator) {
 //    return A.new_;
 //  };
 //}
-//+ (id (^)(NSArray *array, BOOL isSorted, _MapBlock iterator))unique { return self.uniq; } // alias
+//+ (id (^)(NSArray* array, B isSorted, _MapBlock iterator))unique { return self.uniq; } // alias
 //
-//+ (NSArray*(^)(NSArray *arrays))zip
+//+ (NSArray*(^)(NSArray* array1, NSArray* array2, ...))zip
 //{
-//  return ^(NSArray *arrays) {
+//  return ^(NSArray* arrays) {
 //    return A.new_;
 //  };
 //}
 //
-//+ (NSInteger (^)(NSArray *array, id value, BOOL isSorted))indexOf
+//+ (I (^)(NSArray* array, id value, B isSorted))indexOf
 //{
-//  return ^(NSArray *array, id value, BOOL isSorted) {
+//  return ^(NSArray* array, id value, B isSorted) {
 //    return -1;
 //  };
 //}
 //
-//+ (NSInteger (^)(NSArray *array, id value))lastIndexOf
+//+ (I (^)(NSArray* array, id value))lastIndexOf
 //{
-//  return ^(NSArray *array, id value) {
+//  return ^(NSArray* array, id value) {
 //    return -1;
 //  };
 //}
 //
-//+ (NSArray* (^)(NSInteger start, NSInteger stop, NSInteger step))range
+//+ (NSArray* (^)(I start, I stop, I step))range
 //{
-//  return ^(NSInteger start, NSInteger stop, NSInteger step) {
+//  return ^(I start, I stop, I step) {
 //    return A.new_;
 //  };
 //}

@@ -1,5 +1,5 @@
 //
-//  NSDate+SS.h
+//  NSNumber+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,10 +27,20 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "SSTypes.h"
 
-@interface NSDate (SS)
+@interface NSNumber (SS)
 
-+ (NSDate*)new_;
++ (N*(^)(B value))b;
+- (B)b;
+
++ (N*(^)(I value))i;
+- (I)i;
+
++ (N*(^)(UI value))ui;
+- (UI)ui;
+
++ (N*(^)(F value))f;
+- (F)f;
 
 @end

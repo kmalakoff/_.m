@@ -1,5 +1,5 @@
 //
-//  SSSubjectiveScript.m
+//  NSNumber+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,14 +27,40 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSSubjectiveScript.h"
+#import "NSNumber+SS.h"
 
-@implementation SS
+@implementation N (SS)
 
-+ (BOOL(^)(id obj))isArray  { return ^(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
-+ (BOOL(^)(id obj))isObject { return ^(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; }
-+ (BOOL(^)(id obj))isString { return ^(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
-+ (BOOL(^)(id obj))isNumber { return ^(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
-+ (BOOL(^)(id obj))isNull   { return ^(id obj) { return [obj isKindOfClass:[NSNull class]]; }; }
++ (N*(^)(B value))b;
+{
+  return ^(B value) {
+    return [N numberWithBool:value];
+  };
+}
+- (B)b { return self.boolValue; }
+
++ (N*(^)(I))i
+{
+  return ^(I value) {
+    return [N numberWithInt:value];
+  };
+}
+- (NSInteger)i { return self.integerValue; }
+
++ (N*(^)(UI))ui
+{
+  return ^(UI value) {
+    return [N numberWithInt:value];
+  };
+}
+- (UI)ui { return self.unsignedIntegerValue; }
+
++ (N*(^)(F value))f
+{
+  return ^(F value) {
+    return [N numberWithFloat:value];
+  };
+}
+- (F)f { return self.floatValue; }
 
 @end

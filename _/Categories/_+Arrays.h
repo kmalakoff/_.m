@@ -28,42 +28,41 @@
 //
 
 #import "_.h"
-#import "_Types.h"
 
 @interface _ (Arrays)
 
-+ (id(^)(NSArray *array, NSInteger n))first;
-+ (id(^)(NSArray *array, NSInteger n))head;
-+ (id(^)(NSArray *array, NSInteger n))take;
++ (id(^)(NSArray* array, N* index))first;
++ (id(^)(NSArray* array, N* index))head;
++ (id(^)(NSArray* array, N* index))take;
 //
-//+ (NSArray*(^)(NSArray *array))initial;
+//+ (NSArray*(^)(NSArray* array, N* index))initial;
 //
-//+ (id (^)(NSArray *array, NSUInteger n))last;
+//+ (id (^)(NSArray* array, N* index))last;
 //
-//+ (NSArray*(^)(NSArray *array, NSUInteger n))rest;
-//+ (NSArray*(^)(NSArray *array, NSUInteger n))tail;
++ (NSArray*(^)(NSArray* array, N* index))rest;
++ (NSArray*(^)(NSArray* array, N* index))tail;
 //
-//+ (NSArray*(^)(NSArray *array))compact;
+//+ (NSArray*(^)(NSArray* array))compact;
 //
-//+ (NSArray*(^)(NSArray *array, BOOL shallow))flatten;
++ (A*(^)(NSArray* array, N* shallow))flatten;
+
+//+ (NSArray*(^)(NSArray* array, id value1, ...))without;
 //
-//+ (NSArray*(^)(NSArray *array, NSArray*values))without;
+//+ (NSArray*(^)(NSArray* array1, ...))union;
 //
-//+ (NSArray*(^)(NSArray *arrays))union;
+//+ (NSArray*(^)(NSArray* array1, ...))intersection;
 //
-//+ (NSArray*(^)(NSArray *arrays))intersection;
+//+ (NSArray*(^)(NSArray* array, NSArray* array1, ...))difference;
 //
-//+ (NSArray*(^)(NSArray *array, NSArray *arrays))difference;
+//+ (id (^)(NSArray* array, B isSorted, _MapBlock iterator))uniq;
+//+ (id (^)(NSArray* array, B isSorted, _MapBlock iterator))unique;
 //
-//+ (id (^)(NSArray *array, BOOL isSorted, _MapBlock iterator))uniq;
-//+ (id (^)(NSArray *array, BOOL isSorted, _MapBlock iterator))unique;
+//+ (NSArray*(^)(NSArray* array1, NSArray* array2, ...))zip;
 //
-//+ (NSArray*(^)(NSArray *arrays))zip;
+//+ (I (^)(NSArray* array, id value, B isSorted))indexOf;
 //
-//+ (NSInteger (^)(NSArray *array, id value, BOOL isSorted))indexOf;
+//+ (I (^)(NSArray* array, id value))lastIndexOf;
 //
-//+ (NSInteger (^)(NSArray *array, id value))lastIndexOf;
-//
-//+ (NSArray* (^)(NSInteger start, NSInteger stop, NSInteger step))range;
+//+ (NSArray* (^)(I start, I stop, I step))range;
 //
 @end

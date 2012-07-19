@@ -32,55 +32,72 @@
 
 @implementation NSMutableArray (SS)
 
-+ (NSMutableArray*)new_
++ (A*)new_
 {
-  return [NSMutableArray array];
+  return [A array];
 }
 
-+ (NSMutableArray* (^)(const BA values, I count))ba
++ (A*(^)(const B* values, I count))ba
 {
-  return ^(const BA values, I count) {
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
+  return ^(const B* values, I count) {
+    A* result = [A arrayWithCapacity:count];
     
-    for (NSInteger index=0; index<count; index++) {
+    for (I index=0; index<count; index++) {
       [result addObject:N.b(values[index])];
     }
     return result;
   };
 }
 
-+ (NSMutableArray* (^)(const IA values, I count))ia
++ (A*(^)(const I* values, I count))ia
 {
-  return ^(const IA values, I count) {
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
+  return ^(const I* values, I count) {
+    A* result = [A arrayWithCapacity:count];
     
-    for (NSInteger index=0; index<count; index++) {
+    for (I index=0; index<count; index++) {
       [result addObject:N.i(values[index])];
     }
     return result;
   };
 }
 
-+ (NSMutableArray* (^)(const FA values, I count))fa
++ (A*(^)(const UI* values, I count))uia
 {
-  return ^(const FA values, I count) {
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
+  return ^(const UI* values, I count) {
+    A* result = [A arrayWithCapacity:count];
     
-    for (NSInteger index=0; index<count; index++) {
+    for (I index=0; index<count; index++) {
+      [result addObject:N.ui(values[index])];
+    }
+    return result;
+  };
+}
+
++ (A*(^)(const F* values, I count))fa
+{
+  return ^(const F* values, I count) {
+    A* result = [A arrayWithCapacity:count];
+    
+    for (I index=0; index<count; index++) {
       [result addObject:N.f(values[index])];
     }
     return result;
   };
 }
 
-+ (NSMutableArray* (^)(const OA values, I count))oa
++ (A*(^)(const id* values))oa
 {
-  return ^(const OA values, I count) {
-    return [NSMutableArray arrayWithObjects:values count:count];
+  return ^(const id* values) {
+    A* result = A.new_;
+    
+    for (const id* value=values; *value != nil; value+=2) {
+      [result addObject:*value];
+    }
+    return result;
   };
 }
 
-- (NSMutableArray* (^)(id))push
+- (A*(^)(id))push
 {
   return ^(id value) {
     [self addObject:value];
