@@ -56,5 +56,6 @@
 //isNaN
 //isNull
 //isUndefined
+//isDictionary   // ADDED
 
 @end

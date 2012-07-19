@@ -31,18 +31,23 @@
 
 @interface _ (Collections)
 
-+ (void(^)(id obj, _IteratorBlock block))each;
-+ (void(^)(id obj, _IteratorBlock block))forEach;
-+ (void(^)(id obj, _IteratorWithContextBlock block, id context))eachWithContext;
++ (void(^)(id obj, _IteratorBlock iterator))each;
++ (void(^)(id obj, _IteratorBlock iterator))forEach;
++ (void(^)(id obj, _IteratorWithContextBlock iterator, id context))eachWithContext;
 
-+ (id(^)(id obj, _MapBlock block))map;
-+ (id(^)(id obj, _MapBlock block))collect;
-+ (id(^)(id obj, _MapWithContextBlock block, id context))mapWithContext;
++ (id(^)(id obj, _MapBlock iterator))map;
++ (id(^)(id obj, _MapBlock iterator))collect;
++ (id(^)(id obj, _MapWithContextBlock iterator, id context))mapWithContext;
 
 //reduce
 //reduceRight
 //find
-//filter
+
++ (A*(^)(id obj, _IteratorTestBlock iterator))filter;
++ (A*(^)(id obj, _IteratorTestBlock iterator))select;
++ (A*(^)(id obj, _IteratorTestWithContexBlock iterator, id context))filterWithContext;
+
+
 //reject
 //all
 //any

@@ -32,9 +32,12 @@
 @interface NSMutableDictionary (SS)
 
 + (O*)new_;
-+ (O*(^)(const KV* values))kva; // TODO: NS_REQUIRES_NIL_TERMINATION
++ (O*(^)(const KV* values))newKVA; // TODO: NS_REQUIRES_NIL_TERMINATION
 + (O*(^)(id key, id value))set;
 
 @end
 
-#define _O(...) O.kva((KV[]){__VA_ARGS__, nil})
+// terminators
+#define KVA_       nil
+
+#define _O(...) O.newKVA((KV[]){__VA_ARGS__, KVA_})

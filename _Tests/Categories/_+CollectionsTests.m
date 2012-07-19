@@ -58,10 +58,10 @@
 //  self.equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
 
 //  var ids = _.map($(@"#map-test").children(), ^(n){ return n.id; });
-//  deepEqual(ids, ["id1", @"id2"], @"Can use collection methods on NodeLists.");
+//  deepEqual(ids, IA("id1", @"id2"), @"Can use collection methods on NodeLists.");
 
 //  var ids = _.map(document.images, ^(n){ return n.id; });
-//  ok(ids[0] == "chart_image", @"can use collection methods on HTMLCollections");
+//  ok(idsIA(0) == "chart_image", @"can use collection methods on HTMLCollections");
 
   A* ifnil = _.map(nil, ^id(id v, id k){ return nil; });
   self.ok(_.isArray(ifnil) && ifnil.length == 0, @"handles a nil properly");
@@ -70,7 +70,20 @@
 //reduce
 //reduceRight
 //find
-//filter
+
+- (void)test_filter
+{
+  A* evens = _.select(IA(1, 2, 3, 4, 5, 6), ^BOOL(N* num, N* i){ return num.i % 2 == 0; });
+  self.equal(evens.join(@", "), @"2, 4, 6", @"selected each even number");
+
+  evens = _.filter(IA(1, 2, 3, 4, 5, 6), ^BOOL(N* num, N* i){ return num.i % 2 == 0; });
+  self.equal(evens.join(@", "), @"2, 4, 6", @"aliased as 'filter'");
+
+  evens = _.filterWithContext(IA(1, 2, 3, 4, 5, 6), ^BOOL(N* num, N* i, O* this){ return num.i % ((N*)this.get(@"factor")).i == 0; }, _O({@"factor", N.i(2)})); // ADDED
+  self.equal(evens.join(@", "), @"2, 4, 6", @"aliased as 'filter'");
+}
+
+
 //reject
 //all
 //any

@@ -33,10 +33,10 @@
 
 @implementation _ (Collections)
 
-+ (void(^)(id obj, _IteratorBlock block))each
++ (void(^)(id obj, _IteratorBlock iterator))each
 {
-  return ^(id obj, _IteratorBlock block) {
-    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
+  return ^(id obj, _IteratorBlock iterator) {
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj))
       return;
@@ -47,22 +47,22 @@
 
       NSInteger count = [array count];
       for (NSInteger index=0; index<count; index++) {
-        block([array objectAtIndex:index], [N numberWithInteger:index]);
+        iterator([array objectAtIndex:index], [N numberWithInteger:index]);
       }
     }
     else {
       NSDictionary *dictionary = obj;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-          block(value, key);
+          iterator(value, key);
       }];
     }
   };
 }
-+ (void(^)(id obj, _IteratorBlock block))forEach { return self.each; }  // alias
-+ (void(^)(id obj, _IteratorWithContextBlock block, id context))eachWithContext
++ (void(^)(id obj, _IteratorBlock iterator))forEach { return self.each; }  // ALIAS
++ (void(^)(id obj, _IteratorWithContextBlock iterator, id context))eachWithContext
 {
-  return ^(id obj, _IteratorWithContextBlock block, id context){
-    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
+  return ^(id obj, _IteratorWithContextBlock iterator, id context){
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj))
       return;
@@ -73,22 +73,22 @@
 
       NSInteger count = [array count];
       for (NSInteger index=0; index<count; index++) {
-        block([array objectAtIndex:index], [N numberWithInteger:index], context);
+        iterator([array objectAtIndex:index], [N numberWithInteger:index], context);
       }
     }
     else {
       NSDictionary *dictionary = obj;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-          block(value, key, context);
+          iterator(value, key, context);
       }];
     }
   };
 }
 
-+ (id(^)(id obj, _MapBlock block))map
++ (id(^)(id obj, _MapBlock iterator))map
 {
-  return ^(id obj, _MapBlock block) {
-    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
+  return ^(id obj, _MapBlock iterator) {
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj))
       return A.new_;
@@ -100,7 +100,7 @@
       A* result = [A arrayWithCapacity:array.count];
       NSInteger count = [array count];
       for (NSInteger index=0; index<count; index++) {
-        id mapped = block([array objectAtIndex:index], [N numberWithInteger:index]);
+        id mapped = iterator([array objectAtIndex:index], [N numberWithInteger:index]);
         if (mapped)
           [result addObject:mapped];
       }
@@ -112,7 +112,7 @@
       O* result = O.new_;
 
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        id mapped = block(value, key);
+        id mapped = iterator(value, key);
         if (mapped)
           [result setObject:mapped forKey:key];
       }];
@@ -123,11 +123,11 @@
     return nil;
   };
 }
-+ (id(^)(id obj, _MapBlock block))collect { return self.map; }
-+ (id(^)(id obj, _MapWithContextBlock block, id context))mapWithContext
++ (id(^)(id obj, _MapBlock iterator))collect { return self.map; }
++ (id(^)(id obj, _MapWithContextBlock iterator, id context))mapWithContext
 {
-  return ^(id obj, _MapWithContextBlock block, id context) {
-    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or null");
+  return ^(id obj, _MapWithContextBlock iterator, id context) {
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj))
       return A.new_;
@@ -139,7 +139,7 @@
       A* result = [A arrayWithCapacity:array.count];
       NSInteger count = [array count];
       for (NSInteger index=0; index<count; index++) {
-        id mapped = block([array objectAtIndex:index], [N numberWithInteger:index], context);
+        id mapped = iterator([array objectAtIndex:index], [N numberWithInteger:index], context);
         if (mapped)
           [result addObject:mapped];
       }
@@ -151,7 +151,7 @@
       O* result = O.new_;
 
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        id mapped = block(value, key, context);
+        id mapped = iterator(value, key, context);
         if (mapped)
           [result setObject:mapped forKey:key];
       }];
@@ -162,5 +162,48 @@
     return nil;
   };
 }
+
+//reduce
+//reduceRight
+//find
+
++ (A*(^)(id obj, _IteratorTestBlock iterator))filter
+{
+  return ^(id obj, _IteratorTestBlock iterator) {
+    A* results = A.new_;
+    if (obj == nil) return results;
+    _.each(obj, ^(id value, id index) {
+      if (iterator(value, index)) results.push(value);
+    });
+    return results;
+  };
+}
++ (A*(^)(id obj, _IteratorTestBlock iterator))select { return self.filter; } // ALIAS
++ (A*(^)(id obj, _IteratorTestWithContexBlock iterator, id context))filterWithContext
+{
+  return ^(id obj, _IteratorTestWithContexBlock iterator, id context) {
+    A* results = A.new_;
+    if (obj == nil) return results;
+    _.each(obj, ^(id value, id index) {
+      if (iterator(value, index, context)) results.push(value);
+    });
+    return results;
+  };
+}
+
+//reject
+//all
+//any
+//include
+//invoke
+//pluck
+//max
+//min
+//sortBy
+//groupBy
+//sortedIndex
+//shuffle
+//toArray
+//size
 
 @end

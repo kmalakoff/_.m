@@ -61,5 +61,7 @@
 
 // ADDED
 + (B(^)(id obj))isDictionary { return ^(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
++ (B(^)(id obj))isTruthy { return  ^BOOL(id obj) { return obj != nil; }; } // TODO
++ (B(^)(id obj))isFalsey { return  ^BOOL(id obj) { return obj == nil; }; } // TODO
 
 @end

@@ -12,6 +12,12 @@ NSObject -> integers, bools are NSNumbers -> use N* and N.i, N.b, etc when itera
 null -> nil
 '' and "" to @""
 _> _O({k, v}, {k, v}) syntax
+-> terminators and ignorers OA_, FA_ and _FNone
+
+Other Changes
+------------
+_() 
+_Wrapper* __(id); -> two underscores
 
 Arrays
 ------------
@@ -19,20 +25,23 @@ Arrays
 first
 _.first = _.head = _.take = function(array, n, guard)
 + (id(^)(A* array, N* n))first;
-Changes: 
--> optional parameter not possible. Use: _NoneInt or nil?? // TODO: decide on the default version -> mappable or not?
++ (id(^)(A* array, N* unused))firstIterator; // CHANGE
+
 
 initial
 _.initial = function(array, n, guard)
 + (NSArray*(^)(A* array, N* n))initial;
++ (NSArray*(^)(A* array, N* unused))initialIterator; // CHANGE
 
 last
 _.last = function(array, n, guard)
 + (id (^)(A* array, N* n))last;
++ (NSArray*(^)(A* array, N* unused))lastIterator; // CHANGE
 
 rest
 _.rest = _.tail = function(array, index, guard)
 + (NSArray*(^)(A* array, N* index))rest;
++ (NSArray*(^)(A* array, N* unused))restIterator; // CHANGE
 
 compact
 _.compact = function(array)
@@ -90,18 +99,25 @@ Collections
 
 each
   var each = _.each = _.forEach = function(obj, iterator, context)
-+ (void(^)(id obj, _IteratorBlock block))each;
-+ (void(^)(id obj, _IteratorWithContextBlock block, id context))eachWithContext; // CHANGE
++ (void(^)(id obj, _IteratorBlock iterator))each;
++ (void(^)(id obj, _IteratorWithContextBlock iterator, id context))eachWithContext; // CHANGE
+CHANGE: no collection (was used for guard, but removed due to variable arguments not possible)
 
 map
 _.map = _.collect = function(obj, iterator, context)
-+ (id(^)(id obj, _MapBlock block))map;
-+ (id(^)(id obj, _MapWithContextBlock block, id context))mapWithContext; // CHANGE
++ (id(^)(id obj, _MapBlock iterator))map;
++ (id(^)(id obj, _MapWithContextBlock iterator, id context))mapWithContext; // CHANGE
+CHANGE: no collection (was used for guard, but removed due to variable arguments not possible)
 
 reduce
 reduceRight
 find
+
 filter
+  _.filter = _.select = function(obj, iterator, context) {
++ (A*(^)(id obj, _IteratorTestBlock iterator))filter;
++ (A*(^)(id obj, _IteratorTestBlock iterator, id context))filterWithContext;
+
 reject
 all
 any
@@ -178,6 +194,8 @@ isUndefined
 
 // ADDED
 + (B(^)(id obj))isDictionary
++ (B(^)(id obj))isTruthy
++ (B(^)(id obj))isFalsey
 
 Utility
 ------------
@@ -190,4 +208,6 @@ uniqueId
 escape
 result
 template
+
+
 

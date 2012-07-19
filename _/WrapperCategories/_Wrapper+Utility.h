@@ -31,4 +31,13 @@
 
 @interface _Wrapper (Utility)
 
+//noConflict
+//identity
+//times
+//mixin
+//uniqueId
+//escape
+//result
+//template
+
 @end

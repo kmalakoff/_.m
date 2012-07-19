@@ -39,40 +39,69 @@
     return (n != nil) ? array.slice(0, n.i) : array.get(0);
   };
 }
++ (id(^)(NSArray* array, N* n))head { return self.first; } // ALIAS
++ (id(^)(NSArray* array, N* n))take { return self.first; } // ALIAS
++ (id(^)(NSArray* array, N* unused))firstIterator
+{
+  return ^id(NSArray* array, N* unused) {
+    return array.get(0);
+  };
+}
 
-+ (id(^)(NSArray* array, N* n))head { return self.first; } // alias
-+ (id(^)(NSArray* array, N* n))take { return self.first; } // alias
++ (NSArray*(^)(NSArray* array, N* n))initial
+{
+  return ^(NSArray* array, N* n) {
+    return array.slice(0, array.length - ((n == nil) ? 1 : n.i));
+  };
+}
++ (NSArray*(^)(NSArray* array, N* unused))initialIterator
+{
+  return ^(NSArray* array, N* unused) {
+    return array.slice(0, array.length - 1);
+  };
+}
 
-//+ (NSArray*(^)(NSArray* array, N* n))initial
-//{
-//  return ^(NSArray* array) {
-//    return A.new_;
-//  };
-//}
-//
-//+ (id (^)(NSArray* array, NSUInteger n))last
-//{
-//  return ^(NSArray* array, NSUInteger n) {
-//    return A.new_;
-//  };
-//}
-//
++ (id (^)(NSArray* array, N* n))last
+{
+  return ^(NSArray* array, N* n) {
+    if (!array.count) return [NSArray array];
+    if (n != nil) {
+      return array.slice(MAX(array.length - n.i, 0), array.length);
+    } else {
+      return array.get(array.length - 1);
+    }
+  };
+}
++ (id (^)(NSArray* array, N* unused))lastIterator
+{
+  return ^(NSArray* array, N* unused) {
+    return array.get(array.length - 1);
+  };
+}
+
 + (NSArray*(^)(NSArray* array, N* index))rest
 {
   return ^(NSArray* array, N* index) {
     return array.slice((index == nil) ? 1 : index.i, array.length);
   };
 }
-+ (NSArray*(^)(NSArray* array, N* index))tail { return self.rest; } // alias
-//
-//
-//+ (NSArray*(^)(NSArray* array))compact
-//{
-//  return ^(NSArray* array) {
-//    return A.new_;
-//  };
-//}
-//
++ (NSArray*(^)(NSArray* array, N* index))tail { return self.rest; } // ALIAS
++ (NSArray*(^)(NSArray* array, N* unused))restIterator
+{
+  return ^(NSArray* array, N* unused) {
+    if (!array.count) return [NSArray array];
+    return array.slice(1, array.length);
+  };
+}
+
++ (NSArray*(^)(NSArray* array))compact
+{
+  return ^(NSArray* array) {
+    return [NSArray array];
+//    return _.filter(array, ^(id value){ return _.isTruthy(value); });
+  };
+}
+
 + (A*(^)(NSArray* array, N* shallow))flatten
 {
   return ^(NSArray* array, N* shallow) {
@@ -124,7 +153,7 @@
 //    return A.new_;
 //  };
 //}
-//+ (id (^)(NSArray* array, B isSorted, _MapBlock iterator))unique { return self.uniq; } // alias
+//+ (id (^)(NSArray* array, B isSorted, _MapBlock iterator))unique { return self.uniq; } // ALIAS
 //
 //+ (NSArray*(^)(NSArray* array1, NSArray* array2, ...))zip
 //{

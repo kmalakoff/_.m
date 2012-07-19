@@ -37,60 +37,55 @@
   return [A array];
 }
 
-+ (A*(^)(const B* values, I count))ba
++ (A*(^)(const B* values))newBA
 {
-  return ^(const B* values, I count) {
-    A* result = [A arrayWithCapacity:count];
-    
-    for (I index=0; index<count; index++) {
-      [result addObject:N.b(values[index])];
+  return ^(const B* values) {
+    A* result = A.new_;
+    for (const B* value=values; *value != BA_; value++) {
+      [result addObject:N.b(*value)];
     }
     return result;
   };
 }
 
-+ (A*(^)(const I* values, I count))ia
++ (A*(^)(const I* values))newIA
 {
-  return ^(const I* values, I count) {
-    A* result = [A arrayWithCapacity:count];
-    
-    for (I index=0; index<count; index++) {
-      [result addObject:N.i(values[index])];
+  return ^(const I* values) {
+    A* result = A.new_;
+    for (const I* value=values; *value != IA_; value++) {
+      [result addObject:N.i(*value)];
     }
     return result;
   };
 }
 
-+ (A*(^)(const UI* values, I count))uia
++ (A*(^)(const UI* values))newUIA
 {
-  return ^(const UI* values, I count) {
-    A* result = [A arrayWithCapacity:count];
-    
-    for (I index=0; index<count; index++) {
-      [result addObject:N.ui(values[index])];
+  return ^(const UI* values) {
+    A* result = A.new_;
+    for (const UI* value=values; *value != UIA_; value++) {
+      [result addObject:N.ui(*value)];
     }
     return result;
   };
 }
 
-+ (A*(^)(const F* values, I count))fa
++ (A*(^)(const F* values))newFA
 {
-  return ^(const F* values, I count) {
-    A* result = [A arrayWithCapacity:count];
-    
-    for (I index=0; index<count; index++) {
-      [result addObject:N.f(values[index])];
+  return ^(const F* values) {
+    A* result = A.new_;
+    for (const F* value=values; *value != *value; value++) {
+      [result addObject:N.f(*value)];
     }
     return result;
   };
 }
 
-+ (A*(^)(const id* values))oa
++ (A*(^)(const id* values))newOA
 {
   return ^(const id* values) {
     A* result = A.new_;
-    
-    for (const id* value=values; *value != nil; value+=2) {
+    for (const id* value=values; *value != OA_; value++) {
       [result addObject:*value];
     }
     return result;

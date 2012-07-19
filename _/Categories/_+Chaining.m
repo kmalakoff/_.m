@@ -31,4 +31,13 @@
 
 @implementation _ (Chaining)
 
+//+ (_Wrapper*(^)(id obj))chain;
+//+ (_Wrapper*(^)(B value))chainB;
+//+ (_Wrapper*(^)(I value))chainI;
+//+ (_Wrapper*(^)(UI value))chainUI;
+//+ (_Wrapper*(^)(F value))chainF;
+
 @end
+
+// functional representation
+_Wrapper* __(id obj) { return nil; } // TODO: chaining

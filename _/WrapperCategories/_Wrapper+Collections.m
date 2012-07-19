@@ -31,4 +31,25 @@
 
 @implementation _Wrapper (Collections)
 
+//each
+//map
+//reduce
+//reduceRight
+//find
+//filter
+//reject
+//all
+//any
+//include
+//invoke
+//pluck
+//max
+//min
+//sortBy
+//groupBy
+//sortedIndex
+//shuffle
+//toArray
+//size
+
 @end

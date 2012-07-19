@@ -31,17 +31,21 @@
 
 @interface _ (Arrays)
 
-+ (id(^)(NSArray* array, N* index))first;
-+ (id(^)(NSArray* array, N* index))head;
-+ (id(^)(NSArray* array, N* index))take;
-//
-//+ (NSArray*(^)(NSArray* array, N* index))initial;
-//
-//+ (id (^)(NSArray* array, N* index))last;
-//
-+ (NSArray*(^)(NSArray* array, N* index))rest;
++ (id(^)(NSArray* array, N* n))first;  // TODO: nil terminated
++ (id(^)(NSArray* array, N* n))head;
++ (id(^)(NSArray* array, N* n))take;
++ (id(^)(NSArray* array, N* unused))firstIterator;
+
++ (NSArray*(^)(NSArray* array, N* n))initial;   // TODO: nil terminated
++ (NSArray*(^)(NSArray* array, N* unused))initialIterator; 
+
++ (id (^)(NSArray* array, N* n))last; // TODO: nil terminated
++ (id (^)(NSArray* array, N* unused))lastIterator;
+
++ (NSArray*(^)(NSArray* array, N* index))rest;  // TODO: nil terminated
 + (NSArray*(^)(NSArray* array, N* index))tail;
-//
++ (NSArray*(^)(NSArray* array, N* unused))restIterator;
+
 //+ (NSArray*(^)(NSArray* array))compact;
 //
 + (A*(^)(NSArray* array, N* shallow))flatten;

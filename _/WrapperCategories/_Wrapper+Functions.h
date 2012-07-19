@@ -31,4 +31,16 @@
 
 @interface _Wrapper (Functions)
 
+//bind
+//bindAll
+//memoize
+//delay
+//defer
+//throttle
+//debounce
+//once
+//after
+//wrap
+//compose
+
 @end

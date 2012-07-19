@@ -36,12 +36,11 @@
   return [NSMutableDictionary dictionary];
 }
 
-+ (O*(^)(const KV* values))kva
++ (O*(^)(const KV* values))newKVA
 {
   return ^(const KV* values) {
     O* result = O.new_;
-
-    for (const id* value = (const id*) values; value[0] != nil; value+=2) {
+    for (const id* value = (const id*) values; *value != KVA_; value+=2) {
       [result setValue:value[1] forKey:value[0]];
     }
     return result;

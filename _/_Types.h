@@ -31,11 +31,13 @@
 
 // blocks
 typedef void                (^_DoBlock)();
-//typedef B                   (^_TestBlock)(id obj);
+typedef signed char         (^_TestBlock)(id obj); // TODO: fix compiler warning (BOOL)
 typedef id                  (^_ReduceBlock)(id memo, id obj);
 typedef void                (^_IteratorBlock)(id value, id key);
+typedef signed char         (^_IteratorTestBlock)(id value, id key);
+typedef signed char         (^_IteratorTestWithContexBlock)(id value, id key, id context);
 typedef void                (^_IteratorWithContextBlock)(id value, id key, id context);
 typedef id                  (^_MapBlock)(id value, id key);
 typedef id                  (^_MapWithContextBlock)(id value, id key, id context);
 typedef id                  (^_SortByBlock)(id value);
-//typedef NSComparisonResult  (^_CompareBlock)(id left, id right);
+typedef int                 (^_CompareBlock)(id left, id right); // TODO: fix compiler warning (NSComparisonResult)

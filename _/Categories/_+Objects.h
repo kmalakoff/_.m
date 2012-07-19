@@ -69,5 +69,7 @@
 
 // ADDED
 + (B(^)(id obj))isDictionary;
++ (B(^)(id obj))isTruthy;
++ (B(^)(id obj))isFalsey;
 
 @end

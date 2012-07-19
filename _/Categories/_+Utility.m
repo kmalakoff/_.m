@@ -31,4 +31,13 @@
 
 @implementation _ (Utility)
 
+//noConflict
+//identity
+//times
+//mixin
+//uniqueId
+//escape
+//result
+//template
+
 @end

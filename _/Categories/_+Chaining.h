@@ -28,10 +28,20 @@
 //
 
 #import "_.h"
+#import "_Wrapper.h"
 
 @interface _ (Chaining)
+
+//+ (_Wrapper*(^)(id obj))chain;
+//+ (_Wrapper*(^)(B value))chainB;
+//+ (_Wrapper*(^)(I value))chainI;
+//+ (_Wrapper*(^)(UI value))chainUI;
+//+ (_Wrapper*(^)(F value))chainF;
 
 //chain
 //value
 
 @end
+
+// functional representation
+_Wrapper* __(id obj); // CHANGE: two '_'s
