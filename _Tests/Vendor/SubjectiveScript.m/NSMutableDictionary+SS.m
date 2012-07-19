@@ -15,13 +15,13 @@
   return [NSMutableDictionary dictionary];
 }
 
-+ (NSMutableDictionary*(^)(const KVA values, I count))kva
++ (NSMutableDictionary*(^)(const KVA values))kva
 {
-  return ^(const KVA values, I count) {
-    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithCapacity:count];
-    
-    for (NSInteger index=0; index<count; index++) {
-      [result setValue:values[index][1] forKey:values[index][0]];
+  return ^(const KVA values) {
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+
+    for (const id* value = (const id*) values; value[0] != nil; value+=2) {
+      [result setValue:value[1] forKey:value[0]];
     }
     return result;
   };

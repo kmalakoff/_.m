@@ -27,7 +27,7 @@
   self.equal(answers.join(@", "), @"1, 2, 3", @"aliased as 'forEach'");
 
   answers =  A.new_;
-  O* obj = _O(KV(@"one", N.i(1)), KV(@"two", N.i(2)), KV(@"three", N.i(3)));
+  O* obj = _O({@"one", N.i(1)}, {@"two", N.i(2)}, {@"three", N.i(3)});
 //  obj.constructor.prototype.four = 4;
   _.each(obj, ^(id value, id key){ answers.push(key); });
   self.equal(answers.join(@", "), @"one, two, three", @"iterating over objects works, and ignores the object prototype.");

@@ -12,10 +12,9 @@
 @interface NSMutableDictionary (SS)
 
 + (NSMutableDictionary*)new_;
-+ (NSMutableDictionary*(^)(const KVA values, I count))kva;
++ (NSMutableDictionary*(^)(const KVA values))kva; // TODO: NS_REQUIRES_NIL_TERMINATION
 + (NSMutableDictionary*(^)(id key, id value))set;
 
 @end
 
-#define KV(...) {__VA_ARGS__}
-#define _O(...) O.kva((KVA){__VA_ARGS__}, sizeof((KVA){__VA_ARGS__})/sizeof(id[2]))
+#define _O(...) O.kva((KVA){__VA_ARGS__, nil})
