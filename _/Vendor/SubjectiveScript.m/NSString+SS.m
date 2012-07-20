@@ -33,26 +33,26 @@
 
 @implementation NSString (SS)
 
-+ (NSString*(^)(NSString* value))newS
++ (NSS*(^)(NSS* value))newS
 {
-  return ^(NSString* value) {
+  return ^(NSS* value) {
     return [NSString stringWithString:value];
   };
 }
 
-+ (NSString*(^)(NSArray* array))newA
++ (NSS*(^)(NSA* array))newA
 {
-  return ^(NSArray* array) {
+  return ^(NSA* array) {
     S* result = S.new_;
-    for (id value in array)
-      result.append(SS.toString(value));
+    for (NSO* value in array)
+      result.append(value.toString());
     return result;
   };
 }
 
-+ (NSString*(^)(NSString* format, ...))formatted
++ (NSS*(^)(NSS* format, ...))formatted
 {
-  return ^(NSString* format, ...) {
+  return ^(NSS* format, ...) {
     va_list args;
     va_start(args, format);
     NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
@@ -61,6 +61,6 @@
   };
 }
 
-- (NSString*(^)())toString { return ^() { return self; }; }
+- (S*(^)())toString { return ^() { return self.mutableCopy; }; }
 
 @end

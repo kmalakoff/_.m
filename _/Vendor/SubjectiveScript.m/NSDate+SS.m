@@ -36,6 +36,6 @@
   return [D date];
 }
 
-- (NSString*(^)())toString { return ^() { return self.description; }; }
+- (S*(^)())toString { return ^() { return self.description.mutableCopy; }; }
 
 @end

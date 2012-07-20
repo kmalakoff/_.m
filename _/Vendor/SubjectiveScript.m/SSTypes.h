@@ -28,19 +28,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <objc/objc.h>
+#import <Foundation/NSObjCRuntime.h>
 
 // fundamental types
-typedef BOOL            B;
+typedef BOOL            B;   // TODO: return to BOOL (fix compiler warning)
 typedef NSInteger       I;
 typedef NSUInteger      UI;
 typedef float           F;
+typedef id              KV[2];
 
 // object types
+#define NSO             NSObject
 #define A               NSMutableArray
+#define NSA             NSArray
 #define O               NSMutableDictionary
+#define NSD             NSDictionary
 #define S               NSMutableString
+#define NSS             NSString
 #define D               NSDate
 #define N               NSNumber
-
-// array types
-typedef id              KV[2];

@@ -89,7 +89,7 @@
 {
 //  self.ok(!_.isNull(undefined), @"undefined is not null");
 //  self.ok(!_.isNull(NaN), @"NaN is not null");
-  self.ok(_.isNull([NSNull null]), @"but null is"); // ADDED
+  self.ok(_.isNull(NSNull.null), @"but null is"); // ADDED
   self.ok(_.isNull(nil), @"but null is");
 //  self.ok(_.isNull(iNull), @"even from another frame");
 }

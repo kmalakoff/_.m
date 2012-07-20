@@ -33,9 +33,10 @@
 
 + (void(^)(id obj, _IteratorBlock iterator))each;
 + (void(^)(id obj, _IteratorBlock iterator))forEach;
++ (B(^)(id obj, _IteratorTestBlock iterator))eachWithStop;
 
-+ (id(^)(id obj, _MapBlock iterator))map;
-+ (id(^)(id obj, _MapBlock iterator))collect;
++ (A*(^)(id obj, _MapBlock iterator))map;
++ (A*(^)(id obj, _MapBlock iterator))collect;
 
 //reduce
 //reduceRight
@@ -44,15 +45,21 @@
 + (A*(^)(id obj, _IteratorTestBlock iterator))filter;
 + (A*(^)(id obj, _IteratorTestBlock iterator))select;
 
-//reject
-//all
++ (A*(^)(id obj, _IteratorTestBlock iterator))reject;
+
++ (B(^)(id obj, _IteratorTestBlock iterator))all;
++ (B(^)(id obj, _IteratorTestBlock iterator))every;
+
 //any
-//include
+
++ (B(^)(id obj, id target))include;
++ (B(^)(id obj, id target))contains;
+
 //invoke
 
-+ (id(^)(id obj, NSString *keyPath))pluck;
++ (NSO*(^)(id obj, NSString *keyPath))pluck;
 
-+ (id(^)(id obj, _MapBlock iterator))max;
++ (N*(^)(id obj, _MapBlock iterator))max;
 
 //min
 //sortBy

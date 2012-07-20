@@ -29,6 +29,7 @@
 
 #import "_+Collections.h"
 #import "_+Objects.h"
+#import "_+Arrays.h"
 #import "SubjectiveScript.h"
 
 @implementation _ (Collections)
@@ -42,11 +43,11 @@
       return;
 
     else if (_.isArray(obj)) {
-      NSArray* array = obj;
-      if(!array.count) return;
+      NSA* array = obj;
+      if(!array.length) return;
 
-      NSInteger count = [array count];
-      for (NSInteger index=0; index<count; index++) {
+      I count = [array count];
+      for (I index=0; index<count; index++) {
         iterator([array objectAtIndex:index], [N numberWithInteger:index]);
       }
     }
@@ -59,8 +60,40 @@
   };
 }
 + (void(^)(id obj, _IteratorBlock iterator))forEach { return self.each; }  // ALIAS
++ (B(^)(id obj, _IteratorTestBlock iterator))eachWithStop
+{
+  return ^B(id obj, _IteratorTestBlock iterator) {
+    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
-+ (id(^)(id obj, _MapBlock iterator))map
+    if (_.isNull(obj)) return NO;
+
+    else if (_.isArray(obj)) {
+      NSA* array = obj;
+      if(!array.length) return NO;
+
+      I count = [array count];
+      for (I index=0; index<count; index++) {
+        if (!iterator([array objectAtIndex:index], [N numberWithInteger:index])) return YES;
+      }
+
+      return NO;
+    }
+    else {
+      __block B wasStopped = NO;
+      NSDictionary *dictionary = obj;
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+        if (!iterator(value, key)) {
+          wasStopped = YES;
+          *stop = YES;
+        }
+      }];
+      return wasStopped;
+    }
+  };
+}
+
+
++ (A*(^)(id obj, _MapBlock iterator))map
 {
   return ^(id obj, _MapBlock iterator) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
@@ -69,12 +102,12 @@
       return A.new_;
 
     else if (_.isArray(obj)) {
-      NSArray* array = obj;
-      if(!array.count) return A.new_;
+      NSA* array = obj;
+      if(!array.length) return A.new_;
 
-      A* result = [A arrayWithCapacity:array.count];
-      NSInteger count = [array count];
-      for (NSInteger index=0; index<count; index++) {
+      A* result = [A arrayWithCapacity:array.length];
+      I count = [array count];
+      for (I index=0; index<count; index++) {
         id mapped = iterator([array objectAtIndex:index], [N numberWithInteger:index]);
         if (mapped)
           [result addObject:mapped];
@@ -98,7 +131,7 @@
     return nil;
   };
 }
-+ (id(^)(id obj, _MapBlock iterator))collect { return self.map; }
++ (A*(^)(id obj, _MapBlock iterator))collect { return self.map; }
 
 //reduce
 //reduceRight
@@ -117,13 +150,41 @@
 }
 + (A*(^)(id obj, _IteratorTestBlock iterator))select { return self.filter; } // ALIAS
 
-//reject
-//all
++ (A*(^)(id obj, _IteratorTestBlock iterator))reject
+{
+  return ^(id obj, _IteratorTestBlock iterator) {
+    A* results = A.new;
+    if (obj == nil) return results;
+    _.each(obj, ^(id value, id index) {
+      if (!iterator(value, index)) results.push(value);
+    });
+    return results;
+  };
+}
+
++ (B(^)(id obj, _IteratorTestBlock iterator))all
+{
+  return ^B(id obj, _IteratorTestBlock iterator) {
+    if (obj == nil) return NO;
+    return _.eachWithStop(obj, iterator);
+  };
+}
++ (B(^)(id obj, _IteratorTestBlock iterator))every {return self.all; } // ALIAS
+
 //any
-//include
+
++ (B(^)(id obj, id target))include
+{
+  return ^B(id obj, id target) {
+    if (obj == nil) return NO;
+    return _.indexOf(obj, target) != -1;
+  };
+}
++ (B(^)(id obj, id target))contains { return self.include; } // ALIAS
+
 //invoke
 
-+ (id(^)(id obj, NSString* keyPath))pluck
++ (NSO*(^)(id obj, NSS* keyPath))pluck
 {
   return ^(id obj, NSString *keyPath) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
@@ -141,12 +202,11 @@
   };
 }
 
-+ (id(^)(id obj, _MapBlock iterator))max
++ (N*(^)(id obj, _MapBlock iterator))max
 {
   return ^(id obj, _MapBlock iterator) {
-    return N.I(99); // TODO
-  };
-//  _.max = function(obj, iterator, context) {
+    return N.I(65535);
+    // TODO
 //    if (!iterator && _.isArray(obj) && obj[0] === +obj[0] && obj.length < 65535) {
 //      return Math.max.apply(Math, obj);
 //    }
@@ -157,7 +217,7 @@
 //      computed >= result.computed && (result = {value : value, computed : computed});
 //    });
 //    return result.value;
-//  };
+  };
 }
 
 //min

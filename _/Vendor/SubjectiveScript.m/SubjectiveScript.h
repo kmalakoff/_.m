@@ -33,10 +33,13 @@
 
 // core
 #import "SSTypes.h"
-#import "SSSubjectiveScript.h"
-#import "SSJSON.h"
+#import "SS.h"
+#import "SS+Types.h"
+#import "SS+Arguments.h"
+#import "JSON.h"
 
 // categories
+#import "NSObject+SS.h"
 #import "NSArray+SS.h"
 #import "NSMutableArray+SS.h"
 #import "NSDictionary+SS.h"

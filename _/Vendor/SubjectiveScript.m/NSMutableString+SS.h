@@ -31,7 +31,7 @@
 
 @interface NSMutableString (SS)
 
-+ (NSMutableString*)new_;
-- (NSMutableString* (^)(NSString* value))append;
++ (S*)new_;
+- (S*(^)(NSS* value))append;
 
 @end

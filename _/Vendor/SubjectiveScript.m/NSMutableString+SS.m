@@ -31,14 +31,14 @@
 
 @implementation NSMutableString (SS)
 
-+ (NSMutableString*)new_
++ (S*)new_
 {
   return [NSMutableString string];
 }
 
-- (NSMutableString* (^)(NSString* value))append
+- (S*(^)(NSS* value))append
 {
-  return ^(NSString* value) {
+  return ^(NSS* value) {
     [self appendString:value];
     return self;
   };

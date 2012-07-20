@@ -1,5 +1,5 @@
 //
-//  SSSubjectiveScript.h
+//  SS+Arguments.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,15 +27,16 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "SS.h"
 
-@interface SS
+@interface SS (Arguments)
 
-+ (B(^)(id obj))isArray;
-+ (B(^)(id obj))isObject;
-+ (B(^)(id obj))isString;
-+ (B(^)(id obj))isNumber;
-+ (B(^)(id obj))isNull;
-+ (NSString*(^)(id obj))toString;
++ (A*(^)(va_list args))argumentsToArray;
 
 @end
+
+#define SS_ARGUMENTS(_start) \
+  va_list _arguments; \
+  va_start(_arguments, _start); \
+  A* arguments = SS.argumentsToArray(_arguments); \
+  va_end(_arguments);

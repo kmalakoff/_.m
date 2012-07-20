@@ -43,7 +43,8 @@
 
 + (B(^)(id a, id b))isEqual; // TODO: tests
 
-//isEmpty
++ (B(^)(NSO* obj))isEmpty;
+
 //isElement
 
 + (B(^)(id obj))isArray;
@@ -72,6 +73,6 @@
 // ADDED
 + (B(^)(id obj))isDictionary;
 + (B(^)(id obj))isTruthy;
-+ (B(^)(id obj))isFalsey;
++ (B(^)(id obj))isFalsy;
 
 @end

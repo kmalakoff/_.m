@@ -28,6 +28,7 @@
 //
 
 #import "_+Objects.h"
+#import "SubjectiveScript.h"
 
 @implementation _ (Objects)
 
@@ -44,31 +45,50 @@
 + (B(^)(id a, id b))isEqual
 {
   return ^(id a, id b) {
-    return [a isEqual:b];
+    return (B) [a isEqual:b];
   };
 }
 
-//isEmpty
++ (B(^)(NSO* obj))isEmpty  { 
+  return ^B(NSO* obj) {
+    if (obj == nil) return YES;
+    if (_.isArray(obj) || _.isString(obj)) return obj.length == 0;
+    if (_.isDictionary(obj)) return ((O*)obj).isEmpty();
+    return (B) YES;
+  }; 
+}
+
 //isElement
 
-+ (B(^)(id obj))isArray  { return ^(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
++ (B(^)(id obj))isArray  { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
 + (B(^)(id obj))isObject { return ^B(id obj) { return _.isDictionary(obj) || _.isString(obj) || _.isArray(obj); }; }
 
 //isArguments
 //isFunction
-+ (B(^)(id obj))isString { return ^(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
-+ (B(^)(id obj))isNumber { return ^(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
++ (B(^)(id obj))isString { return ^B(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
++ (B(^)(id obj))isNumber { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
 //isFinite
 //isBoolean
-+ (B(^)(id obj))isDate { return ^(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
++ (B(^)(id obj))isDate { return ^B(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
 //isRegExp
 //isNaN
 + (B(^)(id obj))isNull   { return ^B(id obj) { return (obj==nil) || [obj isKindOfClass:[NSNull class]]; }; }
 //isUndefined
 
 // ADDED
-+ (B(^)(id obj))isDictionary { return ^(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
-+ (B(^)(id obj))isTruthy { return  ^BOOL(id obj) { return obj != nil; }; } // TODO
-+ (B(^)(id obj))isFalsey { return  ^BOOL(id obj) { return obj == nil; }; } // TODO
++ (B(^)(id obj))isDictionary { return ^B(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
+
++ (B(^)(id obj))isTruthy { return ^B(id obj) { return !_.isFalsy(obj); }; }
++ (B(^)(id obj))isFalsy { 
+  return ^B(id obj) { 
+    if (!obj) return YES;
+    if (_.isNull(obj)) return YES;
+    if (_.isNumber(obj)) return (((N*)obj).I == 0);  // TODO: handle correctly
+    if (_.isArray(obj) || _.isDictionary(obj)) return !_.isEmpty(obj);
+    
+    // TODO: write test
+    return NO;
+  }; 
+}
 
 @end

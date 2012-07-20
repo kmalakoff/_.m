@@ -31,10 +31,10 @@
 
 @interface NSString (SS)
 
-+ (NSString*(^)(NSString* value))newS;
-+ (NSString*(^)(NSArray* array))newA;
-+ (NSString*(^)(NSString* format, ...))formatted;
++ (NSS*(^)(NSS* value))newS;
++ (NSS*(^)(NSA* array))newA;
++ (NSS*(^)(NSS* format, ...))formatted;
 
-- (NSString*(^)())toString;
+- (S*(^)())toString;
 
 @end

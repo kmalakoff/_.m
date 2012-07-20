@@ -17,16 +17,16 @@
   self.equal(_.first(AI(1, 2, 3), nil), N.I(1), @"can pull out the first element of an array");
   // TODO: chaining - can I overload a define?
 //  self.equal(_(AI(1, 2, 3)).first(), 1, @"can perform OO-style "first()"");
-  self.equal(((A*)_.first(AI(1,2,3), N.I(0))).join(@", "), @"", @"can pass an index to first");
-  self.equal(((A*)_.first(AI(1,2,3), N.I(2))).join(@", "), @"1, 2", @"can pass an index to first");
-  self.equal(((A*)_.first(AI(1,2,3), N.I(5))).join(@", "), @"1, 2, 3", @"can pass an index to first");
-//  NSInteger iResult = (^(){ return _.first(arguments); })(4, 3, 2, 1);
+  self.equal(_.first(AI(1,2,3), N.I(0)).join(@", "), @"", @"can pass an index to first");
+  self.equal(_.first(AI(1,2,3), N.I(2)).join(@", "), @"1, 2", @"can pass an index to first");
+  self.equal(_.first(AI(1,2,3), N.I(5)).join(@", "), @"1, 2, 3", @"can pass an index to first");
+//  I iResult = (^(){ return _.first(arguments); })(4, 3, 2, 1);
 //  self.equal(iResult, 4, @"works on an arguments object.");
   A* result = _.map(AO(AI(1,2,3),AI(1,2,3)), _.firstIterator); // CHANGED
   self.equal(result.join(@","), @"1,1", @"works well with _.map");
-  result = (^() { return _.take(AI(1,2,3), N.I(2)); })();
+  result = (A*) (^() { return _.take(AI(1,2,3), N.I(2)); })();
   self.equal(result.join(@","), @"1,2", @"aliased as take");
-  result = (^() { return _.head(AI(1,2,3), N.I(2)); })();
+  result = (A*) (^() { return _.head(AI(1,2,3), N.I(2)); })();
   self.equal(result.join(@","), @"1,2", @"aliased as head");
 }
 
@@ -37,16 +37,16 @@
 //  A* result = (^(){ return _(arguments).initial(); })(1, 2, 3, 4);
 //  self.equal(result.join(@", "), @"1, 2, 3", @"initial works on arguments object");
   A* result = _.map(AO(AI(1,2,3),AI(1,2,3)), _.initialIterator); // CHANGED
-  self.equal(_.flatten(result, nil).join(@","), @"1,2,1,2", @"initial works with _.map");
+  self.equal(_.flatten(result, YES).join(@","), @"1,2,1,2", @"initial works with _.map"); // CHANGED: no optional parameters to flatten
 }
 
 - (void)test_last
 {
   self.equal(_.last(AI(1,2,3), nil), N.I(3), @"can pull out the last element of an array");
-  self.equal(((A*)_.last(AI(1,2,3), N.I(0))).join(@", "), @"", @"can pass an index to last");
-  self.equal(((A*)_.last(AI(1,2,3), N.I(2))).join(@", "), @"2, 3", @"can pass an index to last");
-  self.equal(((A*)_.last(AI(1,2,3), N.I(5))).join(@", "), @"1, 2, 3", @"can pass an index to last");
-//  NSInteger iResult = (^(){ return _(arguments).last(); })(1, 2, 3, 4);
+  self.equal(_.last(AI(1,2,3), N.I(0)).join(@", "), @"", @"can pass an index to last");
+  self.equal(_.last(AI(1,2,3), N.I(2)).join(@", "), @"2, 3", @"can pass an index to last");
+  self.equal(_.last(AI(1,2,3), N.I(5)).join(@", "), @"1, 2, 3", @"can pass an index to last");
+//  I iResult = (^(){ return _(arguments).last(); })(1, 2, 3, 4);
 //  self.equal(iResult, 4, @"works on an arguments object");
   A* result = _.map(AO(AI(1,2,3),AI(1,2,3)), _.lastIterator); // CHANGED
   self.equal(result.join(@","), @"3,3", @"works well with _.map");
@@ -61,13 +61,13 @@
 //  A* result = (^(){ return _(arguments).tail(); })(1, 2, 3, 4);
 //  self.equal(result.join(@", "), @"2, 3, 4", @"aliased as tail and works on arguments object");
   A* result = _.map(AO(AI(1,2,3),AI(1,2,3)), _.restIterator); // CHANGED
-  self.equal(_.flatten(result, nil).join(@","), @"2,3,2,3", @"works well with _.map");
+  self.equal(_.flatten(result, YES).join(@","), @"2,3,2,3", @"works well with _.map"); // CHANGED: no optional parameters to flatten
 }
 
 - (void)test_compact
 {
   self.equalI(_.compact(AO(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3))).length, 3, @"can trim out all falsy values");
-//  NSInteger result = (^(){ return _(arguments).compact().length; })(0, 1, false, 2, false, 3);
+//  I result = (^(){ return _(arguments).compact().length; })(0, 1, false, 2, false, 3);
 //  self.equal(result, 3, @"works on an arguments object");
 };
 
@@ -76,7 +76,7 @@
 //  if (window.JSON) {
     A* list = AO(N.I(1), AI(2), AO(N.I(3), AO(AO(AI(4)))));
     self.equal(JSON.stringify(_.flatten(list, false)), @"[1,2,3,4]", @"can flatten nested arrays"); // CHANGE: mandatory parameter
-    self.equal(JSON.stringify(_.flatten(list, N.B(true))), @"[1,2,3,[[[4]]]]", @"can shallowly flatten nested arrays");
+    self.equal(JSON.stringify(_.flatten(list, YES)), @"[1,2,3,[[[4]]]]", @"can shallowly flatten nested arrays"); // CHANGED: no optional parameters to flatten
 //    A* result = (^(){ return _.flatten(arguments); })(1, AI(2), AI(3, AI(AI(AI(4)))));
 //    self.equal(JSON.stringify(result), @"[1,2,3,4]", @"works on an arguments object");
 //  }
@@ -97,18 +97,18 @@
 - (void)test_uniq
 {
   A* list = AI(1, 2, 1, 3, 1, 4);
-  self.equal(((A*)_.uniq(list)).join(@", "), @"1, 2, 3, 4", @"can find the unique values of an unsorted array"); 
+  self.equal(_.uniq(list).join(@", "), @"1, 2, 3, 4", @"can find the unique values of an unsorted array"); 
 
   list = AI(1, 1, 1, 2, 2, 3);
-  self.equal(((A*)_.uniqCustomized(list, true, nil)).join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster"); // CHANGE: manadatory 3rd parameter
+  self.equal(_.uniq3(list, true, nil).join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster"); // CHANGE: manadatory 3rd parameter
 
   list = AO(OAKV({@"name", @"moe"}, {@"name", @"curly"}, {@"name", @"larry"}, {@"name", @"curly"}));
   _MapBlock iterator = ^(O* value, id key) { return value.get(@"name"); };
-  self.equal(((A*)_.map(_.uniqCustomized(list, false, iterator), iterator)).join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator"); // CHANGE: uniqCustomized method to allow more customization
+  self.equal(_.map(_.uniq3(list, false, iterator), iterator).join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator"); // CHANGE: uniq3 method to allow more customization
 
   iterator = ^(N* value, N* index) { return N.I(value.I + 1); };
   list = AI(1, 2, 2, 3, 4, 4);
-  self.equal(((A*)_.uniqCustomized(list, true, iterator)).join(@", "), @"1, 2, 3, 4", @"iterator works with sorted array");
+  self.equal(_.uniq3(list, true, iterator).join(@", "), @"1, 2, 3, 4", @"iterator works with sorted array");
 
 //  A* result = (^(){ return _.uniq(arguments); })(1, 2, 1, 3, 1, 4);
 //  self.equal(result.join(@", "), @"1, 2, 3, 4", @"works on an arguments object");
@@ -125,7 +125,7 @@
 
 - (void)test_union
 {
-  NSArray* result = _.union_(AI(1, 2, 3), AI(2, 30, 1), AI(1, 40)); // CHANGE: reserved keyword
+  NSA* result = _.union_(AI(1, 2, 3), AI(2, 30, 1), AI(1, 40)); // CHANGE: reserved keyword
   self.equal(result.join(@" "), @"1 2 3 30 40", @"takes the union of a list of arrays");
 
   result = _.union_(AI(1, 2, 3), AI(2, 30, 1), AO(N.I(1), N.I(40), AI(1))); // CHANGE: reserved keyword
@@ -134,7 +134,7 @@
 
 - (void)test_difference
 {
-  NSArray* result = _.difference(AI(1, 2, 3), AI(2, 30, 40));
+  NSA* result = _.difference(AI(1, 2, 3), AI(2, 30, 40));
   self.equal(result.join(@" "), @"1 3", @"takes the difference of two arrays");
 
   result = _.difference(AI(1, 2, 3, 4), AI(2, 30, 40), AI(1, 11, 111));
@@ -144,7 +144,7 @@
 - (void)test_zip
 {
   A* names = AO(@"moe", @"larry", @"curly"); A* ages = AI(30, 40, 50); A* leaders = AB(true);
-  NSArray* stooges = _.zip(names, ages, leaders);
+  NSA* stooges = _.zip(names, ages, leaders);
   self.equal(S.newA(stooges), @"moe,30,true,larry,40,,curly,50,", @"zipped together arrays of different lengths");
 }
 
@@ -160,7 +160,7 @@
 //  A* numbers = AI(1, 2, 3);
 //  numbers.indexOf = null;
 //  self.equal(_.indexOf(numbers, 2), 1, @"can compute indexOf, even without the native ^");
-//  NSInteger result = (^(){ return _.indexOf(arguments, 2); })(1, 2, 3);
+//  I result = (^(){ return _.indexOf(arguments, 2); })(1, 2, 3);
 //  self.equal(result, N.I(1), @"works on an arguments object");
   self.equalI(_.indexOf(nil, N.I(2)), -1, @"handles nulls properly");
 

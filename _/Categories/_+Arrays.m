@@ -30,42 +30,43 @@
 #import "_+Arrays.h"
 #import "_+Objects.h"
 #import "_+Collections.h"
+#import "_+Extensions.h"
 #import "SubjectiveScript.h"
 
 @implementation _ (Arrays)
 
-+ (id(^)(NSArray* array, N* n))first
++ (NSO*(^)(NSA* array, N* n))first
 {
-  return ^id(NSArray* array, N* n) {
+  return ^id(NSA* array, N* n) {
     return (n != nil) ? array.slice(0, n.I) : array.get(0);
   };
 }
-+ (id(^)(NSArray* array, N* n))head { return self.first; } // ALIAS
-+ (id(^)(NSArray* array, N* n))take { return self.first; } // ALIAS
-+ (id(^)(NSArray* array, N* unused))firstIterator
++ (NSO*(^)(NSA* array, N* n))head { return self.first; } // ALIAS
++ (NSO*(^)(NSA* array, N* n))take { return self.first; } // ALIAS
++ (NSO*(^)(NSA* array, N* unused))firstIterator
 {
-  return ^id(NSArray* array, N* unused) {
+  return ^id(NSA* array, N* unused) {
     return array.get(0);
   };
 }
 
-+ (NSArray*(^)(NSArray* array, N* n))initial
++ (A*(^)(NSA* array, N* n))initial
 {
-  return ^(NSArray* array, N* n) {
+  return ^(NSA* array, N* n) {
     return array.slice(0, array.length - ((n == nil) ? 1 : n.I));
   };
 }
-+ (NSArray*(^)(NSArray* array, N* unused))initialIterator
++ (A*(^)(NSA* array, N* unused))initialIterator
 {
-  return ^(NSArray* array, N* unused) {
+  return ^(NSA* array, N* unused) {
     return array.slice(0, array.length - 1);
   };
 }
 
-+ (id(^)(NSArray* array, N* n))last
++ (NSO*(^)(NSA* array, N* n))last
 {
-  return ^(NSArray* array, N* n) {
-    if (!array.count) return [NSArray array];
+  return ^(NSA* array, N* n) {
+    if (!array.length) return [NSArray array];
     if (n != nil) {
       return array.slice(MAX(array.length - n.I, 0), array.length);
     } else {
@@ -73,38 +74,38 @@
     }
   };
 }
-+ (id(^)(NSArray* array, N* unused))lastIterator
++ (NSO*(^)(NSA* array, N* unused))lastIterator
 {
-  return ^(NSArray* array, N* unused) {
+  return ^(NSA* array, N* unused) {
     return array.get(array.length - 1);
   };
 }
 
-+ (NSArray*(^)(NSArray* array, N* index))rest
++ (A*(^)(NSA* array, N* index))rest
 {
-  return ^(NSArray* array, N* index) {
+  return ^(NSA* array, N* index) {
     return array.slice((index == nil) ? 1 : index.I, array.length);
   };
 }
-+ (NSArray*(^)(NSArray* array, N* index))tail { return self.rest; } // ALIAS
-+ (NSArray*(^)(NSArray* array, N* unused))restIterator
++ (A*(^)(NSA* array, N* index))tail { return self.rest; } // ALIAS
++ (A*(^)(NSA* array, N* unused))restIterator
 {
-  return ^(NSArray* array, N* unused) {
-    if (!array.count) return [NSArray array];
+  return ^(NSA* array, N* unused) {
+    if (!array.length) return [NSArray array];
     return array.slice(1, array.length);
   };
 }
 
-+ (NSArray*(^)(NSArray* array))compact
++ (A*(^)(NSA* array))compact
 {
-  return ^(NSArray* array) {
-    return _.filter(array, ^(id value, id key){ return _.isTruthy(value); });
+  return ^(NSA* array) {
+    return _.filter(array, ^B(id value, id key){ return _.isTruthy(value); });
   };
 }
 
-+ (A*(^)(NSArray* array, N* shallow))flatten
++ (A*(^)(NSA* array, BOOL shallow))flatten
 {
-  return ^(NSArray* array, N* shallow) {
+  return ^(NSA* array, BOOL shallow) {
     A* output = A.new_;
 
     for (id value in array) {
@@ -119,56 +120,70 @@
   };
 }
 
-+ (NSArray*(^)(NSArray* array, id value1, ...))without
++ (A*(^)(NSA* array, id value1, ...))without
 {
-  return ^(NSArray* array, id value1, ...) {
-    return [NSArray array];
+  return ^(NSA* array, id value1, ...) {
+    SS_ARGUMENTS(value1)
+
+    return _.reject(array, ^(id value, id index) { return _.include(arguments, value); });
   };
 }
 
-+ (NSArray*(^)(NSArray* array1, ...))union_
++ (A*(^)(NSA* array1, ...))union_
 {
-  return ^(NSArray* array1, ...) {
-    return [NSArray array];
+  return ^(NSA* array1, ...) {
+    SS_ARGUMENTS(array1)
+
+    return _.uniq(_.flatten(arguments, true));
   };
 }
 
-+ (NSArray*(^)(NSArray* array1, ...))intersection
++ (A*(^)(NSA* array1, ...))intersection
 {
-  return ^(NSArray* array1, ...) {
-    return [NSArray array];
+  return ^(NSA* array1, ...) {
+    SS_ARGUMENTS(array1)
+    
+    A* rest = arguments.slice(1, arguments.length);
+    return _.filter(_.uniq(array1), ^(id item, id index) {
+      return _.every(rest, ^B(id other, id index) {
+        return _.indexOf(other, item) >= 0;
+      });
+    });
   };
 }
 
-+ (NSArray*(^)(NSArray* array, NSArray* array1, ...))difference
++ (A*(^)(NSA* array, NSA* array1, ...))difference
 {
-  return ^(NSArray* array, NSArray* array1, ...) {
-    return [NSArray array];
+  return ^(NSA* array, NSA* array1, ...) {
+    SS_ARGUMENTS(array1)
+
+    A* rest = _.flatten(arguments, true);
+    return _.filter(array, ^B(id value, id index) { return !_.include(rest, value); });
   };
 }
 
-+ (id(^)(NSArray* array))uniq
++ (A*(^)(NSA* array))uniq
 {
-  return ^(NSArray* array) {
+  return ^(NSA* array) {
     return [NSArray array];
   };
 }
-+ (id(^)(NSArray* array, B isSorted, _MapBlock iterator))uniqCustomized
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniq3
 {
-  return ^(NSArray* array, B isSorted, _MapBlock iterator) {
+  return ^(NSA* array, B isSorted, _MapBlock iterator) {
     return [NSArray array];
   };
 }
-+ (id(^)(NSArray* array, B isSorted, _MapBlock iterator))unique { return self.uniqCustomized; } // ALIAS
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))unique { return self.uniq3; } // ALIAS
 
-+ (NSArray*(^)(NSArray* array1, ...))zip
++ (A*(^)(NSA* array1, ...))zip
 {
-  return ^(NSArray* array1, ...) {
+  return ^(NSA* array1, ...) {
     // TODO: can I generalize this into: var args = slice.call(arguments);
     A* args = A.new_;
     va_list arrays;
     va_start(arrays, array1);
-    for (NSArray *arg = array1; arg != nil; arg = va_arg(arrays, NSArray*))
+    for (NSArray *arg = array1; arg != nil; arg = va_arg(arrays, NSA*))
     {
       args.push(arg);
     }
@@ -184,9 +199,9 @@
   };
 }
 
-+ (O*(^)(NSArray* keys, NSArray* values))zipObject
++ (O*(^)(NSA* keys, NSA* values))zipObject
 {
-  return ^(NSArray* keys, NSArray* values) {
+  return ^(NSA* keys, NSA* values) {
     O* result = O.new_;
     for (I i = 0, l = keys.length; i < l; i++) {
       result.set(keys.get(i), values.get(i));
@@ -195,23 +210,23 @@
   };
 }
 
-+ (I(^)(NSArray* array, id value))indexOf
++ (I(^)(NSA* array, id value))indexOf
 {
-  return ^I(NSArray* array, id value) {
+  return ^I(NSA* array, id value) {
     UI index = [array indexOfObject:value];
     return (index == NSNotFound) ? -1 : index;
   };
 }
 
-+ (I(^)(NSArray* array, id value))indexOfSorted
++ (I(^)(NSA* array, id value))indexOfSorted
 {
   // TODO: sorted optimization
   return self.indexOf;
 }
 
-+ (I(^)(NSArray* array, id value))lastIndexOf
++ (I(^)(NSA* array, id value))lastIndexOf
 {
-  return ^I(NSArray* array, id value) {
+  return ^I(NSA* array, id value) {
     for(I index=array.length-1; index>=0; index--) {
       id obj = [array objectAtIndex:index];
       if ([obj isEqual:value]) return index;
@@ -220,7 +235,7 @@
   };
 }
 
-+ (NSArray* (^)(I start, I stop, I step))range
++ (A*(^)(I start, I stop, I step))range
 {
   return ^(I start, I stop, I step) {
     NSAssert(step!=0, @"step should not be zero");

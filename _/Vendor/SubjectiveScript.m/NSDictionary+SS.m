@@ -31,20 +31,10 @@
 
 @implementation NSDictionary (SS)
 
-- (NSString*(^)())toString { return ^() { return self.description; }; }
+- (S*(^)())toString { return ^() { return self.description.mutableCopy; }; }
 
-- (B (^)(id))has
-{
-  return ^(id key) {
-    return (B) ([self objectForKey:key]!=nil);
-  };
-}
-
-- (id(^)(id))get
-{
-  return ^(id key) {
-    return [self objectForKey:key];
-  };
-}
+- (B(^)())isEmpty { return ^B() { return ([self keyEnumerator].nextObject != nil); }; }
+- (B(^)(id key))has { return ^B(id key) { return [self objectForKey:key] != nil; }; }
+- (NSO*(^)(id key))get { return ^(id key) { return [self objectForKey:key]; }; }
 
 @end

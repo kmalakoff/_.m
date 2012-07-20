@@ -43,6 +43,6 @@
 + (N*(^)(F value))F;
 - (F)F;
 
-- (NSString*(^)())toString;
+- (S*(^)())toString;
 
 @end

@@ -31,9 +31,10 @@
 
 @interface NSDictionary (SS)
 
-- (NSString*(^)())toString;
+- (S*(^)())toString;
 
-- (B (^)(id key))has;
-- (id(^)(id key))get;
+- (B(^)())isEmpty;
+- (B(^)(id key))has;
+- (NSO*(^)(id key))get;
 
 @end

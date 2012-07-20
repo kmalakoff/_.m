@@ -31,43 +31,43 @@ _.first = _.head = _.take = function(array, n, guard)
 
 initial
 _.initial = function(array, n, guard)
-+ (NSArray*(^)(A* array, N* n))initial;
-+ (NSArray*(^)(A* array, N* unused))initialIterator; // CHANGE
++ (A*(^)(A* array, N* n))initial;
++ (A*(^)(A* array, N* unused))initialIterator; // CHANGE
 
 last
 _.last = function(array, n, guard)
 + (id(^)(A* array, N* n))last;
-+ (NSArray*(^)(A* array, N* unused))lastIterator; // CHANGE
++ (A*(^)(A* array, N* unused))lastIterator; // CHANGE
 
 rest
 _.rest = _.tail = function(array, index, guard)
-+ (NSArray*(^)(A* array, N* index))rest;
-+ (NSArray*(^)(A* array, N* unused))restIterator; // CHANGE
++ (A*(^)(A* array, N* index))rest;
++ (A*(^)(A* array, N* unused))restIterator; // CHANGE
 
 compact
 _.compact = function(array)
-+ (NSArray*(^)(A* array))compact;
++ (A*(^)(A* array))compact;
 
 flatten
 _.flatten = function(array, shallow)
-+ (NSArray*(^)(A* array, N* shallow))flatten;
++ (A*(^)(A* array, BOOL shallow))flatten;
 // CHANGE: shallow is mandatory or should have two versions? (N* used for compatiblity with map not as an index)
 
 without
 _.without = function(array, ...)
-+ (NSArray*(^)(A* array, id value1, ...))without;
++ (A*(^)(A* array, id value1, ...))without;
 
 union
 _.union = function(...)
-+ (NSArray*(^)(A* array1, ...))union;
++ (A*(^)(A* array1, ...))union;
 
 intersection
 _.intersection = function(...)
-+ (NSArray*(^)(A* array1, ...))intersection;
++ (A*(^)(A* array1, ...))intersection;
 
 difference
 _.difference = function(array)
-+ (NSArray*(^)(A* array, A* array1, ...))difference;
++ (A*(^)(A* array, A* array1, ...))difference;
 
 uniq
 _.uniq = _.unique = function(array, isSorted, iterator)
@@ -75,24 +75,24 @@ _.uniq = _.unique = function(array, isSorted, iterator)
 
 zip
 _.zip = function(...)
-+ (NSArray*(^)(A* array1, A* array2, ...))zip;
++ (A*(^)(A* array1, A* array2, ...))zip;
 
 _.zipObject = function(keys, values)
-+ (O*(^)(NSArray* keys, NSArray* values))zipObject //ADDED
++ (O*(^)(NSA* keys, NSA* values))zipObject //ADDED
 
 indexOf
 _.indexOf = function(array, item, isSorted)
-+ (NSInteger (^)(A* array, id value, B isSorted))indexOf;
-+ (I(^)(NSArray* array, id value))indexOf; // CHANGE: specialized sorted method -> TODO: check others with sorting
-+ (I(^)(NSArray* array, id value))indexOfSorted;
++ (I (^)(A* array, id value, B isSorted))indexOf;
++ (I(^)(NSA* array, id value))indexOf; // CHANGE: specialized sorted method -> TODO: check others with sorting
++ (I(^)(NSA* array, id value))indexOfSorted;
 
 lastIndexOf
 _.lastIndexOf = function(array, item)
-+ (NSInteger (^)(A* array, id value))lastIndexOf;
++ (I (^)(A* array, id value))lastIndexOf;
 
 range
 _.range = function(start, stop, step)
-+ (NSInteger (^)(NSInteger start, NSInteger stop, NSInteger step))range;
++ (I (^)(I start, I stop, I step))range;
 
 Chaining
 ------------
@@ -125,7 +125,11 @@ CHANGE: Context is a JS language feature
 reject
 all
 any
+
 include
+
+
+
 invoke
 pluck
 
@@ -202,7 +206,7 @@ isUndefined
 // ADDED
 + (B(^)(id obj))isDictionary
 + (B(^)(id obj))isTruthy
-+ (B(^)(id obj))isFalsey
++ (B(^)(id obj))isFalsy
 
 Utility
 ------------
@@ -217,4 +221,7 @@ result
 template
 
 
+Arguments
+------------
+Added new category
 

@@ -1,5 +1,5 @@
 //
-//  SSJSON.h
+//  SS+Types.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,10 +27,15 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "SS+Types.h"
 
-@interface JSON : NSObject
+@implementation SS (Types)
 
-+ (NSString*(^)(id obj))stringify;
++ (B(^)(id obj))isArray   { return ^(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
++ (B(^)(id obj))isObject  { return ^(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } // TODO: document difference with Underscore definition
++ (B(^)(id obj))isString  { return ^(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
++ (B(^)(id obj))isNumber  { return ^(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
++ (B(^)(id obj))isDate    { return ^(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
++ (B(^)(id obj))isNull    { return ^(id obj) { return [obj isKindOfClass:[NSNull class]]; }; }
 
 @end

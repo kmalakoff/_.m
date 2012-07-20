@@ -1,8 +1,8 @@
 //
-//  _Types.h
-//  _.m
+//  NSObject+SS.m
+//  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/18/12.
+//  Created by Kevin Malakoff on 7/17/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,15 +27,38 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSObject+SS.h"
+#import "SS+Types.h"
+#import "NSString+SS.h"
+#import "NSArray+SS.h"
 
-// blocks
-typedef void                (^_DoBlock)();
-typedef B                   (^_TestBlock)(id obj); // TODO: fix compiler warning (BOOL)
-typedef id                  (^_ReduceBlock)(id memo, id obj);
-typedef void                (^_IteratorBlock)(id value, id key);
-typedef B                   (^_IteratorTestBlock)(id value, id key);
-typedef id                  (^_MapBlock)(id value, id key);
-typedef id                  (^_MapWithContextBlock)(id value, id key, id context);
-typedef id                  (^_SortByBlock)(id value);
-typedef I                   (^_CompareBlock)(id left, id right); // TODO: fix compiler warning (NSComparisonResult)
+@implementation NSObject (SS)
+
+- (S*(^)())toString
+{
+  return ^() {
+    if (SS.isNull(self))
+      return @"null".mutableCopy;
+    
+    else
+      return self.description.mutableCopy;
+  };
+}
+
+// use dynamic type checking for some JavaScript operations to reduce manual casting
+- (UI(^)())length
+{
+  return ^() {
+    NSAssert(SS.isString(self) || SS.isArray(self), @"length expecting string or array");
+    return SS.isString(self) ? ((NSS*)self).length : ((NSA*)self).length;
+  };
+}
+- (S*(^)(NSS* separator))join
+{
+  return ^(NSS* separator) {
+    NSAssert(SS.isArray(self), @"join expecting array");
+    return ((NSA*)self).join(separator);
+  };
+}
+
+@end

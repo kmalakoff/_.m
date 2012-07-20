@@ -46,7 +46,7 @@
 
 // terminators
 #define AB_       (BOOL)2
-#define AI_       (NSInteger)NSNotFound
+#define AI_       (I)NSNotFound
 #define AUI_      (NSUInteger)NSNotFound
 #define AF_       (float)NaN
 #define AO_       nil

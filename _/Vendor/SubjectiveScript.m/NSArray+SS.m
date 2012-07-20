@@ -32,32 +32,32 @@
 
 @implementation NSArray (SS)
 
-- (NSString*(^)())toString { return ^() { return self.description; }; }
+- (S*(^)())toString { return ^() { return self.description.mutableCopy; }; }
 
-- (NSInteger)length
+- (UI)length
 {
   return [self count];
 }
 
-- (id(^)(NSInteger))get
+- (NSO*(^)(I))get
 {
-  return ^(NSInteger index) {
-    return (index<self.count) ? [self objectAtIndex:index] : [NSNull null];
+  return ^(I index) {
+    return (index<self.length) ? [self objectAtIndex:index] : NSNull.null;
   };
 }
 
-- (NSString*(^)(NSString* separator))join
+- (S*(^)(NSS* separator))join
 {
-  return ^(NSString* separator) {
-    return [self componentsJoinedByString:separator];
+  return ^(NSS* separator) {
+    return [self componentsJoinedByString:separator].mutableCopy;
   };
 }
 
-- (NSArray*(^)(UI start, UI count))slice
+- (A*(^)(UI start, UI count))slice
 {
   return ^(UI start, UI count) {
-    if ((start + count)>self.count-1) count = self.count - start; // clamp to end of array
-    return [self subarrayWithRange:NSMakeRange(start, count)];
+    if ((start + count)>self.length-1) count = self.length - start; // clamp to end of array
+    return [self subarrayWithRange:NSMakeRange(start, count)].mutableCopy;
   };
 }
 

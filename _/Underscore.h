@@ -48,3 +48,6 @@
 #import "_Wrapper+Functions.h"
 #import "_Wrapper+Objects.h"
 #import "_Wrapper+Utility.h"
+
+// publish extensions
+#import "_+Extensions.h"

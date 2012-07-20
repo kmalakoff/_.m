@@ -45,7 +45,7 @@
     return [N numberWithInt:value];
   };
 }
-- (NSInteger)I { return self.integerValue; }
+- (I)I { return self.integerValue; }
 
 + (N*(^)(UI value))UI
 {
@@ -63,6 +63,6 @@
 }
 - (F)F { return self.floatValue; }
 
-- (NSString*(^)())toString { return ^() { return self.description; }; }
+- (S*(^)())toString { return ^() { return self.description.mutableCopy; }; }
 
 @end

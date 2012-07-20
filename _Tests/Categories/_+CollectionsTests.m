@@ -54,7 +54,7 @@
 //  self.equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
 
   // TODO: chain
-//  doubled = _(AI(1, 2, 3)).map(^(N* num){ return  N.I(num.I * 2); });
+//  doubled = _(AI(1, 2, 3)).map(^(N* num){ return N.I(num.I * 2); });
 //  self.equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
 
 //  var ids = _.map($(@"#map-test").children(), ^(n){ return n.id; });

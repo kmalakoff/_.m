@@ -31,46 +31,46 @@
 
 @interface _ (Arrays)
 
-+ (id(^)(NSArray* array, N* n))first;  // TODO: nil terminated
-+ (id(^)(NSArray* array, N* n))head;
-+ (id(^)(NSArray* array, N* n))take;
-+ (id(^)(NSArray* array, N* unused))firstIterator;
++ (NSO*(^)(NSA* array, N* n))first;  // TODO: nil terminated
++ (NSO*(^)(NSA* array, N* n))head;
++ (NSO*(^)(NSA* array, N* n))take;
++ (NSO*(^)(NSA* array, N* unused))firstIterator;
 
-+ (NSArray*(^)(NSArray* array, N* n))initial;   // TODO: nil terminated
-+ (NSArray*(^)(NSArray* array, N* unused))initialIterator; 
++ (A*(^)(NSA* array, N* n))initial;   // TODO: nil terminated
++ (A*(^)(NSA* array, N* unused))initialIterator; 
 
-+ (id(^)(NSArray* array, N* n))last; // TODO: nil terminated
-+ (id(^)(NSArray* array, N* unused))lastIterator;
++ (NSO*(^)(NSA* array, N* n))last; // TODO: nil terminated
++ (NSO*(^)(NSA* array, N* unused))lastIterator;
 
-+ (NSArray*(^)(NSArray* array, N* index))rest;  // TODO: nil terminated
-+ (NSArray*(^)(NSArray* array, N* index))tail;
-+ (NSArray*(^)(NSArray* array, N* unused))restIterator;
++ (A*(^)(NSA* array, N* index))rest;  // TODO: nil terminated
++ (A*(^)(NSA* array, N* index))tail;
++ (A*(^)(NSA* array, N* unused))restIterator;
 
-+ (NSArray*(^)(NSArray* array))compact;
++ (A*(^)(NSA* array))compact;
 
-+ (A*(^)(NSArray* array, N* shallow))flatten;
++ (A*(^)(NSA* array, BOOL shallow))flatten;
 
-+ (NSArray*(^)(NSArray* array, id value1, ...))without;
++ (A*(^)(NSA* array, id value1, ...))without;
 
-+ (NSArray*(^)(NSArray* array1, ...))union_; // CHANGE: reserved keyword
++ (A*(^)(NSA* array1, ...))union_; // CHANGE: reserved keyword
 
-+ (NSArray*(^)(NSArray* array1, ...))intersection;
++ (A*(^)(NSA* array1, ...))intersection;
 
-+ (NSArray*(^)(NSArray* array, NSArray* array1, ...))difference;
++ (A*(^)(NSA* array, NSA* array1, ...))difference;
 
-+ (id(^)(NSArray* array))uniq;
-+ (id(^)(NSArray* array, B isSorted, _MapBlock iterator))uniqCustomized;
-+ (id(^)(NSArray* array, B isSorted, _MapBlock iterator))unique;
++ (A*(^)(NSA* array))uniq;
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniq3;
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))unique;
 
-+ (NSArray*(^)(NSArray* array1, ...))zip;
++ (A*(^)(NSA* array1, ...))zip;
 
-+ (O*(^)(NSArray* keys, NSArray* values))zipObject;
++ (O*(^)(NSA* keys, NSA* values))zipObject;
 
-+ (I(^)(NSArray* array, id value))indexOf;
-+ (I(^)(NSArray* array, id value))indexOfSorted;
++ (I(^)(NSA* array, id value))indexOf;
++ (I(^)(NSA* array, id value))indexOfSorted;
 
-+ (I(^)(NSArray* array, id value))lastIndexOf;
++ (I(^)(NSA* array, id value))lastIndexOf;
 
-+ (NSArray* (^)(I start, I stop, I step))range;
++ (A*(^)(I start, I stop, I step))range;
 
 @end
