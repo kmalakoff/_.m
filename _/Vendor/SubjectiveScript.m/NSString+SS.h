@@ -33,8 +33,10 @@
 
 + (NSS*(^)(NSS* value))newS;
 + (NSS*(^)(NSA* array))newA;
-+ (NSS*(^)(NSS* format, ...))formatted;
++ (NSS*(^)(NSS* format, ...))newFormatted;
 
-- (S*(^)())toString;
+- (const NSS*)typeof;
+- (NSS*(^)())toString;
+- (NSS*(^)(I index))get;
 
 @end

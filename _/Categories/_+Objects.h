@@ -65,6 +65,7 @@
 
 //isRegExp
 //isNaN
++ (B(^)(N* obj))isNaN;
 
 + (B(^)(id obj))isNull;
 
@@ -72,7 +73,5 @@
 
 // ADDED
 + (B(^)(id obj))isDictionary;
-+ (B(^)(id obj))isTruthy;
-+ (B(^)(id obj))isFalsy;
 
 @end

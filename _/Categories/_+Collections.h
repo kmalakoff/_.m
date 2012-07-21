@@ -33,13 +33,18 @@
 
 + (void(^)(id obj, _IteratorBlock iterator))each;
 + (void(^)(id obj, _IteratorBlock iterator))forEach;
-+ (B(^)(id obj, _IteratorTestBlock iterator))eachWithStop;
++ (B(^)(id obj, _IteratorTestBlock iterator))eachWithStop; /* returns YES if processed all elements without a request to stop */
 
 + (A*(^)(id obj, _MapBlock iterator))map;
 + (A*(^)(id obj, _MapBlock iterator))collect;
 
-//reduce
-//reduceRight
++ (id (^)(id obj, _ReduceBlock iterator, id memo))reduce;
++ (id (^)(id obj, _ReduceBlock iterator, id memo))foldl;
++ (id (^)(id obj, _ReduceBlock iterator, id memo))inject;
+
++ (id (^)(id obj, _ReduceBlock iterator, id memo))reduceRight;
++ (id (^)(id obj, _ReduceBlock iterator, id memo))foldr;
+
 //find
 
 + (A*(^)(id obj, _IteratorTestBlock iterator))filter;
@@ -50,7 +55,8 @@
 + (B(^)(id obj, _IteratorTestBlock iterator))all;
 + (B(^)(id obj, _IteratorTestBlock iterator))every;
 
-//any
++ (B(^)(id obj, /* MANDATORY */ _IteratorTestBlock iterator))any;
++ (B(^)(id obj, _IteratorTestBlock iterator))some;
 
 + (B(^)(id obj, id target))include;
 + (B(^)(id obj, id target))contains;
@@ -59,7 +65,7 @@
 
 + (NSO*(^)(id obj, NSString *keyPath))pluck;
 
-+ (N*(^)(id obj, _MapBlock iterator))max;
++ (N*(^)(NSO* obj, _MaxBlock iterator))max;
 
 //min
 //sortBy

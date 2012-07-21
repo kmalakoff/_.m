@@ -28,12 +28,33 @@
 //
 
 #import "NSMutableString+SS.h"
+#import "NSString+SS.h"
 
 @implementation NSMutableString (SS)
 
-+ (S*)new_
++ (S*(^)(NSS* value))newS
 {
-  return [NSMutableString string];
+  return ^(NSS* value) {
+    return NSS.newS(value).mutableCopy;
+  };
+}
+
++ (S*(^)(NSA* array))newA
+{
+  return ^(NSA* array) {
+    return NSS.newA(array).mutableCopy;
+  };
+}
+
++ (S*(^)(NSS* format, ...))newFormatted
+{
+  return ^(NSS* format, ...) {
+    va_list args;
+    va_start(args, format);
+    NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    return result.mutableCopy;
+  };
 }
 
 - (S*(^)(NSS* value))append

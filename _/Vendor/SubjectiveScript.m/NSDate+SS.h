@@ -31,8 +31,6 @@
 
 @interface NSDate (SS)
 
-+ (D*)new_;
-
-- (S*(^)())toString;
+- (NSS*(^)())toString;
 
 @end

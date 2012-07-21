@@ -32,33 +32,32 @@
 #import "NSString+SS.h"
 #import "NSArray+SS.h"
 
+const NSS* SSTypeObject = @"object";
+
 @implementation NSObject (SS)
 
-- (S*(^)())toString
+- (const NSS*)typeof {return SSTypeObject; }
+- (NSS*(^)())toString
 {
   return ^() {
-    if (SS.isNull(self))
-      return @"null".mutableCopy;
-    
-    else
-      return self.description.mutableCopy;
+    if (SS.isNull(self)) return @"";
+    return self.description;
   };
 }
+- (NSS*)className { return NSStringFromClass([self class]); }
 
 // use dynamic type checking for some JavaScript operations to reduce manual casting
-- (UI(^)())length
+- (UI)length
 {
-  return ^() {
-    NSAssert(SS.isString(self) || SS.isArray(self), @"length expecting string or array");
-    return SS.isString(self) ? ((NSS*)self).length : ((NSA*)self).length;
-  };
+  // base class can be triggered by KeyValueCoding
+  if (SS.isArray(self)) return ((NSA*)self).count;
+  if (SS.isString(self)) return ((NSS*)self).length;
+  return 0;
 }
 - (S*(^)(NSS* separator))join
 {
-  return ^(NSS* separator) {
-    NSAssert(SS.isArray(self), @"join expecting array");
-    return ((NSA*)self).join(separator);
-  };
+  NSAssert(nil, @"join expecting array");
+  return nil;
 }
 
 @end

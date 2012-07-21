@@ -32,11 +32,11 @@
 
 @implementation SS (Arguments)
 
-+ (A*(^)(va_list args))argumentsToArray
++ (A*(^)(va_list argList, NSO* lastNamedArg))argumentsToArray
 {
-  return ^(va_list args) {
-    A* result = A.new_;
-    for (NSO* arg = va_arg(args, id); arg != nil; arg = va_arg(args, NSO*)) {
+  return ^(va_list argList, NSO* lastNamedArg) {
+    A* result = A.new;
+    for (NSO* arg = lastNamedArg; arg != nil; arg = va_arg(argList, NSO*)) {
       [result addObject:arg];
     }
     return result;

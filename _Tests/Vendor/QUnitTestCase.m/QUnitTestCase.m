@@ -31,35 +31,33 @@
 
 @implementation QUnitTestCase
 
-- (void(^)(id actual, id expected, NSString *message, va_list args))_equal
+- (void)equal:(id)actual expected:(id)expected message:(NSString*)message args:(va_list)args
 {
-  return ^(id actual, id expected, NSString *message, va_list args){
-    NSString *description = [[NSString alloc] initWithFormat:message arguments:args];
+  NSString *description = [[NSString alloc] initWithFormat:message arguments:args];
 
-    @try {
-      if (actual != expected) { 
-        if (
-          (strcmp(@encode(__typeof__(actual)), @encode(id)) == 0) && 
-          (strcmp(@encode(__typeof__(expected)), @encode(id)) == 0) && 
-          [actual isEqual:expected]
-        )
-          return;
-              
-       [self failWithException:([NSException failureInEqualityBetweenObject:actual 
-                                                                 andObject:expected 
-                                                              inFile:@"" 
-                                                              atLine:0 
-                                                     withDescription:description])]; 
-    } 
-    }
-    @catch (id anException) {
-        [self failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"(%s) == (%s)", @"actual", @"expected"] 
-              exception:anException 
-                 inFile:@"" 
-                 atLine:0
-        withDescription:description])]; 
-    }
-  };
+  @try {
+    if (actual != expected) { 
+      if (
+        (strcmp(@encode(__typeof__(actual)), @encode(id)) == 0) && 
+        (strcmp(@encode(__typeof__(expected)), @encode(id)) == 0) && 
+        [actual isEqual:expected]
+      )
+        return;
+            
+     [self failWithException:([NSException failureInEqualityBetweenObject:actual 
+                                                               andObject:expected 
+                                                            inFile:@"" 
+                                                            atLine:0 
+                                                   withDescription:description])]; 
+  } 
+  }
+  @catch (id anException) {
+      [self failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"(%s) == (%s)", @"actual", @"expected"] 
+            exception:anException 
+               inFile:@"" 
+               atLine:0
+      withDescription:description])]; 
+  }
 }
 
 - (void(^)(id actual, id expected, NSString *message, ...))equal
@@ -67,7 +65,7 @@
   return ^(id actual, id expected, NSString *message, ...){
     va_list args;
     va_start(args, message);
-    self._equal(actual, expected, message, args);
+    [self equal:actual expected:expected message:message args:args];
     va_end(args);
   };
 }
@@ -77,7 +75,7 @@
   return ^(NSInteger actual, NSInteger expected, NSString *message, ...){
     va_list args;
     va_start(args, message);
-    self._equal([NSNumber numberWithInteger:actual], [NSNumber numberWithInteger:expected], message, args);
+    [self equal:[NSNumber numberWithInteger:actual] expected:[NSNumber numberWithInteger:expected] message:message args:args];
     va_end(args);
   };
 }

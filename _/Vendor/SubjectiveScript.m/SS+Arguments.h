@@ -31,12 +31,15 @@
 
 @interface SS (Arguments)
 
-+ (A*(^)(va_list args))argumentsToArray;
++ (A*(^)(va_list argList, NSO* lastNamedArg))argumentsToArray;
 
 @end
 
-#define SS_ARGUMENTS(_start) \
-  va_list _arguments; \
-  va_start(_arguments, _start); \
-  A* arguments = SS.argumentsToArray(_arguments); \
-  va_end(_arguments);
+// TODO: can I make the arguments inline and returnable?
+
+// NOTE: your variable argument array must be nil terminated to indicate the end of arguments
+#define SS_ARGUMENTS_FROM(_name, _lastNamedArg) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  A* _name = SS.argumentsToArray(argList, _lastNamedArg); \
+  va_end(argList);

@@ -31,7 +31,10 @@
 
 @interface NSMutableString (SS)
 
-+ (S*)new_;
++ (S*(^)(NSS* value))newS;
++ (S*(^)(NSA* array))newA;
++ (S*(^)(NSS* format, ...))newFormatted;
+
 - (S*(^)(NSS* value))append;
 
 @end

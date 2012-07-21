@@ -29,13 +29,27 @@
 
 #import "SSTypes.h"
 
+// iteration helpers for polymorphic keys (id and I type) under ARC
+typedef void* KH;
+#define KHFromIndex(_index)     (KH)_index
+#define KHIndex(_kh)            (I)_kh
+
+#define KHRetainKey(_key)       (void*)CFBridgingRetain(_key)
+#define KHReleaseKey(_key)      CFBridgingRelease((__bridge KH)_key)
+#define KHKey(_kh)              (__bridge id)_kh
+
 // blocks
 typedef void                (^_DoBlock)();
-typedef B                   (^_TestBlock)(id obj); // TODO: fix compiler warning (BOOL)
-typedef id                  (^_ReduceBlock)(id memo, id obj);
-typedef void                (^_IteratorBlock)(id value, id key);
-typedef B                   (^_IteratorTestBlock)(id value, id key);
-typedef id                  (^_MapBlock)(id value, id key);
-typedef id                  (^_MapWithContextBlock)(id value, id key, id context);
+
+typedef B                   (^_TestBlock)(id obj);
+typedef N*                  (^_MaxBlock)(N* number);
+
+typedef id                  (^_ReduceBlock)(id memo, id obj, KH kh);
+
+typedef void                (^_IteratorBlock)(id value, KH kh);
+typedef B                   (^_IteratorTestBlock)(id value, KH kh);
+
+typedef id                  (^_MapBlock)(id value, KH kh);
+
 typedef id                  (^_SortByBlock)(id value);
-typedef I                   (^_CompareBlock)(id left, id right); // TODO: fix compiler warning (NSComparisonResult)
+typedef NSComparisonResult  (^_CompareBlock)(id left, id right);

@@ -1,5 +1,5 @@
 //
-//  NSObject+SS.h
+//  SSTypes.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,16 +27,7 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "_Types.h"
+#import <Foundation/Foundation.h>
 
-@interface NSObject (SS)
-
-- (const NSS*)typeof;
-- (NSS*(^)())toString;
-- (NSS*)className;
-
-// use dynamic type checking for some JavaScript operations to reduce manual casting
-- (UI)length;
-- (S*(^)(NSS* separator))join;
-
-@end
+#define NF_INFINITY         [NSNumber numberWithFloat:INFINITY]
+#define NF_NEG_INFINITY     [NSNumber numberWithFloat:-INFINITY]

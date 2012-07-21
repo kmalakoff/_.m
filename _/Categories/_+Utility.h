@@ -32,7 +32,9 @@
 @interface _ (Utility)
 
 //noConflict
-//identity
+
++ (_IteratorTestBlock)identity; // MANDATORYs
+
 //times
 //mixin
 //uniqueId

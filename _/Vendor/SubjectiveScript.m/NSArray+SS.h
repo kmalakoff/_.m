@@ -31,12 +31,13 @@
 
 @interface NSArray (SS)
 
-- (S*(^)())toString;
+- (NSS*(^)())toString;
 
 - (UI)length;
 - (NSO*(^)(I index))get;
 
 - (S*(^)(NSS* separator))join;
-- (A*(^)(UI start, UI count))slice;
+- (NSA*(^)(UI start, UI count))slice;
+- (A*(^)())flatten;
 
 @end

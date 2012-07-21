@@ -28,38 +28,77 @@
 //
 
 #import "NSArray+SS.h"
+#import "NSMutableArray+SS.h"
 #import "NSNumber+SS.h"
+#import "NSMutableString+SS.h"
+#import "NSObject+SS.h"
+#import "SS+Types.h"
+#import "SS.h"
 
 @implementation NSArray (SS)
 
-- (S*(^)())toString { return ^() { return self.description.mutableCopy; }; }
+- (NSS*(^)())toString { return ^() { return S.newFormatted(@"[%@]", self.join(@",")); }; }
+- (UI)length { return self.count; }
 
-- (UI)length
-{
-  return [self count];
-}
-
-- (NSO*(^)(I))get
+- (NSO*(^)(I index))get
 {
   return ^(I index) {
     return (index<self.length) ? [self objectAtIndex:index] : NSNull.null;
   };
 }
 
-- (S*(^)(NSS* separator))join
-{
-  return ^(NSS* separator) {
-    return [self componentsJoinedByString:separator].mutableCopy;
-  };
+- (S*(^)(NSS* separator))join 
+{ 
+  return ^(NSS* separator) { 
+    S* result = S.new;
+    BOOL firstWritten = NO;
+    
+    for (NSO* item in self) {
+      if (firstWritten) result.append(separator);
+
+      // JavaScript collapses arrays on join only if they do not contain other arrays and there are multiple elements. A bit quirky, but supported.
+      if (firstWritten && SS.isArray(item)) {
+        BOOL hasArrays = NO;
+        for (NSO* subitem in (NSA*)item) {
+          if (SS.isArray(subitem)) {
+            hasArrays = YES;
+            break;
+          }
+        }
+        if(hasArrays)
+          result.append(item.toString());
+        else
+          result.append(item.join(separator));
+      }
+      else
+        result.append(item.toString());
+      firstWritten = YES;
+    }
+    return result;
+  }; 
 }
 
-- (A*(^)(UI start, UI count))slice
+- (NSA*(^)(UI start, UI count))slice
 {
   return ^(UI start, UI count) {
     if ((start + count)>self.length-1) count = self.length - start; // clamp to end of array
-    return [self subarrayWithRange:NSMakeRange(start, count)].mutableCopy;
+    if (count<=0) return NSA.new;
+    return [self subarrayWithRange:NSMakeRange(start, count)];
   };
 }
 
+- (A*(^)())flatten
+{
+  return ^() {
+    A* output = A.new;
+    for (id value in self) {
+      if (SS.isArray(value))
+        [output addObjectsFromArray:((NSA*)value).flatten()];
+      else
+        output.push(value);
+    }
+    return output;
+  };
+}
 
 @end

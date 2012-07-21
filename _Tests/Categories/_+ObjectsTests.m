@@ -22,12 +22,29 @@
 //tap
 //has
 //isEqual
-//isEmpty
+
+- (void)test_isEmpty
+{
+  // TODO: wrapper
+self.ok(!_.isEmpty(AI(1)), @"[1] is not empty"); //  self.ok(!__(AI(1)).isEmpty(), @"[1] is not empty");
+  self.ok(_.isEmpty(A.new), @"[] is empty");
+  self.ok(!_.isEmpty(OAKV({@"one", N.I(1)})), @"{one : 1} is not empty");
+  self.ok(_.isEmpty(O.new), @"{} is empty");
+//  self.ok(_.isEmpty(new RegExp('")), @"objects with prototype properties are empty");
+  self.ok(_.isEmpty(nil), @"null is empty");
+//  self.ok(_.isEmpty(), @"undefined is empty");
+  self.ok(_.isEmpty(@""), @"the empty string is empty");
+  self.ok(!_.isEmpty(@"moe"), @"but other strings are not");
+
+  O* obj = OAKV({@"one", N.I(1)});
+  obj.delete_(@"one");
+  self.ok(_.isEmpty(obj), @"deleting all the keys from an object empties it");
+}
+
 //isElement
 
 - (void)test_isArray
 {
-
 //  self.ok(!_.isArray(arguments), @"the arguments object is not an array");
   self.ok(_.isArray(AI(1, 2, 3)), @"but arrays are");
 //  self.ok(_.isArray(iArray), @"even from another frame");
@@ -45,7 +62,7 @@
 //  self.ok(!_.isObject(undefined), @"and not undefined");
 //  self.ok(!_.isObject(@"string"), @"and not string");
   self.ok(!_.isObject(N.I(12)), @"and not number");
-  self.ok(!_.isObject(N.B(true)), @"and not boolean");
+  self.ok(!_.isObject(N.B(YES)), @"and not boolean");
   self.ok(_.isObject(S.newS(@"string")), @"but new String()");
 }
 
@@ -77,8 +94,8 @@
 - (void)test_isDate
 {
   self.ok(!_.isDate(N.I(100)), @"numbers are not dates");
-  self.ok(!_.isDate(O.new_), @"objects are not dates");
-  self.ok(_.isDate(D.new_), @"but dates are");
+  self.ok(!_.isDate(O.new), @"objects are not dates");
+  self.ok(_.isDate(D.new), @"but dates are");
 //  self.ok(_.isDate(iDate), @"even from another frame");
 }
 

@@ -28,11 +28,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <objc/objc.h>
+#import <objc/objc.h> // TODO: why do I need to manually include these files? (fix compiler warning)
 #import <Foundation/NSObjCRuntime.h>
+#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
 // fundamental types
-typedef BOOL            B;   // TODO: return to BOOL (fix compiler warning)
+typedef BOOL            B;
 typedef NSInteger       I;
 typedef NSUInteger      UI;
 typedef float           F;

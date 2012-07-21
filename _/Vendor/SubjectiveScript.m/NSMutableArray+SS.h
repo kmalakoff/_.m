@@ -31,29 +31,21 @@
 
 @interface NSMutableArray (SS)
 
-+ (A*)new_;
 + (A*(^)(UI capacity))newWithCapacity;
-+ (A*(^)(const B* values))newB;
-+ (A*(^)(const I* values))newI;
-+ (A*(^)(const UI* values))newUI;
-+ (A*(^)(const F* values))newF;
-+ (A*(^)(const id* values))newO;
++ (A*(^)(const B* values, I count))newB;
++ (A*(^)(const I* values, I count))newI;
++ (A*(^)(const UI* values, I count))newUI;
++ (A*(^)(const F* values, I count))newF;
++ (A*(^)(const id* values))newO; // TODO: nil termination
 
 - (A*(^)(I index, id value))set;
 - (A*(^)(id value))push;
 
 @end
 
-// terminators
-#define AB_       (BOOL)2
-#define AI_       (I)NSNotFound
-#define AUI_      (NSUInteger)NSNotFound
-#define AF_       (float)NaN
-#define AO_       nil
-
 // new array helpers
-#define AB(...)   A.newB((B[]){__VA_ARGS__, AB_})
-#define AI(...)   A.newI((I[]){__VA_ARGS__, AI_})
-#define AUI(...)  A.newUI((UI[]){__VA_ARGS__, AUI_})
-#define AF(...)   A.newF((F[]){__VA_ARGS__, AF_})
-#define AO(...)   A.newO((id[]){__VA_ARGS__, AO_})
+#define AB(...)   A.newB((B[]){__VA_ARGS__},    sizeof((B[]){__VA_ARGS__})/sizeof(B))
+#define AI(...)   A.newI((I[]){__VA_ARGS__},    sizeof((I[]){__VA_ARGS__})/sizeof(I))
+#define AUI(...)  A.newUI((UI[]){__VA_ARGS__},  sizeof((UI[]){__VA_ARGS__})/sizeof(UI))
+#define AF(...)   A.newF((F[]){__VA_ARGS__},    sizeof((F[]){__VA_ARGS__})/sizeof(F))
+#define AO(...)   A.newO((id[]){__VA_ARGS__, nil})

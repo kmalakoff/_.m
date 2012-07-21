@@ -31,6 +31,8 @@
 #import "NSMutableString+SS.h"
 #import "SubjectiveScript.h"
 
+const NSS* SSTypeString = @"string";
+
 @implementation NSString (SS)
 
 + (NSS*(^)(NSS* value))newS
@@ -43,14 +45,13 @@
 + (NSS*(^)(NSA* array))newA
 {
   return ^(NSA* array) {
-    S* result = S.new_;
-    for (NSO* value in array)
-      result.append(value.toString());
-    return result;
+    // JavaScript flattens the arrays and then joins them
+    A* flattened = array.flatten();
+    return flattened.join(@",");
   };
 }
 
-+ (NSS*(^)(NSS* format, ...))formatted
++ (NSS*(^)(NSS* format, ...))newFormatted
 {
   return ^(NSS* format, ...) {
     va_list args;
@@ -61,6 +62,14 @@
   };
 }
 
-- (S*(^)())toString { return ^() { return self.mutableCopy; }; }
+- (const NSS*)typeof { return SSTypeString; }
+- (NSS*(^)())toString { return ^() { return self; }; }
+
+- (NSS*(^)(I))get
+{
+  return ^(I index) {
+    return [self substringWithRange:NSMakeRange(index, 1)];
+  };
+}
 
 @end

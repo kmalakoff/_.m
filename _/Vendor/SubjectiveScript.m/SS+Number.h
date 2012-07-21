@@ -1,5 +1,5 @@
 //
-//  NSObject+SS.h
+//  SS+Number.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,16 +27,10 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "_Types.h"
+#import "SS.h"
 
-@interface NSObject (SS)
+@interface SS (Number)
 
-- (const NSS*)typeof;
-- (NSS*(^)())toString;
-- (NSS*)className;
-
-// use dynamic type checking for some JavaScript operations to reduce manual casting
-- (UI)length;
-- (S*(^)(NSS* separator))join;
++ (B(^)(NSS* string, I* result))parseInt;
 
 @end

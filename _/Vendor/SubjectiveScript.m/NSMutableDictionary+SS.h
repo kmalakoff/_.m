@@ -31,15 +31,14 @@
 
 @interface NSMutableDictionary (SS)
 
-+ (O*)new_;
 + (A*(^)(UI capacity))newWithCapacity;
 + (O*(^)(const KV* values))newAKV; // TODO: NS_REQUIRES_NIL_TERMINATION
 
 - (O*(^)(id key, id value))set;
+- (O*(^)(const KV* values))setAKV; // TODO: NS_REQUIRES_NIL_TERMINATION
+- (O*(^)(id key))delete_;
 
 @end
 
-// terminators
-#define OAKV_       nil
-
-#define OAKV(...) O.newAKV((KV[]){__VA_ARGS__, OAKV_})
+#define OAKV(...) O.newAKV((KV[]){__VA_ARGS__, nil})
+#define OsetAKV(_o, ...) _o.setAKV((KV[]){__VA_ARGS__, nil})

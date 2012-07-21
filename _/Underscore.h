@@ -40,6 +40,7 @@
 #import "_+Functions.h"
 #import "_+Objects.h"
 #import "_+Utility.h"
+#import "_+Extensions.h"
 
 // publish  wrapper categories
 #import "_Wrapper+Arrays.h"
@@ -48,6 +49,3 @@
 #import "_Wrapper+Functions.h"
 #import "_Wrapper+Objects.h"
 #import "_Wrapper+Utility.h"
-
-// publish extensions
-#import "_+Extensions.h"

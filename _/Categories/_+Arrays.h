@@ -31,38 +31,38 @@
 
 @interface _ (Arrays)
 
-+ (NSO*(^)(NSA* array, N* n))first;  // TODO: nil terminated
-+ (NSO*(^)(NSA* array, N* n))head;
-+ (NSO*(^)(NSA* array, N* n))take;
-+ (NSO*(^)(NSA* array, N* unused))firstIterator;
++ (NSO*(^)(NSA* array, I n))first;
++ (NSO*(^)(NSA* array, I n))head;
++ (NSO*(^)(NSA* array, I n))take;
++ (NSO*(^)(NSA* array, KH kh))firstIterator;
 
-+ (A*(^)(NSA* array, N* n))initial;   // TODO: nil terminated
-+ (A*(^)(NSA* array, N* unused))initialIterator; 
++ (NSA*(^)(NSA* array, I n))initial;
++ (NSA*(^)(NSA* array, KH kh))initialIterator; 
 
-+ (NSO*(^)(NSA* array, N* n))last; // TODO: nil terminated
-+ (NSO*(^)(NSA* array, N* unused))lastIterator;
++ (NSO*(^)(NSA* array, I n))last;
++ (NSO*(^)(NSA* array, KH kh))lastIterator;
 
-+ (A*(^)(NSA* array, N* index))rest;  // TODO: nil terminated
-+ (A*(^)(NSA* array, N* index))tail;
-+ (A*(^)(NSA* array, N* unused))restIterator;
++ (NSA*(^)(NSA* array, I index))rest;
++ (NSA*(^)(NSA* array, I index))tail;
++ (NSA*(^)(NSA* array, KH kh))restIterator;
 
 + (A*(^)(NSA* array))compact;
 
 + (A*(^)(NSA* array, BOOL shallow))flatten;
+ 
++ (A*(^)(NSA* array, id value1, ...))without; // TODO: nil terminated
 
-+ (A*(^)(NSA* array, id value1, ...))without;
++ (A*(^)(NSA* array1, ...))union_; // CHANGE: reserved keyword // TODO: nil terminated
 
-+ (A*(^)(NSA* array1, ...))union_; // CHANGE: reserved keyword
++ (A*(^)(NSA* array1, NSA* array2, ...))intersection; // TODO: nil terminated
 
-+ (A*(^)(NSA* array1, ...))intersection;
-
-+ (A*(^)(NSA* array, NSA* array1, ...))difference;
++ (A*(^)(NSA* array, NSA* array1, ...))difference; // TODO: nil terminated
 
 + (A*(^)(NSA* array))uniq;
 + (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniq3;
 + (A*(^)(NSA* array, B isSorted, _MapBlock iterator))unique;
 
-+ (A*(^)(NSA* array1, ...))zip;
++ (A*(^)(NSA* array1, ...))zip; // TODO: nil terminated
 
 + (O*(^)(NSA* keys, NSA* values))zipObject;
 

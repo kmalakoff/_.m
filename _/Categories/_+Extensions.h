@@ -10,4 +10,18 @@
 
 @interface _ (Extensions)
 
+// TODO: add tests
+
+// value
++ (B(^)(id obj))isTruthy;
++ (B(^)(id obj))isFalsy;
+
+// object
++ (_TestBlock(^)(NSS* key, id match))propTester;
++ (_TestBlock(^)(NSS* key, NSS* match))propStringTester;
+
+// array
++ (void(^)(NSA* array, NSS* key, id value))setProps;
++ (A*(^)(NSA* array))classNames;
+
 @end

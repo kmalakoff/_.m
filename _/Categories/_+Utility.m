@@ -28,11 +28,19 @@
 //
 
 #import "_+Utility.h"
+#import "_+Extensions.h"
 
 @implementation _ (Utility)
 
 //noConflict
-//identity
+
++ (_IteratorTestBlock)identity
+{
+  return ^(id value, KH kh) {
+    return _.isTruthy(value);
+  };
+}
+
 //times
 //mixin
 //uniqueId

@@ -52,7 +52,9 @@
 + (B(^)(NSO* obj))isEmpty  { 
   return ^B(NSO* obj) {
     if (obj == nil) return YES;
-    if (_.isArray(obj) || _.isString(obj)) return obj.length == 0;
+    // TODO: why doesn't this work: if (_.isArray(obj) || _.isString(obj)) return obj.length == 0;
+    if (_.isArray(obj)) return ((NSA*)obj).count == 0;
+    if (_.isString(obj)) return ((NSS*)obj).length == 0;
     if (_.isDictionary(obj)) return ((O*)obj).isEmpty();
     return (B) YES;
   }; 
@@ -71,24 +73,13 @@
 //isBoolean
 + (B(^)(id obj))isDate { return ^B(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
 //isRegExp
-//isNaN
+
++ (B(^)(N* obj))isNaN { return ^B(N* obj) { return [obj isEqualToNumber:[NSDecimalNumber notANumber]]; }; }
+
 + (B(^)(id obj))isNull   { return ^B(id obj) { return (obj==nil) || [obj isKindOfClass:[NSNull class]]; }; }
 //isUndefined
 
 // ADDED
 + (B(^)(id obj))isDictionary { return ^B(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
-
-+ (B(^)(id obj))isTruthy { return ^B(id obj) { return !_.isFalsy(obj); }; }
-+ (B(^)(id obj))isFalsy { 
-  return ^B(id obj) { 
-    if (!obj) return YES;
-    if (_.isNull(obj)) return YES;
-    if (_.isNumber(obj)) return (((N*)obj).I == 0);  // TODO: handle correctly
-    if (_.isArray(obj) || _.isDictionary(obj)) return !_.isEmpty(obj);
-    
-    // TODO: write test
-    return NO;
-  }; 
-}
 
 @end

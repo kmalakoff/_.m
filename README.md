@@ -14,6 +14,9 @@ null -> nil
 _> OAKV({k, v}, {k, v}) syntax
 -> terminators and ignorers AO_, AF_ and _FNone
 -> removed all context
+explain the reason for and use of KH
+variable length: add nil termination requirement
+
 
 Other Changes
 ------------
@@ -25,24 +28,24 @@ Arrays
 
 first
 _.first = _.head = _.take = function(array, n, guard)
-+ (id(^)(A* array, N* n))first;
-+ (id(^)(A* array, N* unused))firstIterator; // CHANGE
++ (id(^)(A* array, I n))first;  // mandatory second parameter: -1 replaces missing paramter
++ (id(^)(A* array, KH kh))firstIterator; // CHANGE
 
 
 initial
 _.initial = function(array, n, guard)
-+ (A*(^)(A* array, N* n))initial;
-+ (A*(^)(A* array, N* unused))initialIterator; // CHANGE
++ (A*(^)(A* array, I n))initial; // mandatory second parameter: -1 replaces missing paramter
++ (A*(^)(A* array, KH kh))initialIterator; // CHANGE
 
 last
 _.last = function(array, n, guard)
-+ (id(^)(A* array, N* n))last;
-+ (A*(^)(A* array, N* unused))lastIterator; // CHANGE
++ (id(^)(A* array, I n))last; // mandatory second parameter: -1 replaces missing paramter
++ (A*(^)(A* array, KH kh))lastIterator; // CHANGE
 
 rest
 _.rest = _.tail = function(array, index, guard)
-+ (A*(^)(A* array, N* index))rest;
-+ (A*(^)(A* array, N* unused))restIterator; // CHANGE
++ (A*(^)(A* array, I index))rest; // mandatory second parameter: -1 replaces missing paramter
++ (A*(^)(A* array, KH kh))restIterator; // CHANGE
 
 compact
 _.compact = function(array)
@@ -225,3 +228,8 @@ Arguments
 ------------
 Added new category
 
+
+***************
+SS:
+
+delete obj.key or delete obj['key'] -> obj.delete_(@"key") -> what is the delete resevered word for..can it be used?

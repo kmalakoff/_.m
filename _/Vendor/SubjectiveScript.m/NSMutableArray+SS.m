@@ -32,11 +32,6 @@
 
 @implementation NSMutableArray (SS)
 
-+ (A*)new_
-{
-  return [A array];
-}
-
 + (A*(^)(UI capacity))newWithCapacity
 {
   return ^(UI capacity) {
@@ -44,45 +39,49 @@
   };
 }
 
-+ (A*(^)(const B* values))newB
++ (A*(^)(const B* values, I count))newB
 {
-  return ^(const B* values) {
-    A* result = A.new_;
-    for (const B* value=values; *value != AB_; value++) {
-      [result addObject:N.B(*value)];
+  return ^(const B* values, I count) {
+    A* result = [A arrayWithCapacity:count];
+    
+    for (I index=0; index<count; index++) {
+      [result addObject:N.B(values[index])];
     }
     return result;
   };
 }
 
-+ (A*(^)(const I* values))newI
++ (A*(^)(const I* values, I count))newI
 {
-  return ^(const I* values) {
-    A* result = A.new_;
-    for (const I* value=values; *value != AI_; value++) {
-      [result addObject:N.I(*value)];
+  return ^(const I* values, I count) {
+    A* result = [A arrayWithCapacity:count];
+    
+    for (I index=0; index<count; index++) {
+      [result addObject:N.I(values[index])];
     }
     return result;
   };
 }
 
-+ (A*(^)(const UI* values))newUI
++ (A*(^)(const UI* values, I count))newUI
 {
-  return ^(const UI* values) {
-    A* result = A.new_;
-    for (const UI* value=values; *value != AUI_; value++) {
-      [result addObject:N.UI(*value)];
+  return ^(const UI* values, I count) {
+    A* result = [A arrayWithCapacity:count];
+    
+    for (I index=0; index<count; index++) {
+      [result addObject:N.UI(values[index])];
     }
     return result;
   };
 }
 
-+ (A*(^)(const F* values))newF
++ (A*(^)(const F* values, I count))newF
 {
-  return ^(const F* values) {
-    A* result = A.new_;
-    for (const F* value=values; *value != *value; value++) {
-      [result addObject:N.F(*value)];
+  return ^(const F* values, I count) {
+    A* result = [A arrayWithCapacity:count];
+    
+    for (I index=0; index<count; index++) {
+      [result addObject:N.F(values[index])];
     }
     return result;
   };
@@ -91,8 +90,8 @@
 + (A*(^)(const id* values))newO
 {
   return ^(const id* values) {
-    A* result = A.new_;
-    for (const id* value=values; *value != AO_; value++) {
+    A* result = A.new;
+    for (const id* value=values; *value != nil; value++) {
       [result addObject:*value];
     }
     return result;
@@ -102,7 +101,14 @@
 - (A*(^)(I index, id value))set
 {
   return ^(I index, id value) {
-    [self replaceObjectAtIndex:index withObject:value]; // TODO: test resizing of array
+    // need to expand and fill the array
+    if (index >= self.count) {
+      for (I addIndex=self.count; addIndex<index; addIndex++)
+        [self addObject:NSNull.null];
+      [self addObject:value];
+    }
+    else
+      [self replaceObjectAtIndex:index withObject:value];
     return self;
   };
 }

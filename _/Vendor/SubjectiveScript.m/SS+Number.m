@@ -1,5 +1,5 @@
 //
-//  NSObject+SS.h
+//  SS+Number.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,16 +27,18 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "_Types.h"
+#import "SS+Number.h"
 
-@interface NSObject (SS)
+@implementation SS (Number)
 
-- (const NSS*)typeof;
-- (NSS*(^)())toString;
-- (NSS*)className;
-
-// use dynamic type checking for some JavaScript operations to reduce manual casting
-- (UI)length;
-- (S*(^)(NSS* separator))join;
++ (B(^)(NSS* string, I* result))parseInt
+{
+  return ^(NSS* string, I* result) {
+    NSScanner* scan = [NSScanner scannerWithString:string]; 
+    if([scan scanInteger:result] && [scan isAtEnd]) 
+      return YES;
+    return NO;
+  };
+}
 
 @end

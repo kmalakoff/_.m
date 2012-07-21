@@ -31,11 +31,6 @@
 
 @implementation NSDate (SS)
 
-+ (D*)new_
-{
-  return [D date];
-}
-
-- (S*(^)())toString { return ^() { return self.description.mutableCopy; }; }
+- (NSS*(^)())toString { return ^() { return self.description; }; }
 
 @end

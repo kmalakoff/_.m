@@ -31,10 +31,10 @@
 
 @interface NSDictionary (SS)
 
-- (S*(^)())toString;
+- (NSS*(^)())toString;
 
 - (B(^)())isEmpty;
 - (B(^)(id key))has;
-- (NSO*(^)(id key))get;
+- (NSO*(^)(NSO* key))get;
 
 @end
