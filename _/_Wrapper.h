@@ -31,4 +31,10 @@
 
 @interface _Wrapper : NSObject
 
+- (NSO*(^)())value;
+- (B(^)())valueB;
+- (I(^)())valueI;
+- (UI(^)())valueUI;
+- (F(^)())valueF;
+
 @end

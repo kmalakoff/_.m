@@ -28,16 +28,18 @@
 //
 
 #import "_+Chaining.h"
+#import "_Wrapper+Private.h"
 
 @implementation _ (Chaining)
 
-//+ (_Wrapper*(^)(id obj))chain;
-//+ (_Wrapper*(^)(B value))chainB;
-//+ (_Wrapper*(^)(I value))chainI;
-//+ (_Wrapper*(^)(UI value))chainUI;
-//+ (_Wrapper*(^)(F value))chainF;
++ (_Wrapper*(^)(NSO* obj))chain;
+{
+  return ^(NSO* obj) {
+    return [[_Wrapper alloc] initWithObject:obj];
+  };
+}
 
 @end
 
 // functional representation
-_Wrapper* __(id obj) { return nil; } // TODO: chaining
+_Wrapper* __(NSO* obj) { return _.chain(obj); }

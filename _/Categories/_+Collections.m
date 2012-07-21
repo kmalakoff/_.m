@@ -35,9 +35,9 @@
 
 @implementation _ (Collections)
 
-+ (void(^)(id obj, _IteratorBlock iterator))each
++ (void(^)(id obj, _ValueKeyBlock iterator))each
 {
-  return ^(id obj, _IteratorBlock iterator) {
+  return ^(id obj, _ValueKeyBlock iterator) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj)) return;
@@ -59,10 +59,10 @@
     }
   };
 }
-+ (void(^)(id obj, _IteratorBlock iterator))forEach { return _.each; }  // ALIAS
-+ (B(^)(id obj, _IteratorTestBlock iterator))eachWithStop
++ (void(^)(id obj, _ValueKeyBlock iterator))forEach { return self.each; }  // ALIAS
++ (B(^)(id obj, _ValueKeyTestBlock iterator))eachWithStop
 {
-  return ^B(id obj, _IteratorTestBlock iterator) {
+  return ^B(id obj, _ValueKeyTestBlock iterator) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj)) return YES;
@@ -133,7 +133,7 @@
     return nil;
   };
 }
-+ (A*(^)(id obj, _MapBlock iterator))collect { return _.map; }
++ (A*(^)(id obj, _MapBlock iterator))collect { return self.map; } // ALIAS
 
 + (id (^)(id obj, _ReduceBlock iterator, id memo))reduce
 {
@@ -153,8 +153,8 @@
     return internalMemo;
   };
 }
-+ (id (^)(id obj, _ReduceBlock iterator, id memo))foldl { return _.reduce; } // ALIAS
-+ (id (^)(id obj, _ReduceBlock iterator, id memo))inject { return _.reduce; } // ALIAS
++ (id (^)(id obj, _ReduceBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
++ (id (^)(id obj, _ReduceBlock iterator, id memo))inject { return self.reduce; } // ALIAS
 
 + (id (^)(id obj, _ReduceBlock iterator, id memo))reduceRight
 {
@@ -163,13 +163,13 @@
     return memo;
   };
 }
-+ (id (^)(id obj, _ReduceBlock iterator, id memo))foldr { return _.reduceRight; } // ALIAS
++ (id (^)(id obj, _ReduceBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
 
 //find
 
-+ (A*(^)(id obj, _IteratorTestBlock iterator))filter
++ (A*(^)(id obj, _ValueKeyTestBlock iterator))filter
 {
-  return ^(id obj, _IteratorTestBlock iterator) {
+  return ^(id obj, _ValueKeyTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
     _.each(obj, ^(id value, KH kh) {
@@ -178,11 +178,11 @@
     return results;
   };
 }
-+ (A*(^)(id obj, _IteratorTestBlock iterator))select { return _.filter; } // ALIAS
++ (A*(^)(id obj, _ValueKeyTestBlock iterator))select { return self.filter; } // ALIAS
 
-+ (A*(^)(id obj, _IteratorTestBlock iterator))reject
++ (A*(^)(id obj, _ValueKeyTestBlock iterator))reject
 {
-  return ^(id obj, _IteratorTestBlock iterator) {
+  return ^(id obj, _ValueKeyTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
     _.each(obj, ^(id value, KH kh) {
@@ -192,19 +192,19 @@
   };
 }
 
-+ (B(^)(id obj, _IteratorTestBlock iterator))all
++ (B(^)(id obj, _ValueKeyTestBlock iterator))all
 {
-  return ^B(id obj, _IteratorTestBlock iterator) {
+  return ^B(id obj, _ValueKeyTestBlock iterator) {
     if (obj == nil) return YES;
     return _.eachWithStop(obj, iterator);
   };
 }
-+ (B(^)(id obj, _IteratorTestBlock iterator))every {return _.all; } // ALIAS
++ (B(^)(id obj, _ValueKeyTestBlock iterator))every {return self.all; } // ALIAS
 
-+ (B(^)(id obj, _IteratorTestBlock iterator))any
++ (B(^)(id obj, _ValueKeyTestBlock iterator))any
 {
-  return ^B(id obj, _IteratorTestBlock iterator) {
-    if (!iterator) iterator = _.identity;
+  return ^B(id obj, _ValueKeyTestBlock iterator) {
+    if (!iterator) iterator = _.identityValueKeyTest;
     __block BOOL result = NO;
     if (obj == nil) return result;
     _.eachWithStop(obj, ^B(id value, KH kh) {
@@ -215,7 +215,7 @@
     return !!result;
   };
 }
-+ (B(^)(id obj, _IteratorTestBlock iterator))some { return _.any; }
++ (B(^)(id obj, _ValueKeyTestBlock iterator))some { return self.any; }
 
 + (B(^)(id obj, id target))include
 {
@@ -228,7 +228,7 @@
     return found;
   };
 }
-+ (B(^)(id obj, id target))contains { return _.include; } // ALIAS
++ (B(^)(id obj, id target))contains { return self.include; } // ALIAS
 
 //invoke
 
@@ -314,7 +314,21 @@
 //min
 //sortBy
 //groupBy
-//sortedIndex
+
++ (I(^)(NSA* array, id obj, _SortByBlock iterator))sortedIndex
+{
+  return ^(NSA* array, id obj, _SortByBlock iterator) {
+    if (!iterator) iterator = _.identitySortBy;
+    NSO* value = iterator(obj);
+    I low = 0, high = array.length;
+    while (low < high) {
+      I mid = (low + high) >> 1;
+      ([iterator(array.get(mid)) compare:value] == NSOrderedAscending) ? (low = mid + 1) : (high = mid);
+    }
+    return low;
+  };
+}
+
 //shuffle
 //toArray
 //size

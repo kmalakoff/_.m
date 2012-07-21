@@ -31,15 +31,23 @@
 
 @interface SS (Arguments)
 
-+ (A*(^)(va_list argList, NSO* lastNamedArg))argumentsToArray;
++ (A*(^)(va_list argList, NSO* lastNamedArg))objectArgumentsToArray;
++ (A*(^)(va_list argList, I lastNamedArg))integerArgumentsToArray;
 
 @end
 
 // TODO: can I make the arguments inline and returnable?
 
 // NOTE: your variable argument array must be nil terminated to indicate the end of arguments
-#define SS_ARGUMENTS_FROM(_name, _lastNamedArg) \
+#define AO_ARGS(_name, _lastNamedArg) \
   va_list argList; \
   va_start(argList, _lastNamedArg); \
-  A* _name = SS.argumentsToArray(argList, _lastNamedArg); \
+  A* _name = SS.objectArgumentsToArray(argList, _lastNamedArg); \
+  va_end(argList);
+
+#define AI_END (I)NSNotFound
+#define AI_ARGS(_name, _lastNamedArg) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  A* _name = SS.integerArgumentsToArray(argList, _lastNamedArg); \
   va_end(argList);

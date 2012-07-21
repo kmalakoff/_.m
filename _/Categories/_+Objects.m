@@ -70,7 +70,9 @@
 + (B(^)(id obj))isString { return ^B(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
 + (B(^)(id obj))isNumber { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
 //isFinite
-//isBoolean
+
++ (B(^)(id obj))isBoolean { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]] && ((N*)obj).isBoolean; }; }
+
 + (B(^)(id obj))isDate { return ^B(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
 //isRegExp
 

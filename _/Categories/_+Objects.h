@@ -59,7 +59,8 @@
 + (B(^)(id obj))isNumber;
 
 //isFinite
-//isBoolean
+
++ (B(^)(id obj))isBoolean;
 
 + (B(^)(id obj))isDate;
 

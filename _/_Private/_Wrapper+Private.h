@@ -31,4 +31,8 @@
 
 @interface _Wrapper (Private)
 
+- (id)initWithObject:(NSO*)obj;
+
+@property (readwrite, retain) NSO* _wrapped;
+
 @end

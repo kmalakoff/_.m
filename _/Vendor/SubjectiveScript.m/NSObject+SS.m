@@ -56,8 +56,16 @@ const NSS* SSTypeObject = @"object";
 }
 - (S*(^)(NSS* separator))join
 {
-  NSAssert(nil, @"join expecting array");
+  NSAssert(nil, @"join not implemented for this type");
   return nil;
+}
+
+- (NSComparisonResult)compare:(NSO*)other
+{
+  if (SS.isString(self)) return [(NSS*)self compare:(NSS*)other];
+  if (SS.isNumber(self)) return [(N*)self compare:(N*)other];
+  NSAssert(nil, @"cannot compare the provided objects");
+  return NSOrderedSame;
 }
 
 @end

@@ -31,20 +31,47 @@
 
 @interface _Wrapper (Arrays)
 
-//first
-//initial
-//last
-//rest
-//compact
-//flatten
-//without
-//union
-//intersection
-//difference
-//uniq
-//zip
-//indexOf
-//lastIndexOf
-//range
+- (NSO*(^)(I n))first;
+- (NSO*(^)(I n))head;
+- (NSO*(^)(I n))take;
+- (NSO*(^)(KH kh))firstIterator; /* SPECIALIZED */
+
+- (NSA*(^)(I n))initial;
+- (NSA*(^)(KH kh))initialIterator; /* SPECIALIZED */
+
+- (NSO*(^)(I n))last;
+- (NSO*(^)(KH kh))lastIterator; /* SPECIALIZED */
+
+- (NSA*(^)(I index))rest;
+- (NSA*(^)(I index))tail;
+- (NSA*(^)(KH kh))restIterator; /* SPECIALIZED */
+
+- (A*(^)())compact;
+
+- (A*(^)(BOOL shallow))flatten;
+ 
+- (A*(^)(id value1, ...))without; // TODO: nil terminated
+
+- (A*(^)(NSA* array1, ...))union_;  /* RESERVED KEYWORD 'union' -> 'union_' */ // TODO: nil terminated
+
+- (A*(^)(NSA* array1, ...))intersection; // TODO: nil terminated
+
+- (A*(^)(NSA* array1, ...))difference; // TODO: nil terminated
+
+- (A*(^)())uniq;
+- (A*(^)(B isSorted, _MapBlock iterator))uniq3; /* SPECIALIZED */
+- (A*(^)(B isSorted, _MapBlock iterator))unique;
+
+- (A*(^)(NSA* array1, ...))zip; // TODO: nil terminated
+
+// zipObject /* NO WRAP */
+
+- (I(^)(id value))indexOf;
+- (I(^)(id value))indexOfSorted; /* SPECIALIZED */
+
+- (I(^)(id value))lastIndexOf;
+
+// range1 /* NO WRAP */
+// range /* NO WRAP */
 
 @end

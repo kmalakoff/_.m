@@ -32,16 +32,9 @@
 
 @interface _ (Chaining)
 
-//+ (_Wrapper*(^)(id obj))chain;
-//+ (_Wrapper*(^)(B value))chainB;
-//+ (_Wrapper*(^)(I value))chainI;
-//+ (_Wrapper*(^)(UI value))chainUI;
-//+ (_Wrapper*(^)(F value))chainF;
-
-//chain
-//value
++ (_Wrapper*(^)(NSO* obj))chain;
 
 @end
 
 // functional representation
-_Wrapper* __(id obj); // CHANGE: two '_'s
+_Wrapper* __(NSO* obj); /* SPECIALIZED - CANNOT DEFINE '_' AS BOTH FUNCTION AND CLASS. FUNCTION IS '__', CLASS IS '_' */

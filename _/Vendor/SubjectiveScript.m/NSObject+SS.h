@@ -39,4 +39,6 @@
 - (UI)length;
 - (S*(^)(NSS* separator))join;
 
+- (NSComparisonResult)compare:(NSO*)other;
+
 @end

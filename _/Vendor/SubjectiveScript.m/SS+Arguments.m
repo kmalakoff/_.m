@@ -29,15 +29,27 @@
 
 #import "SS+Arguments.h"
 #import "NSMutableArray+SS.h"
+#import "NSNumber+SS.h"
 
 @implementation SS (Arguments)
 
-+ (A*(^)(va_list argList, NSO* lastNamedArg))argumentsToArray
++ (A*(^)(va_list argList, NSO* lastNamedArg))objectArgumentsToArray
 {
   return ^(va_list argList, NSO* lastNamedArg) {
     A* result = A.new;
     for (NSO* arg = lastNamedArg; arg != nil; arg = va_arg(argList, NSO*)) {
       [result addObject:arg];
+    }
+    return result;
+  };
+}
+
++ (A*(^)(va_list argList, I lastNamedArg))integerArgumentsToArray
+{
+  return ^(va_list argList, I lastNamedArg) {
+    A* result = A.new;
+    for (I arg = lastNamedArg; arg != AI_END; arg = va_arg(argList, I)) {
+      [result addObject:N.I(arg)];
     }
     return result;
   };

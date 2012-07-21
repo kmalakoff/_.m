@@ -33,7 +33,8 @@
 
 //noConflict
 
-+ (_IteratorTestBlock)identity; // MANDATORYs
++ (_ValueKeyTestBlock)identityValueKeyTest; /* SPECIALIZED */
++ (_SortByBlock)identitySortBy; /* SPECIALIZED */
 
 //times
 //mixin

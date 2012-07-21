@@ -31,4 +31,16 @@
 
 @implementation _Wrapper (Private)
 
+@dynamic _wrapped;
+
+- (id)initWithObject:(NSO*)obj
+{
+  self = [super init];
+  if (!self) return self;
+  
+  self._wrapped = obj;
+  
+  return self;
+}
+
 @end

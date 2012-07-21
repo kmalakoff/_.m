@@ -31,9 +31,9 @@
 
 @interface _ (Collections)
 
-+ (void(^)(id obj, _IteratorBlock iterator))each;
-+ (void(^)(id obj, _IteratorBlock iterator))forEach;
-+ (B(^)(id obj, _IteratorTestBlock iterator))eachWithStop; /* returns YES if processed all elements without a request to stop */
++ (void(^)(id obj, _ValueKeyBlock iterator))each;
++ (void(^)(id obj, _ValueKeyBlock iterator))forEach;
++ (B(^)(id obj, _ValueKeyTestBlock iterator))eachWithStop; /* returns YES if processed all elements without a request to stop */
 
 + (A*(^)(id obj, _MapBlock iterator))map;
 + (A*(^)(id obj, _MapBlock iterator))collect;
@@ -47,16 +47,16 @@
 
 //find
 
-+ (A*(^)(id obj, _IteratorTestBlock iterator))filter;
-+ (A*(^)(id obj, _IteratorTestBlock iterator))select;
++ (A*(^)(id obj, _ValueKeyTestBlock iterator))filter;
++ (A*(^)(id obj, _ValueKeyTestBlock iterator))select;
 
-+ (A*(^)(id obj, _IteratorTestBlock iterator))reject;
++ (A*(^)(id obj, _ValueKeyTestBlock iterator))reject;
 
-+ (B(^)(id obj, _IteratorTestBlock iterator))all;
-+ (B(^)(id obj, _IteratorTestBlock iterator))every;
++ (B(^)(id obj, _ValueKeyTestBlock iterator))all;
++ (B(^)(id obj, _ValueKeyTestBlock iterator))every;
 
-+ (B(^)(id obj, /* MANDATORY */ _IteratorTestBlock iterator))any;
-+ (B(^)(id obj, _IteratorTestBlock iterator))some;
++ (B(^)(id obj, /* MANDATORY */ _ValueKeyTestBlock iterator))any;
++ (B(^)(id obj, _ValueKeyTestBlock iterator))some;
 
 + (B(^)(id obj, id target))include;
 + (B(^)(id obj, id target))contains;
@@ -70,7 +70,9 @@
 //min
 //sortBy
 //groupBy
-//sortedIndex
+
++ (I(^)(NSA* array, id obj, _SortByBlock iterator))sortedIndex;
+
 //shuffle
 //toArray
 //size

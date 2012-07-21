@@ -28,7 +28,56 @@
 //
 
 #import "_Wrapper.h"
+#import "_Wrapper+Private.h"
+#import "_+Objects.h"
+
+@interface _Wrapper ()
+
+@property (readwrite, retain) NSO* _wrapped;
+
+@end
 
 @implementation _Wrapper
+
+@synthesize _wrapped;
+
+- (NSO*(^)())value;
+{
+  return ^{
+    return self._wrapped;
+  };
+}
+
+- (B(^)())valueB;
+{
+  return ^{
+    NSAssert(_.isBoolean(self._wrapped), @"valueB is not a boolean");
+    return ((N*)self._wrapped).boolValue;
+  };
+}
+
+- (I(^)())valueI;
+{
+  return ^{
+    NSAssert([self._wrapped isKindOfClass:[NSNumber class]], @"valueI is not an NSNumber");
+    return ((N*)self._wrapped).integerValue;
+  };
+}
+
+- (UI(^)())valueUI;
+{
+  return ^{
+    NSAssert([self._wrapped isKindOfClass:[NSNumber class]], @"valueI is not an NSNumber");
+    return ((N*)self._wrapped).unsignedIntegerValue;
+  };
+}
+
+- (F(^)())valueF;
+{
+  return ^{
+    NSAssert([self._wrapped isKindOfClass:[NSNumber class]], @"valueI is not an NSNumber");
+    return ((N*)self._wrapped).floatValue;
+  };
+}
 
 @end

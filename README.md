@@ -62,11 +62,11 @@ _.without = function(array, ...)
 
 union
 _.union = function(...)
-+ (A*(^)(A* array1, ...))union;
++ (A*(^)(A* array, ...))union;
 
 intersection
 _.intersection = function(...)
-+ (A*(^)(A* array1, ...))intersection;
++ (A*(^)(A* array, ...))intersection;
 
 difference
 _.difference = function(array)
@@ -78,7 +78,7 @@ _.uniq = _.unique = function(array, isSorted, iterator)
 
 zip
 _.zip = function(...)
-+ (A*(^)(A* array1, A* array2, ...))zip;
++ (A*(^)(A* array, A* array1, ...))zip;
 
 _.zipObject = function(keys, values)
 + (O*(^)(NSA* keys, NSA* values))zipObject //ADDED
@@ -108,7 +108,7 @@ Collections
 
 each
   var each = _.each = _.forEach = function(obj, iterator, context)
-+ (void(^)(id obj, _IteratorBlock iterator))each;
++ (void(^)(id obj, _ValueKeyBlock iterator))each;
 CHANGE: no collection (was used for guard, but removed due to variable arguments not possible). Context is a JS language feature
 
 map
@@ -122,7 +122,7 @@ find
 
 filter
   _.filter = _.select = function(obj, iterator, context) {
-+ (A*(^)(id obj, _IteratorTestBlock iterator))filter;
++ (A*(^)(id obj, _ValueKeyTestBlock iterator))filter;
 CHANGE: Context is a JS language feature
 
 reject

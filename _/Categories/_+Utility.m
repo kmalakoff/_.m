@@ -34,10 +34,17 @@
 
 //noConflict
 
-+ (_IteratorTestBlock)identity
++ (_ValueKeyTestBlock)identityValueKeyTest
 {
   return ^(id value, KH kh) {
     return _.isTruthy(value);
+  };
+}
+
++ (_SortByBlock)identitySortBy
+{
+  return ^(id value) {
+    return value;
   };
 }
 

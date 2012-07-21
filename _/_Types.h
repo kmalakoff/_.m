@@ -44,12 +44,12 @@ typedef void                (^_DoBlock)();
 typedef B                   (^_TestBlock)(id obj);
 typedef N*                  (^_MaxBlock)(N* number);
 
-typedef id                  (^_ReduceBlock)(id memo, id obj, KH kh);
+typedef NSO*                (^_ReduceBlock)(id memo, id obj, KH kh);
 
-typedef void                (^_IteratorBlock)(id value, KH kh);
-typedef B                   (^_IteratorTestBlock)(id value, KH kh);
+typedef void                (^_ValueKeyBlock)(id value, KH kh);
+typedef B                   (^_ValueKeyTestBlock)(id value, KH kh);
 
-typedef id                  (^_MapBlock)(id value, KH kh);
+typedef NSO*                (^_MapBlock)(id value, KH kh);
 
-typedef id                  (^_SortByBlock)(id value);
+typedef NSO*                (^_SortByBlock)(id value);
 typedef NSComparisonResult  (^_CompareBlock)(id left, id right);

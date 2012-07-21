@@ -88,14 +88,14 @@
 
 - (void)test_all
 {
-  self.ok(_.all(A.new, _.identity), @"the empty set");
-  self.ok(_.all(AB(true, true, true), _.identity), @"all true values");
-  self.ok(!_.all(AB(true, false, true), _.identity), @"one false value");
+  self.ok(_.all(A.new, /* SPECIALIZED */ _.identityValueKeyTest), @"the empty set");
+  self.ok(_.all(AB(true, true, true), /* SPECIALIZED */ _.identityValueKeyTest), @"all true values");
+  self.ok(!_.all(AB(true, false, true), /* SPECIALIZED */ _.identityValueKeyTest), @"one false value");
   self.ok(_.all(AI(0, 10, 28), ^B(N* num, KH kh){ return num.I % 2 == 0; }), @"even numbers");
   self.ok(!_.all(AI(0, 11, 28), ^B(N* num, KH kh){ return num.I % 2 == 0; }), @"an odd number");
-  self.ok(_.all(AI(1), _.identity) == true, @"cast to boolean - true");
-  self.ok(_.all(AI(0), _.identity) == false, @"cast to boolean - false");
-  self.ok(_.every(AB(true, true, true), _.identity), @"aliased as 'every'");
+  self.ok(_.all(AI(1), /* SPECIALIZED */ _.identityValueKeyTest) == true, @"cast to boolean - true");
+  self.ok(_.all(AI(0), /* SPECIALIZED */ _.identityValueKeyTest) == false, @"cast to boolean - false");
+  self.ok(_.every(AB(true, true, true), /* SPECIALIZED */ _.identityValueKeyTest), @"aliased as 'every'");
 }
 
 - (void)test_any
@@ -107,8 +107,8 @@
   self.ok(!_.any(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"", N.B(false)), /* MANDATORY */ nil), @"falsy values");
   self.ok(!_.any(AI(1, 11, 29), ^B(N* num, /* MANDATORY */ KH kh){ return num.I % 2 == 0; }), @"all odd numbers");
   self.ok(_.any(AI(1, 10, 29), ^B(N* num, /* MANDATORY */ KH kh){ return num.I % 2 == 0; }), @"an even number");
-  self.ok(_.any(AI(1), _.identity) == true, @"cast to boolean - true");
-  self.ok(_.any(AI(0), _.identity) == false, @"cast to boolean - false");
+  self.ok(_.any(AI(1), /* SPECIALIZED */ _.identityValueKeyTest) == true, @"cast to boolean - true");
+  self.ok(_.any(AI(0), /* SPECIALIZED */ _.identityValueKeyTest) == false, @"cast to boolean - false");
   self.ok(_.some(AB(false, false, true), /* MANDATORY */ nil), @"aliased as 'some'");
 }
 
@@ -137,7 +137,17 @@
 //min
 //sortBy
 //groupBy
-//sortedIndex
+
+- (void)test_sortedIndex
+{
+  A* numbers = AI(10, 20, 30, 40, 50); N* num = N.I(35);
+  I indexForNum = _.sortedIndex(numbers, num, /* MANDATORY */ nil);
+  self.equalI(indexForNum, 3, @"35 should be inserted at index 3");
+
+  I indexFor30 = _.sortedIndex(numbers, N.I(30), /* MANDATORY */ nil);
+  self.equalI(indexFor30, 2, @"30 should be inserted at index 2");
+}
+
 //shuffle
 //toArray
 //size
