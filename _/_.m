@@ -28,7 +28,18 @@
 //
 
 #import "_.h"
+#import "_Wrapper+Private.h"
 
 @implementation _
 
++ (_Wrapper*(^)(NSO* obj))chain;
+{
+  return ^(NSO* obj) {
+    return [[_Wrapper alloc] initWithObject:obj];
+  };
+}
+
 @end
+
+// OO-style representation
+_Wrapper* __(NSO* obj) { return _.chain(obj); }

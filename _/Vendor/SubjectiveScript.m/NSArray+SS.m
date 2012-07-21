@@ -87,6 +87,17 @@
   };
 }
 
+- (A*(^)())reverse
+{
+  return ^() {
+    A* result = A.newWithCapacity(self.count); 
+    for (id item in [self reverseObjectEnumerator]) {
+        [result addObject:item];
+    }
+    return result;
+  };
+}
+
 - (A*(^)())flatten
 {
   return ^() {
@@ -98,6 +109,13 @@
         output.push(value);
     }
     return output;
+  };
+}
+
+- (NSA*(^)(SSCompareBlock block))sort
+{
+  return ^(SSCompareBlock block) {
+    return [self sortedArrayUsingComparator:block];
   };
 }
 

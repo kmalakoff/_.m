@@ -38,7 +38,10 @@
 // use dynamic type checking for some JavaScript operations to reduce manual casting
 - (UI)length;
 - (S*(^)(NSS* separator))join;
+- (id(^)(SEL method, id arg1, ...))call;
+- (id(^)(SEL method, NSA* arguments))apply;
 
+// helper
 - (NSComparisonResult)compare:(NSO*)other;
 
 @end

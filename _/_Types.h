@@ -49,7 +49,7 @@ typedef NSO*                (^_ReduceBlock)(id memo, id obj, KH kh);
 typedef void                (^_ValueKeyBlock)(id value, KH kh);
 typedef B                   (^_ValueKeyTestBlock)(id value, KH kh);
 
-typedef NSO*                (^_MapBlock)(id value, KH kh);
+typedef NSO*                (^_MapBlock)(NSO* value, KH kh);
 
 typedef NSO*                (^_SortByBlock)(id value);
 typedef NSComparisonResult  (^_CompareBlock)(id left, id right);

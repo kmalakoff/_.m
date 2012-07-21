@@ -32,9 +32,9 @@
 @interface _Wrapper : NSObject
 
 - (NSO*(^)())value;
-- (B(^)())valueB;
-- (I(^)())valueI;
-- (UI(^)())valueUI;
-- (F(^)())valueF;
+- (B(^)())valueB; /* SPECIALIZED */
+- (I(^)())valueI; /* SPECIALIZED */
+- (UI(^)())valueUI; /* SPECIALIZED */
+- (F(^)())valueF; /* SPECIALIZED */
 
 @end

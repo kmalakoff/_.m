@@ -21,9 +21,6 @@
 		0A5842BC15B8FC18000BC230 /* _+Arrays.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A58427B15B8FC18000BC230 /* _+Arrays.h */; };
 		0A5842BD15B8FC18000BC230 /* _+Arrays.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58427C15B8FC18000BC230 /* _+Arrays.m */; };
 		0A5842BE15B8FC18000BC230 /* _+Arrays.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58427C15B8FC18000BC230 /* _+Arrays.m */; };
-		0A5842BF15B8FC18000BC230 /* _+Chaining.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A58427D15B8FC18000BC230 /* _+Chaining.h */; };
-		0A5842C015B8FC19000BC230 /* _+Chaining.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58427E15B8FC18000BC230 /* _+Chaining.m */; };
-		0A5842C115B8FC19000BC230 /* _+Chaining.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58427E15B8FC18000BC230 /* _+Chaining.m */; };
 		0A5842C215B8FC19000BC230 /* _+Collections.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A58427F15B8FC18000BC230 /* _+Collections.h */; };
 		0A5842C315B8FC19000BC230 /* _+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58428015B8FC18000BC230 /* _+Collections.m */; };
 		0A5842C415B8FC19000BC230 /* _+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58428015B8FC18000BC230 /* _+Collections.m */; };
@@ -82,9 +79,6 @@
 		0A5842F915B8FC19000BC230 /* _Wrapper+Arrays.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A5842A715B8FC18000BC230 /* _Wrapper+Arrays.h */; };
 		0A5842FA15B8FC19000BC230 /* _Wrapper+Arrays.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842A815B8FC18000BC230 /* _Wrapper+Arrays.m */; };
 		0A5842FB15B8FC19000BC230 /* _Wrapper+Arrays.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842A815B8FC18000BC230 /* _Wrapper+Arrays.m */; };
-		0A5842FC15B8FC19000BC230 /* _Wrapper+Chaining.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A5842A915B8FC18000BC230 /* _Wrapper+Chaining.h */; };
-		0A5842FD15B8FC19000BC230 /* _Wrapper+Chaining.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842AA15B8FC18000BC230 /* _Wrapper+Chaining.m */; };
-		0A5842FE15B8FC19000BC230 /* _Wrapper+Chaining.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842AA15B8FC18000BC230 /* _Wrapper+Chaining.m */; };
 		0A5842FF15B8FC19000BC230 /* _Wrapper+Collections.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A5842AB15B8FC18000BC230 /* _Wrapper+Collections.h */; };
 		0A58430015B8FC19000BC230 /* _Wrapper+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */; };
 		0A58430115B8FC19000BC230 /* _Wrapper+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */; };
@@ -152,8 +146,6 @@
 		0A3930C615BA74CD00FB19BD /* SS+Number.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SS+Number.m"; sourceTree = "<group>"; };
 		0A58427B15B8FC18000BC230 /* _+Arrays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_+Arrays.h"; sourceTree = "<group>"; };
 		0A58427C15B8FC18000BC230 /* _+Arrays.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_+Arrays.m"; sourceTree = "<group>"; };
-		0A58427D15B8FC18000BC230 /* _+Chaining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_+Chaining.h"; sourceTree = "<group>"; };
-		0A58427E15B8FC18000BC230 /* _+Chaining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_+Chaining.m"; sourceTree = "<group>"; };
 		0A58427F15B8FC18000BC230 /* _+Collections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_+Collections.h"; sourceTree = "<group>"; };
 		0A58428015B8FC18000BC230 /* _+Collections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_+Collections.m"; sourceTree = "<group>"; };
 		0A58428115B8FC18000BC230 /* _+Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_+Functions.h"; sourceTree = "<group>"; };
@@ -193,8 +185,6 @@
 		0A5842A515B8FC18000BC230 /* SubjectiveScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectiveScript.m; sourceTree = "<group>"; };
 		0A5842A715B8FC18000BC230 /* _Wrapper+Arrays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Arrays.h"; sourceTree = "<group>"; };
 		0A5842A815B8FC18000BC230 /* _Wrapper+Arrays.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Arrays.m"; sourceTree = "<group>"; };
-		0A5842A915B8FC18000BC230 /* _Wrapper+Chaining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Chaining.h"; sourceTree = "<group>"; };
-		0A5842AA15B8FC18000BC230 /* _Wrapper+Chaining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Chaining.m"; sourceTree = "<group>"; };
 		0A5842AB15B8FC18000BC230 /* _Wrapper+Collections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Collections.h"; sourceTree = "<group>"; };
 		0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Collections.m"; sourceTree = "<group>"; };
 		0A5842AD15B8FC18000BC230 /* _Wrapper+Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Functions.h"; sourceTree = "<group>"; };
@@ -352,8 +342,6 @@
 			children = (
 				0A58427B15B8FC18000BC230 /* _+Arrays.h */,
 				0A58427C15B8FC18000BC230 /* _+Arrays.m */,
-				0A58427D15B8FC18000BC230 /* _+Chaining.h */,
-				0A58427E15B8FC18000BC230 /* _+Chaining.m */,
 				0A58427F15B8FC18000BC230 /* _+Collections.h */,
 				0A58428015B8FC18000BC230 /* _+Collections.m */,
 				0A58428115B8FC18000BC230 /* _+Functions.h */,
@@ -420,8 +408,6 @@
 			children = (
 				0A5842A715B8FC18000BC230 /* _Wrapper+Arrays.h */,
 				0A5842A815B8FC18000BC230 /* _Wrapper+Arrays.m */,
-				0A5842A915B8FC18000BC230 /* _Wrapper+Chaining.h */,
-				0A5842AA15B8FC18000BC230 /* _Wrapper+Chaining.m */,
 				0A5842AB15B8FC18000BC230 /* _Wrapper+Collections.h */,
 				0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */,
 				0A5842AD15B8FC18000BC230 /* _Wrapper+Functions.h */,
@@ -508,7 +494,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A5842BC15B8FC18000BC230 /* _+Arrays.h in Headers */,
-				0A5842BF15B8FC18000BC230 /* _+Chaining.h in Headers */,
 				0A5842C215B8FC19000BC230 /* _+Collections.h in Headers */,
 				0A5842C515B8FC19000BC230 /* _+Functions.h in Headers */,
 				0A5842C815B8FC19000BC230 /* _+Objects.h in Headers */,
@@ -529,7 +514,6 @@
 				0A5842F515B8FC19000BC230 /* SSTypes.h in Headers */,
 				0A5842F615B8FC19000BC230 /* SubjectiveScript.h in Headers */,
 				0A5842F915B8FC19000BC230 /* _Wrapper+Arrays.h in Headers */,
-				0A5842FC15B8FC19000BC230 /* _Wrapper+Chaining.h in Headers */,
 				0A5842FF15B8FC19000BC230 /* _Wrapper+Collections.h in Headers */,
 				0A58430215B8FC19000BC230 /* _Wrapper+Functions.h in Headers */,
 				0A58430515B8FC19000BC230 /* _Wrapper+Objects.h in Headers */,
@@ -645,7 +629,6 @@
 			files = (
 				0A32614F15B8FB4900237F52 /* _.m in Sources */,
 				0A5842BD15B8FC18000BC230 /* _+Arrays.m in Sources */,
-				0A5842C015B8FC19000BC230 /* _+Chaining.m in Sources */,
 				0A5842C315B8FC19000BC230 /* _+Collections.m in Sources */,
 				0A5842C615B8FC19000BC230 /* _+Functions.m in Sources */,
 				0A5842C915B8FC19000BC230 /* _+Objects.m in Sources */,
@@ -665,7 +648,6 @@
 				0A5842F315B8FC19000BC230 /* SS.m in Sources */,
 				0A5842F715B8FC19000BC230 /* SubjectiveScript.m in Sources */,
 				0A5842FA15B8FC19000BC230 /* _Wrapper+Arrays.m in Sources */,
-				0A5842FD15B8FC19000BC230 /* _Wrapper+Chaining.m in Sources */,
 				0A58430015B8FC19000BC230 /* _Wrapper+Collections.m in Sources */,
 				0A58430315B8FC19000BC230 /* _Wrapper+Functions.m in Sources */,
 				0A58430615B8FC19000BC230 /* _Wrapper+Objects.m in Sources */,
@@ -683,7 +665,6 @@
 			files = (
 				0A32616615B8FB4900237F52 /* _Tests.m in Sources */,
 				0A5842BE15B8FC18000BC230 /* _+Arrays.m in Sources */,
-				0A5842C115B8FC19000BC230 /* _+Chaining.m in Sources */,
 				0A5842C415B8FC19000BC230 /* _+Collections.m in Sources */,
 				0A5842C715B8FC19000BC230 /* _+Functions.m in Sources */,
 				0A5842CA15B8FC19000BC230 /* _+Objects.m in Sources */,
@@ -703,7 +684,6 @@
 				0A5842F415B8FC19000BC230 /* SS.m in Sources */,
 				0A5842F815B8FC19000BC230 /* SubjectiveScript.m in Sources */,
 				0A5842FB15B8FC19000BC230 /* _Wrapper+Arrays.m in Sources */,
-				0A5842FE15B8FC19000BC230 /* _Wrapper+Chaining.m in Sources */,
 				0A58430115B8FC19000BC230 /* _Wrapper+Collections.m in Sources */,
 				0A58430415B8FC19000BC230 /* _Wrapper+Functions.m in Sources */,
 				0A58430715B8FC19000BC230 /* _Wrapper+Objects.m in Sources */,

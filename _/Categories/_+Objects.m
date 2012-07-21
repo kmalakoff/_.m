@@ -32,8 +32,18 @@
 
 @implementation _ (Objects)
 
-//keys
-//values
++ (NSA*(^)(NSD* obj))keys {
+  return ^(NSD* obj) {
+    return obj.allKeys;
+  };
+}
+
++ (NSA*(^)(NSD* obj))values {
+  return ^(NSD* obj) {
+    return obj.allValues;
+  };
+}
+
 //functions
 //extend
 //pick
@@ -65,7 +75,6 @@
 + (B(^)(id obj))isArray  { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
 + (B(^)(id obj))isObject { return ^B(id obj) { return _.isDictionary(obj) || _.isString(obj) || _.isArray(obj); }; }
 
-//isArguments
 //isFunction
 + (B(^)(id obj))isString { return ^B(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
 + (B(^)(id obj))isNumber { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }

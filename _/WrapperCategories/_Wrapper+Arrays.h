@@ -64,14 +64,14 @@
 
 - (A*(^)(NSA* array1, ...))zip; // TODO: nil terminated
 
-// zipObject /* NO WRAP */
+// zipObject /* NO OO-STYLE WRAPPER VERSION */
 
 - (I(^)(id value))indexOf;
 - (I(^)(id value))indexOfSorted; /* SPECIALIZED */
 
 - (I(^)(id value))lastIndexOf;
 
-// range1 /* NO WRAP */
-// range /* NO WRAP */
+// range1 /* NO OO-STYLE WRAPPER VERSION */
+// range /* NO OO-STYLE WRAPPER VERSION */
 
 @end

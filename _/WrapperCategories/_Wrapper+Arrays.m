@@ -119,7 +119,7 @@
 - (A*(^)(NSA* array1, ...))union_
 {
   return ^(NSA* array1, ...) {
-    AO_ARGS(arguments, array1)
+    AO_ARGS(arguments, array1);
 
     return _.uniq(_.flatten(arguments, YES));
   };
@@ -128,7 +128,7 @@
 - (A*(^)(NSA* array1, ...))intersection
 {
   return ^(NSA* array1, ...) {
-    AO_ARGS(rest, array1)
+    AO_ARGS(rest, array1);
 
     return _.filter(_.uniq(_array), ^(id item, KH kh) {
       return _.every(rest, ^B(id other, KH kh) {
@@ -141,7 +141,7 @@
 - (A*(^)(NSA* array1, ...))difference
 {
   return ^(NSA* array1, ...) {
-    AO_ARGS(rest, array1)
+    AO_ARGS(rest, array1);
 
     rest = _.flatten(rest, YES);
     return _.filter(_array, ^B(id value, KH kh) { return !_.include(rest, value); });
@@ -165,7 +165,7 @@
 - (A*(^)(NSA* array1, ...))zip
 {
   return ^(NSA* array1, ...) {
-    AO_ARGS(arguments, array1)
+    AO_ARGS(arguments, array1);
 
     N* lengthNumber = _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);
     I length = lengthNumber.I;
@@ -177,7 +177,7 @@
   };
 }
 
-// zipObject /* NO WRAP */
+// zipObject /* NO OO-STYLE WRAPPER VERSION */
 
 - (I(^)(id item))indexOf
 {
@@ -200,6 +200,6 @@
   };
 }
 
-// range /* NO WRAP */
+// range /* NO OO-STYLE WRAPPER VERSION */
 
 @end

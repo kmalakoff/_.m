@@ -29,6 +29,7 @@
 
 #import "NSObject+SS.h"
 #import "SS+Types.h"
+#import "SS+Arguments.h"
 #import "NSString+SS.h"
 #import "NSArray+SS.h"
 
@@ -60,6 +61,37 @@ const NSS* SSTypeObject = @"object";
   return nil;
 }
 
+- (id(^)(SEL method, id arg1, ...))call {
+  return ^(SEL method, id arg1, ...) {
+    AO_ARGS(arguments, arg1);
+    return self.apply(method, arguments);
+  };
+}
+
+- (id(^)(SEL method, NSA* arguments))apply {
+  return ^(SEL method, NSA* arguments) {
+    NSMethodSignature *methodSig = [[self class] instanceMethodSignatureForSelector:method];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
+    [invocation setSelector:method];
+    [invocation setTarget:self];
+
+    // set up the arguments
+    I count = arguments.count;
+    for (I index=0; index<count; index++) {
+      [invocation setArgument:(__bridge void*)[arguments objectAtIndex:index] atIndex:index];
+    }
+    
+    // call
+    [invocation invoke];
+    
+    // get return value
+    id returnValue;
+    [invocation getReturnValue:&returnValue];
+    return returnValue;
+  };
+}
+
+// helper
 - (NSComparisonResult)compare:(NSO*)other
 {
   if (SS.isString(self)) return [(NSS*)self compare:(NSS*)other];

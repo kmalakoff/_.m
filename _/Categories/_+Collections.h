@@ -33,9 +33,9 @@
 
 + (void(^)(id obj, _ValueKeyBlock iterator))each;
 + (void(^)(id obj, _ValueKeyBlock iterator))forEach;
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))eachWithStop; /* returns YES if processed all elements without a request to stop */
++ (B(^)(id obj, _ValueKeyTestBlock iterator))eachWithStop; /* SPECIALIZED: returns YES if processed all elements without a request to stop */
 
-+ (A*(^)(id obj, _MapBlock iterator))map;
++ (A*(^)(NSO* obj, _MapBlock iterator))map;
 + (A*(^)(id obj, _MapBlock iterator))collect;
 
 + (id (^)(id obj, _ReduceBlock iterator, id memo))reduce;
@@ -45,7 +45,8 @@
 + (id (^)(id obj, _ReduceBlock iterator, id memo))reduceRight;
 + (id (^)(id obj, _ReduceBlock iterator, id memo))foldr;
 
-//find
++ (id (^)(id obj, _TestBlock iterator))find;
++ (id (^)(id obj, _TestBlock iterator))detect;
 
 + (A*(^)(id obj, _ValueKeyTestBlock iterator))filter;
 + (A*(^)(id obj, _ValueKeyTestBlock iterator))select;
@@ -61,20 +62,23 @@
 + (B(^)(id obj, id target))include;
 + (B(^)(id obj, id target))contains;
 
-//invoke
++ (NSO*(^)(id obj, SEL method, id arg1, ...))invoke;
 
 + (NSO*(^)(id obj, NSString *keyPath))pluck;
 
 + (N*(^)(NSO* obj, _MaxBlock iterator))max;
++ (N*(^)(NSO* obj, _MaxBlock iterator))min;
 
-//min
-//sortBy
-//groupBy
++ (id(^)(id obj, _SortByBlock))sortBy;
++ (O*(^)(id obj, _MapBlock iterator))groupBy; 
++ (O*(^)(id obj, id key))groupByKey; /* SPECIALIZED */
 
 + (I(^)(NSA* array, id obj, _SortByBlock iterator))sortedIndex;
 
-//shuffle
-//toArray
-//size
++ (A*(^)(id obj))shuffle;
+
++ (NSA*(^)(id obj))toArray;
+
++ (UI(^)(id obj))size;
 
 @end

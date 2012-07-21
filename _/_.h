@@ -29,6 +29,16 @@
 
 #import "_Types.h"
 
+// forward declaration
+@class _Wrapper;
+
 @interface _ : NSObject
 
++ (_Wrapper*(^)(NSO* obj))chain;
+
+// value - see _Wrapper.h
+
 @end
+
+// OO-style representation
+_Wrapper* __(NSO* obj); /* SPECIALIZED - CANNOT DEFINE '_' AS BOTH FUNCTION AND CLASS. FUNCTION IS '__', CLASS IS '_' */

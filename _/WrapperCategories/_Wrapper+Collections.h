@@ -32,7 +32,9 @@
 @interface _Wrapper (Collections)
 
 //each
-//map
+
+- (_Wrapper*(^)(_MapBlock iterator))map;
+
 //reduce
 //reduceRight
 //find
@@ -42,12 +44,18 @@
 //any
 //include
 //invoke
-//pluck
+
+- (_Wrapper*(^)(NSString *keyPath))pluck;
+
 //max
 //min
+
+- (_Wrapper*(^)(_CompareBlock iterator))sort; /* ADDED to allow sorting in chaining */
+
 //sortBy
 //groupBy
 //sortedIndex
+
 //shuffle
 //toArray
 //size

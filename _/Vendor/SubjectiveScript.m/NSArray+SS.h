@@ -38,6 +38,8 @@
 
 - (S*(^)(NSS* separator))join;
 - (NSA*(^)(UI start, UI count))slice;
+- (A*(^)())reverse;
 - (A*(^)())flatten;
+- (NSA*(^)(SSCompareBlock block))sort;
 
 @end

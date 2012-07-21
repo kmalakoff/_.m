@@ -31,8 +31,9 @@
 
 @interface _ (Objects)
 
-//keys
-//values
++ (NSA*(^)(NSD* obj))keys;
++ (NSA*(^)(NSD* obj))values;
+
 //functions
 //extend
 //pick
@@ -51,7 +52,8 @@
 
 + (B(^)(id obj))isObject;
 
-//isArguments
+//isArguments /* REMOVED: JavaScript-only */
+
 //isFunction
 
 + (B(^)(id obj))isString;

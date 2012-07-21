@@ -28,11 +28,22 @@
 //
 
 #import "_Wrapper+Collections.h"
+#import "_Wrapper+Private.h"
+#import "_+Collections.h"
+#import "_+Objects.h"
+#import "SubjectiveScript.h"
 
 @implementation _Wrapper (Collections)
 
 //each
-//map
+
+- (_Wrapper*(^)(_MapBlock iterator))map
+{
+  return ^(_MapBlock iterator) {
+    return _.chain(_.map(self._wrapped, iterator));
+  };
+}
+
 //reduce
 //reduceRight
 //find
@@ -42,9 +53,23 @@
 //any
 //include
 //invoke
-//pluck
+
+- (_Wrapper*(^)(NSString *keyPath))pluck {
+  return ^(NSString *keyPath) {
+    return _.chain(_.pluck(self._wrapped, keyPath));
+  };
+}
+
 //max
 //min
+
+- (_Wrapper*(^)(_CompareBlock iterator))sort { /* ADDED to allow sorting in chaining */
+  return ^(_CompareBlock iterator) {
+    NSAssert(_.isArray(self._wrapped), @"sort expecting NSArray");
+    return _.chain(((NSA*)self._wrapped).sort(iterator));
+  };
+}
+
 //sortBy
 //groupBy
 //sortedIndex
