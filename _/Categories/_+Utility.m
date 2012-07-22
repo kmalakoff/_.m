@@ -42,14 +42,14 @@
   };
 }
 
-+ (_CompareBlock)identityCompare
++ (_ValueValueCompareBlock)identityCompare
 {
   return ^NSComparisonResult((NSO* left, NSO* right)) {
     return [left compare:right];
   };
 }
 
-+ (_SortByBlock)identitySortBy
++ (_ValueMapBlock)identitySortBy
 {
   return ^(id value) {
     return value;

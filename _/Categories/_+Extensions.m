@@ -27,7 +27,7 @@
 }
 
 // object
-+ (_TestBlock(^)(NSString* key, id match))propTester;
++ (_ValueTestBlock(^)(NSString* key, id match))propTester;
 {
   return ^(NSString* key, id match) {
     return ^BOOL(id object) 
@@ -38,7 +38,7 @@
   };
 }
 
-+ (_TestBlock(^)(NSString* key, NSString *match))propStringTester;
++ (_ValueTestBlock(^)(NSString* key, NSString *match))propStringTester;
 {
   return ^(NSString* key, NSString *match) {
     return ^BOOL(id object) 

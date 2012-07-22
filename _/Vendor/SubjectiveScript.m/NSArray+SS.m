@@ -96,13 +96,14 @@
 }
 
 
+- (NSS*)mutableClassName { return NSStringFromClass([S class]); }
 - (NSS*(^)())toString { return ^() { return S.newFormatted(@"[%@]", self.join(@",")); }; }
 - (UI)length { return self.count; }
 
 - (NSO*(^)(I index))getAt
 {
-  return ^(I index) {
-    return (index<self.length) ? [self objectAtIndex:index] : NSNull.null;
+  return ^NSO*(I index) {
+    return (index>=self.count) ? NSNull.null : [self objectAtIndex:index];
   };
 }
 
@@ -174,10 +175,11 @@
 - (NSA*(^)(SSCompareBlock block))sort
 {
   return ^(SSCompareBlock block) {
-    if (SS.isNull(block)) block = ^NSComparisonResult((NSO* left, NSO* right)) {
-      return [left compare:right];
-    };
-    return [self sortedArrayUsingComparator:block];
+    if (SS.isBlock(block))
+      return [self sortedArrayUsingComparator:block];
+    A* sortedCopy = self.mutableCopy;
+    [sortedCopy sortUsingSelector:@selector(compare:)];
+    return sortedCopy;
   };
 }
 

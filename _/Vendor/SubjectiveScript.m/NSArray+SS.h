@@ -37,6 +37,7 @@
 + (A*(^)(const F* values, I count))newF;
 + (A*(^)(const id* values))newO; // TODO: nil termination
 
+- (NSS*)mutableClassName;
 - (NSS*(^)())toString;
 
 - (UI)length;

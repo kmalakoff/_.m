@@ -32,15 +32,13 @@
 // blocks
 typedef void                (^_DoBlock)();
 
-typedef B                   (^_TestBlock)(id obj);
-typedef N*                  (^_MaxBlock)(N* number);
+typedef B                   (^_ValueTestBlock)(id value);
+typedef NSO*                (^_ValueMapBlock)(id value);
 
-typedef NSO*                (^_ReduceBlock)(id memo, id obj, id key);
-
-typedef void                (^_ValueKeyBlock)(id value, id key);
+typedef void                (^_ValueKeyDoBlock)(id value, id key);
 typedef B                   (^_ValueKeyTestBlock)(id value, id key);
+typedef NSO*                (^_ValueKeyMapBlock)(id value, id key);  // TODO: try ... for optional container
 
-typedef NSO*                (^_MapBlock)(id value, id key);  // TODO: try ... for optional container
+typedef NSO*                (^_MemoValueKeyMapBlock)(id memo, id value, id key);
 
-typedef NSO*                (^_SortByBlock)(id value);
-typedef NSComparisonResult  (^_CompareBlock)(id left, id right);
+typedef NSComparisonResult  (^_ValueValueCompareBlock)(id left, id right);

@@ -55,8 +55,8 @@
 - (A*(^)(NSA* array1, ...))difference; // TODO: nil terminated
 
 - (A*(^)())uniq;
-- (A*(^)(B isSorted, _MapBlock iterator))uniq3; /* SPECIALIZED */
-- (A*(^)(B isSorted, _MapBlock iterator))unique;
+- (A*(^)(B isSorted, _ValueKeyMapBlock iterator))uniq3; /* SPECIALIZED */
+- (A*(^)(B isSorted, _ValueKeyMapBlock iterator))unique;
 
 - (A*(^)(NSA* array1, ...))zip; // TODO: nil terminated
 

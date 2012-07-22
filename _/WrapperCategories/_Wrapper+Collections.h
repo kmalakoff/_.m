@@ -33,16 +33,24 @@
 
 //each
 
-- (_Wrapper*(^)(_MapBlock iterator))map;
+- (_Wrapper*(^)(_ValueKeyMapBlock iterator))map;
 
-//reduce
-//reduceRight
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))reduce;
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldl; // ALIAS
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))inject; // ALIAS
+
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))reduceRight;
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldr; // ALIAS
+
 //find
 //filter
 //reject
 //all
 //any
-//include
+
+- (_Wrapper*(^)(id target))include;
+- (_Wrapper*(^)(id target))contains; // ALIAS
+
 //invoke
 
 - (_Wrapper*(^)(NSString *keyPath))pluck;
@@ -50,7 +58,7 @@
 //max
 //min
 
-- (_Wrapper*(^)(_CompareBlock iterator))sort; /* ADDED to allow sorting in chaining */
+- (_Wrapper*(^)(_ValueValueCompareBlock iterator))sort; /* ADDED to allow sorting in chaining */
 
 //sortBy
 //groupBy

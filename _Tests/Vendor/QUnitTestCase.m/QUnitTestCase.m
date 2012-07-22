@@ -184,4 +184,31 @@
   };
 }
 
+- (void(^)(QURaiseBlock block, NSString *expected, NSString *message, ...))raises
+{
+  return ^(QURaiseBlock block, NSString *expected, NSString *message, ...){
+    va_list args;
+    va_start(args, message);
+    NSString *description = [[NSString alloc] initWithFormat:message arguments:args];
+    va_end(args);
+
+    @try {
+      block();
+    }
+    @catch (NSException* anException) {
+      if (expected && ![expected isEqual:anException.name])
+       [self failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"Unexpected exception type '%@'. Was expecting '%@'", anException.name, expected] 
+                                                              inFile:@"" 
+                                                              atLine:0 
+                                                     withDescription:description])]; 
+      return;
+    }
+
+   [self failWithException:([NSException failureInRaise:@"" 
+                                                          inFile:@"" 
+                                                          atLine:0 
+                                                 withDescription:description])]; 
+  };
+}
+
 @end

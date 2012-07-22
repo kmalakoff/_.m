@@ -129,20 +129,20 @@
     return _.uniq(_array);
   };
 }
-- (A*(^)(B isSorted, _MapBlock iterator))uniq3
+- (A*(^)(B isSorted, _ValueKeyMapBlock iterator))uniq3
 {
-  return ^(B isSorted, _MapBlock iterator) {
+  return ^(B isSorted, _ValueKeyMapBlock iterator) {
     return _.uniq3(_array, isSorted, iterator);
   };
 }
-- (A*(^)(B isSorted, _MapBlock iterator))unique { return self.uniq3; } // ALIAS
+- (A*(^)(B isSorted, _ValueKeyMapBlock iterator))unique { return self.uniq3; } // ALIAS
 
 - (A*(^)(NSA* array1, ...))zip
 {
   return ^(NSA* array1, ...) {
     AO_ARGS(arguments, array1);
 
-    N* lengthNumber = _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);
+    N* lengthNumber = (N*) _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);
     I length = lengthNumber.I;
     A* results = A.newC(length);
     for (I i = 0; i < length; i++) {

@@ -37,21 +37,44 @@
 
 //each
 
-- (_Wrapper*(^)(_MapBlock iterator))map
+- (_Wrapper*(^)(_ValueKeyMapBlock iterator))map
 {
-  return ^(_MapBlock iterator) {
+  return ^(_ValueKeyMapBlock iterator) {
     return _.chain(_.map(self._wrapped, iterator));
   };
 }
 
-//reduce
-//reduceRight
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))reduce
+{
+  return ^(_MemoValueKeyMapBlock iterator, id memo) {
+    return _.chain(_.reduce(self._wrapped, iterator, memo));
+  };
+}
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))inject { return self.reduce; } // ALIAS
+
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))reduceRight
+{
+  return ^(_MemoValueKeyMapBlock iterator, id memo) {
+    return _.chain(_.reduceRight(self._wrapped, iterator, memo));
+  };
+}
+- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
+
 //find
 //filter
 //reject
 //all
 //any
-//include
+
+- (_Wrapper*(^)(id target))include
+{
+  return ^(id target) {
+    return _.chain(N.B(_.include(self._wrapped, target)));
+  };
+}
+- (_Wrapper*(^)(id target))contains { return self.include; } // ALIAS
+
 //invoke
 
 - (_Wrapper*(^)(NSString *keyPath))pluck {
@@ -63,8 +86,8 @@
 //max
 //min
 
-- (_Wrapper*(^)(_CompareBlock iterator))sort { /* ADDED to allow sorting in chaining */
-  return ^(_CompareBlock iterator) {
+- (_Wrapper*(^)(_ValueValueCompareBlock iterator))sort { /* ADDED to allow sorting in chaining */
+  return ^(_ValueValueCompareBlock iterator) {
     NSAssert(_.isArray(self._wrapped), @"sort expecting NSArray");
     return _.chain(((NSA*)self._wrapped).sort(iterator));
   };

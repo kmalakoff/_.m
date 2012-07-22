@@ -50,6 +50,7 @@ typedef id              KV[2];
 #define NSS             NSString
 #define D               NSDate
 #define N               NSNumber
+#define E               NSException
 
 // blocks
 typedef NSComparisonResult  (^SSCompareBlock)(id left, id right);

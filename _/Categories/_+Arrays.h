@@ -32,8 +32,8 @@
 @interface _ (Arrays)
 
 + (NSO*(^)(NSA* array, I n))first;
-+ (NSO*(^)(NSA* array, I n))head;
-+ (NSO*(^)(NSA* array, I n))take;
++ (NSO*(^)(NSA* array, I n))head; // ALIAS
++ (NSO*(^)(NSA* array, I n))take; // ALIAS
 + (NSO*(^)(id array, id key))firstIterator; /* SPECIALIZED */
 
 + (NSA*(^)(NSA* array, I n))initial;
@@ -43,7 +43,7 @@
 + (NSO*(^)(id array, id key))lastIterator; /* SPECIALIZED */
 
 + (NSA*(^)(NSA* array, I index))rest;
-+ (NSA*(^)(NSA* array, I index))tail;
++ (NSA*(^)(NSA* array, I index))tail; // ALIAS
 + (NSA*(^)(id array, id key))restIterator; /* SPECIALIZED */
 
 + (A*(^)(NSA* array))compact;
@@ -59,8 +59,8 @@
 + (A*(^)(NSA* array, NSA* array1, ...))difference; // TODO: nil terminated
 
 + (A*(^)(NSA* array))uniq;
-+ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniq3; /* SPECIALIZED */
-+ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))unique;
++ (A*(^)(NSA* array, B isSorted, _ValueKeyMapBlock iterator))uniq3; /* SPECIALIZED */
++ (A*(^)(NSA* array, B isSorted, _ValueKeyMapBlock iterator))unique; // ALIAS
 
 + (A*(^)(NSA* array, ...))zip; // TODO: nil terminated
 

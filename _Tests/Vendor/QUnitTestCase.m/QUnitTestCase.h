@@ -30,6 +30,8 @@
 #import <Foundation/Foundation.h>
 #import <SenTestingKit/SenTestingKit.h>
 
+typedef void                (^QURaiseBlock)();
+
 @interface QUnitTestCase : SenTestCase
 
 - (void(^)(id actual, id expected, NSString *message, ...))equal;
@@ -39,5 +41,6 @@
 - (void(^)(id actual, id expected, NSString *message, ...))strictEqual;
 - (void(^)(id actual, id expected, NSString *message, ...))notStrictEqual;
 - (void(^)(BOOL result, NSString *message, ...))ok;
+- (void(^)(QURaiseBlock block, NSString *expected, NSString *message, ...))raises;
 
 @end

@@ -35,14 +35,6 @@
 #import "NSArray+SS.h"
 #import "NSNumber+SS.h"
 
-typedef id(^SSBlock0)();
-typedef id(^SSBlock1)(id arg1);
-typedef id(^SSBlock2)(id arg1, id arg2);
-typedef id(^SSBlock3)(id arg1, id arg2, id arg3);
-typedef id(^SSBlock4)(id arg1, id arg2, id arg3, id arg4);
-typedef id(^SSBlock5)(id arg1, id arg2, id arg3, id arg4, id arg5);
-typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6);
-
 const NSS* SSTypeObject = @"object";
 
 @implementation NSObject (SS)
@@ -86,6 +78,12 @@ const NSS* SSTypeObject = @"object";
 }
 
 - (NSS*)className { return NSStringFromClass([self class]); }
+- (NSS*)mutableClassName { return nil; }
+- (B(^)(NSS* className))instanceof {
+  return ^(NSS* className) {
+    return [self isKindOfClass:NSClassFromString(className)];
+  };
+}
 
 // use dynamic type checking for some JavaScript operations to reduce manual casting
 - (UI)length
@@ -101,68 +99,6 @@ const NSS* SSTypeObject = @"object";
   return nil;
 }
 
-- (id(^)(SEL method, id arg1, ...))call {
-  return ^(SEL method, id arg1, ...) {
-    AO_ARGS(arguments, arg1);
-    return self.apply(method, arguments);
-  };
-}
-
-- (id(^)(SEL method, NSA* arguments))apply {
-  return ^(SEL method, NSA* arguments) {
-    id returnValue;
-
-    NSMethodSignature *methodSig = [[self class] instanceMethodSignatureForSelector:method];
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-    [invocation setSelector:method];
-    [invocation setTarget:self];
-
-    // assume it could be a block style method
-    if (methodSig.numberOfArguments == 2) {
-
-      // call and get the return value
-      [invocation invoke];
-      [invocation getReturnValue:&returnValue];
-
-      // if it is a function-style call, it will return a block so call the block
-      if (SS.isBlock(returnValue))
-      {
-        // TODO: figure out a safe way to call blocks by signature
-        if (arguments.length==0)
-          return ((SSBlock0)returnValue)();
-        if (arguments.length==1)
-          return ((SSBlock1)returnValue)(arguments.getAt(0));
-        if (arguments.length==2)
-          return ((SSBlock2)returnValue)(arguments.getAt(0), arguments.getAt(1));
-        if (arguments.length==3)
-          return ((SSBlock3)returnValue)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2));
-        if (arguments.length==4)
-          return ((SSBlock4)returnValue)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3));
-        if (arguments.length==5)
-          return ((SSBlock5)returnValue)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3), arguments.getAt(4));
-        if (arguments.length==6)
-          return ((SSBlock6)returnValue)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3), arguments.getAt(4), arguments.getAt(5));
-        NSAssert(nil, @"number of parameters not yet supported for apply");
-      }
-    }
-    
-    // call directly
-    else {
-      // set up the arguments
-      I count = arguments.count;
-      for (I index=0; index<count; index++) {
-        [invocation setArgument:(__bridge void*)[arguments objectAtIndex:index] atIndex:index];
-      }
-
-      // call and get the return value
-      [invocation invoke];
-      [invocation getReturnValue:&returnValue];
-    }
-    
-    return returnValue;
-  };
-}
-
 - (B(^)(NSO* obj))in
 {
   return ^B(NSO* obj) {
@@ -175,6 +111,7 @@ const NSS* SSTypeObject = @"object";
 {
   if (SS.isString(self)) return [(NSS*)self compare:(NSS*)other];
   if (SS.isNumber(self)) return [(N*)self compare:(N*)other];
+  if (SS.isDate(self)) return [(D*)self compare:(D*)other];
   NSAssert(nil, @"cannot compare the provided objects");
   return NSOrderedSame;
 }

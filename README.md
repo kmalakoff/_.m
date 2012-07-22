@@ -74,7 +74,7 @@ _.difference = function(array)
 
 uniq
 _.uniq = _.unique = function(array, isSorted, iterator)
-+ (id(^)(A* array, array, B isSorted, _MapBlock iterator))uniq;
++ (id(^)(A* array, array, B isSorted, _ValueKeyMapBlock iterator))uniq;
 
 zip
 _.zip = function(...)
@@ -108,12 +108,12 @@ Collections
 
 each
   var each = _.each = _.forEach = function(obj, iterator, context)
-+ (void(^)(id obj, _ValueKeyBlock iterator))each;
++ (void(^)(id obj, _ValueKeyDoBlock iterator))each;
 CHANGE: no collection (was used for guard, but removed due to variable arguments not possible). Context is a JS language feature
 
 map
 _.map = _.collect = function(obj, iterator, context)
-+ (id(^)(id obj, _MapBlock iterator))map;
++ (id(^)(id obj, _ValueKeyMapBlock iterator))map;
 CHANGE: no collection (was used for guard, but removed due to variable arguments not possible). Context is a JS language feature
 
 reduce

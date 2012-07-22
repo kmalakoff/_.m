@@ -36,12 +36,12 @@
 - (NSO*(^)(id key))get;
 - (NSO*(^)(I index))getAt;
 - (NSS*)className;
+- (NSS*)mutableClassName;
+- (B(^)(NSS* className))instanceof;
 
 // use dynamic type checking for some JavaScript operations to reduce manual casting
 - (UI)length;
 - (S*(^)(NSS* separator))join;
-- (id(^)(SEL method, id arg1, ...))call;
-- (id(^)(SEL method, NSA* arguments))apply;
 - (B(^)(NSO* obj))in;
 
 // helper

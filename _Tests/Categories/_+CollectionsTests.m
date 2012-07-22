@@ -18,6 +18,7 @@
     self.equalI(num.I, indexNumber.I + 1, @"each iterators provide value and iteration count");
   });
 
+  /* NOT SUPPORTED: JavaScript-only because of 'this' context */
 //  __block A* answers = A.new;
 //  _.each(AI(1, 2, 3), ^(N* num, id key, O* this){ answers.push(N.I(num.I * ((N*)this.get(@"multiplier")).I));}, OKV({@"multiplier", N.I(5)}));
 //  self.equal(answers.join(@", "), @"5, 10, 15", @"context object property accessed");
@@ -26,14 +27,15 @@
   _.forEach(AI(1, 2, 3), ^(N* num, id key){ answers.push(num); });
   self.equal(answers.join(@", "), @"1, 2, 3", @"aliased as 'forEach'");
 
+  /* NOT SUPPORTED: JavaScript-only because of prototype */
   answers =  A.new;
   O* obj = OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)});
-//  obj.constructor.prototype.four = 4; /* NOT SUPPORTED: JavaScript-only */
+//  obj.constructor.prototype.four = 4; 
   _.each(obj, ^(id value, id key){ answers.push(key); });
   self.equal(answers.join(@", "), @"one, two, three", @"iterating over objects works, and ignores the object prototype.");
 //  delete obj.constructor.prototype.four;
 
-  // TODO: add an optional parameter
+  /* NOT SUPPORTED: JavaScript-only because of optional parameters */
 //  __block BOOL answer = false;
 //  _.each(AI(1, 2, 3), ^(N* num, id key, A* arr){ if (_.include(arr, num)) answer = true; });
 //  self.ok(answer, @"can reference the original collection from inside the iterator");
@@ -51,16 +53,18 @@
   doubled = _.collect(AI(1, 2, 3), ^(N* num, id key){ return N.I(num.I * 2); });
   self.equal(doubled.join(@", "), @"2, 4, 6", @"aliased as 'collect'");
 
+  /* NOT SUPPORTED: JavaScript-only because of 'this' context */
 //  __block A* tripled = _.mapWithContext(AI(1, 2, 3), ^(N* num, id key, O* this){ return N.I(num.I * ((N*)this.get(@"multiplier")).I); }, OKV({@"multiplier", N.I(3)})); // CHANGE
 //  self.equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
 
-  // TODO: chain
-//  doubled = _(AI(1, 2, 3)).map(^(N* num){ return N.I(num.I * 2); });
-//  self.equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
+  doubled = (A*) /* SPECIALIZED */ __(AI(1, 2, 3)).map(^(N* num, /* MANDATORY */ id key){ return N.I(num.I * 2); }).value();
+  self.equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
 
+  /* NOT SUPPORTED: JavaScript-only because of DOM */
 //  NSA* ids = _.map($(@"#map-test").children(), ^(n){ return n.id; });
 //  deepEqual(ids, AI(@"id1", @"id2"), @"Can use collection methods on NodeLists.");
 
+  /* NOT SUPPORTED: JavaScript-only because of DOM */
 //  NSA* ids = _.map(document.images, ^(n){ return n.id; });
 //  self.ok(idsAI(0) == "chart_image", @"can use collection methods on HTMLCollections");
 
@@ -73,6 +77,7 @@
   N* sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, /* MANDATORY */ id key){ return N.I(sum.I + num.I); }, 0);
   self.equalI(sum.I, 6, @"can sum up an array");
 
+  /* NOT SUPPORTED: JavaScript-only because of 'this' context */
 //  NSD* context = {multiplier : 3};
 //  N* sum = _.reduce(AI(1, 2, 3), ^(sum, num){ return sum + num * this.multiplier; }, 0, context);
 //  self.equal(sum, 18, @"can reduce with a context object");
@@ -80,23 +85,25 @@
   sum = _.inject(AI(1, 2, 3), ^(N* sum, N* num, /* MANDATORY */ id key){ return N.I(sum.I + num.I); }, 0);
   self.equalI(sum.I, 6, @"aliased as 'inject'");
 
-//  sum = /* SPECIALIZED */ __(AI(1, 2, 3)).reduce(^(N* sum, N* num, id key){ return N.I(sum.I + num.I); }, 0);
-//  self.equalI(sum.I, 6, @"OO-style reduce");
+  sum = (N*) /* SPECIALIZED */ __(AI(1, 2, 3)).reduce(^(N* sum, N* num, id key){ return N.I(sum.I + num.I); }, 0).value();
+  self.equalI(sum.I, 6, @"OO-style reduce");
 
-//  sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, id key){ return N.I(sum.I + num.I); }, /* MANDATORY */ 0);
-//  self.equalI(sum.I, 6, @"default initial value");
+  sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, id key){ return N.I(sum.I + num.I); }, /* MANDATORY */ 0);
+  self.equalI(sum.I, 6, @"default initial value");
 
-//  var ifnull;
-//  try {
-//    _.reduce(null, ^(){});
-//  } catch (ex) {
-//    ifnull = ex;
-//  }
-//  self.ok(ifnil instanceof TypeError, @"handles a null (without inital value) properly");
+  E* ifnull;
+  @try {
+    _.reduce(nil, ^(/* MANDATORY */ N* memo, N* num, id key){ return memo; }, 0);
+  } @catch (E* ex) {
+    ifnull = ex;
+  }
+  self.ok(ifnull.instanceof(@"NSException"), @"handles a null (without inital value) properly");
 
   self.equal(_.reduce(nil, ^(/* MANDATORY */ N* sum, N* num, id key){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
+
+  /* NOT SUPPORTED: JavaScript-only because of 'undefined' */
 //  self.equal(_.reduce(A.new, ^(){}, undefined), undefined, @"undefined can be passed as a special case");
-//  raises(^() { _.reduce(A.new, ^(){}); }, TypeError, @"throws an error for empty arrays with no initial value");
+  self.raises(^() { _.reduce(A.new, ^(/* MANDATORY */ N* memo, N* num, id key){ return memo; }, /* MANDATORY */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
 }
 
 - (void)test_reduceRight
@@ -107,21 +114,22 @@
   list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, /* MANDATORY */ id key){ return memo.append(str); }, S.new);
   self.equal(list, @"bazbarfoo", @"aliased as 'foldr'");
 
-//  list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, /* MANDATORY */ id key){ return memo.append(str); }, /* MANDATORY */ nil);
-//  self.equal(list, @"bazbarfoo", @"default initial value");
+  list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, /* MANDATORY */ id key){ return memo.append(str); }, /* MANDATORY */ nil);
+  self.equal(list, @"bazbarfoo", @"default initial value");
 
-//  var ifnull;
-//  try {
-//    _.reduceRight(nil, ^(){});
-//  } catch (ex) {
-//    ifnull = ex;
-//  }
-//  self.ok(ifnull instanceof TypeError, @"handles a null (without inital value) properly");
+  E* ifnull;
+  @try {
+    _.reduceRight(nil, ^(/* MANDATORY */ N* memo, N* num, id key){ return memo; }, 0);
+  } @catch (E* ex) {
+    ifnull = ex;
+  }
+  self.ok(ifnull.instanceof(@"NSException"), @"handles a null (without inital value) properly");
 
-//  self.ok(_.reduceRight(nil, ^(){}, 138) === 138, @"handles a null (with initial value) properly");
-//
+  self.equal(_.reduceRight(nil, ^(/* MANDATORY */ N* sum, N* num, id key){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
+
+  /* NOT SUPPORTED: JavaScript-only because of 'undefined' */
 //  self.equal(_.reduceRight(A.new, ^(){}, undefined), undefined, @"undefined can be passed as a special case");
-//  raises(^() { _.reduceRight(A.new, ^(){}); }, TypeError, @"throws an error for empty arrays with no initial value");
+  self.raises(^() { _.reduceRight(A.new, ^(/* MANDATORY */ N* memo, N* num, id key){ return memo; }, /* MANDATORY */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
 }
 
 - (void)test_find
@@ -145,6 +153,7 @@
   evens = _.filter(AI(1, 2, 3, 4, 5, 6), ^B(N* num, id key){ return num.I % 2 == 0; });
   self.equal(evens.join(@", "), @"2, 4, 6", @"aliased as 'filter'");
 
+  /* NOT SUPPORTED: JavaScript-only because of 'this' context */
 //  evens = _.filterWithContext(AI(1, 2, 3, 4, 5, 6), ^B(N* num, id key, O* this){ return num.I % ((N*)this.get(@"factor")).I == 0; }, OKV({@"factor", N.I(2)})); // ADDED
 //  self.equal(evens.join(@", "), @"2, 4, 6", @"aliased as 'filter'");
 }
@@ -186,18 +195,18 @@
   self.ok(_.include(AI(1,2,3), N.I(2)), @"two is in the array");
   self.ok(!_.include(AI(1,3,9), N.I(2)), @"two is not in the array");
   self.ok(_.contains(OKV({@"moe",N.I(1)}, {@"larry",N.I(3)}, {@"curly", N.I(9)}), N.I(3)) == true, @"_.include on objects checks their values");
-//  self.ok(__(AI(1,2,3)).include(2), @"OO-style include");
+  self.ok(__(AI(1,2,3)).include(N.I(2)).valueB(), @"OO-style include");
 }
 
 - (void)test_invoke
 {
-//  NSA* list = AO(AI(5, 1, 7), AI(3, 2, 1));
-//  NSA* result = (NSA*) _.invoke(list, NSSelectorFromString(@"sort"), /* MANDATORY */ NSNull.null, /* NIL TERMINATED */ nil);
-//  self.equal(result.getAt(0).join(@", "), @"1, 5, 7", @"first array sorted");
-//  self.equal(result.getAt(1).join(@", "), @"1, 2, 3", @"second array sorted");
+  NSA* list = AO(AI(5, 1, 7), AI(3, 2, 1));
+  NSA* result = (NSA*) _.invoke(list, @"sort", /* MANDATORY */ NSNull.null, /* NIL TERMINATED */ nil);
+  self.equal(result.getAt(0).join(@", "), @"1, 5, 7", @"first array sorted");
+  self.equal(result.getAt(1).join(@", "), @"1, 2, 3", @"second array sorted");
 }
 
-// NOT IMPLEMENTED: JavaScript-only
+/* NOT SUPPORTED: JavaScript-only because of prototype */
 //- (void)test_invokeWithFunctionReference
 //{
 //  NSA* list = AO(AI(5, 1, 7), AI(3, 2, 1));
@@ -206,7 +215,7 @@
 //  self.equal(result[1].join(@", "), @"1, 2, 3", @"second array sorted");
 //}
 
-// NOT IMPLEMENTED: JavaScript-only
+/* NOT SUPPORTED: JavaScript-only because of prototype */
 // Relevant when using ClojureScript
 //- (void)test_invokeWhenStringsHaveACallMethod
 //{
@@ -233,7 +242,7 @@
 {
   self.equal(N.I(3), _.max(AI(1, 2, 3), /* MANDATORY */ nil), @"can perform a regular Math.max");
 
-  N* neg = _.max(AI(1, 2, 3), ^(N* num){ return N.I(-num.I); });
+  N* neg = (N*) _.max(AI(1, 2, 3), ^(N* num){ return N.I(-num.I); });
   self.equal(neg, N.I(1), @"can perform a computation-based max");
 
   self.equal(NF_NEG_INFINITY, _.max(O.new, /* MANDATORY */ nil), @"Maximum value of an empty object");
@@ -246,15 +255,15 @@
 {
   self.equal(N.I(1), _.min(AI(1, 2, 3), /* MANDATORY */ nil), @"can perform a regular Math.min");
 
-  N* neg = _.min(AI(1, 2, 3), ^(N* num){ return N.I(-num.I); });
+  N* neg = (N*) _.min(AI(1, 2, 3), ^(N* num){ return N.I(-num.I); });
   self.equalI(neg.I, 3, @"can perform a computation-based min");
 
   self.equal(NF_POS_INFINITY, _.min(O.new, /* MANDATORY */ nil), @"Minimum value of an empty object");
   self.equal(NF_POS_INFINITY, _.min(A.new, /* MANDATORY */ nil), @"Minimum value of an empty array");
 
-//  D* now = new Date(9999999999);
-//  D* then = new Date(0);
-//  self.equal(_.min(@[now, then]), then);
+  D* now = [D distantFuture];
+  D* then = D.new;
+  self.equal(_.min(AO(now, then), /* MANDATORY */ nil), then, @"the time is now");
 
   self.equal(N.I(1), _.min(_.range(1,300000, /* MANDATORY */ 1), /* MANDATORY */ nil), @"Minimum value of a too-big array");
 }
@@ -265,12 +274,13 @@
   people = _.sortBy(people, ^(O* person){ return person.get(@"age"); });
   self.equal(_.pluck(people, @"name").join(@", "), @"moe, curly", @"stooges sorted by age");
 
+/* NOT SUPPORTED: JavaScript-only because of undefined */
 //  A* list = [undefined, 4, 1, undefined, 3, 2];
 //  self.equal(_.sortBy(list, _.identity).join(@","), @"1,2,3,4,,", @"sortBy with undefined values");
-//
-//  A* list = ["one", @"two", @"three", @"four", @"five"];
-//  var sorted = _.sortBy(list, @"length");
-//  self.equal(sorted.join(@" "), @"one two four five three", @"sorted by length");
+
+  A* list = AO(@"one", @"two", @"three", @"four", @"five");
+  NSA* sorted = _.sortBy(list, @"length");
+  self.equal(sorted.join(@" "), @"one two four five three", @"sorted by length");
 }
 
 - (void)test_groupBy

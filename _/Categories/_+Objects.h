@@ -52,7 +52,7 @@
 
 + (B(^)(id obj))isObject;
 
-//isArguments /* REMOVED: JavaScript-only */
+//isArguments /* NOT SUPPORTED: JavaScript-only */
 
 //isFunction
 

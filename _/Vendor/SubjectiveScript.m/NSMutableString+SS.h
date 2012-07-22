@@ -35,6 +35,7 @@
 + (S*(^)(NSA* array))newA;
 + (S*(^)(NSS* format, ...))newFormatted;
 
+- (NSS*)mutableClassName;
 - (S*(^)(NSS* value))append;
 
 @end

@@ -17,8 +17,8 @@
 + (B(^)(id obj))isFalsy;
 
 // object
-+ (_TestBlock(^)(NSS* key, id match))propTester;
-+ (_TestBlock(^)(NSS* key, NSS* match))propStringTester;
++ (_ValueTestBlock(^)(NSS* key, id match))propTester;
++ (_ValueTestBlock(^)(NSS* key, NSS* match))propStringTester;
 
 // array
 + (void(^)(NSA* array, NSS* key, id value))setProps;

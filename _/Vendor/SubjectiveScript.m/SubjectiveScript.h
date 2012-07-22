@@ -43,6 +43,7 @@
 // categories
 #import "NSObject+SS.h"
 #import "NSArray+SS.h"
+#import "NSArray+SSArguments.h"
 #import "NSMutableArray+SS.h"
 #import "NSDictionary+SS.h"
 #import "NSMutableDictionary+SS.h"

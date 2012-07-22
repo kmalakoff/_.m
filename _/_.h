@@ -40,5 +40,5 @@
 
 @end
 
-// OO-style representation
+// OO-style representation /* CHANGE: IMPLEMENTED WITH _Wrapper SO REQUIRES .value() TO EXTRACT THE RESULT WHEN USED */
 _Wrapper* __(NSO* obj); /* SPECIALIZED - CANNOT DEFINE '_' AS BOTH FUNCTION AND CLASS. FUNCTION IS '__', CLASS IS '_' */

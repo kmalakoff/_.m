@@ -33,6 +33,7 @@
 
 + (O*(^)(const KV* values))newKV; // TODO: NS_REQUIRES_NIL_TERMINATION
 
+- (NSS*)mutableClassName;
 - (NSS*(^)())toString;
 
 - (B(^)())isEmpty;
