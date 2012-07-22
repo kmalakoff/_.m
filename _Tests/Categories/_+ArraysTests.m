@@ -88,8 +88,8 @@
   A* result = (A*) (^(I arg1, ...){ AI_ARGS(arguments, arg1); return _.without(arguments, N.I(0), N.I(1), /* NIL TERMINATED */ nil); })(1, 2, 1, 0, 3, 1, 4, /* AI_END TERMINATED */ AI_END);
   self.equal(result.join(@", "), @"2, 3, 4", @"works on an arguments object");
 
-  list = AO(OAKV({@"one", N.I(1)}), OAKV({@"two", N.I(2)}));
-  self.ok(_.without(list, OAKV({@"one", N.I(1)}, /* NIL TERMINATED */ nil)).length == 2, @"uses real object identity for comparisons.");
+  list = AO(OKV({@"one", N.I(1)}), OKV({@"two", N.I(2)}));
+  self.ok(_.without(list, OKV({@"one", N.I(1)}, /* NIL TERMINATED */ nil)).length == 2, @"uses real object identity for comparisons.");
   self.ok(_.without(list, list.get(0), /* NIL TERMINATED */ nil).length == 1, @"ditto.");
 }
 
@@ -101,11 +101,11 @@
   list = AI(1, 1, 1, 2, 2, 3);
   self.equal(_.uniq3(list, YES, /* MANDATORY */ nil).join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster");
 
-  list = AO(OAKV({@"name", @"moe"}), OAKV({@"name", @"curly"}), OAKV({@"name", @"larry"}), OAKV({@"name", @"curly"}));
-  _MapBlock iterator = ^(O* value, KH kh) { return value.get(@"name"); };
+  list = AO(OKV({@"name", @"moe"}), OKV({@"name", @"curly"}), OKV({@"name", @"larry"}), OKV({@"name", @"curly"}));
+  _MapBlock iterator = ^(O* value, id key) { return value.get(@"name"); };
   self.equal(_.map( /* SPECIALIZED */ _.uniq3(list, NO, iterator), iterator).join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator");
 
-  iterator = ^(N* value, KH kh) { return N.I(value.I + 1); };
+  iterator = ^(N* value, id key) { return N.I(value.I + 1); };
   list = AI(1, 2, 2, 3, 4, 4);
   self.equal(_.uniq3(list, YES, iterator).join(@", "), @"1, 2, 3, 4", @"iterator works with sorted array");
 
@@ -150,7 +150,7 @@
 - (void)test_zipObject
 {
   O* result = _.zipObject(AO(@"moe", @"larry", @"curly"), AI(30, 40, 50));
-  O* shouldBe = OAKV({@"moe", N.I(30)}, {@"larry", N.I(40)}, {@"curly", N.I(50)});
+  O* shouldBe = OKV({@"moe", N.I(30)}, {@"larry", N.I(40)}, {@"curly", N.I(50)});
   self.ok(_.isEqual(result, shouldBe), @"two arrays zipped together into an object");
 }
 

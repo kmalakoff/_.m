@@ -31,6 +31,8 @@
 
 @interface NSDictionary (SS)
 
++ (O*(^)(const KV* values))newKV; // TODO: NS_REQUIRES_NIL_TERMINATION
+
 - (NSS*(^)())toString;
 
 - (B(^)())isEmpty;
@@ -38,3 +40,5 @@
 - (NSO*(^)(NSO* key))get;
 
 @end
+
+#define OKV(...) O.newKV((KV[]){__VA_ARGS__, nil})

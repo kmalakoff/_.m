@@ -9,7 +9,7 @@
 #import "_Wrapper+ObjectsTests.h"
 #import "Underscore.h"
 
-@implementation _WrapperOAKVbjectsTests
+@implementation _WrapperOKVbjectsTests
 
 //keys
 //values

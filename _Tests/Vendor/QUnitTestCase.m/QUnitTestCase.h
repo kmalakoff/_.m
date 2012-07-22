@@ -34,6 +34,10 @@
 
 - (void(^)(id actual, id expected, NSString *message, ...))equal;
 - (void(^)(NSInteger actual, NSInteger expected, NSString *message, ...))equalI;
+- (void(^)(id actual, id expected, NSString *message, ...))notEqual;
+- (void(^)(NSInteger actual, NSInteger expected, NSString *message, ...))notEqualI;
+- (void(^)(id actual, id expected, NSString *message, ...))strictEqual;
+- (void(^)(id actual, id expected, NSString *message, ...))notStrictEqual;
 - (void(^)(BOOL result, NSString *message, ...))ok;
 
 @end

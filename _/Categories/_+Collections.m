@@ -49,13 +49,13 @@
 
       I count = [array count];
       for (I index=0; index<count; index++) {
-        iterator([array objectAtIndex:index], KHFromIndex(index));
+        iterator([array objectAtIndex:index], N.I(index));
       }
     }
     else {
       NSD* dictionary = obj;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        iterator(value, KHRetainKey(key)); KHReleaseKey(key);
+        iterator(value, key);
       }];
     }
   };
@@ -74,7 +74,7 @@
 
       I count = [array count];
       for (I index=0; index<count; index++) {
-        if (!iterator([array objectAtIndex:index], KHFromIndex(index)))
+        if (!iterator([array objectAtIndex:index], N.I(index)))
           return NO;
       }
 
@@ -84,11 +84,10 @@
       __block B processedWithoutStop = YES;
       NSD* dictionary = obj;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        if (!iterator(value, KHRetainKey(key))) {
+        if (!iterator(value, key)) {
           processedWithoutStop = NO;
           *stop = YES;
         }
-        KHReleaseKey(key);
       }];
       
       return processedWithoutStop; /* processed all */
@@ -111,7 +110,7 @@
       A* result = [A arrayWithCapacity:array.length];
       I count = [array count];
       for (I index=0; index<count; index++) {
-        id mapped = iterator([array objectAtIndex:index], KHFromIndex(index));
+        id mapped = iterator([array objectAtIndex:index], N.I(index));
         if (mapped)
           [result addObject:mapped];
       }
@@ -123,7 +122,7 @@
 
       O* result = O.new;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        id mapped = iterator(value, KHRetainKey(key)); KHReleaseKey(key);
+        id mapped = iterator(value, key);
         if (mapped)
           [result setObject:mapped forKey:key];
       }];
@@ -141,12 +140,12 @@
     __block id internalMemo = memo;
     __block BOOL initial = YES;
     if (obj == nil) obj = A.new;
-    _.each(obj, ^(id value, KH kh) {
+    _.each(obj, ^(id value, id key) {
       if (!initial) {
         internalMemo = value;
         initial = true;
       } else {
-        internalMemo = iterator(internalMemo, value, kh);
+        internalMemo = iterator(internalMemo, value, key);
       }
     });
     NSAssert(initial, @"Reduce of empty array with no initial value");
@@ -161,7 +160,7 @@
   return ^(id obj, _ReduceBlock iterator, id memo) {
 
     // do it the memory intensive way for dictionaries
-    if (_.isDictionary(obj)) return _.reduce(_.toArray(obj).reverse(), iterator, memo);
+    if (_.isDictionary(obj)) return _.reduce(_.toArray(obj).reverse().mutableCopy, iterator, memo);
 
     id internalMemo = memo;
     BOOL initial = YES;
@@ -173,7 +172,7 @@
         internalMemo = value;
         initial = true;
       } else {
-        internalMemo = iterator(internalMemo, value, KHFromIndex(index));
+        internalMemo = iterator(internalMemo, value, N.I(index));
       }
     }
     NSAssert(initial, @"Reduce of empty array with no initial value");
@@ -186,7 +185,7 @@
 {
   return ^(id obj, _TestBlock iterator) {
     __block NSO* result;
-    _.any(obj, ^B(id value, KH kh) {
+    _.any(obj, ^B(id value, id key) {
       if (iterator(value)) {
         result = value;
         return true;
@@ -204,8 +203,8 @@
   return ^(id obj, _ValueKeyTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
-    _.each(obj, ^(id value, KH kh) {
-      if (iterator(value, kh)) results.push(value);
+    _.each(obj, ^(id value, id key) {
+      if (iterator(value, key)) results.push(value);
     });
     return results;
   };
@@ -217,8 +216,8 @@
   return ^(id obj, _ValueKeyTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
-    _.each(obj, ^(id value, KH kh) {
-      if (!iterator(value, kh)) results.push(value);
+    _.each(obj, ^(id value, id key) {
+      if (!iterator(value, key)) results.push(value);
     });
     return results;
   };
@@ -239,8 +238,8 @@
     if (!iterator) iterator = _.identityValueKeyTest;
     __block BOOL result = NO;
     if (obj == nil) return result;
-    _.eachWithStop(obj, ^B(id value, KH kh) {
-      if (result || (result = iterator(value, kh))) 
+    _.eachWithStop(obj, ^B(id value, id key) {
+      if (result || (result = iterator(value, key))) 
         return NO;
       return YES;
     });
@@ -254,7 +253,7 @@
   return ^B(id obj, id target) {
     BOOL found = NO;
     if (obj == nil) return found;
-    found = _.any(obj, ^B(id value, KH kh) {
+    found = _.any(obj, ^B(id value, id key) {
       return value == target;
     });
     return found;
@@ -267,7 +266,7 @@
   return ^NSO*(id obj, SEL method, id arg1, ...) {
     AO_ARGS(arguments, arg1);
 
-    return _.map(obj, ^(NSO* value, KH kh) {
+    return _.map(obj, ^(NSO* value, id key) {
       return value.apply(method, arguments);
     });
   };
@@ -278,42 +277,15 @@
   return ^NSO*(id obj, NSString *keyPath) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
 
-    // SPECIAL CASE - length on array returns __NSArrayI
-    if ([keyPath isEqual:@"length"]) {
-      if (_.isArray(obj)) {
-        A* result = A.new;
-        for (NSO* item in (NSA*)obj) {
-          result.push(N.UI(item.length));
-        }
-        return result;
-      }
-      
-      else {
-        return N.UI(((NSO*)obj).length);
-      }
-    }
-
     if (_.isArray(obj)) {
-      // SPECIAL CASE - an index
-      I index;
-      if(SS.parseInt(keyPath, &index)) {
-        A* result = A.new;
-        for (NSA* item in (NSA*)obj) {
-          NSAssert(_.isArray(item), @"array expected");
-          result.push(item.get(index));
-        }
-        return result;
+      A* result = A.new;
+      for (NSO* item in (NSA*)obj) {
+        result.push(item.get(keyPath));
       }
-      else
-        return _.map(obj, ^(NSO* value, KH kh) {
-          return [value valueForKeyPath:keyPath];
-        });
+      return result;
     }
-    
-    else {
-      NSD* dictionary = obj;
-      return [dictionary valueForKey:keyPath];
-    }
+    else
+      return ((NSD*)obj).get(keyPath);
   };
 }
 
@@ -322,31 +294,31 @@
   return ^N*(id obj, _MaxBlock iterator) {
     if (_.isArray(obj)) {
       NSA* array = obj;
-      if (!array.length) return NF_POS_INFINITY;
-      N* min = NF_POS_INFINITY;
+      if (!array.length) return NF_NEG_INFINITY;
+      N* min = NF_NEG_INFINITY;
       if (iterator) {
         N* mappedTest;
         for (N* test in array) {
           mappedTest = iterator(test);
-          if ([min compare: mappedTest] == NSOrderedDescending)
+          if ([min compare: mappedTest] == NSOrderedAscending)
             min = test; 
         }
       }
       else {
         for (N* test in array) {
-          if ([min compare: test] == NSOrderedDescending)
+          if ([min compare: test] == NSOrderedAscending)
             min = test; 
         }
       }
       return min;
     }
     if (!iterator && _.isEmpty(obj))
-      return NF_POS_INFINITY;
+      return NF_NEG_INFINITY;
   
-    __block O* result = OAKV({@"computed", NF_POS_INFINITY});
-    _.each(obj, ^(N* value, KH kh) {
+    __block O* result = OKV({@"computed", NF_NEG_INFINITY});
+    _.each(obj, ^(N* value, id key) {
       N* computed = iterator ? iterator(value) : value;
-      computed <= result.get(@"computed") && (result = OAKV({@"value", value}, {@"computed", computed}));
+      computed <= result.get(@"computed") && (result = OKV({@"value", value}, {@"computed", computed}));
     });
     return (N*) result.get(@"value");
   };
@@ -358,30 +330,30 @@
     if (_.isArray(obj)) {
       NSA* array = obj;
       if (!array.length) return NF_POS_INFINITY;
-      N* max = NF_NEG_INFINITY;
+      N* max = NF_POS_INFINITY;
       if (iterator) {
         N* mappedTest;
         for (N* test in array) {
           mappedTest = iterator(test);
-          if ([max compare: mappedTest] == NSOrderedAscending)
+          if ([max compare: mappedTest] == NSOrderedDescending)
             max = test; 
         }
       }
       else {
         for (N* test in array) {
-          if ([max compare: test] == NSOrderedAscending)
+          if ([max compare: test] == NSOrderedDescending)
             max = test; 
         }
       }
       return max;
     }
     if (!iterator && _.isEmpty(obj))
-      return NF_NEG_INFINITY;
+      return NF_POS_INFINITY;
   
-    __block O* result = OAKV({@"computed", NF_NEG_INFINITY});
-    _.each(obj, ^(N* value, KH kh) {
+    __block O* result = OKV({@"computed", NF_POS_INFINITY});
+    _.each(obj, ^(N* value, id key) {
       N* computed = iterator ? iterator(value) : value;
-      computed >= result.get(@"computed") && (result = OAKV({@"value", value}, {@"computed", computed}));
+      computed >= result.get(@"computed") && (result = OKV({@"value", value}, {@"computed", computed}));
     });
     return (N*) result.get(@"value");
   };
@@ -393,8 +365,8 @@
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
 
     return _.chain(obj)
-      .map(^(NSO* value, KH kh) {
-        return OAKV({@"value", value}, {@"criteria", block(value)});
+      .map(^(NSO* value, id key) {
+        return OKV({@"value", value}, {@"criteria", block(value)});
       })
       .sort(^(NSDictionary *left, NSDictionary *right) {
         id a = [left valueForKey:@"criteria"];
@@ -406,32 +378,26 @@
   };
 }
 
-+ (O*(^)(id obj, _MapBlock iterator))groupBy
++ (O*(^)(id obj, id iteratorOrKey))groupBy
 {
-  return ^(id obj, _MapBlock iterator) {
+  return ^(id obj, id iteratorOrKey) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
 
+    _MapBlock iterator = _.isBlock(iteratorOrKey) ? (_MapBlock) iteratorOrKey : ^(NSO* value, id key){ 
+      return value.get(iteratorOrKey); 
+    };
+    
     __block O* result = O.new;
-    _.each(obj, ^(id value, KH kh) {
-      id key = iterator(value, kh);
+    _.each(obj, ^(id value, id key) {
+      key = iterator(value, key);
       A* values = (A*) result.get(key);
-      if (!value) {
+      if (!values) {
         values = A.new;
         result.set(key, values);
       }
       values.push(value);
     });
     return result;
-  };
-}
-
-+ (O*(^)(id obj, id key))groupByKey
-{
-  return ^(id obj, id key) {
-    NSAssert(_.isDictionary(obj), @"each expecting NSDictionary");
-    return _.groupBy(obj, ^(NSO* value, KH kh){
-      return ((NSD*)value).get(KHKey(kh));
-    });
   };
 }
 
@@ -443,7 +409,7 @@
     I low = 0, high = array.length;
     while (low < high) {
       I mid = (low + high) >> 1;
-      ([iterator(array.get(mid)) compare:value] == NSOrderedAscending) ? (low = mid + 1) : (high = mid);
+      ([iterator(array.getAt(mid)) compare:value] == NSOrderedAscending) ? (low = mid + 1) : (high = mid);
     }
     return low;
   };
@@ -453,8 +419,8 @@
 {
   return ^(id obj) {
     __block A* shuffled = _.isArray(obj) ? ((NSA*)obj).mutableCopy : _.values(obj);
-    _.each(obj, ^(id value, KH kh) {
-      I index = KHIndex(kh);
+    _.each(obj, ^(id value, N* indexNumber) {
+      I index = indexNumber.I;
       I rand = arc4random() % (index + 1);
       [shuffled exchangeObjectAtIndex:rand withObjectAtIndex:index];
     });

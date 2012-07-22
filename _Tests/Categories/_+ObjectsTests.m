@@ -10,7 +10,7 @@
 #import "Underscore.h"
 #import "SubjectiveScript.h"
 
-@implementation _OAKVbjectsTests
+@implementation _OKVbjectsTests
 
 //keys
 //values
@@ -28,7 +28,7 @@
   // TODO: wrapper
 self.ok(!_.isEmpty(AI(1)), @"[1] is not empty"); //  self.ok(!__(AI(1)).isEmpty(), @"[1] is not empty");
   self.ok(_.isEmpty(A.new), @"[] is empty");
-  self.ok(!_.isEmpty(OAKV({@"one", N.I(1)})), @"{one : 1} is not empty");
+  self.ok(!_.isEmpty(OKV({@"one", N.I(1)})), @"{one : 1} is not empty");
   self.ok(_.isEmpty(O.new), @"{} is empty");
 //  self.ok(_.isEmpty(new RegExp('")), @"objects with prototype properties are empty");
   self.ok(_.isEmpty(nil), @"null is empty");
@@ -36,7 +36,7 @@ self.ok(!_.isEmpty(AI(1)), @"[1] is not empty"); //  self.ok(!__(AI(1)).isEmpty(
   self.ok(_.isEmpty(@""), @"the empty string is empty");
   self.ok(!_.isEmpty(@"moe"), @"but other strings are not");
 
-  O* obj = OAKV({@"one", N.I(1)});
+  O* obj = OKV({@"one", N.I(1)});
   obj.delete_(@"one");
   self.ok(_.isEmpty(obj), @"deleting all the keys from an object empties it");
 }

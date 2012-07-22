@@ -53,7 +53,7 @@
 + (void(^)(NSA* array, NSString* key, id value))setProps;
 {
   return ^(NSA* array, NSString* key, id value) {
-    _.each(array, ^(NSObject *obj, KH khj){ 
+    _.each(array, ^(NSObject *obj, id keyj){ 
       [obj setValue:value forKey:key];
     });
   };

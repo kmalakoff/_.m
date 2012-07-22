@@ -31,21 +31,10 @@
 
 @implementation NSMutableDictionary (Object)
 
-+ (O*(^)(UI capacity))newWithCapacity
++ (O*(^)(UI capacity))newC
 {
   return ^(UI capacity) {
     return [O dictionaryWithCapacity:capacity];
-  };
-}
-
-+ (O*(^)(const KV* values))newAKV
-{
-  return ^(const KV* values) {
-    O* result = O.new;
-    for (const id* value = (const id*) values; *value != nil; value+=2) {
-      [result setValue:value[1] forKey:value[0]];
-    }
-    return result;
   };
 }
 
@@ -57,7 +46,7 @@
   };
 }
 
-- (O*(^)(const KV* values))setAKV
+- (O*(^)(const KV* values))setKV
 {
   return ^(const KV* values) {
     for (const id* value = (const id*) values; *value != nil; value+=2) {

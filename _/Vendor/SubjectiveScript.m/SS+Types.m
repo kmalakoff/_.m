@@ -36,6 +36,7 @@
 + (B(^)(id obj))isString  { return ^(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
 + (B(^)(id obj))isNumber  { return ^(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
 + (B(^)(id obj))isDate    { return ^(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
-+ (B(^)(id obj))isNull    { return ^(id obj) { return [obj isKindOfClass:[NSNull class]]; }; }
++ (B(^)(id obj))isNull    { return ^B(id obj) { return !obj || [obj isKindOfClass:[NSNull class]]; }; }
++ (B(^)(id obj))isBlock   { return ^(id obj) { return [obj isKindOfClass:NSClassFromString(@"NSBlock")]; }; } 
 
 @end

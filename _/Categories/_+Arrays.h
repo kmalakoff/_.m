@@ -34,17 +34,17 @@
 + (NSO*(^)(NSA* array, I n))first;
 + (NSO*(^)(NSA* array, I n))head;
 + (NSO*(^)(NSA* array, I n))take;
-+ (NSO*(^)(NSA* array, KH kh))firstIterator; /* SPECIALIZED */
++ (NSO*(^)(id array, id key))firstIterator; /* SPECIALIZED */
 
 + (NSA*(^)(NSA* array, I n))initial;
-+ (NSA*(^)(NSA* array, KH kh))initialIterator; /* SPECIALIZED */
++ (NSA*(^)(id array, id key))initialIterator; /* SPECIALIZED */
 
 + (NSO*(^)(NSA* array, I n))last;
-+ (NSO*(^)(NSA* array, KH kh))lastIterator; /* SPECIALIZED */
++ (NSO*(^)(id array, id key))lastIterator; /* SPECIALIZED */
 
 + (NSA*(^)(NSA* array, I index))rest;
 + (NSA*(^)(NSA* array, I index))tail;
-+ (NSA*(^)(NSA* array, KH kh))restIterator; /* SPECIALIZED */
++ (NSA*(^)(id array, id key))restIterator; /* SPECIALIZED */
 
 + (A*(^)(NSA* array))compact;
 

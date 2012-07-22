@@ -11,7 +11,7 @@ Global Changes
 NSObject -> integers, bools are NSNumbers -> use N* and N.I, N.B, etc when iterating and AI, etc for arrays
 null -> nil
 '' and "" to @""
-_> OAKV({k, v}, {k, v}) syntax
+_> OKV({k, v}, {k, v}) syntax
 -> terminators and ignorers AO_, AF_ and _FNone
 -> removed all context
 explain the reason for and use of KH
@@ -29,23 +29,23 @@ Arrays
 first
 _.first = _.head = _.take = function(array, n, guard)
 + (id(^)(A* array, I n))first;  // mandatory second parameter: -1 replaces missing paramter
-+ (id(^)(A* array, KH kh))firstIterator; // CHANGE
++ (id(^)(A* array, id key))firstIterator; // CHANGE
 
 
 initial
 _.initial = function(array, n, guard)
 + (A*(^)(A* array, I n))initial; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, KH kh))initialIterator; // CHANGE
++ (A*(^)(A* array, id key))initialIterator; // CHANGE
 
 last
 _.last = function(array, n, guard)
 + (id(^)(A* array, I n))last; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, KH kh))lastIterator; // CHANGE
++ (A*(^)(A* array, id key))lastIterator; // CHANGE
 
 rest
 _.rest = _.tail = function(array, index, guard)
 + (A*(^)(A* array, I index))rest; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, KH kh))restIterator; // CHANGE
++ (A*(^)(A* array, id key))restIterator; // CHANGE
 
 compact
 _.compact = function(array)

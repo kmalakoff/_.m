@@ -33,6 +33,8 @@
 
 - (const NSS*)typeof;
 - (NSS*(^)())toString;
+- (NSO*(^)(id key))get;
+- (NSO*(^)(I index))getAt;
 - (NSS*)className;
 
 // use dynamic type checking for some JavaScript operations to reduce manual casting
@@ -40,6 +42,7 @@
 - (S*(^)(NSS* separator))join;
 - (id(^)(SEL method, id arg1, ...))call;
 - (id(^)(SEL method, NSA* arguments))apply;
+- (B(^)(NSO* obj))in;
 
 // helper
 - (NSComparisonResult)compare:(NSO*)other;

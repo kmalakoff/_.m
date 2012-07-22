@@ -37,6 +37,6 @@
 
 - (const NSS*)typeof;
 - (NSS*(^)())toString;
-- (NSS*(^)(I index))get;
+- (NSO*(^)(I index))getAt;
 
 @end

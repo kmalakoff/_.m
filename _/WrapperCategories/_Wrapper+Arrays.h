@@ -34,17 +34,13 @@
 - (NSO*(^)(I n))first;
 - (NSO*(^)(I n))head;
 - (NSO*(^)(I n))take;
-- (NSO*(^)(KH kh))firstIterator; /* SPECIALIZED */
 
 - (NSA*(^)(I n))initial;
-- (NSA*(^)(KH kh))initialIterator; /* SPECIALIZED */
 
 - (NSO*(^)(I n))last;
-- (NSO*(^)(KH kh))lastIterator; /* SPECIALIZED */
 
 - (NSA*(^)(I index))rest;
 - (NSA*(^)(I index))tail;
-- (NSA*(^)(KH kh))restIterator; /* SPECIALIZED */
 
 - (A*(^)())compact;
 

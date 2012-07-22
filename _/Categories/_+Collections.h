@@ -62,7 +62,7 @@
 + (B(^)(id obj, id target))include;
 + (B(^)(id obj, id target))contains;
 
-+ (NSO*(^)(id obj, SEL method, id arg1, ...))invoke;
++ (NSO*(^)(id obj, SEL method, id arg1, ...))invoke; /* TODO: NIL TERMINATED */
 
 + (NSO*(^)(id obj, NSString *keyPath))pluck;
 
@@ -70,8 +70,7 @@
 + (N*(^)(NSO* obj, _MaxBlock iterator))min;
 
 + (id(^)(id obj, _SortByBlock))sortBy;
-+ (O*(^)(id obj, _MapBlock iterator))groupBy; 
-+ (O*(^)(id obj, id key))groupByKey; /* SPECIALIZED */
++ (O*(^)(id obj, id iteratorOrKey))groupBy; 
 
 + (I(^)(NSA* array, id obj, _SortByBlock iterator))sortedIndex;
 

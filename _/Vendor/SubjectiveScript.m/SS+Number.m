@@ -28,16 +28,18 @@
 //
 
 #import "SS+Number.h"
+#import "NSNumber+SS.h"
 
 @implementation SS (Number)
 
-+ (B(^)(NSS* string, I* result))parseInt
++ (N*(^)(NSS* string))parseInt
 {
-  return ^(NSS* string, I* result) {
+  return ^N*(NSS* string) {
     NSScanner* scan = [NSScanner scannerWithString:string]; 
-    if([scan scanInteger:result] && [scan isAtEnd]) 
-      return YES;
-    return NO;
+    I result;
+    if([scan scanInteger:&result] && [scan isAtEnd]) 
+      return N.I(result);
+    return nil;
   };
 }
 

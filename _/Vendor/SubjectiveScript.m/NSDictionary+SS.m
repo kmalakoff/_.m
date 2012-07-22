@@ -31,6 +31,17 @@
 
 @implementation NSDictionary (SS)
 
++ (O*(^)(const KV* values))newKV
+{
+  return ^(const KV* values) {
+    O* result = O.new;
+    for (const id* value = (const id*) values; *value != nil; value+=2) {
+      [result setValue:value[1] forKey:value[0]];
+    }
+    return result;
+  };
+}
+
 - (NSS*(^)())toString { return ^() { return self.description; }; }
 
 - (B(^)())isEmpty { return ^B() { return ([self keyEnumerator].nextObject == nil); }; }

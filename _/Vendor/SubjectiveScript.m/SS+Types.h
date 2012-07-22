@@ -36,5 +36,6 @@
 + (B(^)(id obj))isString;
 + (B(^)(id obj))isNumber;
 + (B(^)(id obj))isNull;
++ (B(^)(id obj))isBlock;
 
 @end

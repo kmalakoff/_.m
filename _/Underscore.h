@@ -35,7 +35,6 @@
 
 // publish _ categories
 #import "_+Arrays.h"
-#import "_+Chaining.h"
 #import "_+Collections.h"
 #import "_+Functions.h"
 #import "_+Objects.h"
@@ -44,7 +43,6 @@
 
 // publish  wrapper categories
 #import "_Wrapper+Arrays.h"
-#import "_Wrapper+Chaining.h"
 #import "_Wrapper+Collections.h"
 #import "_Wrapper+Functions.h"
 #import "_Wrapper+Objects.h"

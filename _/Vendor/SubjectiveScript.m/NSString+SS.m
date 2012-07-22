@@ -65,7 +65,7 @@ const NSS* SSTypeString = @"string";
 - (const NSS*)typeof { return SSTypeString; }
 - (NSS*(^)())toString { return ^() { return self; }; }
 
-- (NSS*(^)(I))get
+- (NSO*(^)(I index))getAt
 {
   return ^(I index) {
     return [self substringWithRange:NSMakeRange(index, 1)];

@@ -76,5 +76,6 @@
 
 // ADDED
 + (B(^)(id obj))isDictionary;
++ (B(^)(id obj))isBlock;
 
 @end

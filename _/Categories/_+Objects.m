@@ -72,25 +72,26 @@
 
 //isElement
 
-+ (B(^)(id obj))isArray  { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
-+ (B(^)(id obj))isObject { return ^B(id obj) { return _.isDictionary(obj) || _.isString(obj) || _.isArray(obj); }; }
++ (B(^)(id obj))isArray       { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
++ (B(^)(id obj))isObject      { return ^B(id obj) { return _.isDictionary(obj) || _.isString(obj) || _.isArray(obj); }; }
 
 //isFunction
-+ (B(^)(id obj))isString { return ^B(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
-+ (B(^)(id obj))isNumber { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
++ (B(^)(id obj))isString      { return ^B(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
++ (B(^)(id obj))isNumber      { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
 //isFinite
 
-+ (B(^)(id obj))isBoolean { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]] && ((N*)obj).isBoolean; }; }
++ (B(^)(id obj))isBoolean     { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]] && ((N*)obj).isBoolean; }; }
 
-+ (B(^)(id obj))isDate { return ^B(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
++ (B(^)(id obj))isDate        { return ^B(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
 //isRegExp
 
-+ (B(^)(N* obj))isNaN { return ^B(N* obj) { return [obj isEqualToNumber:[NSDecimalNumber notANumber]]; }; }
++ (B(^)(N* obj))isNaN         { return ^B(N* obj) { return [obj isEqualToNumber:[NSDecimalNumber notANumber]]; }; }
 
-+ (B(^)(id obj))isNull   { return ^B(id obj) { return (obj==nil) || [obj isKindOfClass:[NSNull class]]; }; }
++ (B(^)(id obj))isNull        { return ^B(id obj) { return !obj || [obj isKindOfClass:[NSNull class]]; }; }
 //isUndefined
 
 // ADDED
-+ (B(^)(id obj))isDictionary { return ^B(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
++ (B(^)(id obj))isDictionary  { return ^B(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
++ (B(^)(id obj))isBlock       { return ^B(id obj) { return [obj isKindOfClass:NSClassFromString(@"NSBlock")]; }; } 
 
 @end

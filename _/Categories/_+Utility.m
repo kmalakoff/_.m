@@ -29,6 +29,7 @@
 
 #import "_+Utility.h"
 #import "_+Extensions.h"
+#import "SubjectiveScript.h"
 
 @implementation _ (Utility)
 
@@ -36,8 +37,15 @@
 
 + (_ValueKeyTestBlock)identityValueKeyTest
 {
-  return ^(id value, KH kh) {
+  return ^(id value, id key) {
     return _.isTruthy(value);
+  };
+}
+
++ (_CompareBlock)identityCompare
+{
+  return ^NSComparisonResult((NSO* left, NSO* right)) {
+    return [left compare:right];
   };
 }
 

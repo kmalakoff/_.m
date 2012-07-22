@@ -43,9 +43,9 @@
 }
 + (NSO*(^)(NSA* array, I n))head { return self.first; } // ALIAS
 + (NSO*(^)(NSA* array, I n))take { return self.first; } // ALIAS
-+ (NSO*(^)(NSA* array, KH kh))firstIterator
++ (NSO*(^)(id array, id key))firstIterator
 {
-  return ^id(NSA* array, KH kh) {
+  return ^id(NSA* array, id key) {
     return array.get(0);
   };
 }
@@ -56,9 +56,9 @@
     return array.slice(0, array.length - ((n<0) ? 1 : n));
   };
 }
-+ (NSA*(^)(NSA* array, KH kh))initialIterator
++ (NSA*(^)(id array, id key))initialIterator
 {
-  return ^(NSA* array, KH kh) {
+  return ^(NSA* array, id key) {
     return array.slice(0, array.length - 1);
   };
 }
@@ -70,14 +70,14 @@
     if (n>=0) {
       return array.slice(MAX((I)array.length - n, 0), array.length);
     } else {
-      return array.get(array.length - 1);
+      return array.getAt(array.length - 1);
     }
   };
 }
-+ (NSO*(^)(NSA* array, KH kh))lastIterator
++ (NSO*(^)(id array, id key))lastIterator
 {
-  return ^(NSA* array, KH kh) {
-    return array.get(array.length - 1);
+  return ^(NSA* array, id key) {
+    return array.getAt(array.length - 1);
   };
 }
 
@@ -88,9 +88,9 @@
   };
 }
 + (NSA*(^)(NSA* array, I index))tail { return self.rest; } // ALIAS
-+ (NSA*(^)(NSA* array, KH kh))restIterator
++ (NSA*(^)(id array, id key))restIterator
 {
-  return ^(NSA* array, KH kh) {
+  return ^(NSA* array, id key) {
     if (!array.length) return [NSArray array];
     return array.slice(1, array.length);
   };
@@ -99,7 +99,7 @@
 + (A*(^)(NSA* array))compact
 {
   return ^(NSA* array) {
-    return _.filter(array, ^B(id value, KH kh){ return _.isTruthy(value); });
+    return _.filter(array, ^B(id value, id key){ return _.isTruthy(value); });
   };
 }
 
@@ -147,8 +147,8 @@
   return ^(NSA* array, NSA* array1, ...) {
     AO_ARGS(rest, array1);
 
-    return _.filter(_.uniq(array), ^(id item, KH kh) {
-      return _.every(rest, ^B(id other, KH kh) {
+    return _.filter(_.uniq(array), ^(id item, id key) {
+      return _.every(rest, ^B(id other, id key) {
         return _.indexOf(other, item) >= 0;
       });
     });
@@ -161,7 +161,7 @@
     AO_ARGS(rest, array1);
 
     rest = _.flatten(rest, YES);
-    return _.filter(array, ^B(id value, KH kh) { return !_.include(rest, value); });
+    return _.filter(array, ^B(id value, id key) { return !_.include(rest, value); });
   };
 }
 
@@ -170,10 +170,10 @@
   return ^(NSA* array) {
     NSA* initial = array;
     A* results = A.new;
-    _.reduce(initial, ^(A* memo, NSO* value, KH kh) {
+    _.reduce(initial, ^(A* memo, NSO* value, id key) {
       if (!_.include(memo, value)) {
         memo.push(value);
-        results.push(array.get(KHIndex(kh)));
+        results.push(array.get(key));
       }
       return memo;
     }, A.new);
@@ -185,10 +185,10 @@
   return ^(NSA* array, B isSorted, _MapBlock iterator) {
     NSA* initial = iterator ? _.map(array, iterator) : array;
     A* results = A.new;
-    _.reduce(initial, ^(A* memo, NSO* value, KH kh) {
+    _.reduce(initial, ^(A* memo, NSO* value, id key) {
       if (isSorted ? (_.last(memo, -1) != value || !memo.length) : !_.include(memo, value)) {
         memo.push(value);
-        results.push(array.get(KHIndex(kh)));
+        results.push(array.get(key));
       }
       return memo;
     }, A.new);
@@ -204,9 +204,9 @@
 
     N* lengthNumber = _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);
     I length = lengthNumber.I;
-    A* results = A.newWithCapacity(length);
+    A* results = A.newC(length);
     for (I i = 0; i < length; i++) {
-      results.set(i, _.pluck(arguments, S.newFormatted(@"%d", i)));
+      results.setAt(i, _.pluck(arguments, S.newFormatted(@"%d", i)));
     }
     return results;
   };
@@ -217,7 +217,7 @@
   return ^(NSA* keys, NSA* values) {
     O* result = O.new;
     for (I i = 0, l = keys.length; i < l; i++) {
-      result.set(keys.get(i), values.get(i));
+      result.set(keys.getAt(i), values.getAt(i));
     }
     return result;
   };
@@ -236,7 +236,7 @@
 {
   return ^I(NSA* array, id item) {
     I i = _.sortedIndex(array, item, /* MANDATORY */ nil);
-    return [array.get(i) isEqual:item] ? i : -1;
+    return [array.getAt(i) isEqual:item] ? i : -1;
   };
 }
 
@@ -264,7 +264,7 @@
     NSAssert(step!=0, @"step should not be zero");
     I len = MAX(ceil((float)(stop - start) / step), 0);
     I idx = 0;
-    A* range = A.newWithCapacity(len);
+    A* range = A.newC(len);
 
     while(idx < len) {
       range.push(N.I(start)); idx++;

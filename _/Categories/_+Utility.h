@@ -34,6 +34,7 @@
 //noConflict
 
 + (_ValueKeyTestBlock)identityValueKeyTest; /* SPECIALIZED */
++ (_CompareBlock)identityCompare; /* SPECIALIZED */ 
 + (_SortByBlock)identitySortBy; /* SPECIALIZED */
 
 //times

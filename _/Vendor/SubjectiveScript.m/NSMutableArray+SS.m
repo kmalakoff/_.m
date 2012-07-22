@@ -32,73 +32,20 @@
 
 @implementation NSMutableArray (SS)
 
-+ (A*(^)(UI capacity))newWithCapacity
++ (A*(^)(UI capacity))newC
 {
   return ^(UI capacity) {
     return [A arrayWithCapacity:capacity];
   };
 }
 
-+ (A*(^)(const B* values, I count))newB
+- (A*(^)(id indexNumber, id value))set
 {
-  return ^(const B* values, I count) {
-    A* result = [A arrayWithCapacity:count];
-    
-    for (I index=0; index<count; index++) {
-      [result addObject:N.B(values[index])];
-    }
-    return result;
+  return ^(N* indexNumber, id value) {
+    return self.setAt(indexNumber.I, value);
   };
 }
-
-+ (A*(^)(const I* values, I count))newI
-{
-  return ^(const I* values, I count) {
-    A* result = [A arrayWithCapacity:count];
-    
-    for (I index=0; index<count; index++) {
-      [result addObject:N.I(values[index])];
-    }
-    return result;
-  };
-}
-
-+ (A*(^)(const UI* values, I count))newUI
-{
-  return ^(const UI* values, I count) {
-    A* result = [A arrayWithCapacity:count];
-    
-    for (I index=0; index<count; index++) {
-      [result addObject:N.UI(values[index])];
-    }
-    return result;
-  };
-}
-
-+ (A*(^)(const F* values, I count))newF
-{
-  return ^(const F* values, I count) {
-    A* result = [A arrayWithCapacity:count];
-    
-    for (I index=0; index<count; index++) {
-      [result addObject:N.F(values[index])];
-    }
-    return result;
-  };
-}
-
-+ (A*(^)(const id* values))newO
-{
-  return ^(const id* values) {
-    A* result = A.new;
-    for (const id* value=values; *value != nil; value++) {
-      [result addObject:*value];
-    }
-    return result;
-  };
-}
-
-- (A*(^)(I index, id value))set
+- (A*(^)(I index, id value))setAt
 {
   return ^(I index, id value) {
     // need to expand and fill the array

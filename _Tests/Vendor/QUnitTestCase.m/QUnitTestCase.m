@@ -31,7 +31,7 @@
 
 @implementation QUnitTestCase
 
-- (void)equal:(id)actual expected:(id)expected message:(NSString*)message args:(va_list)args
+- (void)equal:(id)actual expected:(id)expected message:(NSString*)message args:(va_list)args strict:(BOOL)strict
 {
   NSString *description = [[NSString alloc] initWithFormat:message arguments:args];
 
@@ -43,6 +43,51 @@
         [actual isEqual:expected]
       )
         return;
+
+      if (strict && (strcmp(@encode(__typeof__(actual)), @encode(__typeof__(expected))) != 0))
+       [self failWithException:([NSException failureInEqualityBetweenObject:actual 
+                                                                 andObject:expected 
+                                                              inFile:@"" 
+                                                              atLine:0 
+                                                     withDescription:description])]; 
+      
+            
+     [self failWithException:([NSException failureInEqualityBetweenObject:actual 
+                                                               andObject:expected 
+                                                            inFile:@"" 
+                                                            atLine:0 
+                                                   withDescription:description])]; 
+  } 
+  }
+  @catch (id anException) {
+      [self failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"(%s) == (%s)", @"actual", @"expected"] 
+            exception:anException 
+               inFile:@"" 
+               atLine:0
+      withDescription:description])]; 
+  }
+}
+
+- (void)notEqual:(id)actual expected:(id)expected message:(NSString*)message args:(va_list)args strict:(BOOL)strict
+{
+  NSString *description = [[NSString alloc] initWithFormat:message arguments:args];
+
+  @try {
+    if (actual == expected) { 
+      if (
+        (strcmp(@encode(__typeof__(actual)), @encode(id)) == 0) && 
+        (strcmp(@encode(__typeof__(expected)), @encode(id)) == 0) && 
+        ![actual isEqual:expected]
+      )
+        return;
+
+      if (strict && (strcmp(@encode(__typeof__(actual)), @encode(__typeof__(expected))) != 0))
+       [self failWithException:([NSException failureInEqualityBetweenObject:actual 
+                                                                 andObject:expected 
+                                                              inFile:@"" 
+                                                              atLine:0 
+                                                     withDescription:description])]; 
+      
             
      [self failWithException:([NSException failureInEqualityBetweenObject:actual 
                                                                andObject:expected 
@@ -65,7 +110,17 @@
   return ^(id actual, id expected, NSString *message, ...){
     va_list args;
     va_start(args, message);
-    [self equal:actual expected:expected message:message args:args];
+    [self equal:actual expected:expected message:message args:args strict:NO];
+    va_end(args);
+  };
+}
+
+- (void(^)(id actual, id expected, NSString *message, ...))notEqual
+{
+  return ^(id actual, id expected, NSString *message, ...){
+    va_list args;
+    va_start(args, message);
+    [self notEqual:actual expected:expected message:message args:args strict:NO];
     va_end(args);
   };
 }
@@ -75,7 +130,37 @@
   return ^(NSInteger actual, NSInteger expected, NSString *message, ...){
     va_list args;
     va_start(args, message);
-    [self equal:[NSNumber numberWithInteger:actual] expected:[NSNumber numberWithInteger:expected] message:message args:args];
+    [self equal:[NSNumber numberWithInteger:actual] expected:[NSNumber numberWithInteger:expected] message:message args:args strict:NO];
+    va_end(args);
+  };
+}
+
+- (void(^)(NSInteger actual, NSInteger expected, NSString *message, ...))notEqualI
+{
+  return ^(NSInteger actual, NSInteger expected, NSString *message, ...){
+    va_list args;
+    va_start(args, message);
+    [self notEqual:[NSNumber numberWithInteger:actual] expected:[NSNumber numberWithInteger:expected] message:message args:args strict:NO];
+    va_end(args);
+  };
+}
+
+- (void(^)(id actual, id expected, NSString *message, ...))strictEqual
+{
+  return ^(id actual, id expected, NSString *message, ...){
+    va_list args;
+    va_start(args, message);
+    [self equal:actual expected:expected message:message args:args strict:YES];
+    va_end(args);
+  };
+}
+
+- (void(^)(id actual, id expected, NSString *message, ...))notStrictEqual
+{
+  return ^(id actual, id expected, NSString *message, ...){
+    va_list args;
+    va_start(args, message);
+    [self notEqual:actual expected:expected message:message args:args strict:YES];
     va_end(args);
   };
 }

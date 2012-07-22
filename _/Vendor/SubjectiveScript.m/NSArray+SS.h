@@ -31,10 +31,16 @@
 
 @interface NSArray (SS)
 
++ (A*(^)(const B* values, I count))newB;
++ (A*(^)(const I* values, I count))newI;
++ (A*(^)(const UI* values, I count))newUI;
++ (A*(^)(const F* values, I count))newF;
++ (A*(^)(const id* values))newO; // TODO: nil termination
+
 - (NSS*(^)())toString;
 
 - (UI)length;
-- (NSO*(^)(I index))get;
+- (NSO*(^)(I index))getAt;
 
 - (S*(^)(NSS* separator))join;
 - (NSA*(^)(UI start, UI count))slice;
@@ -43,3 +49,10 @@
 - (NSA*(^)(SSCompareBlock block))sort;
 
 @end
+
+// new array helpers
+#define AB(...)   A.newB((B[]){__VA_ARGS__},    sizeof((B[]){__VA_ARGS__})/sizeof(B))
+#define AI(...)   A.newI((I[]){__VA_ARGS__},    sizeof((I[]){__VA_ARGS__})/sizeof(I))
+#define AUI(...)  A.newUI((UI[]){__VA_ARGS__},  sizeof((UI[]){__VA_ARGS__})/sizeof(UI))
+#define AF(...)   A.newF((F[]){__VA_ARGS__},    sizeof((F[]){__VA_ARGS__})/sizeof(F))
+#define AO(...)   A.newO((id[]){__VA_ARGS__, nil})
