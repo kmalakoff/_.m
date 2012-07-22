@@ -15,6 +15,8 @@
 // value
 + (B(^)(id obj))isTruthy;
 + (B(^)(id obj))isFalsy;
++ (B(^)(id obj))isDictionary;
++ (B(^)(id obj))isBlock;
 
 // object
 + (_ValueTestBlock(^)(NSS* key, id match))propTester;

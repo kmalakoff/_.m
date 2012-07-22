@@ -28,6 +28,7 @@
 //
 
 #import "_+Objects.h"
+#import "_+Extensions.h"
 #import "SubjectiveScript.h"
 
 @implementation _ (Objects)
@@ -114,9 +115,5 @@
 + (B(^)(id obj))isNull        { return ^B(id obj) { return !obj || [obj isKindOfClass:[NSNull class]]; }; }
 
 //isUndefined /* NOT SUPPORTED: JavaScript-only */
-
-/* ADDED */
-+ (B(^)(id obj))isDictionary  { return ^B(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
-+ (B(^)(id obj))isBlock       { return ^B(id obj) { return [obj isKindOfClass:NSClassFromString(@"NSBlock")]; }; } 
 
 @end

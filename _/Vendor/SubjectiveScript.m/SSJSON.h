@@ -1,5 +1,5 @@
 //
-//  JSON.h
+//  SSJSON.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -29,8 +29,8 @@
 
 #import "SS+Types.h"
 
-@interface JSON : NSObject
+@interface SSJSON : NSObject
 
-+ (NSS*(^)(NSO* obj))stringify;
+- (NSS*(^)(NSO* obj))stringify;
 
 @end

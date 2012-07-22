@@ -75,8 +75,4 @@
 
 //isUndefined /* NOT SUPPORTED: JavaScript-only */
 
-/* ADDED */
-+ (B(^)(id obj))isDictionary;
-+ (B(^)(id obj))isBlock;
-
 @end

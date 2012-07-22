@@ -1,5 +1,5 @@
 //
-//  JSON.m
+//  SSJSON.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,11 +27,11 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "JSON.h"
+#import "SSJSON.h"
 #import "NSObject+SS.h"
 
-@implementation JSON
+@implementation SSJSON
 
-+ (NSS*(^)(NSO* obj))stringify { return ^(NSO* obj) { return obj.toString(); }; }
+- (NSS*(^)(NSO* obj))stringify { return ^(NSO* obj) { return obj.toString(); }; }
 
 @end

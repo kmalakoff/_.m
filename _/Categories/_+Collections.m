@@ -31,6 +31,7 @@
 #import "_+Objects.h"
 #import "_+Arrays.h"
 #import "_+Utility.h"
+#import "_+Extensions.h"
 #import "_Wrapper+Collections.h"
 #import "SubjectiveScript.h"
 

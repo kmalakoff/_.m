@@ -40,7 +40,7 @@
 #import "SS+Number.h"
 #import "SS+SystemCompatibility.h"
 #import "SS+GCD.h"
-#import "JSON.h"
+#import "SS+JavaScript.h"
 
 // categories
 #import "NSObject+SS.h"
