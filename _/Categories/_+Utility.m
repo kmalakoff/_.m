@@ -35,24 +35,24 @@
 
 //noConflict
 
-+ (_ValueKeyTestBlock)identityValueKeyTest
++ (_ValueMapBlock)identityVMB
+{
+  return ^(id value) {
+    return value;
+  };
+}
+
++ (_ValueKeyTestBlock)identityVKTB
 {
   return ^(id value, id key) {
     return _.isTruthy(value);
   };
 }
 
-+ (_ValueValueCompareBlock)identityCompare
++ (_ValueValueCompareBlock)identityVVCB
 {
   return ^NSComparisonResult((NSO* left, NSO* right)) {
     return [left compare:right];
-  };
-}
-
-+ (_ValueMapBlock)identitySortBy
-{
-  return ^(id value) {
-    return value;
   };
 }
 

@@ -1,8 +1,8 @@
 //
-//  NSDictionary+SS.m
+//  SS-SystemCompatibility.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/22/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -26,27 +26,47 @@
 //  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
+// Technique from http://stackoverflow.com/questions/3339722/check-iphone-ios-version
+//
 
-#import "NSDictionary+SS.h"
+#import "SS+SystemCompatibility.h"
+#import <UIKit/UIKit.h>
 
-@implementation NSDictionary (SS)
+@implementation SS (SystemCompatibility)
 
-+ (O*(^)(const KV* values))newKV
++ (B(^)(NSS* version))iOSVersionET
 {
-  return ^(const KV* values) {
-    O* result = O.new;
-    for (const id* value = (const id*) values; *value != nil; value+=2) {
-      [result setValue:value[1] forKey:value[0]];
-    }
-    return result;
+  return ^B(NSS* version) {
+    return ([[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] == NSOrderedSame);
   };
 }
 
-- (NSS*)mutableClassName { return NSStringFromClass([D class]); }
-- (NSS*(^)())toString { return ^() { return self.description; }; }
++ (B(^)(NSS* version))iOSVersionGT
+{
+  return ^B(NSS* version) {
+    return ([[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] == NSOrderedDescending);
+  };
+}
 
-- (B(^)())isEmpty { return ^B() { return ([self keyEnumerator].nextObject == nil); }; }
-- (B(^)(id key))hasOwnProperty { return ^B(id key) { return [self objectForKey:key] != nil; }; }
-- (NSO*(^)(NSO* key))get { return ^(NSO* key) { return [self objectForKey:key]; }; }
++ (B(^)(NSS* version))iOSVersionGTET
+{
+  return ^B(NSS* version) {
+    return ([[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] != NSOrderedAscending);
+  };
+}
+
++ (B(^)(NSS* version))iOSVersionLT
+{
+  return ^B(NSS* version) {
+    return ([[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] == NSOrderedAscending);
+  };
+}
+
++ (B(^)(NSS* version))iOSVersionLTET
+{
+  return ^B(NSS* version) {
+    return ([[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] != NSOrderedDescending);
+  };
+}
 
 @end

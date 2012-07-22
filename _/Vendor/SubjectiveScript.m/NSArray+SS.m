@@ -33,6 +33,11 @@
 #import "NSMutableString+SS.h"
 #import "NSObject+SS.h"
 #import "SS+Types.h"
+#import "SS+Number.h"
+#import <objc/runtime.h>
+
+static const NSS* SSTypeArguments = @"arguments";
+static char* const SSIsArgumentsKey = "IsArguments";
 
 @implementation NSArray (SS)
 
@@ -100,10 +105,33 @@
 - (NSS*(^)())toString { return ^() { return S.newFormatted(@"[%@]", self.join(@",")); }; }
 - (UI)length { return self.count; }
 
+- (B)isArguments { return objc_getAssociatedObject(self, SSIsArgumentsKey) != nil; } 
+- (void(^)())setIsArguments { return ^(){ objc_setAssociatedObject(self, SSIsArgumentsKey, SSTypeArguments, OBJC_ASSOCIATION_ASSIGN); }; } // set the stored key
+
+- (B(^)(id key))hasOwnProperty
+{
+  return ^B(id key) {
+    N* indexNumber = ((N*)key);
+  
+    // requesting a property
+    if ([key isKindOfClass:[NSString class]])
+      indexNumber = SS.parseInt((NSS*)key);
+    if (!indexNumber) return false;
+
+    I index = indexNumber.I;
+    return (index >=0) && (index < self.count);
+  };
+}
+
 - (NSO*(^)(I index))getAt
 {
   return ^NSO*(I index) {
-    return (index>=self.count) ? NSNull.null : [self objectAtIndex:index];
+    if (index>=self.count) return nil;
+    NSO* item = [self objectAtIndex:index];
+    if (self.isArguments)
+      return SS.isNull(item) ? (NSO*) nil : item; 
+    else
+      return item;
   };
 }
 

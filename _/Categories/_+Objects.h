@@ -40,41 +40,42 @@
 //defaults
 //clone
 //tap
-//has
 
-+ (B(^)(id a, id b))isEqual; // TODO: tests
++ (B(^)(NSO* obj, id key))has;
+
++ (B(^)(id a, id b))isEqual;
 
 + (B(^)(NSO* obj))isEmpty;
 
-//isElement
+//isElement /* NOT SUPPORTED: JavaScript-only */
 
 + (B(^)(id obj))isArray;
 
 + (B(^)(id obj))isObject;
 
-//isArguments /* NOT SUPPORTED: JavaScript-only */
++ (B(^)(id obj))isArguments;
 
-//isFunction
++ (B(^)(id obj, id target))isFunction;  /* DEFINITION: you call @"fnName".apply(target, ...) or @"fnName".call(target, ...) it using a block property or static function. See NSString+SS.h */
 
 + (B(^)(id obj))isString;
 
 + (B(^)(id obj))isNumber;
 
-//isFinite
++ (B(^)(id obj))isFinite;
 
 + (B(^)(id obj))isBoolean;
 
 + (B(^)(id obj))isDate;
 
-//isRegExp
-//isNaN
+//isRegExp /* NOT SUPPORTED: JavaScript-only */
+
 + (B(^)(N* obj))isNaN;
 
 + (B(^)(id obj))isNull;
 
-//isUndefined
+//isUndefined /* NOT SUPPORTED: JavaScript-only */
 
-// ADDED
+/* ADDED */
 + (B(^)(id obj))isDictionary;
 + (B(^)(id obj))isBlock;
 

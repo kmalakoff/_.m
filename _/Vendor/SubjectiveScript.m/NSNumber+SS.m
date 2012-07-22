@@ -31,10 +31,10 @@
 #import "NSString+SS.h"
 #import <objc/runtime.h>
 
-const NSS* SSTypeNumber = @"number";
-const NSS* SSTypeBoolean = @"boolean";
+static const NSS* SSTypeNumber = @"number";
+static const NSS* SSTypeBoolean = @"boolean";
 
-static char* const SSTypeBooleanKey = "IsBoolean";
+static char* const SSIsBooleanKey = "IsBoolean";
 
 @implementation N (SS)
 
@@ -44,7 +44,7 @@ static char* const SSTypeBooleanKey = "IsBoolean";
     N* boolNumber = [[NSNumber alloc] initWithBool:value];
     
     // add a dynamic property to the class so it can be recognized as a boolean. Explaination on why it is not built in functionality: http://stackoverflow.com/questions/2518761/get-type-of-nsnumber
-    objc_setAssociatedObject(boolNumber, SSTypeBooleanKey, SSTypeBoolean, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(boolNumber, SSIsBooleanKey, SSTypeBoolean, OBJC_ASSOCIATION_ASSIGN);
 
     return boolNumber;
   };
@@ -76,9 +76,7 @@ static char* const SSTypeBooleanKey = "IsBoolean";
 - (F)F { return self.floatValue; }
 
 - (const NSS*)typeof { return self.isBoolean ? SSTypeNumber : SSTypeBoolean; }
-- (B)isBoolean { 
-  return objc_getAssociatedObject(self, SSTypeBooleanKey) != nil; // check for the stored key
-}
+- (B)isBoolean { return objc_getAssociatedObject(self, SSIsBooleanKey) != nil; } // check for the stored key
 - (NSS*(^)())toString { 
   return ^() { 
     if (self.isBoolean)

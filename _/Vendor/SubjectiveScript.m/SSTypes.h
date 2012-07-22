@@ -53,4 +53,5 @@ typedef id              KV[2];
 #define E               NSException
 
 // blocks
+typedef void                (^SSDoBlock)();
 typedef NSComparisonResult  (^SSCompareBlock)(id left, id right);

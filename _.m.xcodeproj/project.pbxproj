@@ -113,9 +113,12 @@
 		0A8E677315BA7CFF00E50BE4 /* _Wrapper+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A8E677115BA7CFF00E50BE4 /* _Wrapper+Private.h */; };
 		0A8E677415BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */; };
 		0A8E677515BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */; };
-		0A93F13515BBBE2700971790 /* NSArray+SSArguments.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A93F13315BBBE2700971790 /* NSArray+SSArguments.h */; };
-		0A93F13615BBBE2700971790 /* NSArray+SSArguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93F13415BBBE2700971790 /* NSArray+SSArguments.m */; };
-		0A93F13715BBBE2700971790 /* NSArray+SSArguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93F13415BBBE2700971790 /* NSArray+SSArguments.m */; };
+		0A93F13F15BBC4B700971790 /* SS+GCD.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A93F13D15BBC4B500971790 /* SS+GCD.h */; };
+		0A93F14015BBC4B700971790 /* SS+GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93F13E15BBC4B600971790 /* SS+GCD.m */; };
+		0A93F14115BBC4B700971790 /* SS+GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93F13E15BBC4B600971790 /* SS+GCD.m */; };
+		0A93F14315BBC65500971790 /* SS+SystemCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A93F14215BBC65400971790 /* SS+SystemCompatibility.h */; };
+		0A93F14515BBC6F300971790 /* SS+SystemCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93F14415BBC6F300971790 /* SS+SystemCompatibility.m */; };
+		0A93F14615BBC6F300971790 /* SS+SystemCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93F14415BBC6F300971790 /* SS+SystemCompatibility.m */; };
 		0AB970C415BBBB3100C03234 /* SS+Arguments.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AB970C215BBBB3100C03234 /* SS+Arguments.h */; };
 		0AB970C515BBBB3100C03234 /* SS+Arguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB970C315BBBB3100C03234 /* SS+Arguments.m */; };
 		0AB970C615BBBB3100C03234 /* SS+Arguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB970C315BBBB3100C03234 /* SS+Arguments.m */; };
@@ -230,8 +233,10 @@
 		0A58433915B8FC7A000BC230 /* _WrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WrapperTests.m; sourceTree = "<group>"; };
 		0A8E677115BA7CFF00E50BE4 /* _Wrapper+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Private.h"; sourceTree = "<group>"; };
 		0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Private.m"; sourceTree = "<group>"; };
-		0A93F13315BBBE2700971790 /* NSArray+SSArguments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+SSArguments.h"; path = "_/Vendor/SubjectiveScript.m/NSArray+SSArguments.h"; sourceTree = SOURCE_ROOT; };
-		0A93F13415BBBE2700971790 /* NSArray+SSArguments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+SSArguments.m"; path = "_/Vendor/SubjectiveScript.m/NSArray+SSArguments.m"; sourceTree = SOURCE_ROOT; };
+		0A93F13D15BBC4B500971790 /* SS+GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SS+GCD.h"; sourceTree = "<group>"; };
+		0A93F13E15BBC4B600971790 /* SS+GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SS+GCD.m"; sourceTree = "<group>"; };
+		0A93F14215BBC65400971790 /* SS+SystemCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SS+SystemCompatibility.h"; path = "_/Vendor/SubjectiveScript.m/SS+SystemCompatibility.h"; sourceTree = SOURCE_ROOT; };
+		0A93F14415BBC6F300971790 /* SS+SystemCompatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SS+SystemCompatibility.m"; path = "_/Vendor/SubjectiveScript.m/SS+SystemCompatibility.m"; sourceTree = SOURCE_ROOT; };
 		0AB970C215BBBB3100C03234 /* SS+Arguments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SS+Arguments.h"; path = "_/Vendor/SubjectiveScript.m/SS+Arguments.h"; sourceTree = SOURCE_ROOT; };
 		0AB970C315BBBB3100C03234 /* SS+Arguments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SS+Arguments.m"; path = "_/Vendor/SubjectiveScript.m/SS+Arguments.m"; sourceTree = SOURCE_ROOT; };
 		0AC0449315B9675C006C4984 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
@@ -377,19 +382,21 @@
 				0A5842A115B8FC18000BC230 /* SS.h */,
 				0A5842A215B8FC18000BC230 /* SS.m */,
 				0AEB526A15BA1B0D00317C50 /* SSConstants.h */,
+				0A93F14215BBC65400971790 /* SS+SystemCompatibility.h */,
+				0A93F14415BBC6F300971790 /* SS+SystemCompatibility.m */,
 				0A5842A315B8FC18000BC230 /* SSTypes.h */,
 				0A58429F15B8FC18000BC230 /* SS+Types.h */,
 				0A5842A015B8FC18000BC230 /* SS+Types.m */,
 				0AB970C215BBBB3100C03234 /* SS+Arguments.h */,
 				0AB970C315BBBB3100C03234 /* SS+Arguments.m */,
+				0A93F13D15BBC4B500971790 /* SS+GCD.h */,
+				0A93F13E15BBC4B600971790 /* SS+GCD.m */,
 				0A3930C515BA74CC00FB19BD /* SS+Number.h */,
 				0A3930C615BA74CD00FB19BD /* SS+Number.m */,
 				0A58428915B8FC18000BC230 /* JSON.h */,
 				0A58428A15B8FC18000BC230 /* JSON.m */,
 				0A58428B15B8FC18000BC230 /* NSArray+SS.h */,
 				0A58428C15B8FC18000BC230 /* NSArray+SS.m */,
-				0A93F13315BBBE2700971790 /* NSArray+SSArguments.h */,
-				0A93F13415BBBE2700971790 /* NSArray+SSArguments.m */,
 				0A58429115B8FC18000BC230 /* NSMutableArray+SS.h */,
 				0A58429215B8FC18000BC230 /* NSMutableArray+SS.m */,
 				0A58428D15B8FC18000BC230 /* NSDate+SS.h */,
@@ -532,7 +539,8 @@
 				0A3930C715BA74CD00FB19BD /* SS+Number.h in Headers */,
 				0A8E677315BA7CFF00E50BE4 /* _Wrapper+Private.h in Headers */,
 				0AB970C415BBBB3100C03234 /* SS+Arguments.h in Headers */,
-				0A93F13515BBBE2700971790 /* NSArray+SSArguments.h in Headers */,
+				0A93F13F15BBC4B700971790 /* SS+GCD.h in Headers */,
+				0A93F14315BBC65500971790 /* SS+SystemCompatibility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,7 +672,8 @@
 				0A3930C815BA74CD00FB19BD /* SS+Number.m in Sources */,
 				0A8E677415BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */,
 				0AB970C515BBBB3100C03234 /* SS+Arguments.m in Sources */,
-				0A93F13615BBBE2700971790 /* NSArray+SSArguments.m in Sources */,
+				0A93F14015BBC4B700971790 /* SS+GCD.m in Sources */,
+				0A93F14515BBC6F300971790 /* SS+SystemCompatibility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,7 +724,8 @@
 				0A3930C915BA74CD00FB19BD /* SS+Number.m in Sources */,
 				0A8E677515BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */,
 				0AB970C615BBBB3100C03234 /* SS+Arguments.m in Sources */,
-				0A93F13715BBBE2700971790 /* NSArray+SSArguments.m in Sources */,
+				0A93F14115BBC4B700971790 /* SS+GCD.m in Sources */,
+				0A93F14615BBC6F300971790 /* SS+SystemCompatibility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

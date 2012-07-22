@@ -33,13 +33,14 @@
 
 - (const NSS*)typeof;
 - (NSS*(^)())toString;
-- (NSO*(^)(id key))get;
-- (NSO*(^)(I index))getAt;
 - (NSS*)className;
 - (NSS*)mutableClassName;
 - (B(^)(NSS* className))instanceof;
 
 // use dynamic type checking for some JavaScript operations to reduce manual casting
+- (NSO*(^)(id key))get;
+- (NSO*(^)(I index))getAt;
+- (B(^)(id key))hasOwnProperty;
 - (UI)length;
 - (S*(^)(NSS* separator))join;
 - (B(^)(NSO* obj))in;

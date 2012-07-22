@@ -28,14 +28,43 @@
 //
 
 #import "_+Functions.h"
+#import "SubjectiveScript.h"
 
 @implementation _ (Functions)
 
 //bind
 //bindAll
 //memoize
-//delay
-//defer
+
++ (void(^)(_DoBlock func, I wait))delay
+{
+  return ^(_DoBlock func, I wait) {
+    // TODO: add arguments
+    SS.dispatchMain(func, wait);
+  };
+}
+
++ (void(^)(_DoBlock func, I wait))delayBG
+{
+  return ^(_DoBlock func, I wait) {
+    SS.dispatchBackground(func, wait);
+  };
+}
+
++ (void(^)(_DoBlock func))defer 
+{ 
+  return ^(_DoBlock func) {
+    SS.dispatchMain(func, 0);
+  };
+}
+
++ (void(^)(_DoBlock func))deferBG
+{ 
+  return ^(_DoBlock func) {
+    SS.dispatchBackground(func, 0);
+  };
+}
+
 //throttle
 //debounce
 //once

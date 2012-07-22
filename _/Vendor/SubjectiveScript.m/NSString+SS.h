@@ -40,5 +40,6 @@
 - (NSO*(^)(I index))getAt;
 - (id(^)(id target, id arg1, ...))call;
 - (id(^)(id target, NSA* arguments))apply;
+- (id(^)(id target))getScriptFunctionBlock;
 
 @end

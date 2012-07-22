@@ -39,8 +39,11 @@
 
 - (NSS*)mutableClassName;
 - (NSS*(^)())toString;
+- (B)isArguments; 
+- (void(^)())setIsArguments;
 
 - (UI)length;
+- (B(^)(id key))hasOwnProperty;
 - (NSO*(^)(I index))getAt;
 
 - (S*(^)(NSS* separator))join;

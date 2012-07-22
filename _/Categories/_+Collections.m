@@ -238,7 +238,7 @@
 + (B(^)(id obj, _ValueKeyTestBlock iterator))any
 {
   return ^B(id obj, _ValueKeyTestBlock iterator) {
-    if (!iterator) iterator = _.identityValueKeyTest;
+    if (!iterator) iterator = _.identityVKTB;
     __block BOOL result = NO;
     if (obj == nil) return result;
     _.eachWithStop(obj, ^B(id value, id key) {
@@ -283,7 +283,8 @@
     if (_.isArray(obj)) {
       A* result = A.new;
       for (NSO* item in (NSA*)obj) {
-        result.push(item.get(keyPath));
+        id value = item.get(keyPath);
+        result.push(value ? value : NSNull.null);
       }
       return result;
     }
@@ -398,7 +399,7 @@
 + (I(^)(NSA* array, id obj, _ValueMapBlock iterator))sortedIndex
 {
   return ^(NSA* array, id obj, _ValueMapBlock iterator) {
-    if (!iterator) iterator = _.identitySortBy;
+    if (!iterator) iterator = _.identityVMB;
     NSO* value = iterator(obj);
     I low = 0, high = array.length;
     while (low < high) {

@@ -37,7 +37,7 @@
 - (NSS*(^)())toString;
 
 - (B(^)())isEmpty;
-- (B(^)(id key))has;
+- (B(^)(id key))hasOwnProperty;
 - (NSO*(^)(NSO* key))get;
 
 @end

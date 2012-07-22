@@ -50,7 +50,13 @@
 //defaults
 //clone
 //tap
-//has
+
++ (B(^)(NSO* obj, id key))has
+{
+  return ^(NSO* obj, id key) {
+    return obj.hasOwnProperty(key);
+  };
+}
 
 + (B(^)(id a, id b))isEqual
 {
@@ -70,27 +76,46 @@
   }; 
 }
 
-//isElement
+//isElement /* NOT SUPPORTED: JavaScript-only */
 
 + (B(^)(id obj))isArray       { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
 + (B(^)(id obj))isObject      { return ^B(id obj) { return _.isDictionary(obj) || _.isString(obj) || _.isArray(obj); }; }
++ (B(^)(id obj))isArguments   { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]] && ((NSA*)obj).isArguments; }; }
 
-//isFunction
++ (B(^)(id obj, id target))isFunction  /* DEFINITION: you call @"fnName".apply(obj, ...) or @"fnName".call(obj, ...) it using a block property or static function. See NSString+SS.h */
+{
+  return ^B(id obj, id target) { 
+    return (_.isString(obj) && !!((NSS*)obj).getScriptFunctionBlock(target)); 
+  };
+}
+
 + (B(^)(id obj))isString      { return ^B(id obj) { return [obj isKindOfClass:[NSString class]]; }; }
 + (B(^)(id obj))isNumber      { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]]; }; }
-//isFinite
++ (B(^)(id obj))isFinite      
+{ 
+  return ^B(id obj) { 
+    return (
+      _.isNumber(obj) && 
+      !_.isNaN(obj) && 
+      ([(N*)obj compare:NF_POS_INFINITY] != NSOrderedSame) &&
+      ([(N*)obj compare:NF_NEG_INFINITY] != NSOrderedSame)
+    );
+  }; 
+}
 
 + (B(^)(id obj))isBoolean     { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]] && ((N*)obj).isBoolean; }; }
 
 + (B(^)(id obj))isDate        { return ^B(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
-//isRegExp
+
+//isRegExp /* NOT SUPPORTED: JavaScript-only */
 
 + (B(^)(N* obj))isNaN         { return ^B(N* obj) { return [obj isEqualToNumber:[NSDecimalNumber notANumber]]; }; }
 
 + (B(^)(id obj))isNull        { return ^B(id obj) { return !obj || [obj isKindOfClass:[NSNull class]]; }; }
-//isUndefined
 
-// ADDED
+//isUndefined /* NOT SUPPORTED: JavaScript-only */
+
+/* ADDED */
 + (B(^)(id obj))isDictionary  { return ^B(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
 + (B(^)(id obj))isBlock       { return ^B(id obj) { return [obj isKindOfClass:NSClassFromString(@"NSBlock")]; }; } 
 

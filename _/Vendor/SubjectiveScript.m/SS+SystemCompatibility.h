@@ -1,8 +1,8 @@
 //
-//  _+Utility.h
-//  _.m
+//  SS-SystemCompatibility.h
+//  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/18/12.
+//  Created by Kevin Malakoff on 7/22/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,21 +27,15 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "_.h"
+#import "SS.h"
 
-@interface _ (Utility)
+@interface SS (SystemCompatibility)
 
-//noConflict /* NOT SUPPORTED: JavaScript-only */
-
-+ (_ValueMapBlock)identityVMB; /* SPECIALIZED */
-+ (_ValueKeyTestBlock)identityVKTB; /* SPECIALIZED */
-+ (_ValueValueCompareBlock)identityVVCB; /* SPECIALIZED */ 
-
-//times
-//mixin
-//uniqueId
-//escape
-//result
-//template
+// version should be in the form @"3.1.1" or @"4.0"
++ (B(^)(NSS* version))iOSVersionET;     // EqualTo
++ (B(^)(NSS* version))iOSVersionGT;     // GreaterThan
++ (B(^)(NSS* version))iOSVersionGTET;   // GreaterThanOrEqualTo
++ (B(^)(NSS* version))iOSVersionLT;     // LessThan
++ (B(^)(NSS* version))iOSVersionLTET;   // LessThanOrEqualTo
 
 @end

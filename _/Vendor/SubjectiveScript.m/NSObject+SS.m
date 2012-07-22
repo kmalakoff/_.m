@@ -47,6 +47,15 @@ const NSS* SSTypeObject = @"object";
     return self.description;
   };
 }
+- (NSS*)className { return NSStringFromClass([self class]); }
+- (NSS*)mutableClassName { return nil; }
+- (B(^)(NSS* className))instanceof {
+  return ^(NSS* className) {
+    return [self isKindOfClass:NSClassFromString(className)];
+  };
+}
+
+// use dynamic type checking for some JavaScript operations to reduce manual casting
 - (NSO*(^)(id key))get
 {
   return ^NSO*(id key) {
@@ -77,15 +86,13 @@ const NSS* SSTypeObject = @"object";
   };
 }
 
-- (NSS*)className { return NSStringFromClass([self class]); }
-- (NSS*)mutableClassName { return nil; }
-- (B(^)(NSS* className))instanceof {
-  return ^(NSS* className) {
-    return [self isKindOfClass:NSClassFromString(className)];
+- (B(^)(id key))hasOwnProperty
+{
+  return ^B(id key) {
+    return false;
   };
 }
 
-// use dynamic type checking for some JavaScript operations to reduce manual casting
 - (UI)length
 {
   // base class can be triggered by KeyValueCoding

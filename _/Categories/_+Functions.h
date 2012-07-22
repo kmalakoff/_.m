@@ -31,11 +31,17 @@
 
 @interface _ (Functions)
 
-//bind
-//bindAll
+//bind /* NOT SUPPORTED: JavaScript-only */
+//bindAll /* NOT SUPPORTED: JavaScript-only */
+
 //memoize
-//delay
-//defer
+
++ (void(^)(_DoBlock func, I waitNS))delay;
++ (void(^)(_DoBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */
+
++ (void(^)(_DoBlock func))defer;
++ (void(^)(_DoBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */
+
 //throttle
 //debounce
 //once

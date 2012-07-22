@@ -91,34 +91,42 @@ const NSS* SSTypeString = @"string";
 
 - (id(^)(id target, NSA* arguments))apply
 {
-  return ^(id target, NSA* arguments) {
-    // assume only JavaScript-style block methods or properties are used
-    id propertyOrBlock = nil;
-    
-    // first try a method
-    SEL methodSelector = NSSelectorFromString(self);
-    if ([target respondsToSelector:methodSelector])
-      propertyOrBlock = objc_msgSend(target, methodSelector);
-    else
-      propertyOrBlock = [target valueForKey:self];
-    
-    if (!propertyOrBlock) NSLog(@"function '%@' did not exist for call or apply", self);
-    if (!SS.isBlock(propertyOrBlock)) return propertyOrBlock;
+  return ^id(id target, NSA* arguments) {
+    id scriptFunction = self.getScriptFunctionBlock(target);
+    if (!scriptFunction) {
+      NSLog(@"function '%@' did not exist for call or apply", self);
+      return nil;
+    }
 
     // TODO: figure out a safe way to call blocks by signature
     switch(arguments.length) {
-      case 0: return ((SSBlock0)propertyOrBlock)();
-      case 1: return ((SSBlock1)propertyOrBlock)(arguments.getArgAt(0));
-      case 2: return ((SSBlock2)propertyOrBlock)(arguments.getArgAt(0), arguments.getArgAt(1));
-      case 3: return ((SSBlock3)propertyOrBlock)(arguments.getArgAt(0), arguments.getArgAt(1), arguments.getArgAt(2));
-      case 4: return ((SSBlock4)propertyOrBlock)(arguments.getArgAt(0), arguments.getArgAt(1), arguments.getArgAt(2), arguments.getArgAt(3));
-      case 5: return ((SSBlock5)propertyOrBlock)(arguments.getArgAt(0), arguments.getArgAt(1), arguments.getArgAt(2), arguments.getArgAt(3), arguments.getArgAt(4));
-      case 6: return ((SSBlock6)propertyOrBlock)(arguments.getArgAt(0), arguments.getArgAt(1), arguments.getArgAt(2), arguments.getArgAt(3), arguments.getArgAt(4), arguments.getArgAt(5));
+      case 0: return ((SSBlock0)scriptFunction)();
+      case 1: return ((SSBlock1)scriptFunction)(arguments.getAt(0));
+      case 2: return ((SSBlock2)scriptFunction)(arguments.getAt(0), arguments.getAt(1));
+      case 3: return ((SSBlock3)scriptFunction)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2));
+      case 4: return ((SSBlock4)scriptFunction)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3));
+      case 5: return ((SSBlock5)scriptFunction)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3), arguments.getAt(4));
+      case 6: return ((SSBlock6)scriptFunction)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3), arguments.getAt(4), arguments.getAt(5));
       default:
         NSAssert(nil, @"number of parameters not yet supported for apply");
         return nil;
     }
   };
 }
+- (id(^)(id target))getScriptFunctionBlock
+{
+  return ^id(id target) {
+    // assume only JavaScript-style block methods or properties are used
+    id propertyOrBlock;
+    SEL methodSelector = NSSelectorFromString(self);
+    if ([target respondsToSelector:methodSelector])
+      propertyOrBlock = objc_msgSend(target, methodSelector);
+    else
+      propertyOrBlock = [target valueForKey:self];
+    
+    return SS.isBlock(propertyOrBlock) ? propertyOrBlock : nil;
+  };
+}
+
 
 @end

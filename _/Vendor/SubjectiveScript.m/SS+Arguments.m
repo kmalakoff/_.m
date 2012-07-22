@@ -28,6 +28,7 @@
 //
 
 #import "SS+Arguments.h"
+#import "NSArray+SS.h"
 #import "NSMutableArray+SS.h"
 #import "NSNumber+SS.h"
 
@@ -37,6 +38,8 @@
 {
   return ^(va_list argList, NSO* lastNamedArg) {
     A* result = A.new;
+    result.setIsArguments();
+    
     for (NSO* arg = lastNamedArg; arg != nil; arg = va_arg(argList, NSO*)) {
       [result addObject:arg];
     }
@@ -48,6 +51,8 @@
 {
   return ^(va_list argList, I lastNamedArg) {
     A* result = A.new;
+    result.setIsArguments();
+
     for (I arg = lastNamedArg; arg != AI_END; arg = va_arg(argList, I)) {
       [result addObject:N.I(arg)];
     }
