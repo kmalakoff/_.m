@@ -1,5 +1,5 @@
 //
-//  NSMutableDictionary+SS.m
+//  SSArguments.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,55 +27,37 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSMutableDictionary+SS.h"
+#import "NSMutableArray+SS.h"
 
-@implementation NSMutableDictionary (Object)
+// TODO: can I make the arguments inline and returnable?
 
-+ (O*(^)(UI capacity))newC
-{
-  return ^(UI capacity) {
-    return [O dictionaryWithCapacity:capacity];
-  };
-}
+// any number of arguments of type id or NSObject terminated with nil
+#define ARGS_AO(_name, _lastNamedArg) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  A* _name = A.newArguments; \
+  for (NSO* arg = _lastNamedArg; arg != nil; arg = va_arg(argList, NSO*)) { [_name addObject:arg]; } \
+  va_end(argList);
 
-- (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd
-{
-  return ^(id key, SSGetOrAddBlock add) {
-    id value = [self objectForKey:key];
-    if (value) return value;
-    
-    // create a new one
-    value = add();
-    [self setValue:value forKey:key];
-    return value;
-  };
-}
+// any number of arguments of type NSInteger terminated with AI_END
+#define AI_END (I)NSNotFound
+#define ARGS_AI(_name, _lastNamedArg) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  A* _name = A.newArguments; \
+  for (I arg = _lastNamedArg; arg != AI_END; arg = va_arg(argList, I)) { [_name addObject:N.I(arg)]; } \
+  va_end(argList);
 
-- (O*(^)(id key, id value))set
-{
-  return ^(id key, id value) {
-    if (!value) value = NSNull.null;
-    [self setValue:value forKey:key];
-    return self;
-  };
-}
+// one argument of type NSInteger
+#define ARG_I(_name, _lastNamedArg) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  I _name = va_arg(argList, I); \
+  va_end(argList);
 
-- (O*(^)(const KV* values))setKV
-{
-  return ^(const KV* values) {
-    for (const id* value = (const id*) values; *value != nil; value+=2) {
-      [self setValue:value[1] forKey:value[0]];
-    }
-    return self;
-  };
-}
-
-- (O*(^)(id key))delete_
-{
-  return ^(id key) {
-    [self removeObjectForKey:key];
-    return self;
-  };
-}
-
-@end
+// one argument of type NSNumber
+#define ARG_N(_name, _lastNamedArg) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  N* _name = va_arg(argList, N*); \
+  va_end(argList);

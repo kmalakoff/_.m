@@ -108,7 +108,7 @@ Collections
 
 each
   var each = _.each = _.forEach = function(obj, iterator, context)
-+ (void(^)(id obj, _ValueKeyDoBlock iterator))each;
++ (void(^)(id obj, _EachBlock iterator))each;
 CHANGE: no collection (was used for guard, but removed due to variable arguments not possible). Context is a JS language feature
 
 map

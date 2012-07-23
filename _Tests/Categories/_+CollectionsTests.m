@@ -57,7 +57,7 @@
 //  __block A* tripled = _.mapWithContext(AI(1, 2, 3), ^(N* num, id key, O* this){ return N.I(num.I * ((N*)this.get(@"multiplier")).I); }, OKV({@"multiplier", N.I(3)})); // CHANGE
 //  self.equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
 
-  doubled = (A*) /* SPECIALIZED */ __(AI(1, 2, 3)).map(^(N* num, /* MANDATORY */ id key){ return N.I(num.I * 2); }).value();
+  doubled = /* SPECIALIZED */ __(AI(1, 2, 3)).map(^(N* num, /* MANDATORY */ id key){ return N.I(num.I * 2); }).valueA();
   self.equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
 
   /* NOT SUPPORTED: JavaScript-only because of DOM */
@@ -85,7 +85,7 @@
   sum = _.inject(AI(1, 2, 3), ^(N* sum, N* num, /* MANDATORY */ id key){ return N.I(sum.I + num.I); }, 0);
   self.equalI(sum.I, 6, @"aliased as 'inject'");
 
-  sum = (N*) /* SPECIALIZED */ __(AI(1, 2, 3)).reduce(^(N* sum, N* num, id key){ return N.I(sum.I + num.I); }, 0).value();
+  sum = /* SPECIALIZED */ __(AI(1, 2, 3)).reduce(^(N* sum, N* num, id key){ return N.I(sum.I + num.I); }, 0).valueN();
   self.equalI(sum.I, 6, @"OO-style reduce");
 
   sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, id key){ return N.I(sum.I + num.I); }, /* MANDATORY */ 0);
@@ -102,8 +102,8 @@
   self.equal(_.reduce(nil, ^(/* MANDATORY */ N* sum, N* num, id key){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
 
   /* NOT SUPPORTED: JavaScript-only because of 'undefined' */
-//  self.equal(_.reduce(A.new, ^(){}, undefined), undefined, @"undefined can be passed as a special case");
-  self.raises(^() { _.reduce(A.new, ^(/* MANDATORY */ N* memo, N* num, id key){ return memo; }, /* MANDATORY */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
+//  self.equal(_.reduce(A.new, ^{}, undefined), undefined, @"undefined can be passed as a special case");
+  self.raises(^{ _.reduce(A.new, ^(/* MANDATORY */ N* memo, N* num, id key){ return memo; }, /* MANDATORY */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
 }
 
 - (void)test_reduceRight
@@ -128,8 +128,8 @@
   self.equal(_.reduceRight(nil, ^(/* MANDATORY */ N* sum, N* num, id key){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
 
   /* NOT SUPPORTED: JavaScript-only because of 'undefined' */
-//  self.equal(_.reduceRight(A.new, ^(){}, undefined), undefined, @"undefined can be passed as a special case");
-  self.raises(^() { _.reduceRight(A.new, ^(/* MANDATORY */ N* memo, N* num, id key){ return memo; }, /* MANDATORY */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
+//  self.equal(_.reduceRight(A.new, ^{}, undefined), undefined, @"undefined can be passed as a special case");
+  self.raises(^{ _.reduceRight(A.new, ^(/* MANDATORY */ N* memo, N* num, id key){ return memo; }, /* MANDATORY */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
 }
 
 - (void)test_find
@@ -219,7 +219,7 @@
 // Relevant when using ClojureScript
 //- (void)test_invokeWhenStringsHaveACallMethod
 //{
-//  String.prototype.call = ^() {
+//  String.prototype.call = ^{
 //    return 42;
 //  };
 //  NSA* list = AO(AI(5, 1, 7), AI(3, 2, 1));
@@ -326,7 +326,7 @@
   NSA* numbers = _.toArray(OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)}));
   self.equal(numbers.join(@", "), @"1, 2, 3", @"object flattened into array");
 
-//  var objectWithToArrayFunction = {toArray: ^() {
+//  var objectWithToArrayFunction = {toArray: ^{
 //      return [1, 2, 3];
 //  }};
 //  self.equal(_.toArray(objectWithToArrayFunction).join(@", "), @"1, 2, 3", @"toArray method used if present");

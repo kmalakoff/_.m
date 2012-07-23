@@ -78,7 +78,7 @@ static char* const SSIsBooleanKey = "IsBoolean";
 - (const NSS*)typeof { return self.isBoolean ? SSTypeNumber : SSTypeBoolean; }
 - (B)isBoolean { return objc_getAssociatedObject(self, SSIsBooleanKey) != nil; } // check for the stored key
 - (NSS*(^)())toString { 
-  return ^() { 
+  return ^{ 
     if (self.isBoolean)
       return self.boolValue ? @"true" : @"false";
     else

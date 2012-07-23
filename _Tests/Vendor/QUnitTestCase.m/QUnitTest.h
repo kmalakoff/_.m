@@ -1,8 +1,8 @@
 //
-//  NSMutableDictionary+SS.m
-//  SubjectiveScript.m
+//  QUnitTest.h
+//  QUnitTest.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/23/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,55 +27,20 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSMutableDictionary+SS.h"
+#import "QUnitTestTypes.h"
 
-@implementation NSMutableDictionary (Object)
+// forward declarations
+@class QUnitTestCase;
 
-+ (O*(^)(UI capacity))newC
+@interface QUnitTest : NSObject
 {
-  return ^(UI capacity) {
-    return [O dictionaryWithCapacity:capacity];
-  };
+  @private
+    QUnitTestCase* mTestCase;
+    id mExpected;
+    QUAsyncTestBlockExpected mCallback;
+    BOOL mStartCalled;
 }
 
-- (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd
-{
-  return ^(id key, SSGetOrAddBlock add) {
-    id value = [self objectForKey:key];
-    if (value) return value;
-    
-    // create a new one
-    value = add();
-    [self setValue:value forKey:key];
-    return value;
-  };
-}
-
-- (O*(^)(id key, id value))set
-{
-  return ^(id key, id value) {
-    if (!value) value = NSNull.null;
-    [self setValue:value forKey:key];
-    return self;
-  };
-}
-
-- (O*(^)(const KV* values))setKV
-{
-  return ^(const KV* values) {
-    for (const id* value = (const id*) values; *value != nil; value+=2) {
-      [self setValue:value[1] forKey:value[0]];
-    }
-    return self;
-  };
-}
-
-- (O*(^)(id key))delete_
-{
-  return ^(id key) {
-    [self removeObjectForKey:key];
-    return self;
-  };
-}
+- (void(^)())start;
 
 @end

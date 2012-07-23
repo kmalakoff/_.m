@@ -30,7 +30,7 @@
 + (B(^)(id obj))isDictionary  { return ^B(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
 + (B(^)(id obj))isBlock       { return ^B(id obj) { return [obj isKindOfClass:NSClassFromString(@"NSBlock")]; }; } 
 
-+ (_ValueTestBlock(^)(NSString* key, id match))propTester;
++ (_FindBlock(^)(NSString* key, id match))propTester;
 {
   return ^(NSString* key, id match) {
     return ^BOOL(id object) 
@@ -41,7 +41,7 @@
   };
 }
 
-+ (_ValueTestBlock(^)(NSString* key, NSString *match))propStringTester;
++ (_FindBlock(^)(NSString* key, NSString *match))propStringTester;
 {
   return ^(NSString* key, NSString *match) {
     return ^BOOL(id object) 

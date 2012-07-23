@@ -33,114 +33,112 @@
 #import "_+Collections.h"
 #import "SubjectiveScript.h"
 
-#define _array ((A*)self._wrapped)
-
 @implementation _Wrapper (Arrays)
 
-- (NSO*(^)(I n))first
+- (_Wrapper*(^)(I n))first
 {
   return ^id(I n) {
-    return (n>=0) ? _array.slice(0, n) : _array.get(0);
+    return (n>=0) ? self.valueNSA().slice(0, n) : self.valueNSA().get(0);
   };
 }
-- (NSO*(^)(I n))head { return self.first; } // ALIAS
-- (NSO*(^)(I n))take { return self.first; } // ALIAS
+- (_Wrapper*(^)(I n))head { return self.first; } // ALIAS
+- (_Wrapper*(^)(I n))take { return self.first; } // ALIAS
 
-- (NSA*(^)(I n))initial
+- (_Wrapper*(^)(I n))initial
 {
   return ^(I n) {
-    return _array.slice(0, _array.length - ((n<0) ? 1 : n));
+    return _.chain(self.valueNSA().slice(0, self.valueNSA().length - ((n<0) ? 1 : n)));
   };
 }
 
-- (NSO*(^)(I n))last
+- (_Wrapper*(^)(I n))last
 {
   return ^(I n) {
-    return _.last(_array, n);
+    return _.chain(_.last(self.valueNSA(), n));
   };
 }
 
-- (NSA*(^)(I index))rest
+- (_Wrapper*(^)(I index))rest
 {
   return ^(I index) {
-    return _array.slice((index<0) ? 1 : index, _array.length);
+    return _.chain(self.valueNSA().slice((index<0) ? 1 : index, self.valueNSA().length));
   };
 }
-- (NSA*(^)(I index))tail { return self.rest; } // ALIAS
+- (_Wrapper*(^)(I index))tail { return self.rest; } // ALIAS
 
-- (A*(^)())compact
+- (_Wrapper*(^)())compact
 {
-  return ^() {
-    return _.compact(_array);
+  return ^{
+    return _.chain(_.compact(self.valueNSA()));
   };
 }
 
-- (A*(^)(BOOL shallow))flatten
+- (_Wrapper*(^)(BOOL shallow))flatten
 {
   return ^(BOOL shallow) {
-    return _.flatten(_array, shallow);
+    return _.chain(_.flatten(self.valueNSA(), shallow));
   };
 }
 
-- (A*(^)(id value1, ...))without
+- (_Wrapper*(^)(id value1, ...))without
 {
   return ^(id value1, ...) {
-    AO_ARGS(items, value1);
+    ARGS_AO(items, value1);
 
-    return _.difference(_array, items, /* NIL TERMINATED */ nil);
+    return _.chain(_.difference(self.valueNSA(), items, /* NIL TERMINATED */ nil));
   };
 }
 
-- (A*(^)(NSA* array1, ...))union_
+- (_Wrapper*(^)(NSA* array1, ...))union_
 {
   return ^(NSA* array1, ...) {
-    AO_ARGS(arguments, array1);
+    ARGS_AO(arguments, array1);
 
-    return _.uniq(_.flatten(arguments, YES));
+    return _.chain(_.uniq(_.flatten(arguments, YES)));
   };
 }
 
-- (A*(^)(NSA* array1, ...))intersection
+- (_Wrapper*(^)(NSA* array1, ...))intersection
 {
   return ^(NSA* array1, ...) {
-    AO_ARGS(rest, array1);
+    ARGS_AO(rest, array1);
 
-    return _.filter(_.uniq(_array), ^(id item, id key) {
+    return _.chain(_.filter(_.uniq(self.valueNSA()), ^(id item, id key) {
       return _.every(rest, ^B(id other, id key) {
         return _.indexOf(other, item) >= 0;
       });
-    });
+    }));
   };
 }
 
-- (A*(^)(NSA* array1, ...))difference
+- (_Wrapper*(^)(NSA* array1, ...))difference
 {
   return ^(NSA* array1, ...) {
-    AO_ARGS(rest, array1);
+    ARGS_AO(rest, array1);
 
     rest = _.flatten(rest, YES);
-    return _.filter(_array, ^B(id value, id key) { return !_.include(rest, value); });
+    return _.chain(_.filter(self.valueNSA(), ^B(id value, id key) { return !_.include(rest, value); }));
   };
 }
 
-- (A*(^)())uniq
+- (_Wrapper*(^)())uniq
 {
-  return ^() {
-    return _.uniq(_array);
+  return ^{
+    return _.chain(_.uniq(self.valueNSA()));
   };
 }
-- (A*(^)(B isSorted, _ValueKeyMapBlock iterator))uniq3
+- (_Wrapper*(^)(B isSorted, _ValueKeyMapBlock iterator))uniq3
 {
   return ^(B isSorted, _ValueKeyMapBlock iterator) {
-    return _.uniq3(_array, isSorted, iterator);
+    return _.chain(_.uniq3(self.valueNSA(), isSorted, iterator));
   };
 }
-- (A*(^)(B isSorted, _ValueKeyMapBlock iterator))unique { return self.uniq3; } // ALIAS
+- (_Wrapper*(^)(B isSorted, _ValueKeyMapBlock iterator))unique { return self.uniq3; } // ALIAS
 
-- (A*(^)(NSA* array1, ...))zip
+- (_Wrapper*(^)(NSA* array1, ...))zip
 {
   return ^(NSA* array1, ...) {
-    AO_ARGS(arguments, array1);
+    ARGS_AO(arguments, array1);
 
     N* lengthNumber = (N*) _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);
     I length = lengthNumber.I;
@@ -148,30 +146,30 @@
     for (I i = 0; i < length; i++) {
       results.setAt(i, _.pluck(arguments, S.newFormatted(@"%d", i)));
     }
-    return results;
+    return _.chain(results);
   };
 }
 
 // zipObject /* NO OO-STYLE WRAPPER VERSION */
 
-- (I(^)(id item))indexOf
+- (_Wrapper*(^)(id item))indexOf
 {
-  return ^I(id item) {
-    return _.indexOf(_array, item);
+  return ^(id item) {
+    return _.chain(N.I(_.indexOf(self.valueNSA(), item)));
   };
 }
 
-- (I(^)(id item))indexOfSorted
+- (_Wrapper*(^)(id item))indexOfSorted
 {
-  return ^I(id item) {
-    return _.indexOfSorted(_array, item);
+  return ^(id item) {
+    return _.chain(N.I(_.indexOfSorted(self.valueNSA(), item)));
   };
 }
 
-- (I(^)(id value))lastIndexOf
+- (_Wrapper*(^)(id value))lastIndexOf
 {
-  return ^I(id value) {
-    return _.lastIndexOf(_array, value);
+  return ^(id value) {
+    return _.chain(N.I(_.lastIndexOf(self.valueNSA(), value)));
   };
 }
 

@@ -31,10 +31,19 @@
 
 @interface _Wrapper : NSObject
 
+- (_Wrapper*(^)())chain;
+
 - (NSO*(^)())value;
-- (B(^)())valueB; /* SPECIALIZED */
-- (I(^)())valueI; /* SPECIALIZED */
-- (UI(^)())valueUI; /* SPECIALIZED */
-- (F(^)())valueF; /* SPECIALIZED */
+- (B(^)())valueB;       /* SPECIALIZED */
+- (I(^)())valueI;       /* SPECIALIZED */
+- (UI(^)())valueUI;     /* SPECIALIZED */
+- (F(^)())valueF;       /* SPECIALIZED */
+- (N*(^)())valueN;      /* SPECIALIZED */
+- (NSS*(^)())valueNSS;  /* SPECIALIZED */
+- (S*(^)())valueS;      /* SPECIALIZED */
+- (NSA*(^)())valueNSA;  /* SPECIALIZED */
+- (A*(^)())valueA;      /* SPECIALIZED */
+- (NSD*(^)())valueNSD;  /* SPECIALIZED */
+- (O*(^)())valueO;      /* SPECIALIZED */
 
 @end

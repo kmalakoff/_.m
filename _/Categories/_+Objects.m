@@ -28,29 +28,84 @@
 //
 
 #import "_+Objects.h"
+#import "_+Arrays.h"
+#import "_+Collections.h"
 #import "_+Extensions.h"
 #import "SubjectiveScript.h"
 
 @implementation _ (Objects)
 
-+ (NSA*(^)(NSD* obj))keys {
++ (NSA*(^)(NSD* obj))keys 
+{
   return ^(NSD* obj) {
     return obj.allKeys;
   };
 }
 
-+ (NSA*(^)(NSD* obj))values {
++ (NSA*(^)(NSD* obj))values 
+{
   return ^(NSD* obj) {
     return obj.allValues;
   };
 }
 
-//functions
-//extend
-//pick
-//defaults
-//clone
-//tap
++ (A*(^)(NSD* obj))functions 
+{
+  return ^(NSD* obj) {
+    return obj.functionNames();
+  };
+}
++ (A*(^)(NSD* obj))methods { return _.functions; } // ALIAS 
+
++ (O*(^)(O* obj, NSD* obj1, ...))extend
+{
+  return ^(O* obj, NSD* obj1, ...) {
+    ARGS_AO(objects, obj1);
+
+    _.each(objects, ^(NSD* source, id key) {
+      [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+        [obj setObject:value forKey:key];
+      }];
+    });
+    return obj;
+  };
+}
+
++ (O*(^)(O* obj, id key1, ...))pick
+{
+  return ^(O* obj, id key1, ...) {
+    ARGS_AO(keys, key1);
+
+    __block O* result = O.new;
+    _.each(_.flatten(keys, true), ^(NSO* key, id index) {
+      if (key.in(obj)) result.set(key, obj.get(key));
+    });
+    return result;
+  };
+}
+
++ (O*(^)(O* obj, NSD* obj1, ...))defaults
+{
+  return ^(O* obj, NSD* obj1, ...) {
+    ARGS_AO(objects, obj1);
+
+    _.each(objects, ^(NSD* source, id key) {
+      [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, BOOL *stop) {
+        if (!key.in(obj)) [obj setObject:value forKey:key];
+      }];
+    });
+    return obj;
+  };
+}
+
++ (NSO*(^)(NSO* obj))clone
+{
+  return ^(NSO* obj) {
+    return obj.copy;
+  };
+}
+
+//tap /* NOT SUPPORTED: JavaScript-only */
 
 + (B(^)(NSO* obj, id key))has
 {

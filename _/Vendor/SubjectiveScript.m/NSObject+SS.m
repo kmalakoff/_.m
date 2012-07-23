@@ -30,7 +30,7 @@
 #import "NSObject+SS.h"
 #import "SS+Types.h"
 #import "SS+Number.h"
-#import "SS+Arguments.h"
+#import "SSArguments.h"
 #import "NSString+SS.h"
 #import "NSArray+SS.h"
 #import "NSNumber+SS.h"
@@ -42,7 +42,7 @@ const NSS* SSTypeObject = @"object";
 - (const NSS*)typeof {return SSTypeObject; }
 - (NSS*(^)())toString
 {
-  return ^() {
+  return ^{
     if (SS.isNull(self)) return @"";
     return self.description;
   };

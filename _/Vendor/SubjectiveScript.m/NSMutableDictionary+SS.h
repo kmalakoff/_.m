@@ -33,6 +33,7 @@
 
 + (A*(^)(UI capacity))newC;
 
+- (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd;
 - (O*(^)(id key, id value))set;
 - (O*(^)(const KV* values))setKV; // TODO: NS_REQUIRES_NIL_TERMINATION
 - (O*(^)(id key))delete_;

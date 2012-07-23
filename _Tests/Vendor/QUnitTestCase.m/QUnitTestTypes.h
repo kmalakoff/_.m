@@ -1,8 +1,8 @@
 //
-//  SS+Arguments.m
-//  SubjectiveScript.m
+//  QUnitTestTypes.h
+//  QUnitTestTypes.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/23/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,37 +27,12 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SS+Arguments.h"
-#import "NSArray+SS.h"
-#import "NSMutableArray+SS.h"
-#import "NSNumber+SS.h"
+#import <Foundation/Foundation.h>
 
-@implementation SS (Arguments)
+// forward declarations
+@class QUnitTest;
 
-+ (A*(^)(va_list argList, NSO* lastNamedArg))objectArgumentsToArray
-{
-  return ^(va_list argList, NSO* lastNamedArg) {
-    A* result = A.new;
-    result.setIsArguments();
-    
-    for (NSO* arg = lastNamedArg; arg != nil; arg = va_arg(argList, NSO*)) {
-      [result addObject:arg];
-    }
-    return result;
-  };
-}
+typedef void                (^QURaiseBlock)();
 
-+ (A*(^)(va_list argList, I lastNamedArg))integerArgumentsToArray
-{
-  return ^(va_list argList, I lastNamedArg) {
-    A* result = A.new;
-    result.setIsArguments();
-
-    for (I arg = lastNamedArg; arg != AI_END; arg = va_arg(argList, I)) {
-      [result addObject:N.I(arg)];
-    }
-    return result;
-  };
-}
-
-@end
+typedef void                (^QUAsyncTestBlock)(QUnitTest* test);
+typedef id                  (^QUAsyncTestBlockExpected)(QUnitTest* test);

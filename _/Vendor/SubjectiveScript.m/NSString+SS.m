@@ -29,16 +29,9 @@
 
 #import "NSString+SS.h"
 #import "NSMutableString+SS.h"
+#import "NSMutableArray+SS.h"
+#import "SS+JavaScript.h"
 #import "SubjectiveScript.h"
-#import <objc/message.h>
-
-typedef id(^SSBlock0)();
-typedef id(^SSBlock1)(id arg1);
-typedef id(^SSBlock2)(id arg1, id arg2);
-typedef id(^SSBlock3)(id arg1, id arg2, id arg3);
-typedef id(^SSBlock4)(id arg1, id arg2, id arg3, id arg4);
-typedef id(^SSBlock5)(id arg1, id arg2, id arg3, id arg4, id arg5);
-typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6);
 
 const NSS* SSTypeString = @"string";
 
@@ -72,7 +65,7 @@ const NSS* SSTypeString = @"string";
 }
 
 - (const NSS*)typeof { return SSTypeString; }
-- (NSS*(^)())toString { return ^() { return self; }; }
+- (NSS*(^)())toString { return ^{ return self; }; }
 
 - (NSO*(^)(I index))getAt
 {
@@ -81,52 +74,30 @@ const NSS* SSTypeString = @"string";
   };
 }
 
-- (id(^)(id target, id arg1, ...))call
+- (NSA*(^)(NSS* separator))split
 {
-  return ^(id target, id arg1, ...) {
-    AO_ARGS(arguments, arg1);
-    return self.apply(target, arguments);
-  };
-}
-
-- (id(^)(id target, NSA* arguments))apply
-{
-  return ^id(id target, NSA* arguments) {
-    id scriptFunction = self.getScriptFunctionBlock(target);
-    if (!scriptFunction) {
-      NSLog(@"function '%@' did not exist for call or apply", self);
-      return nil;
+  return ^NSA*(NSS* separator) {
+    // split on nothing means get the characters
+    if (!separator || !separator.length)
+    {
+      UI count = self.length;
+      A *characters = A.newC(count);
+      for (I index=0; index<count; index++) {
+        characters.push([self substringWithRange:NSMakeRange(index, 1)]);
+      }
+      return characters;
     }
-
-    // TODO: figure out a safe way to call blocks by signature
-    switch(arguments.length) {
-      case 0: return ((SSBlock0)scriptFunction)();
-      case 1: return ((SSBlock1)scriptFunction)(arguments.getAt(0));
-      case 2: return ((SSBlock2)scriptFunction)(arguments.getAt(0), arguments.getAt(1));
-      case 3: return ((SSBlock3)scriptFunction)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2));
-      case 4: return ((SSBlock4)scriptFunction)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3));
-      case 5: return ((SSBlock5)scriptFunction)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3), arguments.getAt(4));
-      case 6: return ((SSBlock6)scriptFunction)(arguments.getAt(0), arguments.getAt(1), arguments.getAt(2), arguments.getAt(3), arguments.getAt(4), arguments.getAt(5));
-      default:
-        NSAssert(nil, @"number of parameters not yet supported for apply");
-        return nil;
-    }
-  };
-}
-- (id(^)(id target))getScriptFunctionBlock
-{
-  return ^id(id target) {
-    // assume only JavaScript-style block methods or properties are used
-    id propertyOrBlock;
-    SEL methodSelector = NSSelectorFromString(self);
-    if ([target respondsToSelector:methodSelector])
-      propertyOrBlock = objc_msgSend(target, methodSelector);
     else
-      propertyOrBlock = [target valueForKey:self];
-    
-    return SS.isBlock(propertyOrBlock) ? propertyOrBlock : nil;
+      return [self componentsSeparatedByString:separator];
   };
 }
-
+- (S*(^)(NSS* value))add
+{
+  return ^(NSS* value) {
+    S* result = self.mutableCopy;
+    [result appendString:value];
+    return result;
+  };
+}
 
 @end

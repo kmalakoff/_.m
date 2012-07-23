@@ -44,13 +44,15 @@
 
 - (UI)length;
 - (B(^)(id key))hasOwnProperty;
-- (NSO*(^)(I index))getAt;
+- (NSO*(^)(UI index))getAt;
+- (NSO*(^)(UI index))getArgAt;
 
 - (S*(^)(NSS* separator))join;
 - (NSA*(^)(UI start, UI count))slice;
 - (A*(^)())reverse;
 - (A*(^)())flatten;
 - (NSA*(^)(SSCompareBlock block))sort;
+- (A*(^)(NSA* other))concat;
 
 @end
 

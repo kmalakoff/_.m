@@ -13,4 +13,21 @@
 
 + (SSJSON*)JSON;
 
++ (id(^)(id block, id arg1, ...))call;
++ (id(^)(id block, NSA* arguments))apply;
+
+@end
+
+@interface NSObject (JavaScript)
+
+- (A*(^)())functionNames;
+
+@end
+
+@interface NSString (JavaScript)
+
+- (id(^)(id target, id arg1, ...))call;
+- (id(^)(id target, NSA* arguments))apply;
+- (id(^)(id target))getScriptFunctionBlock;
+
 @end

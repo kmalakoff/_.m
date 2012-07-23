@@ -31,6 +31,6 @@
 
 @implementation NSDate (SS)
 
-- (NSS*(^)())toString { return ^() { return self.description; }; }
+- (NSS*(^)())toString { return ^{ return self.description; }; }
 
 @end

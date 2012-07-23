@@ -33,15 +33,20 @@
 
 //noConflict /* NOT SUPPORTED: JavaScript-only */
 
-+ (_ValueMapBlock)identityVMB; /* SPECIALIZED */
++ (_IdentityBlock)identity;
 + (_ValueKeyTestBlock)identityVKTB; /* SPECIALIZED */
-+ (_ValueValueCompareBlock)identityVVCB; /* SPECIALIZED */ 
++ (_CompareBlock)identityVVCB; /* SPECIALIZED */ 
 
-//times
-//mixin
-//uniqueId
-//escape
-//result
-//template
++ (void(^)(I n, _TimesBlock iterator))times;
+
+//mixin /* NOT SUPPORTED: JavaScript-only: use Objective-C categories on '_' instead */
+
++ (NSS*(^)(NSS* prefix))uniqueId;
+
+//escape /* NOT SUPPORTED: JavaScript-only...could be implemented with GTMNSString+HTML, but currently not ARC compatible */
+
++ (NSO*(^)(NSO* object, id property))result;
+
+//template /* NOT SUPPORTED: JavaScript-only */
 
 @end

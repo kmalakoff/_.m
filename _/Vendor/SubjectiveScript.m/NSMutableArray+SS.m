@@ -28,9 +28,17 @@
 //
 
 #import "NSMutableArray+SS.h"
+#import "NSArray+SS.h"
 #import "NSNumber+SS.h"
 
 @implementation NSMutableArray (SS)
+
++ (A*)newArguments
+{
+  A* result = A.new;
+  result.setIsArguments();
+  return result;
+}
 
 + (A*(^)(UI capacity))newC
 {
@@ -39,9 +47,17 @@
   };
 }
 
++ (A*(^)(id obj))newNSO
+{
+  return ^(id obj) {
+    return [A arrayWithObject:obj];
+  };
+}
+
 - (A*(^)(id indexNumber, id value))set
 {
   return ^(N* indexNumber, id value) {
+    if (!value) value = NSNull.null;
     return self.setAt(indexNumber.I, value);
   };
 }

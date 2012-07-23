@@ -28,12 +28,23 @@
 //
 
 #import "_Wrapper+Utility.h"
+#import "_Wrapper+Private.h"
+#import "_+Utility.h"
 
 @implementation _Wrapper (Utility)
 
 //noConflict
 //identity
-//times
+
+- (_Wrapper*(^)(_TimesBlock iterator))times
+{
+  return ^(_TimesBlock iterator) {
+    _.times(self.valueI(), iterator);
+    return self;
+  };
+}
+
+
 //mixin
 //uniqueId
 //escape

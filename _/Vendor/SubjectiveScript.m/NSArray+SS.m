@@ -102,11 +102,11 @@ static char* const SSIsArgumentsKey = "IsArguments";
 
 
 - (NSS*)mutableClassName { return NSStringFromClass([S class]); }
-- (NSS*(^)())toString { return ^() { return S.newFormatted(@"[%@]", self.join(@",")); }; }
+- (NSS*(^)())toString { return ^{ return S.newFormatted(@"[%@]", self.join(@",")); }; }
 - (UI)length { return self.count; }
 
 - (B)isArguments { return objc_getAssociatedObject(self, SSIsArgumentsKey) != nil; } 
-- (void(^)())setIsArguments { return ^(){ objc_setAssociatedObject(self, SSIsArgumentsKey, SSTypeArguments, OBJC_ASSOCIATION_ASSIGN); }; } // set the stored key
+- (void(^)())setIsArguments { return ^{ objc_setAssociatedObject(self, SSIsArgumentsKey, SSTypeArguments, OBJC_ASSOCIATION_ASSIGN); }; } // set the stored key
 
 - (B(^)(id key))hasOwnProperty
 {
@@ -123,15 +123,20 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-- (NSO*(^)(I index))getAt
+- (NSO*(^)(UI index))getAt
 {
-  return ^NSO*(I index) {
+  return ^NSO*(UI index) {
+    return index>=self.count ? nil : [self objectAtIndex:index];
+  };
+}
+
+- (NSO*(^)(UI index))getArgAt
+{
+  return ^NSO*(UI index) {
     if (index>=self.count) return nil;
-    NSO* item = [self objectAtIndex:index];
-    if (self.isArguments)
-      return SS.isNull(item) ? (NSO*) nil : item; 
-    else
-      return item;
+    id value = [self objectAtIndex:index];
+    if ([value isKindOfClass:[NSNull class]]) return nil;
+    return value;
   };
 }
 
@@ -177,10 +182,10 @@ static char* const SSIsArgumentsKey = "IsArguments";
 
 - (A*(^)())reverse
 {
-  return ^() {
+  return ^{
     A* result = A.newC(self.count); 
     for (id item in [self reverseObjectEnumerator]) {
-        [result addObject:item];
+      [result addObject:item];
     }
     return result;
   };
@@ -188,7 +193,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
 
 - (A*(^)())flatten
 {
-  return ^() {
+  return ^{
     A* output = A.new;
     for (id value in self) {
       if (SS.isArray(value))
@@ -209,6 +214,15 @@ static char* const SSIsArgumentsKey = "IsArguments";
     [sortedCopy sortUsingSelector:@selector(compare:)];
     return sortedCopy;
   };
+}
+
+- (A*(^)(NSA* other))concat
+{
+  return ^(NSA* other) {
+    A* result = self.mutableCopy;
+    [result addObjectsFromArray:other];
+    return result;
+  };  
 }
 
 @end

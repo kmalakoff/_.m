@@ -128,7 +128,7 @@
 + (A*(^)(NSA* array, id value1, ...))without
 {
   return ^(NSA* array, id value1, ...) {
-    AO_ARGS(items, value1);
+    ARGS_AO(items, value1);
     return _.difference(array, items, /* NIL TERMINATED */ nil);
   };
 }
@@ -136,7 +136,7 @@
 + (A*(^)(NSA* array, ...))union_
 {
   return ^(NSA* array, ...) {
-    AO_ARGS(arguments, array);
+    ARGS_AO(arguments, array);
 
     return _.uniq([self flatten:arguments shallow:YES output:A.new]);
   };
@@ -145,7 +145,7 @@
 + (A*(^)(NSA* array, NSA* array1, ...))intersection
 {
   return ^(NSA* array, NSA* array1, ...) {
-    AO_ARGS(rest, array1);
+    ARGS_AO(rest, array1);
 
     return _.filter(_.uniq(array), ^(id item, id key) {
       return _.every(rest, ^B(id other, id key) {
@@ -158,7 +158,7 @@
 + (A*(^)(NSA* array, NSA* array1, ...))difference
 {
   return ^(NSA* array, NSA* array1, ...) {
-    AO_ARGS(rest, array1);
+    ARGS_AO(rest, array1);
 
     rest = _.flatten(rest, YES);
     return _.filter(array, ^B(id value, id key) { return !_.include(rest, value); });
@@ -200,7 +200,7 @@
 + (A*(^)(NSA* array, ...))zip
 {
   return ^(NSA* array, ...) {
-    AO_ARGS(arguments, array);
+    ARGS_AO(arguments, array);
 
     N* lengthNumber = (N*) _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);
     I length = lengthNumber.I;

@@ -41,42 +41,116 @@
 
 @synthesize _wrapped;
 
-- (NSO*(^)())value;
+- (_Wrapper*(^)())chain
+{
+  return ^{
+    return _.chain(self._wrapped);
+  };
+}
+
+- (NSO*(^)())value
 {
   return ^{
     return self._wrapped;
   };
 }
 
-- (B(^)())valueB;
+- (B(^)())valueB
 {
   return ^{
-    NSAssert(_.isBoolean(self._wrapped), @"valueB is not a boolean");
-    return ((N*)self._wrapped).boolValue;
+    if (_.isBoolean(self._wrapped)) return ((N*)self._wrapped).boolValue;
+    NSLog(@"valueB is not a boolean");
+    return false;
   };
 }
 
-- (I(^)())valueI;
+- (I(^)())valueI
 {
   return ^{
-    NSAssert([self._wrapped isKindOfClass:[NSNumber class]], @"valueI is not an NSNumber");
-    return ((N*)self._wrapped).integerValue;
+    if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).integerValue;
+    NSLog(@"valueI is not a NSNumber");
+    return 0;
   };
 }
 
-- (UI(^)())valueUI;
+- (UI(^)())valueUI
 {
   return ^{
-    NSAssert([self._wrapped isKindOfClass:[NSNumber class]], @"valueI is not an NSNumber");
-    return ((N*)self._wrapped).unsignedIntegerValue;
+    if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).unsignedIntegerValue;
+    NSLog(@"valueUI is not a NSNumber");
+    return 0;
   };
 }
 
-- (F(^)())valueF;
+- (F(^)())valueF
 {
   return ^{
-    NSAssert([self._wrapped isKindOfClass:[NSNumber class]], @"valueI is not an NSNumber");
-    return ((N*)self._wrapped).floatValue;
+    if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).floatValue;
+    NSLog(@"valueF is not a NSNumber");
+    return 0;
+  };
+}
+
+- (N*(^)())valueN
+{
+  return ^{
+    if ([self._wrapped isKindOfClass:[NSNumber class]]) return (N*)self._wrapped;
+    NSLog(@"valueN is not a NSNumber");
+    return nil;
+  };
+}
+
+- (NSS*(^)())valueNSS
+{
+  return ^{
+    if ([self._wrapped isKindOfClass:[NSString class]]) return (NSS*)self._wrapped;
+    NSLog(@"valueNSS is not a NSString");
+    return nil;
+  };
+}
+
+- (S*(^)())valueS
+{
+  return ^{
+    if ([self._wrapped isKindOfClass:[NSMutableString class]]) return (S*)self._wrapped;
+    NSLog(@"valueS is not a NSMutableString");
+    return nil;
+  };
+}
+
+- (NSA*(^)())valueNSA
+{
+  return ^{
+    if ([self._wrapped isKindOfClass:[NSArray class]]) return (NSA*)self._wrapped;
+    NSLog(@"valueNSA is not a NSArray");
+    return nil;
+  };
+}
+
+- (A*(^)())valueA
+{
+  return ^{
+    if ([self._wrapped isKindOfClass:[NSMutableArray class]]) return (A*)self._wrapped;
+    NSLog(@"valueA is not a NSMutableArray");
+    return nil;
+  };
+}
+
+- (NSD*(^)())valueNSD
+{
+  return ^{
+    if ([self._wrapped isKindOfClass:[NSDictionary class]]) return (NSD*)self._wrapped;
+    NSLog(@"valueNSD is not a NSDictionary");
+    return nil;
+  };
+}
+
+- (O*(^)())valueO
+{
+  return ^{
+    if ([self._wrapped isKindOfClass:[NSMutableDictionary class]]) return (O*)self._wrapped;
+    NSLog(@"valueO is not a NSMutableDictionary");
+    return nil;
   };
 }
 

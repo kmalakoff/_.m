@@ -31,6 +31,8 @@
 
 @interface SSJSON : NSObject
 
++ (SSJSON*)sharedInstance;
+
 - (NSS*(^)(NSO* obj))stringify;
 
 @end

@@ -53,5 +53,7 @@ typedef id              KV[2];
 #define E               NSException
 
 // blocks
-typedef void                (^SSDoBlock)();
+typedef void                (^SSDispatchBlock)();
+typedef void                (^SSTimeoutBlock)();
+typedef id                  (^SSGetOrAddBlock)();
 typedef NSComparisonResult  (^SSCompareBlock)(id left, id right);

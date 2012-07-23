@@ -29,16 +29,45 @@
 
 #import "SSTypes.h"
 
-// blocks
-typedef void                (^_DoBlock)();
 
-typedef B                   (^_ValueTestBlock)(id value);
-typedef NSO*                (^_ValueMapBlock)(id value);
+typedef id                  (^_IdentityBlock)(id value);
 
-typedef void                (^_ValueKeyDoBlock)(id value, id key);
-typedef B                   (^_ValueKeyTestBlock)(id value, id key);
+typedef void                (^_DelayBlock)();
+typedef void                (^_DeferBlock)();
+typedef void                (^_TimeoutBlock)();
+
+typedef id                  (^_ThrottledBlock)();
+typedef id                  (^_ThrottleBlock)(id arg1, ...);
+
+typedef void                (^_DebouncedBlock)();
+typedef void                (^_DebounceBlock)(id arg1, ...);
+
+typedef id                  (^_ComposeBlock)(id arg1, ...);
+
+typedef id                  (^_WrappedBlock)(id arg1, ...);
+typedef id                  (^_WrapBlock)(_WrappedBlock wrapped, id arg1, ...);
+
+typedef id                  (^_OncedBlock)();
+typedef id                  (^_OnceBlock)(id arg1, ...);
+
+typedef id                  (^_AfterBlock)(id arg1, ...);
+typedef void                (^_TimesBlock)(I index);
+
+typedef B                   (^_FindBlock)(id value);
+
+typedef NSO*                (^_MinBlock)(id value);
+typedef NSO*                (^_MaxBlock)(id value);
+typedef NSO*                (^_SortedIndexBlock)(id value);
+typedef NSO*                (^_SortByBlock)(id value);
+typedef NSO*                (^_GroupByBlock)(id value, id key);
+
+typedef id                  (^_MemoizeBlock)(id arg1, ...);
+typedef id                  (^_MemoizedBlock)(id arg1, ...);
+
+typedef void                (^_EachBlock)(id value, id key);
+typedef B                   (^_ValueKeyTestBlock)(id value, id key); // TODO: should this be specialized?
 typedef NSO*                (^_ValueKeyMapBlock)(id value, id key);  // TODO: try ... for optional container
 
 typedef NSO*                (^_MemoValueKeyMapBlock)(id memo, id value, id key);
 
-typedef NSComparisonResult  (^_ValueValueCompareBlock)(id left, id right);
+typedef NSComparisonResult  (^_CompareBlock)(id left, id right);

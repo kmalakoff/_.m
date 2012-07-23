@@ -31,41 +31,41 @@
 
 @interface _Wrapper (Arrays)
 
-- (NSO*(^)(I n))first;
-- (NSO*(^)(I n))head;
-- (NSO*(^)(I n))take;
+- (_Wrapper*(^)(I n))first;
+- (_Wrapper*(^)(I n))head;
+- (_Wrapper*(^)(I n))take;
 
-- (NSA*(^)(I n))initial;
+- (_Wrapper*(^)(I n))initial;
 
-- (NSO*(^)(I n))last;
+- (_Wrapper*(^)(I n))last;
 
-- (NSA*(^)(I index))rest;
-- (NSA*(^)(I index))tail;
+- (_Wrapper*(^)(I index))rest;
+- (_Wrapper*(^)(I index))tail;
 
-- (A*(^)())compact;
+- (_Wrapper*(^)())compact;
 
-- (A*(^)(BOOL shallow))flatten;
+- (_Wrapper*(^)(BOOL shallow))flatten;
  
-- (A*(^)(id value1, ...))without; // TODO: nil terminated
+- (_Wrapper*(^)(id value1, ...))without; // TODO: nil terminated
 
-- (A*(^)(NSA* array1, ...))union_;  /* RESERVED KEYWORD 'union' -> 'union_' */ // TODO: nil terminated
+- (_Wrapper*(^)(NSA* array1, ...))union_;  /* RESERVED KEYWORD 'union' -> 'union_' */ // TODO: nil terminated
 
-- (A*(^)(NSA* array1, ...))intersection; // TODO: nil terminated
+- (_Wrapper*(^)(NSA* array1, ...))intersection; // TODO: nil terminated
 
-- (A*(^)(NSA* array1, ...))difference; // TODO: nil terminated
+- (_Wrapper*(^)(NSA* array1, ...))difference; // TODO: nil terminated
 
-- (A*(^)())uniq;
-- (A*(^)(B isSorted, _ValueKeyMapBlock iterator))uniq3; /* SPECIALIZED */
-- (A*(^)(B isSorted, _ValueKeyMapBlock iterator))unique;
+- (_Wrapper*(^)())uniq;
+- (_Wrapper*(^)(B isSorted, _ValueKeyMapBlock iterator))uniq3; /* SPECIALIZED */
+- (_Wrapper*(^)(B isSorted, _ValueKeyMapBlock iterator))unique;
 
-- (A*(^)(NSA* array1, ...))zip; // TODO: nil terminated
+- (_Wrapper*(^)(NSA* array1, ...))zip; // TODO: nil terminated
 
 // zipObject /* NO OO-STYLE WRAPPER VERSION */
 
-- (I(^)(id value))indexOf;
-- (I(^)(id value))indexOfSorted; /* SPECIALIZED */
+- (_Wrapper*(^)(id value))indexOf;
+- (_Wrapper*(^)(id value))indexOfSorted; /* SPECIALIZED */
 
-- (I(^)(id value))lastIndexOf;
+- (_Wrapper*(^)(id value))lastIndexOf;
 
 // range1 /* NO OO-STYLE WRAPPER VERSION */
 // range /* NO OO-STYLE WRAPPER VERSION */

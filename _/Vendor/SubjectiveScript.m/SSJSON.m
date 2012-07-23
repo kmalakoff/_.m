@@ -32,6 +32,16 @@
 
 @implementation SSJSON
 
++ (SSJSON*)sharedInstance
+{
+  static SSJSON *sharedInstance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedInstance = [[SSJSON alloc] init];
+  });
+  return sharedInstance;
+}
+
 - (NSS*(^)(NSO* obj))stringify { return ^(NSO* obj) { return obj.toString(); }; }
 
 @end

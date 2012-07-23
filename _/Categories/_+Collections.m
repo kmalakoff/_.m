@@ -37,9 +37,9 @@
 
 @implementation _ (Collections)
 
-+ (void(^)(id obj, _ValueKeyDoBlock iterator))each
++ (void(^)(id obj, _EachBlock iterator))each
 {
-  return ^(id obj, _ValueKeyDoBlock iterator) {
+  return ^(id obj, _EachBlock iterator) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"each xpecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj)) return;
@@ -61,7 +61,7 @@
     }
   };
 }
-+ (void(^)(id obj, _ValueKeyDoBlock iterator))forEach { return self.each; }  // ALIAS
++ (void(^)(id obj, _EachBlock iterator))forEach { return self.each; }  // ALIAS
 + (B(^)(id obj, _ValueKeyTestBlock iterator))eachWithStop
 {
   return ^B(id obj, _ValueKeyTestBlock iterator) {
@@ -185,9 +185,9 @@
 }
 + (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
 
-+ (id(^)(id obj, _ValueTestBlock iterator))find
++ (id(^)(id obj, _FindBlock iterator))find
 {
-  return ^(id obj, _ValueTestBlock iterator) {
+  return ^(id obj, _FindBlock iterator) {
     __block NSO* result;
     _.any(obj, ^B(id value, id key) {
       if (iterator(value)) {
@@ -200,7 +200,7 @@
   };
 }
 
-+ (id(^)(id obj, _ValueTestBlock iterator))detect { return self.find; } // ALIAS
++ (id(^)(id obj, _FindBlock iterator))detect { return self.find; } // ALIAS
 
 + (A*(^)(id obj, _ValueKeyTestBlock iterator))filter
 {
@@ -268,7 +268,7 @@
 + (NSO*(^)(id obj, NSS* methodName, id arg1, ...))invoke
 {
   return ^NSO*(id obj, NSS* methodName, id arg1, ...) {
-    AO_ARGS(arguments, arg1);
+    ARGS_AO(arguments, arg1);
 
     return _.map(obj, ^(NSO* value, id key) {
       return methodName.apply(value, arguments);
@@ -294,9 +294,9 @@
   };
 }
 
-+ (NSO*(^)(NSO* obj, _ValueMapBlock iterator))max
++ (NSO*(^)(NSO* obj, _MaxBlock iterator))max
 {
-  return ^NSO*(id obj, _ValueMapBlock iterator) {
+  return ^NSO*(id obj, _MaxBlock iterator) {
     if (!iterator && _.isEmpty(obj))
       return NF_NEG_INFINITY;
 
@@ -322,9 +322,9 @@
   };
 }
 
-+ (NSO*(^)(NSO* obj, _ValueMapBlock iterator))min
++ (NSO*(^)(NSO* obj, _MinBlock iterator))min
 {
-  return ^NSO*(id obj, _ValueMapBlock iterator) {
+  return ^NSO*(id obj, _MinBlock iterator) {
     if (!iterator && _.isEmpty(obj))
       return NF_POS_INFINITY;
 
@@ -356,7 +356,7 @@
   return ^(id obj, id iteratorOrKey) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
 
-    _ValueMapBlock iterator = _.isBlock(iteratorOrKey) ? (_ValueMapBlock) iteratorOrKey : ^(NSO* value){ 
+    _SortedIndexBlock iterator = _.isBlock(iteratorOrKey) ? (_SortedIndexBlock) iteratorOrKey : ^(NSO* value){ 
       return value.get(iteratorOrKey); 
     };
 
@@ -379,28 +379,24 @@
   return ^(id obj, id iteratorOrKey) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
 
-    _ValueKeyMapBlock iterator = _.isBlock(iteratorOrKey) ? (_ValueKeyMapBlock) iteratorOrKey : ^(NSO* value, id key){ 
+    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, id key){ 
       return value.get(iteratorOrKey); 
     };
     
     __block O* result = O.new;
     _.each(obj, ^(id value, id key) {
       key = iterator(value, key);
-      A* values = (A*) result.get(key);
-      if (!values) {
-        values = A.new;
-        result.set(key, values);
-      }
+      A* values = (A*) result.getOrAdd(key, ^{ return A.new; });
       values.push(value);
     });
     return result;
   };
 }
 
-+ (I(^)(NSA* array, id obj, _ValueMapBlock iterator))sortedIndex
++ (I(^)(NSA* array, id obj, _SortedIndexBlock iterator))sortedIndex
 {
-  return ^(NSA* array, id obj, _ValueMapBlock iterator) {
-    if (!iterator) iterator = _.identityVMB;
+  return ^(NSA* array, id obj, _SortedIndexBlock iterator) {
+    if (!iterator) iterator = _.identity;
     NSO* value = iterator(obj);
     I low = 0, high = array.length;
     while (low < high) {
@@ -429,7 +425,7 @@
   return ^(id obj) {
     if (!obj)                                         return NSA.new;
     if (_.isArray(obj))                               return ((NSA*)obj).copy;
-//    if (_.isArguments(obj))                         return ((NSA*)obj).copy;  /* NOT SUPPORTED: JavaScript-only */
+//    if (_.isArguments(obj))                           return ((NSA*)obj).copy;  /* NOT NEEDED: Arugements are an array */
     if ([obj respondsToSelector:@selector(toArray)])  return (NSA*) [obj performSelector:@selector(toArray)];
     return _.values(obj);
   };

@@ -32,6 +32,13 @@
 
 @implementation NSMutableString (SS)
 
++ (S*(^)(UI capacity))newC
+{
+  return ^(UI capacity) {
+    return [S stringWithCapacity:capacity];
+  };
+}
+
 + (S*(^)(NSS* value))newS
 {
   return ^(NSS* value) {

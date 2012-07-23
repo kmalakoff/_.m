@@ -27,10 +27,9 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
 #import <SenTestingKit/SenTestingKit.h>
-
-typedef void                (^QURaiseBlock)();
+#import "QUnitTestTypes.h"
+#import "QUnitTest.h"
 
 @interface QUnitTestCase : SenTestCase
 
@@ -40,7 +39,12 @@ typedef void                (^QURaiseBlock)();
 - (void(^)(NSInteger actual, NSInteger expected, NSString *message, ...))notEqualI;
 - (void(^)(id actual, id expected, NSString *message, ...))strictEqual;
 - (void(^)(id actual, id expected, NSString *message, ...))notStrictEqual;
+- (void(^)(id actual, id expected, NSString *message, ...))deepEqual;
+
 - (void(^)(BOOL result, NSString *message, ...))ok;
 - (void(^)(QURaiseBlock block, NSString *expected, NSString *message, ...))raises;
+
+- (void(^)(QUAsyncTestBlock callback))asyncTest;
+- (void(^)(id expected, QUAsyncTestBlockExpected callback))asyncTestExpected;
 
 @end

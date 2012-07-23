@@ -19,8 +19,8 @@
 + (B(^)(id obj))isBlock;
 
 // object
-+ (_ValueTestBlock(^)(NSS* key, id match))propTester;
-+ (_ValueTestBlock(^)(NSS* key, NSS* match))propStringTester;
++ (_FindBlock(^)(NSS* key, id match))propTester;
++ (_FindBlock(^)(NSS* key, NSS* match))propStringTester;
 
 // array
 + (void(^)(NSA* array, NSS* key, id value))setProps;

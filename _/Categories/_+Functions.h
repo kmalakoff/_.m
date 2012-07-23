@@ -34,19 +34,24 @@
 //bind /* NOT SUPPORTED: JavaScript-only */
 //bindAll /* NOT SUPPORTED: JavaScript-only */
 
-//memoize
++ (_MemoizeBlock(^)(_MemoizeBlock func, _MemoizeBlock hasher))memoize; /* NIL TERMINATED */
 
-+ (void(^)(_DoBlock func, I waitNS))delay;
-+ (void(^)(_DoBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */
++ (void(^)(_DelayBlock func, I waitNS))delay;
++ (void(^)(_DelayBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */
 
-+ (void(^)(_DoBlock func))defer;
-+ (void(^)(_DoBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */
++ (void(^)(_DeferBlock func))defer;
++ (void(^)(_DeferBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */
 
-//throttle
-//debounce
-//once
-//after
-//wrap
-//compose
++ (_ThrottledBlock(^)(_ThrottleBlock func, I waitNS, id arg1, ...))throttle;  /* NIL TERMINATED */
+
++ (_DebouncedBlock(^)(_DebounceBlock func, I waitNS, B immediate, id arg1, ...))debounce;  /* NIL TERMINATED */
+
++ (_OncedBlock(^)(_OnceBlock func, id arg1, ...))once;
+
++ (_AfterBlock(^)(I times, _AfterBlock func, id arg1, ...))after;
+
++ (_WrappedBlock(^)(_WrappedBlock func, _WrapBlock wrapper))wrap;
+
++ (_ComposeBlock(^)(_ComposeBlock func1, ...))compose;
 
 @end

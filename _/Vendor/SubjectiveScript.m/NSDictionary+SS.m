@@ -43,7 +43,7 @@
 }
 
 - (NSS*)mutableClassName { return NSStringFromClass([D class]); }
-- (NSS*(^)())toString { return ^() { return self.description; }; }
+- (NSS*(^)())toString { return ^{ return self.description; }; }
 
 - (B(^)())isEmpty { return ^B() { return ([self keyEnumerator].nextObject == nil); }; }
 - (B(^)(id key))hasOwnProperty { return ^B(id key) { return [self objectForKey:key] != nil; }; }

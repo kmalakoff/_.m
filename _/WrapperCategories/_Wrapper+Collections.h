@@ -43,7 +43,10 @@
 - (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldr; // ALIAS
 
 //find
-//filter
+
+- (_Wrapper*(^)(_ValueKeyTestBlock iterator))filter;
+- (_Wrapper*(^)(_ValueKeyTestBlock iterator))select; // ALIAS
+
 //reject
 //all
 //any
@@ -58,7 +61,7 @@
 //max
 //min
 
-- (_Wrapper*(^)(_ValueValueCompareBlock iterator))sort; /* ADDED to allow sorting in chaining */
+- (_Wrapper*(^)(_CompareBlock iterator))sort; /* ADDED to allow sorting in chaining */
 
 //sortBy
 //groupBy

@@ -29,13 +29,14 @@
 
 #import "_+Utility.h"
 #import "_+Extensions.h"
+#import "_+Objects.h"
 #import "SubjectiveScript.h"
 
 @implementation _ (Utility)
 
 //noConflict
 
-+ (_ValueMapBlock)identityVMB
++ (_IdentityBlock)identity
 {
   return ^(id value) {
     return value;
@@ -49,18 +50,49 @@
   };
 }
 
-+ (_ValueValueCompareBlock)identityVVCB
++ (_CompareBlock)identityVVCB
 {
   return ^NSComparisonResult((NSO* left, NSO* right)) {
     return [left compare:right];
   };
 }
 
-//times
-//mixin
-//uniqueId
-//escape
-//result
-//template
++ (void(^)(I n, _TimesBlock iterator))times
+{
+  return ^(I n, _TimesBlock iterator) {
+    for (I i = 0; i < n; i++) iterator(i);
+  };
+}
+
+//mixin /* NOT SUPPORTED: JavaScript-only: use Objective-C categories on '_' instead */
+
++ (NSS*(^)(NSS* prefix))uniqueId
+{
+  return ^(NSS* prefix) {
+    static I id = 0; id++;
+    return prefix ? [NSString stringWithFormat:@"%@%d", prefix, id] : [NSString stringWithFormat:@"%d", id];
+  };
+}
+
+/* NOT SUPPORTED: JavaScript-only */
+//+ (NSS*(^)(NSS* string))escape
+//{
+//  return ^(NSS* string) {
+//    return [string gtm_stringByEscapingForHTML];
+//  };
+//}
+
++ (NSO*(^)(NSO* object, id property))result
+{
+  return ^NSO*(NSO* object, id property) {
+    if (object == nil) return nil;
+    if (_.isFunction(property, object))
+      return ((NSS*)property).call(object, nil);
+    else
+      return object.get(property);
+  };
+}
+
+//template /* NOT SUPPORTED: JavaScript-only */
 
 @end

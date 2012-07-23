@@ -31,6 +31,7 @@
 
 @interface NSMutableString (SS)
 
++ (S*(^)(UI capacity))newC;
 + (S*(^)(NSS* value))newS;
 + (S*(^)(NSA* array))newA;
 + (S*(^)(NSS* format, ...))newFormatted;

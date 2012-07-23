@@ -33,7 +33,9 @@
 
 //noConflict
 //identity
-//times
+
+- (_Wrapper*(^)(_TimesBlock iterator))times;
+
 //mixin
 //uniqueId
 //escape

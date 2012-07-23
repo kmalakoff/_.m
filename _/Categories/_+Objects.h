@@ -34,12 +34,18 @@
 + (NSA*(^)(NSD* obj))keys;
 + (NSA*(^)(NSD* obj))values;
 
-//functions
-//extend
-//pick
-//defaults
-//clone
-//tap
++ (A*(^)(NSD* obj))functions;
++ (A*(^)(NSD* obj))methods;
+
++ (O*(^)(O* obj, NSD* obj1, ...))extend;
+
++ (O*(^)(O* obj, id key1, ...))pick;
+
++ (O*(^)(O* obj, NSD* obj1, ...))defaults;
+
++ (NSO*(^)(NSO* obj))clone;
+
+//tap /* NOT SUPPORTED: JavaScript-only */
 
 + (B(^)(NSO* obj, id key))has;
 

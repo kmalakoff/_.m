@@ -8,9 +8,13 @@
 
 #import "SS.h"
 
+typedef NSNumber SSTimeout;
+
 @interface SS (GCD)
 
-+ (void(^)(SSDoBlock block, I waitNS))dispatchMain;
-+ (void(^)(SSDoBlock block, I waitNS))dispatchBackground;
++ (void(^)(SSDispatchBlock block, I waitNS))dispatchMain;
++ (void(^)(SSDispatchBlock block, I waitNS))dispatchBackground;
++ (SSTimeout*(^)(SSTimeoutBlock block, I waitNS))setTimeout;
++ (void(^)(SSTimeout* timeout))clearTimeout;
 
 @end

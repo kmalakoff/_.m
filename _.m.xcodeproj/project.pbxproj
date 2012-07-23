@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A061F6115BD034C0091BBA9 /* QUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A061F6015BD034C0091BBA9 /* QUnitTest.m */; };
+		0A061F6915BD26A90091BBA9 /* QUnitTest+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A061F6815BD26A90091BBA9 /* QUnitTest+Private.m */; };
 		0A32614915B8FB4800237F52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32614815B8FB4800237F52 /* Foundation.framework */; };
 		0A32614F15B8FB4900237F52 /* _.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A32614E15B8FB4900237F52 /* _.m */; };
 		0A32615715B8FB4900237F52 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32615615B8FB4900237F52 /* SenTestingKit.framework */; };
@@ -122,9 +124,7 @@
 		0A9BA88D15BC2DF300C7E871 /* SS+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A9BA88B15BC2DF300C7E871 /* SS+JavaScript.h */; };
 		0A9BA88E15BC2DF300C7E871 /* SS+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BA88C15BC2DF300C7E871 /* SS+JavaScript.m */; };
 		0A9BA88F15BC2DF300C7E871 /* SS+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9BA88C15BC2DF300C7E871 /* SS+JavaScript.m */; };
-		0AB970C415BBBB3100C03234 /* SS+Arguments.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AB970C215BBBB3100C03234 /* SS+Arguments.h */; };
-		0AB970C515BBBB3100C03234 /* SS+Arguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB970C315BBBB3100C03234 /* SS+Arguments.m */; };
-		0AB970C615BBBB3100C03234 /* SS+Arguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB970C315BBBB3100C03234 /* SS+Arguments.m */; };
+		0AB970C415BBBB3100C03234 /* SSArguments.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AB970C215BBBB3100C03234 /* SSArguments.h */; };
 		0AEB526B15BA1B0D00317C50 /* SSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AEB526A15BA1B0D00317C50 /* SSConstants.h */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +139,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A061F5F15BD034C0091BBA9 /* QUnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUnitTest.h; sourceTree = "<group>"; };
+		0A061F6015BD034C0091BBA9 /* QUnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUnitTest.m; sourceTree = "<group>"; };
+		0A061F6315BD06510091BBA9 /* QUnitTestTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUnitTestTypes.h; sourceTree = "<group>"; };
+		0A061F6715BD26A80091BBA9 /* QUnitTest+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QUnitTest+Private.h"; sourceTree = "<group>"; };
+		0A061F6815BD26A90091BBA9 /* QUnitTest+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QUnitTest+Private.m"; sourceTree = "<group>"; };
 		0A32614515B8FB4800237F52 /* lib_.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib_.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A32614815B8FB4800237F52 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A32614C15B8FB4900237F52 /* _-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "_-Prefix.pch"; sourceTree = "<group>"; };
@@ -242,8 +247,7 @@
 		0A93F14415BBC6F300971790 /* SS+SystemCompatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SS+SystemCompatibility.m"; path = "_/Vendor/SubjectiveScript.m/SS+SystemCompatibility.m"; sourceTree = SOURCE_ROOT; };
 		0A9BA88B15BC2DF300C7E871 /* SS+JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SS+JavaScript.h"; sourceTree = "<group>"; };
 		0A9BA88C15BC2DF300C7E871 /* SS+JavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SS+JavaScript.m"; sourceTree = "<group>"; };
-		0AB970C215BBBB3100C03234 /* SS+Arguments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SS+Arguments.h"; path = "_/Vendor/SubjectiveScript.m/SS+Arguments.h"; sourceTree = SOURCE_ROOT; };
-		0AB970C315BBBB3100C03234 /* SS+Arguments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SS+Arguments.m"; path = "_/Vendor/SubjectiveScript.m/SS+Arguments.m"; sourceTree = SOURCE_ROOT; };
+		0AB970C215BBBB3100C03234 /* SSArguments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSArguments.h; path = _/Vendor/SubjectiveScript.m/SSArguments.h; sourceTree = SOURCE_ROOT; };
 		0AC0449315B9675C006C4984 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		0AC0449415B9675C006C4984 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		0AEB526A15BA1B0D00317C50 /* SSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSConstants.h; sourceTree = "<group>"; };
@@ -387,13 +391,12 @@
 				0A5842A115B8FC18000BC230 /* SS.h */,
 				0A5842A215B8FC18000BC230 /* SS.m */,
 				0AEB526A15BA1B0D00317C50 /* SSConstants.h */,
+				0AB970C215BBBB3100C03234 /* SSArguments.h */,
 				0A93F14215BBC65400971790 /* SS+SystemCompatibility.h */,
 				0A93F14415BBC6F300971790 /* SS+SystemCompatibility.m */,
 				0A5842A315B8FC18000BC230 /* SSTypes.h */,
 				0A58429F15B8FC18000BC230 /* SS+Types.h */,
 				0A5842A015B8FC18000BC230 /* SS+Types.m */,
-				0AB970C215BBBB3100C03234 /* SS+Arguments.h */,
-				0AB970C315BBBB3100C03234 /* SS+Arguments.m */,
 				0A93F13D15BBC4B500971790 /* SS+GCD.h */,
 				0A93F13E15BBC4B600971790 /* SS+GCD.m */,
 				0A9BA88B15BC2DF300C7E871 /* SS+JavaScript.h */,
@@ -412,14 +415,14 @@
 				0A58429015B8FC18000BC230 /* NSDictionary+SS.m */,
 				0A58429315B8FC18000BC230 /* NSMutableDictionary+SS.h */,
 				0A58429415B8FC18000BC230 /* NSMutableDictionary+SS.m */,
+				0A58429B15B8FC18000BC230 /* NSString+SS.h */,
+				0A58429C15B8FC18000BC230 /* NSString+SS.m */,
 				0A58429515B8FC18000BC230 /* NSMutableString+SS.h */,
 				0A58429615B8FC18000BC230 /* NSMutableString+SS.m */,
 				0A58429715B8FC18000BC230 /* NSNumber+SS.h */,
 				0A58429815B8FC18000BC230 /* NSNumber+SS.m */,
 				0A58429915B8FC18000BC230 /* NSObject+SS.h */,
 				0A58429A15B8FC18000BC230 /* NSObject+SS.m */,
-				0A58429B15B8FC18000BC230 /* NSString+SS.h */,
-				0A58429C15B8FC18000BC230 /* NSString+SS.m */,
 			);
 			path = SubjectiveScript.m;
 			sourceTree = "<group>";
@@ -472,8 +475,13 @@
 		0A58432715B8FC7A000BC230 /* QUnitTestCase.m */ = {
 			isa = PBXGroup;
 			children = (
+				0A061F6315BD06510091BBA9 /* QUnitTestTypes.h */,
 				0A58432815B8FC7A000BC230 /* QUnitTestCase.h */,
 				0A58432915B8FC7A000BC230 /* QUnitTestCase.m */,
+				0A061F5F15BD034C0091BBA9 /* QUnitTest.h */,
+				0A061F6015BD034C0091BBA9 /* QUnitTest.m */,
+				0A061F6715BD26A80091BBA9 /* QUnitTest+Private.h */,
+				0A061F6815BD26A90091BBA9 /* QUnitTest+Private.m */,
 			);
 			path = QUnitTestCase.m;
 			sourceTree = "<group>";
@@ -545,7 +553,7 @@
 				0AEB526B15BA1B0D00317C50 /* SSConstants.h in Headers */,
 				0A3930C715BA74CD00FB19BD /* SS+Number.h in Headers */,
 				0A8E677315BA7CFF00E50BE4 /* _Wrapper+Private.h in Headers */,
-				0AB970C415BBBB3100C03234 /* SS+Arguments.h in Headers */,
+				0AB970C415BBBB3100C03234 /* SSArguments.h in Headers */,
 				0A93F13F15BBC4B700971790 /* SS+GCD.h in Headers */,
 				0A93F14315BBC65500971790 /* SS+SystemCompatibility.h in Headers */,
 				0A9BA88D15BC2DF300C7E871 /* SS+JavaScript.h in Headers */,
@@ -679,7 +687,6 @@
 				0A58431715B8FC53000BC230 /* _+Extensions.m in Sources */,
 				0A3930C815BA74CD00FB19BD /* SS+Number.m in Sources */,
 				0A8E677415BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */,
-				0AB970C515BBBB3100C03234 /* SS+Arguments.m in Sources */,
 				0A93F14015BBC4B700971790 /* SS+GCD.m in Sources */,
 				0A93F14515BBC6F300971790 /* SS+SystemCompatibility.m in Sources */,
 				0A9BA88E15BC2DF300C7E871 /* SS+JavaScript.m in Sources */,
@@ -732,10 +739,11 @@
 				0A58434815B8FC7A000BC230 /* _WrapperTests.m in Sources */,
 				0A3930C915BA74CD00FB19BD /* SS+Number.m in Sources */,
 				0A8E677515BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */,
-				0AB970C615BBBB3100C03234 /* SS+Arguments.m in Sources */,
 				0A93F14115BBC4B700971790 /* SS+GCD.m in Sources */,
 				0A93F14615BBC6F300971790 /* SS+SystemCompatibility.m in Sources */,
 				0A9BA88F15BC2DF300C7E871 /* SS+JavaScript.m in Sources */,
+				0A061F6115BD034C0091BBA9 /* QUnitTest.m in Sources */,
+				0A061F6915BD26A90091BBA9 /* QUnitTest+Private.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

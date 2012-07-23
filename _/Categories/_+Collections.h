@@ -31,8 +31,8 @@
 
 @interface _ (Collections)
 
-+ (void(^)(id obj, _ValueKeyDoBlock iterator))each;
-+ (void(^)(id obj, _ValueKeyDoBlock iterator))forEach; // ALIAS
++ (void(^)(id obj, _EachBlock iterator))each;
++ (void(^)(id obj, _EachBlock iterator))forEach; // ALIAS
 + (B(^)(id obj, _ValueKeyTestBlock iterator))eachWithStop; /* SPECIALIZED: returns YES if processed all elements without a request to stop */
 
 + (A*(^)(NSO* obj, _ValueKeyMapBlock iterator))map;
@@ -45,8 +45,8 @@
 + (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))reduceRight;
 + (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))foldr; // ALIAS
 
-+ (id(^)(id obj, _ValueTestBlock iterator))find;
-+ (id(^)(id obj, _ValueTestBlock iterator))detect; // ALIAS
++ (id(^)(id obj, _FindBlock iterator))find;
++ (id(^)(id obj, _FindBlock iterator))detect; // ALIAS
 
 + (A*(^)(id obj, _ValueKeyTestBlock iterator))filter;
 + (A*(^)(id obj, _ValueKeyTestBlock iterator))select; // ALIAS
@@ -66,13 +66,13 @@
 
 + (NSO*(^)(id obj, NSString *keyPath))pluck;
 
-+ (NSO*(^)(NSO* obj, _ValueMapBlock iterator))max;
-+ (NSO*(^)(NSO* obj, _ValueMapBlock iterator))min;
++ (NSO*(^)(NSO* obj, _MaxBlock iterator))max;
++ (NSO*(^)(NSO* obj, _MinBlock iterator))min;
 
-+ (id(^)(id obj, id iteratorOrKey))sortBy;
-+ (O*(^)(id obj, id iteratorOrKey))groupBy; 
++ (id(^)(id obj, id iteratorOrKey))sortBy;    // takes a _SortByBlock or a key
++ (O*(^)(id obj, id iteratorOrKey))groupBy;   // takes a _GroupByBlock or a key
 
-+ (I(^)(NSA* array, id obj, _ValueMapBlock iterator))sortedIndex;
++ (I(^)(NSA* array, id obj, _SortedIndexBlock iterator))sortedIndex;
 
 + (A*(^)(id obj))shuffle;
 
