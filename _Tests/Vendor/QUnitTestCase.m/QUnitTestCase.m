@@ -62,7 +62,7 @@
   } 
   }
   @catch (id anException) {
-      [self failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"(%s) == (%s)", @"actual", @"expected"] 
+      [self failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"(%@) == (%@)", @"actual", @"expected"]
             exception:anException 
                inFile:@"" 
                atLine:0
@@ -136,7 +136,7 @@
   } 
   }
   @catch (id anException) {
-      [self failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"(%s) == (%s)", @"actual", @"expected"] 
+      [self failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"(%@) == (%@)", @"actual", @"expected"]
             exception:anException 
                inFile:@"" 
                atLine:0

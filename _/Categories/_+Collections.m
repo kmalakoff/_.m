@@ -98,7 +98,7 @@
 
 + (A*(^)(NSO* obj, _ValueKeyMapBlock iterator))map
 {
-  return ^(NSO* obj, _ValueKeyMapBlock iterator) {
+  return ^A*(NSO* obj, _ValueKeyMapBlock iterator) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj))
@@ -121,14 +121,14 @@
     else {
       NSD* dictionary = (NSD*) obj;
 
-      O* result = O.new;
+      A* result = [A arrayWithCapacity:obj.length];
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
         id mapped = iterator(value, key);
         if (mapped)
-          [result setObject:mapped forKey:key];
+          [result addObject:mapped];
       }];
       
-      return (id) result;
+      return result;
     }
     return nil;
   };
@@ -422,17 +422,17 @@
 
 + (NSA*(^)(id obj))toArray
 {
-  return ^(id obj) {
+  return ^NSA*(id obj) {
     if (!obj)                                         return NSA.new;
     if (_.isArray(obj))                               return ((NSA*)obj).copy;
 //    if (_.isArguments(obj))                           return ((NSA*)obj).copy;  /* NOT NEEDED: Arugements are an array */
-    if ([obj respondsToSelector:@selector(toArray)])  return (NSA*) [obj performSelector:@selector(toArray)];
+    if ([obj respondsToSelector:@selector(toArray)])  return [obj performSelector:@selector(toArray)];
     return _.values(obj);
   };
 }
 
 + (UI(^)(id obj))size {
-  return ^(id obj) {
+  return ^UI(id obj) {
     if (_.isArray(obj))          return ((NSA*)obj).count;
     if (_.isDictionary(obj))     return ((NSD*)obj).count;
     return 0;

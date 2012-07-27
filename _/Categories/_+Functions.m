@@ -45,7 +45,7 @@
       return arg1;
     };
     
-    return ^(id arg1, ...){
+    return ^id(id arg1, ...){
       ARGS_AO(arguments, arg1);
 
       // requires at least one argument to match the block signature (id arg1, ...)
@@ -171,7 +171,7 @@
 
     __block I timesInternal = times;
     if (timesInternal <= 0) return SS.apply(func, arguments);
-    return ^(id arg1, ...) {
+    return ^id(id arg1, ...) {
       if (--timesInternal < 1) {
         return SS.apply(func, arguments);
       }

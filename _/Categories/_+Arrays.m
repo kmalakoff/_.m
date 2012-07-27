@@ -43,7 +43,7 @@
 }
 + (NSO*(^)(NSA* array, I n))head { return self.first; } // ALIAS
 + (NSO*(^)(NSA* array, I n))take { return self.first; } // ALIAS
-+ (NSO*(^)(id array, id key))firstIterator
++ (NSO*(^)(NSA* array, id key))firstIterator
 {
   return ^id(NSA* array, id key) {
     return array.get(0);
@@ -56,7 +56,7 @@
     return array.slice(0, array.length - ((n<0) ? 1 : n));
   };
 }
-+ (NSA*(^)(id array, id key))initialIterator
++ (NSA*(^)(NSA* array, id key))initialIterator
 {
   return ^(NSA* array, id key) {
     return array.slice(0, array.length - 1);
@@ -65,7 +65,7 @@
 
 + (NSO*(^)(NSA* array, I n))last
 {
-  return ^(NSA* array, I n) {
+  return ^NSO*(NSA* array, I n) {
     if (!array.length) return [NSArray array];
     if (n>=0) {
       return array.slice(MAX((I)array.length - n, 0), array.length);
@@ -74,7 +74,7 @@
     }
   };
 }
-+ (NSO*(^)(id array, id key))lastIterator
++ (NSO*(^)(NSA* array, id key))lastIterator
 {
   return ^(NSA* array, id key) {
     return array.getAt(array.length - 1);
@@ -88,9 +88,9 @@
   };
 }
 + (NSA*(^)(NSA* array, I index))tail { return self.rest; } // ALIAS
-+ (NSA*(^)(id array, id key))restIterator
++ (NSA*(^)(NSA* array, id key))restIterator
 {
-  return ^(NSA* array, id key) {
+  return ^NSA*(NSA* array, id key) {
     if (!array.length) return [NSArray array];
     return array.slice(1, array.length);
   };

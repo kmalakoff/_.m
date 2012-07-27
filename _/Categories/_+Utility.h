@@ -43,7 +43,7 @@
 
 + (NSS*(^)(NSS* prefix))uniqueId;
 
-//escape /* NOT SUPPORTED: JavaScript-only...could be implemented with GTMNSString+HTML, but currently not ARC compatible */
+//escape /* NOT SUPPORTED: JavaScript-only...could be implemented with GTMNSString+HTML, but currently not ARC compatible and adds significant size to the library */
 
 + (NSO*(^)(NSO* object, id property))result;
 

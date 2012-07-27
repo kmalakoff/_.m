@@ -207,7 +207,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
 
 - (NSA*(^)(SSCompareBlock block))sort
 {
-  return ^(SSCompareBlock block) {
+  return ^NSA*(SSCompareBlock block) {
     if (SS.isBlock(block))
       return [self sortedArrayUsingComparator:block];
     A* sortedCopy = self.mutableCopy;

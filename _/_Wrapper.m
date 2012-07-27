@@ -60,7 +60,7 @@
   return ^{
     if (_.isBoolean(self._wrapped)) return ((N*)self._wrapped).boolValue;
     NSLog(@"valueB is not a boolean");
-    return false;
+    return NO;
   };
 }
 
@@ -75,7 +75,7 @@
 
 - (UI(^)())valueUI
 {
-  return ^{
+  return ^UI{
     if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).unsignedIntegerValue;
     NSLog(@"valueUI is not a NSNumber");
     return 0;
@@ -87,7 +87,7 @@
   return ^{
     if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).floatValue;
     NSLog(@"valueF is not a NSNumber");
-    return 0;
+    return 0.0f;
   };
 }
 
@@ -96,7 +96,7 @@
   return ^{
     if ([self._wrapped isKindOfClass:[NSNumber class]]) return (N*)self._wrapped;
     NSLog(@"valueN is not a NSNumber");
-    return nil;
+    return (N*)nil;
   };
 }
 
@@ -105,7 +105,7 @@
   return ^{
     if ([self._wrapped isKindOfClass:[NSString class]]) return (NSS*)self._wrapped;
     NSLog(@"valueNSS is not a NSString");
-    return nil;
+    return (NSS*)nil;
   };
 }
 
@@ -114,7 +114,7 @@
   return ^{
     if ([self._wrapped isKindOfClass:[NSMutableString class]]) return (S*)self._wrapped;
     NSLog(@"valueS is not a NSMutableString");
-    return nil;
+    return (S*)nil;
   };
 }
 
@@ -123,7 +123,7 @@
   return ^{
     if ([self._wrapped isKindOfClass:[NSArray class]]) return (NSA*)self._wrapped;
     NSLog(@"valueNSA is not a NSArray");
-    return nil;
+    return (NSA*)nil;
   };
 }
 
@@ -132,7 +132,7 @@
   return ^{
     if ([self._wrapped isKindOfClass:[NSMutableArray class]]) return (A*)self._wrapped;
     NSLog(@"valueA is not a NSMutableArray");
-    return nil;
+    return (A*)nil;
   };
 }
 
@@ -141,7 +141,7 @@
   return ^{
     if ([self._wrapped isKindOfClass:[NSDictionary class]]) return (NSD*)self._wrapped;
     NSLog(@"valueNSD is not a NSDictionary");
-    return nil;
+    return (NSD*)nil;
   };
 }
 
@@ -150,7 +150,7 @@
   return ^{
     if ([self._wrapped isKindOfClass:[NSMutableDictionary class]]) return (O*)self._wrapped;
     NSLog(@"valueO is not a NSMutableDictionary");
-    return nil;
+    return (O*)nil;
   };
 }
 
