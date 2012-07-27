@@ -50,13 +50,13 @@
 
       I count = [array count];
       for (I index=0; index<count; index++) {
-        iterator([array objectAtIndex:index], N.I(index));
+        iterator([array objectAtIndex:index], N.I(index), obj);
       }
     }
     else {
       NSD* dictionary = obj;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        iterator(value, key);
+        iterator(value, key, obj);
       }];
     }
   };
@@ -75,7 +75,7 @@
 
       I count = [array count];
       for (I index=0; index<count; index++) {
-        if (!iterator([array objectAtIndex:index], N.I(index)))
+        if (!iterator([array objectAtIndex:index], N.I(index), obj))
           return NO;
       }
 
@@ -85,7 +85,7 @@
       __block B processedWithoutStop = YES;
       NSD* dictionary = obj;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        if (!iterator(value, key)) {
+        if (!iterator(value, key, obj)) {
           processedWithoutStop = NO;
           *stop = YES;
         }
@@ -111,7 +111,7 @@
       A* result = [A arrayWithCapacity:array.length];
       I count = [array count];
       for (I index=0; index<count; index++) {
-        id mapped = iterator([array objectAtIndex:index], N.I(index));
+        id mapped = iterator([array objectAtIndex:index], N.I(index), obj);
         if (mapped)
           [result addObject:mapped];
       }
@@ -123,7 +123,7 @@
 
       A* result = [A arrayWithCapacity:obj.length];
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
-        id mapped = iterator(value, key);
+        id mapped = iterator(value, key, obj);
         if (mapped)
           [result addObject:mapped];
       }];
@@ -146,9 +146,11 @@
     __block id internalMemo = memo;
     __block BOOL initial = false;
     if (obj == nil) obj = A.new;
-    _.each(obj, ^(NSO* value, id key) {
+    _.each(obj, ^(NSO* value, ...) {
       initial = true;
       if (!internalMemo) internalMemo = [[NSClassFromString(value.mutableClassName) alloc] init];
+      
+      _ARGS_KEY(value);
       internalMemo = iterator(internalMemo, value, key);
     });
     if (!initial) @throw [NSException exceptionWithName:@"TypeError" reason:@"Reduce of empty array with no initial value" userInfo:nil];
@@ -177,7 +179,7 @@
       NSO* value = [array objectAtIndex:index];
       initial = true;
       if (!internalMemo) internalMemo = [[NSClassFromString(value.mutableClassName) alloc] init];
-      internalMemo = iterator(internalMemo, value, N.I(index));
+      internalMemo = iterator(internalMemo, value, N.I(index), obj);
     }
     if (!initial) @throw [NSException exceptionWithName:@"TypeError" reason:@"Reduce of empty array with no initial value" userInfo:nil];
     return internalMemo;
@@ -189,7 +191,7 @@
 {
   return ^(id obj, _FindBlock iterator) {
     __block NSO* result;
-    _.any(obj, ^B(id value, id key) {
+    _.any(obj, ^B(id value, ...) {
       if (iterator(value)) {
         result = value;
         return true;
@@ -207,7 +209,8 @@
   return ^(id obj, _CollectionItemTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
-    _.each(obj, ^(id value, id key) {
+    _.each(obj, ^(id value, ...) {
+      _ARGS_KEY(value);
       if (iterator(value, key)) results.push(value);
     });
     return results;
@@ -220,7 +223,8 @@
   return ^(id obj, _CollectionItemTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
-    _.each(obj, ^(id value, id key) {
+    _.each(obj, ^(id value, ...) {
+      _ARGS_KEY(value);
       if (!iterator(value, key)) results.push(value);
     });
     return results;
@@ -239,11 +243,12 @@
 + (B(^)(id obj, _CollectionItemTestBlock iterator))any
 {
   return ^B(id obj, _CollectionItemTestBlock iterator) {
-    if (!iterator) iterator = _.identityCollectionTest;
+    if (!iterator) iterator = _.identityCollectionItemTest;
     __block BOOL result = NO;
     if (obj == nil) return result;
-    _.eachWithStop(obj, ^B(id value, id key) {
-      if (result || (result = iterator(value, key))) 
+    _.eachWithStop(obj, ^B(id value, ...) {
+      _ARGS_KEY(value);
+      if (result || (result = iterator(value, key)))
         return NO;
       return YES;
     });
@@ -257,7 +262,7 @@
   return ^B(id obj, id target) {
     BOOL found = NO;
     if (obj == nil) return found;
-    found = _.any(obj, ^B(id value, id key) {
+    found = _.any(obj, ^B(id value, ...) {
       return value == target;
     });
     return found;
@@ -270,7 +275,7 @@
   return ^NSO*(id obj, NSS* methodName, id arg1, ...) {
     ARGS_AO(arguments, arg1);
 
-    return _.map(obj, ^(NSO* value, id key) {
+    return _.map(obj, ^(NSO* value, ...) {
       return methodName.apply(value, arguments);
     });
   };
@@ -313,7 +318,7 @@
     
     else {
       __block O* result = OKV({@"computed", ((NSD*)obj).objectEnumerator.nextObject});
-      _.each(obj, ^(NSO* value, id key) {
+      _.each(obj, ^(NSO* value, ...) {
         NSO* computed = iterator ? iterator(value) : value;
         computed <= result.get(@"computed") && (result = OKV({@"value", value}, {@"computed", computed}));
       });
@@ -342,7 +347,7 @@
     else
     {
       __block O* result = OKV({@"computed", ((NSD*)obj).objectEnumerator.nextObject});
-      _.each(obj, ^(NSO* value, id key) {
+      _.each(obj, ^(NSO* value, ...) {
         NSO* computed = iterator ? iterator(value) : value;
         computed >= result.get(@"computed") && (result = OKV({@"value", value}, {@"computed", computed}));
       });
@@ -361,7 +366,7 @@
     };
 
     return _.chain(obj)
-      .map(^(NSO* value, id key) {
+      .map(^(NSO* value, ...) {
         return OKV({@"value", value}, {@"criteria", iterator(value)});
       })
       .sort(^(NSDictionary *left, NSDictionary *right) {
@@ -379,12 +384,13 @@
   return ^(id obj, id iteratorOrKey) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
 
-    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, id key){ 
+    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, ...){ 
       return value.get(iteratorOrKey); 
     };
     
     __block O* result = O.new;
-    _.each(obj, ^(id value, id key) {
+    _.each(obj, ^(id value, ...) {
+      _ARGS_KEY(value);
       key = iterator(value, key);
       A* values = (A*) result.getOrAdd(key, ^{ return A.new; });
       values.push(value);
@@ -411,8 +417,8 @@
 {
   return ^(id obj) {
     __block A* shuffled = _.isArray(obj) ? ((NSA*)obj).mutableCopy : _.values(obj);
-    _.each(obj, ^(id value, N* indexNumber) {
-      I index = indexNumber.I;
+    _.each(obj, ^(id value, ...) {
+      _ARGS_INDEX(value);
       I rand = arc4random() % (index + 1);
       [shuffled exchangeObjectAtIndex:rand withObjectAtIndex:index];
     });

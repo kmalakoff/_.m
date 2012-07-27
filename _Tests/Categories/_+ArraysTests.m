@@ -104,10 +104,10 @@
   self.equal(_.uniq3(list, YES, /* MANDATORY */ nil).join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster");
 
   list = AO(OKV({@"name", @"moe"}), OKV({@"name", @"curly"}), OKV({@"name", @"larry"}), OKV({@"name", @"curly"}));
-  _UniqueBlock iterator = ^(O* value, id key) { return value.get(@"name"); };
+  _UniqueBlock iterator = ^(O* value, ...) { return value.get(@"name"); };
   self.equal(_.map( /* SPECIALIZED */ _.uniq3(list, NO, iterator), iterator).join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator");
 
-  iterator = ^(N* value, id key) { return N.I(value.I + 1); };
+  iterator = ^(N* value, ...) { return N.I(value.I + 1); };
   list = AI(1, 2, 2, 3, 4, 4);
   self.equal(_.uniq3(list, YES, iterator).join(@", "), @"1, 2, 3, 4", @"iterator works with sorted array");
 

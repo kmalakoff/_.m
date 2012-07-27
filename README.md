@@ -16,7 +16,7 @@ _> OKV({k, v}, {k, v}) syntax
 -> removed all context
 explain the reason for and use of KH
 variable length: add nil termination requirement
-
+no context 'this'
 
 Other Changes
 ------------
@@ -29,23 +29,23 @@ Arrays
 first
 _.first = _.head = _.take = function(array, n, guard)
 + (id(^)(A* array, I n))first;  // mandatory second parameter: -1 replaces missing paramter
-+ (id(^)(A* array, id key))firstIterator; // CHANGE
++ (id(^)(A* array, ...))firstIterator; // CHANGE
 
 
 initial
 _.initial = function(array, n, guard)
 + (A*(^)(A* array, I n))initial; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, id key))initialIterator; // CHANGE
++ (A*(^)(A* array, ...))initialIterator; // CHANGE
 
 last
 _.last = function(array, n, guard)
 + (id(^)(A* array, I n))last; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, id key))lastIterator; // CHANGE
++ (A*(^)(A* array, ...))lastIterator; // CHANGE
 
 rest
 _.rest = _.tail = function(array, index, guard)
 + (A*(^)(A* array, I index))rest; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, id key))restIterator; // CHANGE
++ (A*(^)(A* array, ...))restIterator; // CHANGE
 
 compact
 _.compact = function(array)

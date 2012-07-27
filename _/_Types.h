@@ -29,16 +29,45 @@
 
 #import "SSTypes.h"
 
+// Helpers to access collection iteration (each, map, etc) with variable arguments
+#define _ARGS_KEY(_lastNamedArg) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  id key = va_arg(argList, id); \
+  va_end(argList);
+#define _ARGS_KEY_COLLECTION(_lastNamedArg, _collection) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  id key = va_arg(argList, id); \
+  id _collection = va_arg(argList, id); \
+  va_end(argList);
+#define _ARGS_INDEX(_lastNamedArg) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  I index = ((N*) va_arg(argList, N*)).I; \
+  va_end(argList);
+#define _ARGS_INDEX_COLLECTION(_lastNamedArg, _collection) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  I index = ((N*) va_arg(argList, N*)).I; \
+  id _collection = va_arg(argList, id); \
+  va_end(argList);
+#define _ARGS_COLLECTION(_lastNamedArg, _collection) \
+  va_list argList; \
+  va_start(argList, _lastNamedArg); \
+  va_arg(argList, id); \
+  id _collection = va_arg(argList, id); \
+  va_end(argList);
 
-typedef void                (^_EachBlock)(id value, id key);
-typedef B                   (^_EachWithStopBlock)(id value, id key);
-typedef NSO*                (^_MapBlock)(id value, id key);
+typedef void                (^_EachBlock)(id value, ...);
+typedef B                   (^_EachWithStopBlock)(id value, ...);
+typedef NSO*                (^_MapBlock)(id value, ...);
 
-typedef NSO*                (^_ReduceBlock)(id memo, id value, id key);
+typedef NSO*                (^_ReduceBlock)(id memo, id value, ...);
 
 typedef B                   (^_FindBlock)(id value);
 
-typedef B                   (^_CollectionItemTestBlock)(id value, id key);
+typedef B                   (^_CollectionItemTestBlock)(id value, ...);
 
 typedef NSO*                (^_MinBlock)(id value);
 typedef NSO*                (^_MaxBlock)(id value);
@@ -46,10 +75,10 @@ typedef NSO*                (^_MaxBlock)(id value);
 typedef NSComparisonResult  (^_SortBlock)(id left, id right); /* ADDED */
 
 typedef NSO*                (^_SortByBlock)(id value);
-typedef NSO*                (^_GroupByBlock)(id value, id key);
+typedef NSO*                (^_GroupByBlock)(id value, ...);
 typedef NSO*                (^_SortedIndexBlock)(id value);
 
-typedef NSO*                (^_UniqueBlock)(id value, id key);
+typedef NSO*                (^_UniqueBlock)(id value, ...);
 
 typedef id                  (^_MemoizedBlock)(id arg1, ...);
 typedef id                  (^_MemoizeBlock)(id arg1, ...);

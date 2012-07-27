@@ -62,7 +62,7 @@
   return ^(O* obj, NSD* obj1, ...) {
     ARGS_AO(objects, obj1);
 
-    _.each(objects, ^(NSD* source, id key) {
+    _.each(objects, ^(NSD* source, ...) {
       [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
         [obj setObject:value forKey:key];
       }];
@@ -77,7 +77,7 @@
     ARGS_AO(keys, key1);
 
     __block O* result = O.new;
-    _.each(_.flatten(keys, true), ^(NSO* key, id index) {
+    _.each(_.flatten(keys, true), ^(NSO* key, ...) {
       if (key.in(obj)) result.set(key, obj.get(key));
     });
     return result;
@@ -89,7 +89,7 @@
   return ^(O* obj, NSD* obj1, ...) {
     ARGS_AO(objects, obj1);
 
-    _.each(objects, ^(NSD* source, id key) {
+    _.each(objects, ^(NSD* source, ...) {
       [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, BOOL *stop) {
         if (!key.in(obj)) [obj setObject:value forKey:key];
       }];

@@ -34,7 +34,7 @@
 
 @implementation _ (Utility)
 
-//noConflict
+//noConflict /* NOT SUPPORTED: JavaScript-only */
 
 + (_IdentityBlock)identity
 {
@@ -43,9 +43,9 @@
   };
 }
 
-+ (_CollectionItemTestBlock)identityCollectionTest
++ (_CollectionItemTestBlock)identityCollectionItemTest
 {
-  return ^(id value, id key) {
+  return ^(id value, ...) {
     return _.isTruthy(value);
   };
 }

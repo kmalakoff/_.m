@@ -103,8 +103,8 @@
   return ^(NSA* array1, ...) {
     ARGS_AO(rest, array1);
 
-    return _.chain(_.filter(_.uniq(self.valueNSA()), ^(id item, id key) {
-      return _.every(rest, ^B(id other, id key) {
+    return _.chain(_.filter(_.uniq(self.valueNSA()), ^(id item, ...) {
+      return _.every(rest, ^B(id other, ...) {
         return _.indexOf(other, item) >= 0;
       });
     }));
@@ -117,7 +117,7 @@
     ARGS_AO(rest, array1);
 
     rest = _.flatten(rest, YES);
-    return _.chain(_.filter(self.valueNSA(), ^B(id value, id key) { return !_.include(rest, value); }));
+    return _.chain(_.filter(self.valueNSA(), ^B(id value, ...) { return !_.include(rest, value); }));
   };
 }
 

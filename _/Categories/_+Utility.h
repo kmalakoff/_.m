@@ -34,7 +34,7 @@
 //noConflict /* NOT SUPPORTED: JavaScript-only */
 
 + (_IdentityBlock)identity;
-+ (_CollectionItemTestBlock)identityCollectionTest; /* SPECIALIZED */
++ (_CollectionItemTestBlock)identityCollectionItemTest; /* SPECIALIZED */
 
 + (void(^)(I n, _TimesBlock iterator))times;
 
