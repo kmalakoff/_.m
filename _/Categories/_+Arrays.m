@@ -180,9 +180,10 @@
     return results;
   };
 }
-+ (A*(^)(NSA* array, B isSorted, _ValueKeyMapBlock iterator))uniq3
++ (A*(^)(NSA* array))unique { return self.uniq; } // ALIAS
++ (A*(^)(NSA* array, B isSorted, _UniqueBlock iterator))uniq3
 {
-  return ^(NSA* array, B isSorted, _ValueKeyMapBlock iterator) {
+  return ^(NSA* array, B isSorted, _UniqueBlock iterator) {
     NSA* initial = iterator ? _.map(array, iterator) : array;
     A* results = A.new;
     _.reduce(initial, ^(A* memo, NSO* value, id key) {
@@ -195,7 +196,7 @@
     return results;
   };
 }
-+ (A*(^)(NSA* array, B isSorted, _ValueKeyMapBlock iterator))unique { return self.uniq3; } // ALIAS
++ (A*(^)(NSA* array, B isSorted, _UniqueBlock iterator))unique3 { return self.uniq3; } // ALIAS
 
 + (A*(^)(NSA* array, ...))zip
 {

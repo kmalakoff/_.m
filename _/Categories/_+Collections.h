@@ -33,31 +33,31 @@
 
 + (void(^)(id obj, _EachBlock iterator))each;
 + (void(^)(id obj, _EachBlock iterator))forEach; // ALIAS
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))eachWithStop; /* SPECIALIZED: returns YES if processed all elements without a request to stop */
++ (B(^)(id obj, _EachWithStopBlock iterator))eachWithStop; /* SPECIALIZED: returns YES if processed all elements without a request to stop */
 
-+ (A*(^)(NSO* obj, _ValueKeyMapBlock iterator))map;
-+ (A*(^)(id obj, _ValueKeyMapBlock iterator))collect; // ALIAS
++ (A*(^)(NSO* obj, _MapBlock iterator))map;
++ (A*(^)(id obj, _MapBlock iterator))collect; // ALIAS
 
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))reduce;
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))foldl; // ALIAS
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))inject; // ALIAS
++ (id(^)(id obj, _ReduceBlock iterator, id memo))reduce;
++ (id(^)(id obj, _ReduceBlock iterator, id memo))foldl; // ALIAS
++ (id(^)(id obj, _ReduceBlock iterator, id memo))inject; // ALIAS
 
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))reduceRight;
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))foldr; // ALIAS
++ (id(^)(id obj, _ReduceBlock iterator, id memo))reduceRight;
++ (id(^)(id obj, _ReduceBlock iterator, id memo))foldr; // ALIAS
 
 + (id(^)(id obj, _FindBlock iterator))find;
 + (id(^)(id obj, _FindBlock iterator))detect; // ALIAS
 
-+ (A*(^)(id obj, _ValueKeyTestBlock iterator))filter;
-+ (A*(^)(id obj, _ValueKeyTestBlock iterator))select; // ALIAS
++ (A*(^)(id obj, _CollectionItemTestBlock iterator))filter;
++ (A*(^)(id obj, _CollectionItemTestBlock iterator))select; // ALIAS
 
-+ (A*(^)(id obj, _ValueKeyTestBlock iterator))reject;
++ (A*(^)(id obj, _CollectionItemTestBlock iterator))reject;
 
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))all;
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))every; // ALIAS
++ (B(^)(id obj, _CollectionItemTestBlock iterator))all;
++ (B(^)(id obj, _CollectionItemTestBlock iterator))every; // ALIAS
 
-+ (B(^)(id obj, /* MANDATORY */ _ValueKeyTestBlock iterator))any;
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))some; // ALIAS
++ (B(^)(id obj, /* MANDATORY */ _CollectionItemTestBlock iterator))any;
++ (B(^)(id obj, _CollectionItemTestBlock iterator))some; // ALIAS
 
 + (B(^)(id obj, id target))include;
 + (B(^)(id obj, id target))contains; // ALIAS

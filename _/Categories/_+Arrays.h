@@ -59,8 +59,9 @@
 + (A*(^)(NSA* array, NSA* array1, ...))difference; // TODO: nil terminated
 
 + (A*(^)(NSA* array))uniq;
-+ (A*(^)(NSA* array, B isSorted, _ValueKeyMapBlock iterator))uniq3; /* SPECIALIZED */
-+ (A*(^)(NSA* array, B isSorted, _ValueKeyMapBlock iterator))unique; // ALIAS
++ (A*(^)(NSA* array))unique; // ALIAS
++ (A*(^)(NSA* array, B isSorted, _UniqueBlock iterator))uniq3; /* SPECIALIZED */
++ (A*(^)(NSA* array, B isSorted, _UniqueBlock iterator))unique3; /* SPECIALIZED */
 
 + (A*(^)(NSA* array, ...))zip; // TODO: nil terminated
 

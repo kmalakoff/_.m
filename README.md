@@ -74,7 +74,8 @@ _.difference = function(array)
 
 uniq
 _.uniq = _.unique = function(array, isSorted, iterator)
-+ (id(^)(A* array, array, B isSorted, _ValueKeyMapBlock iterator))uniq;
++ (id(^)(A* array, array))uniq;
++ (id(^)(A* array, array, B isSorted, _UniqueBlock iterator))uniq3;
 
 zip
 _.zip = function(...)
@@ -113,7 +114,7 @@ CHANGE: no collection (was used for guard, but removed due to variable arguments
 
 map
 _.map = _.collect = function(obj, iterator, context)
-+ (id(^)(id obj, _ValueKeyMapBlock iterator))map;
++ (id(^)(id obj, _MapBlock iterator))map;
 CHANGE: no collection (was used for guard, but removed due to variable arguments not possible). Context is a JS language feature
 
 reduce
@@ -122,7 +123,7 @@ find
 
 filter
   _.filter = _.select = function(obj, iterator, context) {
-+ (A*(^)(id obj, _ValueKeyTestBlock iterator))filter;
++ (A*(^)(id obj, _CollectionItemTestBlock iterator))filter;
 CHANGE: Context is a JS language feature
 
 reject

@@ -37,39 +37,39 @@
 
 //each
 
-- (_Wrapper*(^)(_ValueKeyMapBlock iterator))map
+- (_Wrapper*(^)(_MapBlock iterator))map
 {
-  return ^(_ValueKeyMapBlock iterator) {
+  return ^(_MapBlock iterator) {
     return _.chain(_.map(self.value(), iterator));
   };
 }
 
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))reduce
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))reduce
 {
-  return ^(_MemoValueKeyMapBlock iterator, id memo) {
+  return ^(_ReduceBlock iterator, id memo) {
     return _.chain(_.reduce(self.value(), iterator, memo));
   };
 }
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))inject { return self.reduce; } // ALIAS
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))inject { return self.reduce; } // ALIAS
 
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))reduceRight
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))reduceRight
 {
-  return ^(_MemoValueKeyMapBlock iterator, id memo) {
+  return ^(_ReduceBlock iterator, id memo) {
     return _.chain(_.reduceRight(self.value(), iterator, memo));
   };
 }
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
 
 //find
 
-- (_Wrapper*(^)(_ValueKeyTestBlock iterator))filter 
+- (_Wrapper*(^)(_CollectionItemTestBlock iterator))filter 
 {
-  return ^(_ValueKeyTestBlock iterator) {
+  return ^(_CollectionItemTestBlock iterator) {
     return _.chain(_.filter(self.value(), iterator));
   };
 }
-- (_Wrapper*(^)(_ValueKeyTestBlock iterator))select { return self.filter; } // ALIAS
+- (_Wrapper*(^)(_CollectionItemTestBlock iterator))select { return self.filter; } // ALIAS
 
 //reject
 //all
@@ -94,8 +94,8 @@
 //max
 //min
 
-- (_Wrapper*(^)(_CompareBlock iterator))sort { /* ADDED to allow sorting in chaining */
-  return ^(_CompareBlock iterator) {
+- (_Wrapper*(^)(_SortBlock iterator))sort { /* ADDED to allow sorting in chaining */
+  return ^(_SortBlock iterator) {
     NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
     return _.chain(self.valueA().sort(iterator));
   };

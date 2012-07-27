@@ -55,8 +55,8 @@
 - (_Wrapper*(^)(NSA* array1, ...))difference; // TODO: nil terminated
 
 - (_Wrapper*(^)())uniq;
-- (_Wrapper*(^)(B isSorted, _ValueKeyMapBlock iterator))uniq3; /* SPECIALIZED */
-- (_Wrapper*(^)(B isSorted, _ValueKeyMapBlock iterator))unique;
+- (_Wrapper*(^)(B isSorted, _UniqueBlock iterator))uniq3; /* SPECIALIZED */
+- (_Wrapper*(^)(B isSorted, _UniqueBlock iterator))unique;
 
 - (_Wrapper*(^)(NSA* array1, ...))zip; // TODO: nil terminated
 

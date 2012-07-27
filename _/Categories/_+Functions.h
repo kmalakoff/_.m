@@ -34,7 +34,7 @@
 //bind /* NOT SUPPORTED: JavaScript-only */
 //bindAll /* NOT SUPPORTED: JavaScript-only */
 
-+ (_MemoizeBlock(^)(_MemoizeBlock func, _MemoizeBlock hasher))memoize; /* NIL TERMINATED */
++ (_MemoizedBlock(^)(_MemoizeBlock func, _MemoizeHashBlock hasher))memoize; /* NIL TERMINATED */
 
 + (void(^)(_DelayBlock func, I waitNS))delay;
 + (void(^)(_DelayBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */

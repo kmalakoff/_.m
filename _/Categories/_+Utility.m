@@ -43,17 +43,10 @@
   };
 }
 
-+ (_ValueKeyTestBlock)identityVKTB
++ (_CollectionItemTestBlock)identityCollectionTest
 {
   return ^(id value, id key) {
     return _.isTruthy(value);
-  };
-}
-
-+ (_CompareBlock)identityVVCB
-{
-  return ^NSComparisonResult((NSO* left, NSO* right)) {
-    return [left compare:right];
   };
 }
 

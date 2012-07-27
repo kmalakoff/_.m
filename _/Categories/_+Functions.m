@@ -37,9 +37,9 @@
 //bind /* NOT SUPPORTED: JavaScript-only */
 //bindAll /* NOT SUPPORTED: JavaScript-only */
 
-+ (_MemoizeBlock(^)(_MemoizeBlock func, _MemoizeBlock hasher))memoize
++ (_MemoizedBlock(^)(_MemoizeBlock func, _MemoizeHashBlock hasher))memoize
 {
-  return ^(_MemoizeBlock func, _MemoizeBlock hasher) {
+  return ^(_MemoizeBlock func, _MemoizeHashBlock hasher) {
     O* memo = O.new;
     if (!hasher) hasher = ^id(id arg1, ...) {
       return arg1;

@@ -30,11 +30,34 @@
 #import "SSTypes.h"
 
 
-typedef id                  (^_IdentityBlock)(id value);
+typedef void                (^_EachBlock)(id value, id key);
+typedef B                   (^_EachWithStopBlock)(id value, id key);
+typedef NSO*                (^_MapBlock)(id value, id key);
+
+typedef NSO*                (^_ReduceBlock)(id memo, id value, id key);
+
+typedef B                   (^_FindBlock)(id value);
+
+typedef B                   (^_CollectionItemTestBlock)(id value, id key);
+
+typedef NSO*                (^_MinBlock)(id value);
+typedef NSO*                (^_MaxBlock)(id value);
+
+typedef NSComparisonResult  (^_SortBlock)(id left, id right); /* ADDED */
+
+typedef NSO*                (^_SortByBlock)(id value);
+typedef NSO*                (^_GroupByBlock)(id value, id key);
+typedef NSO*                (^_SortedIndexBlock)(id value);
+
+typedef NSO*                (^_UniqueBlock)(id value, id key);
+
+typedef id                  (^_MemoizedBlock)(id arg1, ...);
+typedef id                  (^_MemoizeBlock)(id arg1, ...);
+typedef id                  (^_MemoizeHashBlock)(id arg1, ...);
 
 typedef void                (^_DelayBlock)();
 typedef void                (^_DeferBlock)();
-typedef void                (^_TimeoutBlock)();
+typedef void                (^_TimeoutBlock)(); /* ADDED */
 
 typedef id                  (^_ThrottledBlock)();
 typedef id                  (^_ThrottleBlock)(id arg1, ...);
@@ -42,32 +65,16 @@ typedef id                  (^_ThrottleBlock)(id arg1, ...);
 typedef void                (^_DebouncedBlock)();
 typedef void                (^_DebounceBlock)(id arg1, ...);
 
-typedef id                  (^_ComposeBlock)(id arg1, ...);
-
-typedef id                  (^_WrappedBlock)(id arg1, ...);
-typedef id                  (^_WrapBlock)(_WrappedBlock wrapped, id arg1, ...);
-
 typedef id                  (^_OncedBlock)();
 typedef id                  (^_OnceBlock)(id arg1, ...);
 
 typedef id                  (^_AfterBlock)(id arg1, ...);
+
+typedef id                  (^_WrappedBlock)(id arg1, ...);
+typedef id                  (^_WrapBlock)(_WrappedBlock wrapped, id arg1, ...);
+
+typedef id                  (^_ComposeBlock)(id arg1, ...);
+
+typedef id                  (^_IdentityBlock)(id value);
+
 typedef void                (^_TimesBlock)(I index);
-
-typedef B                   (^_FindBlock)(id value);
-
-typedef NSO*                (^_MinBlock)(id value);
-typedef NSO*                (^_MaxBlock)(id value);
-typedef NSO*                (^_SortedIndexBlock)(id value);
-typedef NSO*                (^_SortByBlock)(id value);
-typedef NSO*                (^_GroupByBlock)(id value, id key);
-
-typedef id                  (^_MemoizeBlock)(id arg1, ...);
-typedef id                  (^_MemoizedBlock)(id arg1, ...);
-
-typedef void                (^_EachBlock)(id value, id key);
-typedef B                   (^_ValueKeyTestBlock)(id value, id key); // TODO: should this be specialized?
-typedef NSO*                (^_ValueKeyMapBlock)(id value, id key);  // TODO: try ... for optional container
-
-typedef NSO*                (^_MemoValueKeyMapBlock)(id memo, id value, id key);
-
-typedef NSComparisonResult  (^_CompareBlock)(id left, id right);

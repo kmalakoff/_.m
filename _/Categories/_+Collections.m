@@ -62,9 +62,9 @@
   };
 }
 + (void(^)(id obj, _EachBlock iterator))forEach { return self.each; }  // ALIAS
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))eachWithStop
++ (B(^)(id obj, _EachWithStopBlock iterator))eachWithStop
 {
-  return ^B(id obj, _ValueKeyTestBlock iterator) {
+  return ^B(id obj, _EachWithStopBlock iterator) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"eachWithStop expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj)) return YES;
@@ -96,9 +96,9 @@
   };
 }
 
-+ (A*(^)(NSO* obj, _ValueKeyMapBlock iterator))map
++ (A*(^)(NSO* obj, _MapBlock iterator))map
 {
-  return ^A*(NSO* obj, _ValueKeyMapBlock iterator) {
+  return ^A*(NSO* obj, _MapBlock iterator) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
 
     if (_.isNull(obj))
@@ -133,11 +133,11 @@
     return nil;
   };
 }
-+ (A*(^)(id obj, _ValueKeyMapBlock iterator))collect { return self.map; } // ALIAS
++ (A*(^)(id obj, _MapBlock iterator))collect { return self.map; } // ALIAS
 
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))reduce
++ (id(^)(id obj, _ReduceBlock iterator, id memo))reduce
 {
-  return ^(id obj, _MemoValueKeyMapBlock iterator, id memo) {
+  return ^(id obj, _ReduceBlock iterator, id memo) {
     if (!obj) {
       if (!memo) @throw [NSException exceptionWithName:@"TypeError" reason:@"null without inital value" userInfo:nil];
       return memo;
@@ -155,12 +155,12 @@
     return internalMemo;
   };
 }
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))inject { return self.reduce; } // ALIAS
++ (id(^)(id obj, _ReduceBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
++ (id(^)(id obj, _ReduceBlock iterator, id memo))inject { return self.reduce; } // ALIAS
 
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))reduceRight
++ (id(^)(id obj, _ReduceBlock iterator, id memo))reduceRight
 {
-  return ^(id obj, _MemoValueKeyMapBlock iterator, id memo) {
+  return ^(id obj, _ReduceBlock iterator, id memo) {
     if (!obj) {
       if (!memo) @throw [NSException exceptionWithName:@"TypeError" reason:@"null without inital value" userInfo:nil];
       return memo;
@@ -183,7 +183,7 @@
     return internalMemo;
   };
 }
-+ (id(^)(id obj, _MemoValueKeyMapBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
++ (id(^)(id obj, _ReduceBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
 
 + (id(^)(id obj, _FindBlock iterator))find
 {
@@ -202,9 +202,9 @@
 
 + (id(^)(id obj, _FindBlock iterator))detect { return self.find; } // ALIAS
 
-+ (A*(^)(id obj, _ValueKeyTestBlock iterator))filter
++ (A*(^)(id obj, _CollectionItemTestBlock iterator))filter
 {
-  return ^(id obj, _ValueKeyTestBlock iterator) {
+  return ^(id obj, _CollectionItemTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
     _.each(obj, ^(id value, id key) {
@@ -213,11 +213,11 @@
     return results;
   };
 }
-+ (A*(^)(id obj, _ValueKeyTestBlock iterator))select { return self.filter; } // ALIAS
++ (A*(^)(id obj, _CollectionItemTestBlock iterator))select { return self.filter; } // ALIAS
 
-+ (A*(^)(id obj, _ValueKeyTestBlock iterator))reject
++ (A*(^)(id obj, _CollectionItemTestBlock iterator))reject
 {
-  return ^(id obj, _ValueKeyTestBlock iterator) {
+  return ^(id obj, _CollectionItemTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
     _.each(obj, ^(id value, id key) {
@@ -227,19 +227,19 @@
   };
 }
 
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))all
++ (B(^)(id obj, _CollectionItemTestBlock iterator))all
 {
-  return ^B(id obj, _ValueKeyTestBlock iterator) {
+  return ^B(id obj, _CollectionItemTestBlock iterator) {
     if (obj == nil) return YES;
     return _.eachWithStop(obj, iterator);
   };
 }
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))every {return self.all; } // ALIAS
++ (B(^)(id obj, _CollectionItemTestBlock iterator))every {return self.all; } // ALIAS
 
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))any
++ (B(^)(id obj, _CollectionItemTestBlock iterator))any
 {
-  return ^B(id obj, _ValueKeyTestBlock iterator) {
-    if (!iterator) iterator = _.identityVKTB;
+  return ^B(id obj, _CollectionItemTestBlock iterator) {
+    if (!iterator) iterator = _.identityCollectionTest;
     __block BOOL result = NO;
     if (obj == nil) return result;
     _.eachWithStop(obj, ^B(id value, id key) {
@@ -250,7 +250,7 @@
     return !!result;
   };
 }
-+ (B(^)(id obj, _ValueKeyTestBlock iterator))some { return self.any; }
++ (B(^)(id obj, _CollectionItemTestBlock iterator))some { return self.any; }
 
 + (B(^)(id obj, id target))include
 {

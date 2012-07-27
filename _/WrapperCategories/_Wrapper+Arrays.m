@@ -127,13 +127,13 @@
     return _.chain(_.uniq(self.valueNSA()));
   };
 }
-- (_Wrapper*(^)(B isSorted, _ValueKeyMapBlock iterator))uniq3
+- (_Wrapper*(^)(B isSorted, _UniqueBlock iterator))uniq3
 {
-  return ^(B isSorted, _ValueKeyMapBlock iterator) {
+  return ^(B isSorted, _UniqueBlock iterator) {
     return _.chain(_.uniq3(self.valueNSA(), isSorted, iterator));
   };
 }
-- (_Wrapper*(^)(B isSorted, _ValueKeyMapBlock iterator))unique { return self.uniq3; } // ALIAS
+- (_Wrapper*(^)(B isSorted, _UniqueBlock iterator))unique { return self.uniq3; } // ALIAS
 
 - (_Wrapper*(^)(NSA* array1, ...))zip
 {

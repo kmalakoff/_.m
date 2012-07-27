@@ -166,14 +166,14 @@
 
 - (void)test_all
 {
-  self.ok(_.all(A.new, /* SPECIALIZED */ _.identityVKTB), @"the empty set");
-  self.ok(_.all(AB(true, true, true), /* SPECIALIZED */ _.identityVKTB), @"all true values");
-  self.ok(!_.all(AB(true, false, true), /* SPECIALIZED */ _.identityVKTB), @"one false value");
+  self.ok(_.all(A.new, /* SPECIALIZED */ _.identityCollectionTest), @"the empty set");
+  self.ok(_.all(AB(true, true, true), /* SPECIALIZED */ _.identityCollectionTest), @"all true values");
+  self.ok(!_.all(AB(true, false, true), /* SPECIALIZED */ _.identityCollectionTest), @"one false value");
   self.ok(_.all(AI(0, 10, 28), ^B(N* num, id key){ return num.I % 2 == 0; }), @"even numbers");
   self.ok(!_.all(AI(0, 11, 28), ^B(N* num, id key){ return num.I % 2 == 0; }), @"an odd number");
-  self.ok(_.all(AI(1), /* SPECIALIZED */ _.identityVKTB) == true, @"cast to boolean - true");
-  self.ok(_.all(AI(0), /* SPECIALIZED */ _.identityVKTB) == false, @"cast to boolean - false");
-  self.ok(_.every(AB(true, true, true), /* SPECIALIZED */ _.identityVKTB), @"aliased as 'every'");
+  self.ok(_.all(AI(1), /* SPECIALIZED */ _.identityCollectionTest) == true, @"cast to boolean - true");
+  self.ok(_.all(AI(0), /* SPECIALIZED */ _.identityCollectionTest) == false, @"cast to boolean - false");
+  self.ok(_.every(AB(true, true, true), /* SPECIALIZED */ _.identityCollectionTest), @"aliased as 'every'");
 }
 
 - (void)test_any
@@ -185,8 +185,8 @@
   self.ok(!_.any(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"", N.B(false)), /* MANDATORY */ nil), @"falsy values");
   self.ok(!_.any(AI(1, 11, 29), ^B(N* num, /* MANDATORY */ id key){ return num.I % 2 == 0; }), @"all odd numbers");
   self.ok(_.any(AI(1, 10, 29), ^B(N* num, /* MANDATORY */ id key){ return num.I % 2 == 0; }), @"an even number");
-  self.ok(_.any(AI(1), /* SPECIALIZED */ _.identityVKTB) == true, @"cast to boolean - true");
-  self.ok(_.any(AI(0), /* SPECIALIZED */ _.identityVKTB) == false, @"cast to boolean - false");
+  self.ok(_.any(AI(1), /* SPECIALIZED */ _.identityCollectionTest) == true, @"cast to boolean - true");
+  self.ok(_.any(AI(0), /* SPECIALIZED */ _.identityCollectionTest) == false, @"cast to boolean - false");
   self.ok(_.some(AB(false, false, true), /* MANDATORY */ nil), @"aliased as 'some'");
 }
 

@@ -33,19 +33,19 @@
 
 //each
 
-- (_Wrapper*(^)(_ValueKeyMapBlock iterator))map;
+- (_Wrapper*(^)(_MapBlock iterator))map;
 
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))reduce;
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldl; // ALIAS
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))inject; // ALIAS
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))reduce;
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))foldl; // ALIAS
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))inject; // ALIAS
 
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))reduceRight;
-- (_Wrapper*(^)(_MemoValueKeyMapBlock iterator, id memo))foldr; // ALIAS
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))reduceRight;
+- (_Wrapper*(^)(_ReduceBlock iterator, id memo))foldr; // ALIAS
 
 //find
 
-- (_Wrapper*(^)(_ValueKeyTestBlock iterator))filter;
-- (_Wrapper*(^)(_ValueKeyTestBlock iterator))select; // ALIAS
+- (_Wrapper*(^)(_CollectionItemTestBlock iterator))filter;
+- (_Wrapper*(^)(_CollectionItemTestBlock iterator))select; // ALIAS
 
 //reject
 //all
@@ -61,7 +61,7 @@
 //max
 //min
 
-- (_Wrapper*(^)(_CompareBlock iterator))sort; /* ADDED to allow sorting in chaining */
+- (_Wrapper*(^)(_SortBlock iterator))sort; /* ADDED to allow sorting in chaining */
 
 //sortBy
 //groupBy
