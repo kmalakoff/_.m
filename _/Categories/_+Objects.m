@@ -31,6 +31,7 @@
 #import "_+Arrays.h"
 #import "_+Collections.h"
 #import "_+Extensions.h"
+#import "_Wrapper.h"
 #import "SubjectiveScript.h"
 
 @implementation _ (Objects)
@@ -133,8 +134,29 @@
 
 + (B(^)(id a, id b))isEqual
 {
-  return ^(id a, id b) {
-    return (B) [a isEqual:b];
+  return ^B(id a, id b) {
+    if ([a isKindOfClass:[_Wrapper class]]) // unwrap
+      return _.isEqual(((_Wrapper*)a).value(), b);
+    if ([b isKindOfClass:[_Wrapper class]]) // unwrap
+      return _.isEqual(a, ((_Wrapper*)b).value());
+  
+    if (_.isNull(a) || _.isNull(b))
+      return (a == b);
+
+    if (_.isNumber(a) || _.isNumber(b)) {
+      if ((!_.isNumber(a) || !_.isNumber(b)) || (strcmp(((N*)a).objCType, ((N*)b).objCType) != 0))
+        return NO;
+      else
+        return [a isEqual:b];
+    }
+
+    // TODO: specialized functions needed?
+//    if (_.isFunction(@"isEqual", a))
+//      @"isEqual".apply(a, [A arrayWithObject:b]);
+//    if (_.isFunction(@"isEqual", b))
+//      @"isEqual".apply(b, [A arrayWithObject:a]);
+    
+    return [a isEqual:b];
   };
 }
 

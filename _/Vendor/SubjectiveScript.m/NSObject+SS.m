@@ -92,6 +92,17 @@ const NSS* SSTypeObject = @"object";
   };
 }
 
+- (NSO*(^)(id key, NSO* value))set
+{
+  return ^NSO*(id key, NSO* value) {
+#ifdef DEBUG
+    NSAssert(nil, @"set not implemented for this type");
+#endif
+
+    return nil;
+  };
+}
+
 - (B(^)(id key))hasOwnProperty
 {
   return ^B(id key) {

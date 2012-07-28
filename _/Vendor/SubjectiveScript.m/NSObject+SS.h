@@ -40,6 +40,7 @@
 // use dynamic type checking for some JavaScript operations to reduce manual casting
 - (NSO*(^)(id key))get;
 - (NSO*(^)(I index))getAt;
+- (NSO*(^)(id key, NSO* value))set;
 - (B(^)(id key))hasOwnProperty;
 - (UI)length;
 - (S*(^)(NSS* separator))join;

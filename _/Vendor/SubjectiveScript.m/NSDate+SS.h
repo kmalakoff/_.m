@@ -31,6 +31,7 @@
 
 @interface NSDate (SS)
 
++ (D*(^)(I year, I month, I day))newYMD;
 - (NSS*(^)())toString;
 
 @end

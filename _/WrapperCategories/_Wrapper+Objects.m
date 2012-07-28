@@ -28,6 +28,8 @@
 //
 
 #import "_Wrapper+Objects.h"
+#import "_+Objects.h"
+#import "SubjectiveScript.h"
 
 @implementation _Wrapper (Objects)
 
@@ -40,7 +42,14 @@
 //clone
 //tap
 //has
-//isEqual
+
+- (_Wrapper*(^)(id b))isEqual
+{
+  return ^(id b) {
+    return _.chain(N.B(_.isEqual(self.value(), b)));
+  };
+}
+
 //isEmpty
 //isElement
 //isArray

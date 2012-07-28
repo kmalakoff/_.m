@@ -73,7 +73,6 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
 {
   return ^{
     __block A* results = A.new;
-    UI count = 0;
     
     // check the dictionary
     if (SS.isObject(self))
@@ -90,6 +89,7 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
     // TODO: should I support functions? (some internal methods crash)
 //    Method* methodlist = class_copyMethodList(object_getClass(self), &count);
 //
+//    UI count = 0;
 //    for(I index=0;index<count;index++) {
 //      // only JavaScript-style properties
 //      if (method_getNumberOfArguments(methodlist[index]) != 2) continue;

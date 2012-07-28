@@ -40,7 +40,9 @@
 //clone
 //tap
 //has
-//isEqual
+
+- (_Wrapper*(^)(id b))isEqual;
+
 //isEmpty
 //isElement
 //isArray

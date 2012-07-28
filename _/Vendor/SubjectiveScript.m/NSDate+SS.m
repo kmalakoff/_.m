@@ -31,6 +31,19 @@
 
 @implementation NSDate (SS)
 
++ (D*(^)(I year, I month, I day))newYMD
+{
+  return ^(I year, I month, I day) {
+    NSDateComponents *components = NSDateComponents.new;
+    components.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    components.year = year;
+    components.month = month;
+    components.day = day;
+
+    return components.date;
+  };
+}
+
 - (NSS*(^)())toString { return ^{ return self.description; }; }
 
 @end

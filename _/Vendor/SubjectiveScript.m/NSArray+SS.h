@@ -31,6 +31,7 @@
 
 @interface NSArray (SS)
 
++ (A*(^)(UI count))newSparse;
 + (A*(^)(const B* values, I count))newB;
 + (A*(^)(const I* values, I count))newI;
 + (A*(^)(const UI* values, I count))newUI;

@@ -41,6 +41,18 @@ static char* const SSIsArgumentsKey = "IsArguments";
 
 @implementation NSArray (SS)
 
++ (A*(^)(UI count))newSparse
+{
+  return ^(UI count) {
+    A* result = [A arrayWithCapacity:count];
+    id value = NSNull.null;
+    for (UI index=0; index<count; index++) {
+      [result addObject:value];
+    }
+    return result;
+  };
+}
+
 + (A*(^)(const B* values, I count))newB
 {
   return ^(const B* values, I count) {
