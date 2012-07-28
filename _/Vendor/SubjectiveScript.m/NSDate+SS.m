@@ -31,7 +31,7 @@
 
 @implementation NSDate (SS)
 
-+ (D*(^)(I year, I month, I day))newYMD
++ (Date*(^)(I year, I month, I day))newYMD
 {
   return ^(I year, I month, I day) {
     NSDateComponents *components = NSDateComponents.new;

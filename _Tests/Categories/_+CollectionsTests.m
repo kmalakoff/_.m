@@ -261,8 +261,8 @@
   self.equal(NF_POS_INFINITY, _.min(O.new, /* MANDATORY */ nil), @"Minimum value of an empty object");
   self.equal(NF_POS_INFINITY, _.min(A.new, /* MANDATORY */ nil), @"Minimum value of an empty array");
 
-  D* now = [D distantFuture];
-  D* then = D.new;
+  Date* now = [Date distantFuture];
+  Date* then = Date.new;
   self.equal(_.min(AO(now, then), /* MANDATORY */ nil), then, @"the time is now");
 
   self.equal(N.I(1), _.min(_.range(1,300000, /* MANDATORY */ 1), /* MANDATORY */ nil), @"Minimum value of a too-big array");

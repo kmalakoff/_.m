@@ -195,9 +195,9 @@
 //  self.ok(!_.isEqual(12564504e5, new Date(2009, 9, 25)), @"Dates and their corresponding numeric primitive values are not self.equal");
 
   // Dates.
-  self.ok(_.isEqual(D.newYMD(2009, 9, 25), D.newYMD(2009, 9, 25)), @"Date objects referencing identical times are self.equal");
-  self.ok(!_.isEqual(D.newYMD(2009, 9, 25), D.newYMD(2009, 11, 13)), @"Date objects referencing different times are not self.equal");
-  self.ok(!_.isEqual(D.newYMD(2009, 11, 13), OKV({
+  self.ok(_.isEqual(Date.newYMD(2009, 9, 25), Date.newYMD(2009, 9, 25)), @"Date objects referencing identical times are self.equal");
+  self.ok(!_.isEqual(Date.newYMD(2009, 9, 25), Date.newYMD(2009, 11, 13)), @"Date objects referencing different times are not self.equal");
+  self.ok(!_.isEqual(Date.newYMD(2009, 11, 13), OKV({
     @"getTime", ^(){
       return 12606876e5;
     }
@@ -226,11 +226,11 @@
 
   // Arrays with primitive and object values.
   self.ok(_.isEqual(AO(N.I(1), @"Larry", N.B(true)), AO(N.I(1), @"Larry", N.B(true))), @"Arrays containing identical primitives are self.equal");
-  self.ok(_.isEqual(AO(/*(/Moe/g),*/ D.newYMD(2009, 9, 25)), AO(/*(/Moe/g),*/ D.newYMD(2009, 9, 25))), @"Arrays containing equivalent elements are self.equal");
+  self.ok(_.isEqual(AO(/*(/Moe/g),*/ Date.newYMD(2009, 9, 25)), AO(/*(/Moe/g),*/ Date.newYMD(2009, 9, 25))), @"Arrays containing equivalent elements are self.equal");
 
   // Multi-dimensional arrays.
-  A* aA = AO(N.I(47), N.B(false), @"Larry", /*/Moe/,*/ D.newYMD(2009, 11, 13), AO(@"running", @"biking", S.newS(@"programming")), OKV({@"a", N.I(47)}));
-  A* bA = AO(N.I(47), N.B(false), @"Larry", /*/Moe/,*/ D.newYMD(2009, 11, 13), AO(@"running", @"biking", S.newS(@"programming")), OKV({@"a", N.I(47)}));
+  A* aA = AO(N.I(47), N.B(false), @"Larry", /*/Moe/,*/ Date.newYMD(2009, 11, 13), AO(@"running", @"biking", S.newS(@"programming")), OKV({@"a", N.I(47)}));
+  A* bA = AO(N.I(47), N.B(false), @"Larry", /*/Moe/,*/ Date.newYMD(2009, 11, 13), AO(@"running", @"biking", S.newS(@"programming")), OKV({@"a", N.I(47)}));
   self.ok(_.isEqual(aA, bA), @"Arrays containing nested arrays and objects are recursively compared");
 
 //  // Overwrite the methods defined in ES 5.1 section 15.4.4.
@@ -259,7 +259,7 @@
 
   // Simple objects.
   self.ok(_.isEqual(OKV({@"a", @"Curly"}, {@"b", N.I(1)}, {@"c", N.B(true)}), OKV({@"a", @"Curly"}, {@"b", N.I(1)}, {@"c", N.B(true)})), @"Objects containing identical primitives are self.equal");
-  self.ok(_.isEqual(OKV(/*{@"a", /Curly/g},*/ {@"b", D.newYMD(2009, 11, 13)}), OKV(/*{@"a", /Curly/g},*/ {@"b", D.newYMD(2009, 11, 13)})), @"Objects containing equivalent members are self.equal");
+  self.ok(_.isEqual(OKV(/*{@"a", /Curly/g},*/ {@"b", Date.newYMD(2009, 11, 13)}), OKV(/*{@"a", /Curly/g},*/ {@"b", Date.newYMD(2009, 11, 13)})), @"Objects containing equivalent members are self.equal");
   self.ok(!_.isEqual(OKV({@"a", N.I(63)}, {@"b", N.I(75)}), OKV({@"a", N.I(61)}, {@"b", N.I(55)})), @"Objects of identical sizes with different values are not self.equal");
   self.ok(!_.isEqual(OKV({@"a", N.I(63)}, {@"b", N.I(75)}), OKV({@"a", N.I(61)}, {@"c", N.I(55)})), @"Objects of identical sizes with different property names are not self.equal");
   self.ok(!_.isEqual(OKV({@"a", N.I(1)}, {@"b", N.I(2)}), OKV({@"a", N.I(1)})), @"Objects of different sizes are not self.equal");
@@ -274,7 +274,7 @@
     {@"hobbies", AO(@"acting")},
     {@"film", OKV(
       {@"name", @"Sing a Song of Six Pants"},
-      {@"release", D.newYMD(1947, 9, 30)},
+      {@"release", Date.newYMD(1947, 9, 30)},
       {@"stars", AO(S.newS(@"Larry Fine"), @"Shemp Howard")},
       {@"minutes", N.I(16)},
       {@"seconds", N.I(54)}
@@ -289,7 +289,7 @@
     {@"hobbies", AO(@"acting")},
     {@"film", OKV(
       {@"name", @"Sing a Song of Six Pants"},
-      {@"release", D.newYMD(1947, 9, 30)},
+      {@"release", Date.newYMD(1947, 9, 30)},
       {@"stars", AO(S.newS(@"Larry Fine"), @"Shemp Howard")},
       {@"minutes", N.I(16)},
       {@"seconds", N.I(54)}
@@ -535,7 +535,7 @@
 {
   self.ok(!_.isDate(N.I(100)), @"numbers are not dates");
   self.ok(!_.isDate(O.new), @"objects are not dates");
-  self.ok(_.isDate(D.new), @"but dates are");
+  self.ok(_.isDate(Date.new), @"but dates are");
 //  self.ok(_.isDate(iDate), @"even from another frame"); /* NOT SUPPORTED: JavaScript-only because of frame */
 }
 

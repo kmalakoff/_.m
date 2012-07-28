@@ -90,6 +90,16 @@
     va_end(argList); \
   }
 
+// one argument of type double
+#define ARG_D(_name, _lastNamedArg) \
+  D _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = va_arg(argList, D); \
+    va_end(argList); \
+  }
+
 // one argument of type NSNumber
 #define ARG_N(_name, _lastNamedArg) \
   N* _name; \

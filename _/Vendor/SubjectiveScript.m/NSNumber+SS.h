@@ -43,6 +43,9 @@
 + (N*(^)(F value))F;
 - (F)F;
 
++ (N*(^)(D value))D;
+- (D)D;
+
 - (const NSS*)typeof;
 - (B)isBoolean;
 - (NSS*(^)())toString;

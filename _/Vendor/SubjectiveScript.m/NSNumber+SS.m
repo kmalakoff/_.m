@@ -75,6 +75,14 @@ static char* const SSIsBooleanKey = "IsBoolean";
 }
 - (F)F { return self.floatValue; }
 
++ (N*(^)(D value))D
+{
+  return ^(D value) {
+    return [N numberWithDouble:value];
+  };
+}
+- (D)D { return self.doubleValue; }
+
 - (const NSS*)typeof { return self.isBoolean ? SSTypeNumber : SSTypeBoolean; }
 - (B)isBoolean { return objc_getAssociatedObject(self, SSIsBooleanKey) != nil; } // check for the stored key
 - (NSS*(^)())toString { 

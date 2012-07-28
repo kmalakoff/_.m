@@ -36,6 +36,7 @@ typedef BOOL            B;
 typedef NSInteger       I;
 typedef NSUInteger      UI;
 typedef float           F;
+typedef double          D;
 typedef id              KV[2];
 
 // object types
@@ -46,7 +47,7 @@ typedef id              KV[2];
 #define NSD             NSDictionary
 #define S               NSMutableString
 #define NSS             NSString
-#define D               NSDate
+#define Date            NSDate
 #define N               NSNumber
 #define E               NSException
 

@@ -43,7 +43,7 @@
   };
 }
 
-- (NSS*)mutableClassName { return NSStringFromClass([D class]); }
+- (NSS*)mutableClassName { return NSStringFromClass([O class]); }
 - (NSS*(^)())toString { return ^{ return self.description; }; }
 
 - (B(^)())isEmpty { return ^B() { return ([self keyEnumerator].nextObject == nil); }; }
