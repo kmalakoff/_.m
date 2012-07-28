@@ -45,7 +45,7 @@
 
 + (_CollectionItemTestBlock)identityCollectionItemTest
 {
-  return ^(id value, ...) {
+  return ^(id value, ... /* KEY, COLLECTION */) {
     return _.isTruthy(value);
   };
 }

@@ -21,7 +21,7 @@
 - (void)test_uniqueId 
 {
   A* ids = A.new; I i = 0;
-  while(i++ < 100) ids.push(_.uniqueId(/* NIL TERMINATED */ nil));
+  while(i++ < 100) ids.push(_.uniqueId(/* NIL_TERMINATION */ nil));
   self.equalI(_.uniq(ids).length, ids.length, @"can generate a globally-unique stream of ids");
 }
 

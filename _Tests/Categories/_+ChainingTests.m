@@ -23,7 +23,7 @@
 //  O* counts = (O*) __(lyrics).chain()
 //    .map(^(NSS* line, /* MANDATORY */ id index) { return line.split(@""); })
 //    .flatten( /* MANDATORY */ false )
-//    .reduce(^(O* hash, N* l, ...) {
+//    .reduce(^(O* hash, N* l, ... /* KEY, COLLECTION */) {
 //      N* value = (N*) hash.getOrAdd(l, ^{ return N.I(0); });
 //      hash.set(l, N.I(value.I+1));
 //      return hash;
@@ -34,11 +34,11 @@
 //- (void)test_select_reject_sortBy
 //{
 //  A* numbers = AI(1,2,3,4,5,6,7,8,9,10);
-//  numbers = __(numbers).chain().select(^B(N* n, ...) {
+//  numbers = __(numbers).chain().select(^B(N* n, ... /* KEY, COLLECTION */) {
 //    return n.I % 2 == 0;
-//  }).reject(^(N* n, ...) {
+//  }).reject(^(N* n, ... /* KEY, COLLECTION */) {
 //    return n.I % 4 == 0;
-//  }).sortBy(^(N* n, ...) {
+//  }).sortBy(^(N* n, ... /* KEY, COLLECTION */) {
 //    return -n.I;
 //  }).value();
 //  self.equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");

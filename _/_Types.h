@@ -59,15 +59,15 @@
   id _collection = va_arg(argList, id); \
   va_end(argList);
 
-typedef void                (^_EachBlock)(id value, ...);
-typedef B                   (^_EachWithStopBlock)(id value, ...);
-typedef NSO*                (^_MapBlock)(id value, ...);
+typedef void                (^_EachBlock)(id value, ... /* KEY, COLLECTION */);
+typedef B                   (^_EachWithStopBlock)(id value, ... /* KEY, COLLECTION */);
+typedef NSO*                (^_MapBlock)(id value, ... /* KEY, COLLECTION */);
 
-typedef NSO*                (^_ReduceBlock)(id memo, id value, ...);
+typedef NSO*                (^_ReduceBlock)(id memo, id value, ... /* KEY, COLLECTION */);
 
 typedef B                   (^_FindBlock)(id value);
 
-typedef B                   (^_CollectionItemTestBlock)(id value, ...);
+typedef B                   (^_CollectionItemTestBlock)(id value, ... /* KEY, COLLECTION */);
 
 typedef NSO*                (^_MinBlock)(id value);
 typedef NSO*                (^_MaxBlock)(id value);
@@ -75,34 +75,33 @@ typedef NSO*                (^_MaxBlock)(id value);
 typedef NSComparisonResult  (^_SortBlock)(id left, id right); /* ADDED */
 
 typedef NSO*                (^_SortByBlock)(id value);
-typedef NSO*                (^_GroupByBlock)(id value, ...);
+typedef NSO*                (^_GroupByBlock)(id value, ... /* KEY, COLLECTION */);
 typedef NSO*                (^_SortedIndexBlock)(id value);
 
-typedef NSO*                (^_UniqueBlock)(id value, ...);
-
-typedef id                  (^_MemoizedBlock)(id arg1, ...);
-typedef id                  (^_MemoizeBlock)(id arg1, ...);
-typedef id                  (^_MemoizeHashBlock)(id arg1, ...);
+typedef id                  (^_MemoizedBlock)(id arg1, ... /* NIL_TERMINATION */);
+typedef id                  (^_MemoizeBlock)(id arg1, ... /* NIL_TERMINATION */);
+typedef id                  (^_MemoizeHashBlock)(id arg1, ... /* NIL_TERMINATION */);
 
 typedef void                (^_DelayBlock)();
 typedef void                (^_DeferBlock)();
 typedef void                (^_TimeoutBlock)(); /* ADDED */
 
 typedef id                  (^_ThrottledBlock)();
-typedef id                  (^_ThrottleBlock)(id arg1, ...);
+typedef id                  (^_ThrottleBlock)(id arg1, ... /* NIL_TERMINATION */);
 
 typedef void                (^_DebouncedBlock)();
-typedef void                (^_DebounceBlock)(id arg1, ...);
+typedef void                (^_DebounceBlock)(id arg1, ... /* NIL_TERMINATION */);
 
 typedef id                  (^_OncedBlock)();
-typedef id                  (^_OnceBlock)(id arg1, ...);
+typedef id                  (^_OnceBlock)(id arg1, ... /* NIL_TERMINATION */);
 
-typedef id                  (^_AfterBlock)(id arg1, ...);
+typedef id                  (^_AfteredBlock)(id arg1, ... /* NIL_TERMINATION */);
+typedef id                  (^_AfterBlock)(id arg1, ... /* NIL_TERMINATION */);
 
-typedef id                  (^_WrappedBlock)(id arg1, ...);
-typedef id                  (^_WrapBlock)(_WrappedBlock wrapped, id arg1, ...);
+typedef id                  (^_WrappedBlock)(id arg1, ... /* NIL_TERMINATION */);
+typedef id                  (^_WrapBlock)(_WrappedBlock wrapped, id arg1, ... /* NIL_TERMINATION */);
 
-typedef id                  (^_ComposeBlock)(id arg1, ...);
+typedef id                  (^_ComposeBlock)(id arg1, ... /* NIL_TERMINATION */);
 
 typedef id                  (^_IdentityBlock)(id value);
 

@@ -146,7 +146,7 @@
     __block id internalMemo = memo;
     __block BOOL initial = false;
     if (obj == nil) obj = A.new;
-    _.each(obj, ^(NSO* value, ...) {
+    _.each(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
       initial = true;
       if (!internalMemo) internalMemo = [[NSClassFromString(value.mutableClassName) alloc] init];
       
@@ -191,7 +191,7 @@
 {
   return ^(id obj, _FindBlock iterator) {
     __block NSO* result;
-    _.any(obj, ^B(id value, ...) {
+    _.any(obj, ^B(id value, ... /* KEY, COLLECTION */) {
       if (iterator(value)) {
         result = value;
         return true;
@@ -209,7 +209,7 @@
   return ^(id obj, _CollectionItemTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
-    _.each(obj, ^(id value, ...) {
+    _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
       _ARGS_KEY(value);
       if (iterator(value, key)) results.push(value);
     });
@@ -223,7 +223,7 @@
   return ^(id obj, _CollectionItemTestBlock iterator) {
     A* results = A.new;
     if (obj == nil) return results;
-    _.each(obj, ^(id value, ...) {
+    _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
       _ARGS_KEY(value);
       if (!iterator(value, key)) results.push(value);
     });
@@ -246,7 +246,7 @@
     if (!iterator) iterator = _.identityCollectionItemTest;
     __block BOOL result = NO;
     if (obj == nil) return result;
-    _.eachWithStop(obj, ^B(id value, ...) {
+    _.eachWithStop(obj, ^B(id value, ... /* KEY, COLLECTION */) {
       _ARGS_KEY(value);
       if (result || (result = iterator(value, key)))
         return NO;
@@ -262,7 +262,7 @@
   return ^B(id obj, id target) {
     BOOL found = NO;
     if (obj == nil) return found;
-    found = _.any(obj, ^B(id value, ...) {
+    found = _.any(obj, ^B(id value, ... /* KEY, COLLECTION */) {
       return value == target;
     });
     return found;
@@ -270,12 +270,12 @@
 }
 + (B(^)(id obj, id target))contains { return self.include; } // ALIAS
 
-+ (NSO*(^)(id obj, NSS* methodName, id arg1, ...))invoke
++ (NSO*(^)(id obj, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke
 {
-  return ^NSO*(id obj, NSS* methodName, id arg1, ...) {
+  return ^NSO*(id obj, NSS* methodName, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
 
-    return _.map(obj, ^(NSO* value, ...) {
+    return _.map(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
       return methodName.apply(value, arguments);
     });
   };
@@ -318,7 +318,7 @@
     
     else {
       __block O* result = OKV({@"computed", ((NSD*)obj).objectEnumerator.nextObject});
-      _.each(obj, ^(NSO* value, ...) {
+      _.each(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
         NSO* computed = iterator ? iterator(value) : value;
         computed <= result.get(@"computed") && (result = OKV({@"value", value}, {@"computed", computed}));
       });
@@ -347,7 +347,7 @@
     else
     {
       __block O* result = OKV({@"computed", ((NSD*)obj).objectEnumerator.nextObject});
-      _.each(obj, ^(NSO* value, ...) {
+      _.each(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
         NSO* computed = iterator ? iterator(value) : value;
         computed >= result.get(@"computed") && (result = OKV({@"value", value}, {@"computed", computed}));
       });
@@ -356,7 +356,7 @@
   };
 }
 
-+ (id(^)(id obj, id iteratorOrKey))sortBy
++ (id(^)(id obj, id iteratorOrKey /* _SortByBlock or key */))sortBy
 {
   return ^(id obj, id iteratorOrKey) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
@@ -366,7 +366,7 @@
     };
 
     return _.chain(obj)
-      .map(^(NSO* value, ...) {
+      .map(^(NSO* value, ... /* KEY, COLLECTION */) {
         return OKV({@"value", value}, {@"criteria", iterator(value)});
       })
       .sort(^(NSDictionary *left, NSDictionary *right) {
@@ -379,19 +379,19 @@
   };
 }
 
-+ (O*(^)(id obj, id iteratorOrKey))groupBy
++ (O*(^)(id obj, id iteratorOrKey /* _GroupByBlock or key */))groupBy
 {
   return ^(id obj, id iteratorOrKey) {
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
 
-    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, ...){ 
+    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, ... /* KEY, COLLECTION */){
       return value.get(iteratorOrKey); 
     };
     
     __block O* result = O.new;
-    _.each(obj, ^(id value, ...) {
+    _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
       _ARGS_KEY(value);
-      key = iterator(value, key);
+      key = iterator(value, key, obj);
       A* values = (A*) result.getOrAdd(key, ^{ return A.new; });
       values.push(value);
     });
@@ -417,7 +417,7 @@
 {
   return ^(id obj) {
     __block A* shuffled = _.isArray(obj) ? ((NSA*)obj).mutableCopy : _.values(obj);
-    _.each(obj, ^(id value, ...) {
+    _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
       _ARGS_INDEX(value);
       I rand = arc4random() % (index + 1);
       [shuffled exchangeObjectAtIndex:rand withObjectAtIndex:index];

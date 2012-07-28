@@ -80,44 +80,44 @@
   };
 }
 
-- (_Wrapper*(^)(id value1, ...))without
+- (_Wrapper*(^)(id value1, ... /* NIL_TERMINATION */))without
 {
-  return ^(id value1, ...) {
+  return ^(id value1, ... /* NIL_TERMINATION */) {
     ARGS_AO(items, value1);
 
-    return _.chain(_.difference(self.valueNSA(), items, /* NIL TERMINATED */ nil));
+    return _.chain(_.difference(self.valueNSA(), items, /* NIL_TERMINATION */ nil));
   };
 }
 
-- (_Wrapper*(^)(NSA* array1, ...))union_
+- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))union_
 {
-  return ^(NSA* array1, ...) {
+  return ^(NSA* array1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, array1);
 
     return _.chain(_.uniq(_.flatten(arguments, YES)));
   };
 }
 
-- (_Wrapper*(^)(NSA* array1, ...))intersection
+- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))intersection
 {
-  return ^(NSA* array1, ...) {
+  return ^(NSA* array1, ... /* NIL_TERMINATION */) {
     ARGS_AO(rest, array1);
 
-    return _.chain(_.filter(_.uniq(self.valueNSA()), ^(id item, ...) {
-      return _.every(rest, ^B(id other, ...) {
+    return _.chain(_.filter(_.uniq(self.valueNSA()), ^(id item, ... /* KEY, COLLECTION */) {
+      return _.every(rest, ^B(id other, ... /* KEY, COLLECTION */) {
         return _.indexOf(other, item) >= 0;
       });
     }));
   };
 }
 
-- (_Wrapper*(^)(NSA* array1, ...))difference
+- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))difference
 {
-  return ^(NSA* array1, ...) {
+  return ^(NSA* array1, ... /* NIL_TERMINATION */) {
     ARGS_AO(rest, array1);
 
     rest = _.flatten(rest, YES);
-    return _.chain(_.filter(self.valueNSA(), ^B(id value, ...) { return !_.include(rest, value); }));
+    return _.chain(_.filter(self.valueNSA(), ^B(id value, ... /* KEY, COLLECTION */) { return !_.include(rest, value); }));
   };
 }
 
@@ -127,17 +127,17 @@
     return _.chain(_.uniq(self.valueNSA()));
   };
 }
-- (_Wrapper*(^)(B isSorted, _UniqueBlock iterator))uniq3
+- (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniq3
 {
-  return ^(B isSorted, _UniqueBlock iterator) {
+  return ^(B isSorted, _MapBlock iterator) {
     return _.chain(_.uniq3(self.valueNSA(), isSorted, iterator));
   };
 }
-- (_Wrapper*(^)(B isSorted, _UniqueBlock iterator))unique { return self.uniq3; } // ALIAS
+- (_Wrapper*(^)(B isSorted, _MapBlock iterator))unique { return self.uniq3; } // ALIAS
 
-- (_Wrapper*(^)(NSA* array1, ...))zip
+- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))zip
 {
-  return ^(NSA* array1, ...) {
+  return ^(NSA* array1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, array1);
 
     N* lengthNumber = (N*) _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);

@@ -38,14 +38,14 @@
 + (NSO*(^)(NSA* array, I n))first
 {
   return ^id(NSA* array, I n) {
-    return (n>=0) ? array.slice(0, n) : array.get(0);
+    return (n>=0 && (n != AI_END)) ? array.slice(0, n) : array.get(0);
   };
 }
 + (NSO*(^)(NSA* array, I n))head { return self.first; } // ALIAS
 + (NSO*(^)(NSA* array, I n))take { return self.first; } // ALIAS
-+ (NSO*(^)(NSA* array, ...))firstIterator
++ (NSO*(^)(NSA* array, ... /* KEY, COLLECTION */))firstIterator
 {
-  return ^id(NSA* array, ...) {
+  return ^id(NSA* array, ... /* KEY, COLLECTION */) {
     return array.get(0);
   };
 }
@@ -53,12 +53,12 @@
 + (NSA*(^)(NSA* array, I n))initial
 {
   return ^(NSA* array, I n) {
-    return array.slice(0, array.length - ((n<0) ? 1 : n));
+    return array.slice(0, array.length - ((n<0 || (n == AI_END)) ? 1 : n));
   };
 }
-+ (NSA*(^)(NSA* array, ...))initialIterator
++ (NSA*(^)(NSA* array, ... /* KEY, COLLECTION */))initialIterator
 {
-  return ^(NSA* array, ...) {
+  return ^(NSA* array, ... /* KEY, COLLECTION */) {
     return array.slice(0, array.length - 1);
   };
 }
@@ -67,16 +67,16 @@
 {
   return ^NSO*(NSA* array, I n) {
     if (!array.length) return [NSArray array];
-    if (n>=0) {
+    if (n>=0 && (n != AI_END)) {
       return array.slice(MAX((I)array.length - n, 0), array.length);
     } else {
       return array.getAt(array.length - 1);
     }
   };
 }
-+ (NSO*(^)(NSA* array, ...))lastIterator
++ (NSO*(^)(NSA* array, ... /* KEY, COLLECTION */))lastIterator
 {
-  return ^(NSA* array, ...) {
+  return ^(NSA* array, ... /* KEY, COLLECTION */) {
     return array.getAt(array.length - 1);
   };
 }
@@ -84,13 +84,13 @@
 + (NSA*(^)(NSA* array, I index))rest
 {
   return ^(NSA* array, I index) {
-    return array.slice((index<0) ? 1 : index, array.length);
+    return array.slice((index<0 || (index == AI_END)) ? 1 : index, array.length);
   };
 }
 + (NSA*(^)(NSA* array, I index))tail { return self.rest; } // ALIAS
-+ (NSA*(^)(NSA* array, ...))restIterator
++ (NSA*(^)(NSA* array, ... /* KEY, COLLECTION */))restIterator
 {
-  return ^NSA*(NSA* array, ...) {
+  return ^NSA*(NSA* array, ... /* KEY, COLLECTION */) {
     if (!array.length) return [NSArray array];
     return array.slice(1, array.length);
   };
@@ -99,7 +99,7 @@
 + (A*(^)(NSA* array))compact
 {
   return ^(NSA* array) {
-    return _.filter(array, ^B(id value, ...){ return _.isTruthy(value); });
+    return _.filter(array, ^B(id value, ... /* KEY, COLLECTION */){ return _.isTruthy(value); });
   };
 }
 
@@ -125,43 +125,43 @@
   };
 }
 
-+ (A*(^)(NSA* array, id value1, ...))without
++ (A*(^)(NSA* array, id value1, ... /* NIL_TERMINATION */))without
 {
-  return ^(NSA* array, id value1, ...) {
+  return ^(NSA* array, id value1, ... /* NIL_TERMINATION */) {
     ARGS_AO(items, value1);
-    return _.difference(array, items, /* NIL TERMINATED */ nil);
+    return _.difference(array, items, /* NIL_TERMINATION */ nil);
   };
 }
 
-+ (A*(^)(NSA* array, ...))union_
++ (A*(^)(NSA* array, ... /* NIL_TERMINATION */))union_
 {
-  return ^(NSA* array, ...) {
+  return ^(NSA* array, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, array);
 
     return _.uniq([self flatten:arguments shallow:YES output:A.new]);
   };
 }
 
-+ (A*(^)(NSA* array, NSA* array1, ...))intersection
++ (A*(^)(NSA* array, NSA* array1, ... /* NIL_TERMINATION */))intersection
 {
-  return ^(NSA* array, NSA* array1, ...) {
+  return ^(NSA* array, NSA* array1, ... /* NIL_TERMINATION */) {
     ARGS_AO(rest, array1);
 
-    return _.filter(_.uniq(array), ^(id item, ...) {
-      return _.every(rest, ^B(id other, ...) {
+    return _.filter(_.uniq(array), ^(id item, ... /* KEY, COLLECTION */) {
+      return _.every(rest, ^B(id other, ... /* KEY, COLLECTION */) {
         return _.indexOf(other, item) >= 0;
       });
     });
   };
 }
 
-+ (A*(^)(NSA* array, NSA* array1, ...))difference
++ (A*(^)(NSA* array, NSA* array1, ... /* NIL_TERMINATION */))difference
 {
-  return ^(NSA* array, NSA* array1, ...) {
+  return ^(NSA* array, NSA* array1, ... /* NIL_TERMINATION */) {
     ARGS_AO(rest, array1);
 
     rest = _.flatten(rest, YES);
-    return _.filter(array, ^B(id value, ...) { return !_.include(rest, value); });
+    return _.filter(array, ^B(id value, ... /* KEY, COLLECTION */) { return !_.include(rest, value); });
   };
 }
 
@@ -170,7 +170,7 @@
   return ^(NSA* array) {
     NSA* initial = array;
     A* results = A.new;
-    _.reduce(initial, ^(A* memo, NSO* value, ...) {
+    _.reduce(initial, ^(A* memo, NSO* value, ... /* KEY, COLLECTION */) {
       if (!_.include(memo, value)) {
         memo.push(value);
 
@@ -183,12 +183,12 @@
   };
 }
 + (A*(^)(NSA* array))unique { return self.uniq; } // ALIAS
-+ (A*(^)(NSA* array, B isSorted, _UniqueBlock iterator))uniq3
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniq3
 {
-  return ^(NSA* array, B isSorted, _UniqueBlock iterator) {
+  return ^(NSA* array, B isSorted, _MapBlock iterator) {
     NSA* initial = iterator ? _.map(array, iterator) : array;
     A* results = A.new;
-    _.reduce(initial, ^(A* memo, NSO* value, ...) {
+    _.reduce(initial, ^(A* memo, NSO* value, ... /* KEY, COLLECTION */) {
       if (isSorted ? (_.last(memo, -1) != value || !memo.length) : !_.include(memo, value)) {
         memo.push(value);
 
@@ -200,11 +200,11 @@
     return results;
   };
 }
-+ (A*(^)(NSA* array, B isSorted, _UniqueBlock iterator))unique3 { return self.uniq3; } // ALIAS
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))unique3 { return self.uniq3; } // ALIAS
 
-+ (A*(^)(NSA* array, ...))zip
++ (A*(^)(NSA* array, ... /* NIL_TERMINATION */))zip
 {
-  return ^(NSA* array, ...) {
+  return ^(NSA* array, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, array);
 
     N* lengthNumber = (N*) _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);

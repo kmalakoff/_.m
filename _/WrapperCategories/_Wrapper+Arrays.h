@@ -46,19 +46,19 @@
 
 - (_Wrapper*(^)(BOOL shallow))flatten;
  
-- (_Wrapper*(^)(id value1, ...))without; // TODO: nil terminated
+- (_Wrapper*(^)(id value1, ... /* NIL_TERMINATION */))without;
 
-- (_Wrapper*(^)(NSA* array1, ...))union_;  /* RESERVED KEYWORD 'union' -> 'union_' */ // TODO: nil terminated
+- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))union_;  /* RESERVED KEYWORD 'union' -> 'union_' */
 
-- (_Wrapper*(^)(NSA* array1, ...))intersection; // TODO: nil terminated
+- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))intersection;
 
-- (_Wrapper*(^)(NSA* array1, ...))difference; // TODO: nil terminated
+- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))difference;
 
 - (_Wrapper*(^)())uniq;
-- (_Wrapper*(^)(B isSorted, _UniqueBlock iterator))uniq3; /* SPECIALIZED */
-- (_Wrapper*(^)(B isSorted, _UniqueBlock iterator))unique;
+- (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniq3; /* SPECIALIZED */
+- (_Wrapper*(^)(B isSorted, _MapBlock iterator))unique;
 
-- (_Wrapper*(^)(NSA* array1, ...))zip; // TODO: nil terminated
+- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))zip;
 
 // zipObject /* NO OO-STYLE WRAPPER VERSION */
 

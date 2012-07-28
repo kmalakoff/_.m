@@ -60,9 +60,9 @@
   };
 }
 
-- (O*(^)(const KV* values))setKV
+- (O*(^)(const KV* values /* NIL_TERMINATION */))setKV
 {
-  return ^(const KV* values) {
+  return ^(const KV* values /* NIL_TERMINATION */) {
     for (const id* value = (const id*) values; *value != nil; value+=2) {
       [self setValue:value[1] forKey:value[0]];
     }

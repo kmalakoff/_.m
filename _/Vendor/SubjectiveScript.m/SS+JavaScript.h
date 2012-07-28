@@ -13,7 +13,7 @@
 
 + (SSJSON*)JSON;
 
-+ (id(^)(id block, id arg1, ...))call;
++ (id(^)(id block, id arg1, ... /* NIL_TERMINATED*/))call;
 + (id(^)(id block, NSA* arguments))apply;
 
 @end
@@ -26,7 +26,7 @@
 
 @interface NSString (JavaScript)
 
-- (id(^)(id target, id arg1, ...))call;
+- (id(^)(id target, id arg1, ... /* NIL_TERMINATED*/))call;
 - (id(^)(id target, NSA* arguments))apply;
 - (id(^)(id target))getScriptFunctionBlock;
 

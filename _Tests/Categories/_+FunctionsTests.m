@@ -75,7 +75,7 @@
 
 - (void)test_memoize {
   __block _MemoizeBlock _fib = nil;
-  _MemoizeBlock fib = ^N*(N* nNumber, ...) {
+  _MemoizeBlock fib = ^N*(N* nNumber, ... /* NIL_TERMINATION */) {
     I n = nNumber.I;
     if (n < 2) return nNumber;
     N* n1 = _fib(N.I(n - 1)); // can't refer to itself -> use _{name}
@@ -88,7 +88,7 @@
   self.equal(fib(N.I(10)), N.I(55), @"a memoized version of fibonacci produces identical results");
   self.equal(fastFib(N.I(10), /* MANDATORY */ nil), N.I(55), @"a memoized version of fibonacci produces identical results");
 
-  _MemoizeBlock o = ^(NSS* str, ...) {
+  _MemoizeBlock o = ^(NSS* str, ... /* NIL_TERMINATION */) {
     return str;
   };
   _MemoizedBlock fastO = _.memoize(o, /* MANDATORY */ nil);
@@ -122,7 +122,7 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block I counter = 0;
-    _ThrottleBlock incr = ^id(id arg1, /* MANDATORY */ ...){ counter++; /* MANDATORY */ return nil; };
+    _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* MANDATORY */ return nil; };
     _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* MANDATORY */ nil );  // TODO: rename BLOCK?
     throttledIncr(); throttledIncr(); throttledIncr();
     SS.setTimeout(^{ throttledIncr(); }, 70);
@@ -142,7 +142,7 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block N* value = nil;
-    _ThrottleBlock update = ^id(N* val, /* MANDATORY */ ...){ value = val; /* MANDATORY */ return nil; };
+    _ThrottleBlock update = ^id(N* val, ... /* NIL_TERMINATION */){ value = val; /* MANDATORY */ return nil; };
     _ThrottledBlock throttledUpdate = _.throttle(update, 100, /* MANDATORY */ nil );
     throttledUpdate(N.I(1), nil); throttledUpdate(N.I(2), nil); throttledUpdate(N.I(3), nil);
     SS.setTimeout(^(){ throttledUpdate(N.I(4)); }, 120);
@@ -157,7 +157,7 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block I counter = 0;
-    _ThrottleBlock incr = ^N*(id arg1, /* MANDATORY */ ...){ return N.I(++counter); };
+    _ThrottleBlock incr = ^N*(id arg1, ... /* NIL_TERMINATION */){ return N.I(++counter); };
     _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* MANDATORY */ nil );
     N* result = throttledIncr();
     _.delay(^(){
@@ -171,7 +171,7 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block I  counter = 0;
-    _ThrottleBlock incr = ^id(id arg1, /* MANDATORY */ ...){ counter++; /* MANDATORY */ return nil; };
+    _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* MANDATORY */ return nil; };
     _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* MANDATORY */ nil);
     throttledIncr(); throttledIncr();
     _.delay(^(){ self.equalI(counter, 2, @"incr was called twice"); test.start(); }, 220);
@@ -182,8 +182,8 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block I  counter = 0;
-    _DebounceBlock incr = ^(id arg1, /* MANDATORY */ ...){ counter++; };
-    _DebouncedBlock debouncedIncr = _.debounce(incr, 50, /* MANDATORY */ false, /* NIL TERMINATED */ nil);
+    _DebounceBlock incr = ^(id arg1, ... /* NIL_TERMINATION */){ counter++; };
+    _DebouncedBlock debouncedIncr = _.debounce(incr, 50, /* MANDATORY */ false, /* NIL_TERMINATION */ nil);
     debouncedIncr(); debouncedIncr(); debouncedIncr();
     SS.setTimeout(^{ debouncedIncr(); }, 30);
     SS.setTimeout(^{ debouncedIncr(); }, 60);
@@ -198,10 +198,10 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block I counter = 0;
-    _DebounceBlock incr = ^(id arg1, /* MANDATORY */ ...){ 
+    _DebounceBlock incr = ^(id arg1, ... /* NIL_TERMINATION */){ 
       counter++; 
     };
-    _DebouncedBlock debouncedIncr = _.debounce(incr, 50, true, /* NIL TERMINATED */ nil);
+    _DebouncedBlock debouncedIncr = _.debounce(incr, 50, true, /* NIL_TERMINATION */ nil);
     debouncedIncr(); debouncedIncr(); debouncedIncr();
     self.equalI(counter, 1, @"incr was called immediately");
     SS.setTimeout(^{ debouncedIncr(); }, 30);
@@ -218,10 +218,10 @@
   self.asyncTest(^(QUnitTest* test) {
     __block I counter = 0;
     __block _DebouncedBlock _debouncedIncr = nil;
-    _DebouncedBlock debouncedIncr = _.debounce(^(id arg1, /* MANDATORY */ ...){
+    _DebouncedBlock debouncedIncr = _.debounce(^(id arg1, ... /* NIL_TERMINATION */){
       counter++;
       if (counter < 5) _debouncedIncr(); // can't refer to itself -> use _{name}
-    }, 50, true, /* NIL TERMINATED */ nil);
+    }, 50, true, /* NIL_TERMINATION */ nil);
     _debouncedIncr = debouncedIncr; // can't refer to itself -> use _{name}
     debouncedIncr();
     self.equalI(counter, 1, @"incr was called immediately");
@@ -231,35 +231,35 @@
 
 - (void)test_once {
   __block I num = 0;
-  _OncedBlock increment = _.once(^id(/* MANDATORY */ id arg1, ...){ num++; /* MANDATORY */ return nil; }, /* NIL TERMINATED */ nil);
+  _OncedBlock increment = _.once(^id(id arg1, ... /* NIL_TERMINATION */){ num++; /* MANDATORY */ return nil; }, /* NIL_TERMINATION */ nil);
   increment();
   increment();
   self.equalI(num, 1, @"once");
 }
 
 - (void)test_wrap {
-  _WrappedBlock greet = ^S*(NSS* name, /* MANDATORY */ ...){ return @"hi: ".add(name); };
-  _WrappedBlock backwards = _.wrap(greet, ^S*(_WrappedBlock func, NSS* name, /* MANDATORY */ ...){ 
+  _WrappedBlock greet = ^S*(NSS* name, ... /* NIL_TERMINATION */){ return @"hi: ".add(name); };
+  _WrappedBlock backwards = _.wrap(greet, ^S*(_WrappedBlock func, NSS* name, ... /* NIL_TERMINATION */){
     return ((S*)func(name)).append(@" ").append(name.split(@"").reverse().join(@"")); 
   });
   self.equal(backwards(@"moe", /* MANDATORY */ nil), @"hi: moe eom", @"wrapped the saluation function");
 
-  _WrappedBlock inner = ^(/* MANDATORY */ id arg1, ...){ return @"Hello "; };
+  _WrappedBlock inner = ^(id arg1, ... /* NIL_TERMINATION */){ return @"Hello "; };
   O* obj   = OKV({@"name", @"Moe"});
-  obj.set(@"hi", _.wrap(inner, ^(_WrappedBlock fn, /* MANDATORY */ id arg1, ...){ return ((S*)fn(nil)).add((NSS*)obj.get(@"name")); /* REMOVED 'this' CONTEXT */ })); 
-  self.equal(((_WrappedBlock)obj.get(@"hi"))(/* NIL TERMINATED */ nil), @"Hello Moe", @"wrapped in property");
+  obj.set(@"hi", _.wrap(inner, ^(_WrappedBlock fn, id arg1, ... /* NIL_TERMINATION */){ return ((S*)fn(nil)).add((NSS*)obj.get(@"name")); /* REMOVED 'this' CONTEXT */ })); 
+  self.equal(((_WrappedBlock)obj.get(@"hi"))(/* NIL_TERMINATION */ nil), @"Hello Moe", @"wrapped in property");
 
-  _WrappedBlock noop    = ^id(/* MANDATORY */ id arg1, ...){ 
+  _WrappedBlock noop    = ^id(id arg1, ... /* NIL_TERMINATION */){ 
     return NSNull.null; 
   };
-  _WrappedBlock wrapped = _.wrap(noop, ^A*(_WrappedBlock fn, /* MANDATORY */ id arg1, ...){ ARGS_AO(arguments, arg1); return A.newNSO(fn).concat(arguments); });
+  _WrappedBlock wrapped = _.wrap(noop, ^A*(_WrappedBlock fn, id arg1, ... /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return A.newNSO(fn).concat(arguments); });
   A* ret     = wrapped(AO(@"whats", @"your"), @"vector", @"victor", /* MANDATORY */ nil);
   self.deepEqual(ret, AO(noop, AO(@"whats", @"your"), @"vector", @"victor"), @"deep wrapping");
 }
 
 - (void)test_compose {
-  _ComposeBlock greet = ^S*(NSS* name, /* MANDATORY */ ...){ return @"hi: ".add(name); };
-  _ComposeBlock exclaim = ^S*(NSS* sentence, /* MANDATORY */ ...){ return sentence.add(@"!"); };
+  _ComposeBlock greet = ^S*(NSS* name, ... /* NIL_TERMINATION */){ return @"hi: ".add(name); };
+  _ComposeBlock exclaim = ^S*(NSS* sentence, ... /* NIL_TERMINATION */){ return sentence.add(@"!"); };
   _ComposeBlock composed = _.compose(exclaim, greet, /* NIL TERMINATION */ nil);
   self.equal(composed(@"moe"), @"hi: moe!", @"can compose a function that takes another");
 
@@ -268,10 +268,10 @@
 }
 
 - (void)test_after {
-  _AfterBlock testAfter = ^(N* afterAmount, ...) {
+  _AfterBlock testAfter = ^(N* afterAmount, ... /* NIL_TERMINATION */) {
     ARG_N(timesCalled, afterAmount); 
     __block N* afterCalled = N.I(0);
-    _AfterBlock after = _.after(afterAmount.I, ^(id arg1, ...) {
+    _AfterBlock after = _.after(afterAmount.I, ^(id arg1, ... /* NIL_TERMINATION */) {
       afterCalled = N.I(afterCalled.I+1);
       return (id) nil;
     }, /* NIL TERMINATION */ nil); 

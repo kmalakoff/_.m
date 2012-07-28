@@ -89,7 +89,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-+ (A*(^)(const id* values))newO
++ (A*(^)(const id* values /* NIL_TERMINATION */))newO
 {
   return ^(const id* values) {
     A* result = A.new;
@@ -99,7 +99,6 @@ static char* const SSIsArgumentsKey = "IsArguments";
     return result;
   };
 }
-
 
 - (NSS*)mutableClassName { return NSStringFromClass([S class]); }
 - (NSS*(^)())toString { return ^{ return S.newFormatted(@"[%@]", self.join(@",")); }; }

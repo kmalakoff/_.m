@@ -34,36 +34,36 @@
 + (NSO*(^)(NSA* array, I n))first;
 + (NSO*(^)(NSA* array, I n))head; // ALIAS
 + (NSO*(^)(NSA* array, I n))take; // ALIAS
-+ (NSO*(^)(NSA* array, ...))firstIterator; /* SPECIALIZED */
++ (NSO*(^)(NSA* array, ... /* KEY, COLLECTION */))firstIterator; /* SPECIALIZED */
 
 + (NSA*(^)(NSA* array, I n))initial;
-+ (NSA*(^)(NSA* array, ...))initialIterator; /* SPECIALIZED */
++ (NSA*(^)(NSA* array, ... /* KEY, COLLECTION */))initialIterator; /* SPECIALIZED */
 
 + (NSO*(^)(NSA* array, I n))last;
-+ (NSO*(^)(NSA* array, ...))lastIterator; /* SPECIALIZED */
++ (NSO*(^)(NSA* array, ... /* KEY, COLLECTION */))lastIterator; /* SPECIALIZED */
 
 + (NSA*(^)(NSA* array, I index))rest;
 + (NSA*(^)(NSA* array, I index))tail; // ALIAS
-+ (NSA*(^)(NSA* array, ...))restIterator; /* SPECIALIZED */
++ (NSA*(^)(NSA* array, ... /* KEY, COLLECTION */))restIterator; /* SPECIALIZED */
 
 + (A*(^)(NSA* array))compact;
 
 + (A*(^)(NSA* array, BOOL shallow))flatten;
  
-+ (A*(^)(NSA* array, id value1, ...))without; // TODO: nil terminated
++ (A*(^)(NSA* array, id value1, ... /* NIL_TERMINATION */))without;
 
-+ (A*(^)(NSA* array, ...))union_; /* RESERVED KEYWORD 'union' -> 'union_' */ // TODO: nil terminated
++ (A*(^)(NSA* array, ... /* NIL_TERMINATION */))union_; /* RESERVED KEYWORD 'union' -> 'union_' */
 
-+ (A*(^)(NSA* array, NSA* array1, ...))intersection; // TODO: nil terminated
++ (A*(^)(NSA* array, NSA* array1, ... /* NIL_TERMINATION */))intersection;
 
-+ (A*(^)(NSA* array, NSA* array1, ...))difference; // TODO: nil terminated
++ (A*(^)(NSA* array, NSA* array1, ... /* NIL_TERMINATION */))difference;
 
 + (A*(^)(NSA* array))uniq;
 + (A*(^)(NSA* array))unique; // ALIAS
-+ (A*(^)(NSA* array, B isSorted, _UniqueBlock iterator))uniq3; /* SPECIALIZED */
-+ (A*(^)(NSA* array, B isSorted, _UniqueBlock iterator))unique3; /* SPECIALIZED */
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniq3; /* SPECIALIZED */
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))unique3; /* SPECIALIZED */
 
-+ (A*(^)(NSA* array, ...))zip; // TODO: nil terminated
++ (A*(^)(NSA* array, ... /* NIL_TERMINATION */))zip;
 
 + (O*(^)(NSA* keys, NSA* values))zipObject;
 

@@ -37,11 +37,11 @@
 + (A*(^)(NSD* obj))functions;
 + (A*(^)(NSD* obj))methods;
 
-+ (O*(^)(O* obj, NSD* obj1, ...))extend;
++ (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))extend;
 
-+ (O*(^)(O* obj, id key1, ...))pick;
++ (O*(^)(O* obj, id key1, ... /* NIL_TERMINATION */))pick;
 
-+ (O*(^)(O* obj, NSD* obj1, ...))defaults;
++ (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))defaults;
 
 + (NSO*(^)(NSO* obj))clone;
 
@@ -61,7 +61,7 @@
 
 + (B(^)(id obj))isArguments;
 
-+ (B(^)(id obj, id target))isFunction;  /* DEFINITION: you call @"fnName".apply(target, ...) or @"fnName".call(target, ...) it using a block property or static function. See NSString+SS.h */
++ (B(^)(id obj, id target))isFunction;  /* DEFINITION: you call @"fnName".apply(target, ... NIL_TERMINATION) or @"fnName".call(target, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
 
 + (B(^)(id obj))isString;
 

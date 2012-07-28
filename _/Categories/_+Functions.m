@@ -37,18 +37,18 @@
 //bind /* NOT SUPPORTED: JavaScript-only */
 //bindAll /* NOT SUPPORTED: JavaScript-only */
 
-+ (_MemoizedBlock(^)(_MemoizeBlock func, _MemoizeHashBlock hasher))memoize
++ (_MemoizedBlock /* NIL_TERMINATION */(^)(_MemoizeBlock func, _MemoizeHashBlock hasher))memoize
 {
   return ^(_MemoizeBlock func, _MemoizeHashBlock hasher) {
     O* memo = O.new;
-    if (!hasher) hasher = ^id(id arg1, ...) {
+    if (!hasher) hasher = ^id(id arg1, .../* KEY, COLLECTION */) {
       return arg1;
     };
     
-    return ^id(id arg1, ...){
+    return ^id(id arg1, ... /* NIL_TERMINATION */){
       ARGS_AO(arguments, arg1);
 
-      // requires at least one argument to match the block signature (id arg1, ...)
+      // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
       if (arguments.length < 1) arguments.push(NSNull.null);
 
       id key = SS.apply(hasher, arguments);
@@ -91,15 +91,15 @@
   };
 }
 
-+ (_ThrottledBlock(^)(_ThrottleBlock func, I waitNS, id arg1, ...))throttle
++ (_ThrottledBlock(^)(_ThrottleBlock func, I waitNS, id arg1, ... /* NIL_TERMINATION */))throttle
 {
-  return ^(_ThrottleBlock func, I waitNS, id arg1, ...) {
+  return ^(_ThrottleBlock func, I waitNS, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
 
     __block B throttling;
     __block B more;
 
-    _DebouncedBlock whenDone = _.debounce(^(/* MANDATORY */ id arg1, ...){ more = throttling = false; }, waitNS, /* MANDATORY */ false, /* NIL TERMINATED */ nil);
+    _DebouncedBlock whenDone = _.debounce(^(id arg1, ... /* NIL_TERMINATION */ /* NIL_TERMINATION */){ more = throttling = false; }, waitNS, /* MANDATORY */ false, /* NIL_TERMINATION */ nil);
     return ^{
       id result;
       __block SSTimeout* timeout;
@@ -121,12 +121,12 @@
   };
 }
 
-+ (_DebouncedBlock(^)(_DebounceBlock func, I waitNS, B immediate, id arg1, ...))debounce
++ (_DebouncedBlock(^)(_DebounceBlock func, I waitNS, B immediate, id arg1, ... /* NIL_TERMINATION */))debounce
 {
-  return ^(_DebounceBlock func, I waitNS, B immediate, id arg1, ...) {
+  return ^(_DebounceBlock func, I waitNS, B immediate, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
     
-    // requires at least one argument to match the block signature (id arg1, ...)
+    // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
     if (arguments.length < 1) arguments.push(NSNull.null);
     __block SSTimeout* timeout;
 
@@ -143,12 +143,12 @@
   };
 }
 
-+ (_OncedBlock(^)(_OnceBlock func, id arg1, ...))once
++ (_OncedBlock(^)(_OnceBlock func, id arg1, ... /* NIL_TERMINATION */))once
 {
-  return ^(_OnceBlock func, id arg1, ...) {
+  return ^(_OnceBlock func, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
 
-    // requires at least one argument to match the block signature (id arg1, ...)
+    // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
     if (arguments.length < 1) arguments.push(NSNull.null);
 
     __block B ran = false;
@@ -161,17 +161,17 @@
   };
 }
 
-+ (_AfterBlock(^)(I times, _AfterBlock func, id arg1, ...))after
++ (_AfteredBlock /* NIL_TERMINATION */(^)(I times, _AfterBlock func, id arg1, ... /* NIL_TERMINATION */))after
 {
-  return ^_AfterBlock(I times, _AfterBlock func, id arg1, ...) {
+  return ^_AfterBlock(I times, _AfterBlock func, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
 
-    // requires at least one argument to match the block signature (id arg1, ...)
+    // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
     if (arguments.length < 1) arguments.push(NSNull.null);
 
     __block I timesInternal = times;
     if (timesInternal <= 0) return SS.apply(func, arguments);
-    return ^id(id arg1, ...) {
+    return ^id(id arg1, ... /* NIL_TERMINATION */) {
       if (--timesInternal < 1) {
         return SS.apply(func, arguments);
       }
@@ -180,13 +180,13 @@
   };
 }
 
-+ (_WrappedBlock(^)(_WrappedBlock func, _WrapBlock wrapper))wrap
++ (_WrappedBlock /* NIL_TERMINATION */(^)(_WrappedBlock func, _WrapBlock wrapper))wrap
 {
   return ^(_WrappedBlock func, _WrapBlock wrapper) {
-    return ^id(id arg1, ...){
+    return ^id(id arg1, ... /* NIL_TERMINATION */){
       ARGS_AO(arguments, arg1);
 
-      // requires at least one argument to match the block signature (id arg1, ...)
+      // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
       if (arguments.length < 1) arguments.push(NSNull.null);
       
       A* args = A.newNSO(func).concat(arguments);
@@ -195,16 +195,16 @@
   };
 }
 
-+ (_ComposeBlock(^)(_ComposeBlock func1, ...))compose
++ (_ComposeBlock /* NIL_TERMINATION */(^)(_ComposeBlock func1, ... /* NIL_TERMINATION */))compose
 {
-  return ^_ComposeBlock(_ComposeBlock func1, ...) {
+  return ^_ComposeBlock(_ComposeBlock func1, ... /* NIL_TERMINATION */) {
     // TODO: add type checking 
     ARGS_AO(funcs, func1);
 
-    return ^(id arg1, ...) {
+    return ^(id arg1, ... /* NIL_TERMINATION */) {
       ARGS_AO(args, arg1);
 
-      // requires at least one argument to match the block signature (id arg1, ...)
+      // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
       if (args.length < 1) args.push(NSNull.null);
 
       for (I i = funcs.length - 1; i >= 0; i--) {

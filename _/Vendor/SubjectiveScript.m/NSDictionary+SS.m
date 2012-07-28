@@ -31,9 +31,9 @@
 
 @implementation NSDictionary (SS)
 
-+ (O*(^)(const KV* values))newKV
++ (O*(^)(const KV* values /* NIL_TERMINATION */))newKV
 {
-  return ^(const KV* values) {
+  return ^(const KV* values /* NIL_TERMINATION */) {
     O* result = O.new;
     for (const id* value = (const id*) values; *value != nil; value+=2) {
       [result setValue:value[1] forKey:value[0]];

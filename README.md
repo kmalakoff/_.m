@@ -15,8 +15,9 @@ _> OKV({k, v}, {k, v}) syntax
 -> terminators and ignorers AO_, AF_ and _FNone
 -> removed all context
 explain the reason for and use of KH
-variable length: add nil termination requirement
+variable length: add nil termination requirement -> look for /* NIL_TERMINATION */ in the function definition or test
 no context 'this'
+how to use _ARGS_KEY and ARGS_AO, etc
 
 Other Changes
 ------------
@@ -29,23 +30,23 @@ Arrays
 first
 _.first = _.head = _.take = function(array, n, guard)
 + (id(^)(A* array, I n))first;  // mandatory second parameter: -1 replaces missing paramter
-+ (id(^)(A* array, ...))firstIterator; // CHANGE
++ (id(^)(A* array, ... /* KEY, COLLECTION */))firstIterator; // CHANGE 
 
 
 initial
 _.initial = function(array, n, guard)
 + (A*(^)(A* array, I n))initial; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, ...))initialIterator; // CHANGE
++ (A*(^)(A* array, ... /* KEY, COLLECTION */))initialIterator; // CHANGE
 
 last
 _.last = function(array, n, guard)
 + (id(^)(A* array, I n))last; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, ...))lastIterator; // CHANGE
++ (A*(^)(A* array, ... /* KEY, COLLECTION */))lastIterator; // CHANGE
 
 rest
 _.rest = _.tail = function(array, index, guard)
 + (A*(^)(A* array, I index))rest; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, ...))restIterator; // CHANGE
++ (A*(^)(A* array, ... /* KEY, COLLECTION */))restIterator; // CHANGE
 
 compact
 _.compact = function(array)
@@ -58,28 +59,28 @@ _.flatten = function(array, shallow)
 
 without
 _.without = function(array, ...)
-+ (A*(^)(A* array, id value1, ...))without;
++ (A*(^)(A* array, id value1, ... /* NIL_TERMINATED*/))without;
 
 union
 _.union = function(...)
-+ (A*(^)(A* array, ...))union;
++ (A*(^)(A* array, ... /* NIL_TERMINATED*/))union;
 
 intersection
 _.intersection = function(...)
-+ (A*(^)(A* array, ...))intersection;
++ (A*(^)(A* array, ... /* NIL_TERMINATED*/))intersection;
 
 difference
 _.difference = function(array)
-+ (A*(^)(A* array, A* array1, ...))difference;
++ (A*(^)(A* array, A* array1, ... /* NIL_TERMINATED*/))difference;
 
 uniq
 _.uniq = _.unique = function(array, isSorted, iterator)
 + (id(^)(A* array, array))uniq;
-+ (id(^)(A* array, array, B isSorted, _UniqueBlock iterator))uniq3;
++ (id(^)(A* array, array, B isSorted, _MapBlock iterator))uniq3;
 
 zip
 _.zip = function(...)
-+ (A*(^)(A* array, A* array1, ...))zip;
++ (A*(^)(A* array, A* array1, ... /* NIL_TERMINATED*/))zip;
 
 _.zipObject = function(keys, values)
 + (O*(^)(NSA* keys, NSA* values))zipObject //ADDED

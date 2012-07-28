@@ -31,9 +31,9 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
   return json;
 }
 
-+ (id(^)(id block, id arg1, ...))call
++ (id(^)(id block, id arg1, ... /* NIL_TERMINATED*/))call
 {
-  return ^(id block, id arg1, ...) {
+  return ^(id block, id arg1, ... /* NIL_TERMINATED*/) {
     ARGS_AO(arguments, arg1);
 
     return SS.apply(block, arguments);
@@ -85,9 +85,9 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
 
 @implementation NSString (JavaScript)
 
-- (id(^)(id target, id arg1, ...))call
+- (id(^)(id target, id arg1, ... /* NIL_TERMINATED*/))call
 {
-  return ^id(id target, id arg1, ...) {
+  return ^id(id target, id arg1, ... /* NIL_TERMINATED*/) {
     ARGS_AO(arguments, arg1);
     
     id scriptFunction = self.getScriptFunctionBlock(target);

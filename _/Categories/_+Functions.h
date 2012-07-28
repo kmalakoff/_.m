@@ -34,7 +34,7 @@
 //bind /* NOT SUPPORTED: JavaScript-only */
 //bindAll /* NOT SUPPORTED: JavaScript-only */
 
-+ (_MemoizedBlock(^)(_MemoizeBlock func, _MemoizeHashBlock hasher))memoize; /* NIL TERMINATED */
++ (_MemoizedBlock /* NIL_TERMINATION */(^)(_MemoizeBlock func, _MemoizeHashBlock hasher))memoize;
 
 + (void(^)(_DelayBlock func, I waitNS))delay;
 + (void(^)(_DelayBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */
@@ -42,16 +42,16 @@
 + (void(^)(_DeferBlock func))defer;
 + (void(^)(_DeferBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */
 
-+ (_ThrottledBlock(^)(_ThrottleBlock func, I waitNS, id arg1, ...))throttle;  /* NIL TERMINATED */
++ (_ThrottledBlock(^)(_ThrottleBlock func, I waitNS, id arg1, ... /* NIL_TERMINATION */))throttle;
 
-+ (_DebouncedBlock(^)(_DebounceBlock func, I waitNS, B immediate, id arg1, ...))debounce;  /* NIL TERMINATED */
++ (_DebouncedBlock(^)(_DebounceBlock func, I waitNS, B immediate, id arg1, ... /* NIL_TERMINATION */))debounce;
 
-+ (_OncedBlock(^)(_OnceBlock func, id arg1, ...))once;
++ (_OncedBlock(^)(_OnceBlock func, id arg1, ... /* NIL_TERMINATION */))once;
 
-+ (_AfterBlock(^)(I times, _AfterBlock func, id arg1, ...))after;
++ (_AfteredBlock /* NIL_TERMINATION */(^)(I times, _AfterBlock func, id arg1, ... /* NIL_TERMINATION */))after;
 
-+ (_WrappedBlock(^)(_WrappedBlock func, _WrapBlock wrapper))wrap;
++ (_WrappedBlock /* NIL_TERMINATION */(^)(_WrappedBlock func, _WrapBlock wrapper))wrap;
 
-+ (_ComposeBlock(^)(_ComposeBlock func1, ...))compose;
++ (_ComposeBlock /* NIL_TERMINATION */(^)(_ComposeBlock func1, ... /* NIL_TERMINATION */))compose;
 
 @end

@@ -35,7 +35,7 @@
 + (A*(^)(const I* values, I count))newI;
 + (A*(^)(const UI* values, I count))newUI;
 + (A*(^)(const F* values, I count))newF;
-+ (A*(^)(const id* values))newO; // TODO: nil termination
++ (A*(^)(const id* values /* NIL_TERMINATION */))newO;
 
 - (NSS*)mutableClassName;
 - (NSS*(^)())toString;

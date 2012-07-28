@@ -57,12 +57,12 @@
 }
 + (A*(^)(NSD* obj))methods { return _.functions; } // ALIAS 
 
-+ (O*(^)(O* obj, NSD* obj1, ...))extend
++ (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))extend
 {
-  return ^(O* obj, NSD* obj1, ...) {
+  return ^(O* obj, NSD* obj1, ... /* NIL_TERMINATION */) {
     ARGS_AO(objects, obj1);
 
-    _.each(objects, ^(NSD* source, ...) {
+    _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
       [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
         [obj setObject:value forKey:key];
       }];
@@ -71,25 +71,25 @@
   };
 }
 
-+ (O*(^)(O* obj, id key1, ...))pick
++ (O*(^)(O* obj, id key1, ... /* NIL_TERMINATION */))pick
 {
-  return ^(O* obj, id key1, ...) {
+  return ^(O* obj, id key1, ... /* NIL_TERMINATION */) {
     ARGS_AO(keys, key1);
 
     __block O* result = O.new;
-    _.each(_.flatten(keys, true), ^(NSO* key, ...) {
+    _.each(_.flatten(keys, true), ^(NSO* key, ... /* KEY, COLLECTION */) {
       if (key.in(obj)) result.set(key, obj.get(key));
     });
     return result;
   };
 }
 
-+ (O*(^)(O* obj, NSD* obj1, ...))defaults
++ (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))defaults
 {
-  return ^(O* obj, NSD* obj1, ...) {
+  return ^(O* obj, NSD* obj1, ... /* NIL_TERMINATION */) {
     ARGS_AO(objects, obj1);
 
-    _.each(objects, ^(NSD* source, ...) {
+    _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
       [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, BOOL *stop) {
         if (!key.in(obj)) [obj setObject:value forKey:key];
       }];
@@ -138,7 +138,7 @@
 + (B(^)(id obj))isObject      { return ^B(id obj) { return _.isDictionary(obj) || _.isString(obj) || _.isArray(obj); }; }
 + (B(^)(id obj))isArguments   { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]] && ((NSA*)obj).isArguments; }; }
 
-+ (B(^)(id obj, id target))isFunction  /* DEFINITION: you call @"fnName".apply(obj, ...) or @"fnName".call(obj, ...) it using a block property or static function. See NSString+SS.h */
++ (B(^)(id obj, id target))isFunction  /* DEFINITION: you call @"fnName".apply(obj, ... NIL_TERMINATION) or @"fnName".call(obj, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
 {
   return ^B(id obj, id target) { 
     return (_.isString(obj) && !!((NSS*)obj).getScriptFunctionBlock(target)); 

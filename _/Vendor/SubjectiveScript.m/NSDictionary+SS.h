@@ -31,7 +31,7 @@
 
 @interface NSDictionary (SS)
 
-+ (O*(^)(const KV* values))newKV; // TODO: NS_REQUIRES_NIL_TERMINATION
++ (O*(^)(const KV* values /* NIL_TERMINATION */))newKV;
 
 - (NSS*)mutableClassName;
 - (NSS*(^)())toString;
@@ -42,4 +42,4 @@
 
 @end
 
-#define OKV(...) O.newKV((KV[]){__VA_ARGS__, nil})
+#define OKV(...) O.newKV((KV[]){__VA_ARGS__, /* NIL_TERMINATION */ nil})

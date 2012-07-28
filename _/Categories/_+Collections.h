@@ -62,15 +62,15 @@
 + (B(^)(id obj, id target))include;
 + (B(^)(id obj, id target))contains; // ALIAS
 
-+ (NSO*(^)(id obj, NSS* methodName, id arg1, ...))invoke; /* TODO: NIL TERMINATED */
++ (NSO*(^)(id obj, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke;
 
 + (NSO*(^)(id obj, NSString *keyPath))pluck;
 
 + (NSO*(^)(NSO* obj, _MaxBlock iterator))max;
 + (NSO*(^)(NSO* obj, _MinBlock iterator))min;
 
-+ (id(^)(id obj, id iteratorOrKey))sortBy;    // takes a _SortByBlock or a key
-+ (O*(^)(id obj, id iteratorOrKey))groupBy;   // takes a _GroupByBlock or a key
++ (id(^)(id obj, id iteratorOrKey /* _SortByBlock or key */))sortBy;
++ (O*(^)(id obj, id iteratorOrKey /* _GroupByBlock or key */))groupBy;
 
 + (I(^)(NSA* array, id obj, _SortedIndexBlock iterator))sortedIndex;
 

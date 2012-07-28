@@ -35,9 +35,9 @@
 
 - (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd;
 - (O*(^)(id key, id value))set;
-- (O*(^)(const KV* values))setKV; // TODO: NS_REQUIRES_NIL_TERMINATION
+- (O*(^)(const KV* values /* NIL_TERMINATION */))setKV;
 - (O*(^)(id key))delete_;
 
 @end
 
-#define OsetKV(_o, ...) _o.setKV((KV[]){__VA_ARGS__, nil})
+#define OsetKV(_o, ...) _o.setKV((KV[]){__VA_ARGS__, /* NIL_TERMINATION */ nil})
