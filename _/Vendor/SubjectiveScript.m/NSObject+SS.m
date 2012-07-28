@@ -70,8 +70,11 @@ const NSS* SSTypeObject = @"object";
 
       // support JavaScript-style indexing by string
       N* indexNumber = SS.parseInt(stringKey);
+
+#ifdef DEBUG
       NSAssert(indexNumber, @"get did not recognize key '%@'", stringKey);
-      index = indexNumber.I;
+#endif
+      index = indexNumber ? indexNumber.I : 0;
     }
     else
       index = ((N*)key).I;
@@ -81,7 +84,10 @@ const NSS* SSTypeObject = @"object";
 - (NSO*(^)(I index))getAt
 {
   return ^NSO*(I index) {
+#ifdef DEBUG
     NSAssert(nil, @"getAt not implemented for this type");
+#endif
+
     return nil;
   };
 }
@@ -102,7 +108,10 @@ const NSS* SSTypeObject = @"object";
 }
 - (S*(^)(NSS* separator))join
 {
+#ifdef DEBUG
   NSAssert(nil, @"join not implemented for this type");
+#endif
+
   return nil;
 }
 
@@ -119,7 +128,11 @@ const NSS* SSTypeObject = @"object";
   if (SS.isString(self)) return [(NSS*)self compare:(NSS*)other];
   if (SS.isNumber(self)) return [(N*)self compare:(N*)other];
   if (SS.isDate(self)) return [(D*)self compare:(D*)other];
+
+#ifdef DEBUG
   NSAssert(nil, @"cannot compare the provided objects");
+#endif 
+
   return NSOrderedSame;
 }
 

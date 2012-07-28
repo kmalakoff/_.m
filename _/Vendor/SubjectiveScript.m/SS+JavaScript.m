@@ -54,7 +54,10 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
       case 5: return ((SSBlock5)block)(arguments.getArgAt(0), arguments.getArgAt(1), arguments.getArgAt(2), arguments.getArgAt(3), arguments.getArgAt(4), nil);
       case 6: return ((SSBlock6)block)(arguments.getArgAt(0), arguments.getArgAt(1), arguments.getArgAt(2), arguments.getArgAt(3), arguments.getArgAt(4), arguments.getArgAt(5), nil);
       default:
+#ifdef DEBUG
         NSAssert(nil, @"number of parameters not yet supported for apply");
+#endif 
+
         return nil;
     }
   };

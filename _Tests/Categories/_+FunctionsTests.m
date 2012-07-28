@@ -100,7 +100,7 @@
 {
   self.asyncTestExpected(N.I(2), ^(QUnitTest* test) {
     __block B delayed = false;
-    _.delay(^(){ delayed = true; }, 100);
+    _.delay(^(/* MANDATORY */ id arg1, ...){ delayed = true; }, 100, /* NIL_TERMINATED */ nil);
     SS.setTimeout(^(){ self.self.ok(!delayed, @"didn't delay the function quite yet"); }, 50);
     SS.setTimeout(^(){ self.self.ok(delayed, @"delayed the function"); test.start(); }, 150);
     
@@ -113,8 +113,8 @@
   self.asyncTest(^(QUnitTest* test) {
     __block B deferred = false;
 //    _.defer(^(B value){ deferred = value; }, true);
-    _.defer(^(){ deferred = true; });
-    _.delay(^(){ self.self.ok(deferred, @"deferred the function"); test.start(); }, 50);
+    _.defer(^(/* MANDATORY */ id arg1, ...){ deferred = true; }, /* NIL_TERMINATED */ nil);
+    _.delay(^(/* MANDATORY */ id arg1, ...){ self.self.ok(deferred, @"deferred the function"); test.start(); }, 50, /* NIL_TERMINATED */ nil);
   });
 }
 

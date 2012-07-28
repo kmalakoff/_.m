@@ -30,6 +30,7 @@
 #import "_+Functions.h"
 #import "_+Utility.h"
 #import "_+Objects.h"
+#import "_+Extensions.h"
 #import "SubjectiveScript.h"
 
 @implementation _ (Functions)
@@ -47,9 +48,7 @@
     
     return ^id(id arg1, ... /* NIL_TERMINATION */){
       ARGS_AO(arguments, arg1);
-
-      // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-      if (arguments.length < 1) arguments.push(NSNull.null);
+      if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
       id key = SS.apply(hasher, arguments);
       if (_.has(memo, key))
@@ -62,32 +61,51 @@
   };
 }
 
-+ (void(^)(_DelayBlock func, I wait))delay
++ (void(^)(_DelayBlock func, I wait, id arg1, ... /* NIL_TERMINATION */))delay
 {
-  return ^(_DelayBlock func, I wait) {
-    // TODO: add arguments
-    SS.dispatchMain(func, wait);
+  return ^(_DelayBlock func, I wait, id arg1, ... /* NIL_TERMINATION */) {
+    ARGS_AO(arguments, arg1);
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
+
+    SS.dispatchMain(^{
+      SS.apply(func, arguments);
+    }, wait);
   };
 }
 
-+ (void(^)(_DelayBlock func, I wait))delayBG
++ (void(^)(_DelayBlock func, I wait, id arg1, ... /* NIL_TERMINATION */))delayBG
 {
-  return ^(_DelayBlock func, I wait) {
-    SS.dispatchBackground(func, wait);
+  return ^(_DelayBlock func, I wait, id arg1, ... /* NIL_TERMINATION */) {
+    ARGS_AO(arguments, arg1);
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
+
+    SS.dispatchBackground(^{
+      SS.apply(func, arguments);
+    }, wait);
   };
 }
 
-+ (void(^)(_DeferBlock func))defer 
++ (void(^)(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */))defer
 { 
-  return ^(_DeferBlock func) {
-    SS.dispatchMain(func, 0);
+  return ^(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */) {
+    ARGS_AO(arguments, arg1);
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
+
+    SS.dispatchMain(^{
+      SS.apply(func, arguments);
+    }, 0);
   };
 }
 
-+ (void(^)(_DeferBlock func))deferBG
++ (void(^)(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */))deferBG
 { 
-  return ^(_DeferBlock func) {
-    SS.dispatchBackground(func, 0);
+  return ^(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */) {
+    ARGS_AO(arguments, arg1);
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
+
+    SS.dispatchBackground(^{
+      SS.apply(func, arguments);
+    }, 0);
   };
 }
 
@@ -125,11 +143,9 @@
 {
   return ^(_DebounceBlock func, I waitNS, B immediate, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
-    
-    // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-    if (arguments.length < 1) arguments.push(NSNull.null);
-    __block SSTimeout* timeout;
+      if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
+    __block SSTimeout* timeout;
     return ^{
       _DebouncedBlock later = ^{
         timeout = nil;
@@ -147,9 +163,7 @@
 {
   return ^(_OnceBlock func, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
-
-    // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-    if (arguments.length < 1) arguments.push(NSNull.null);
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
     __block B ran = false;
     __block id memo;
@@ -165,9 +179,7 @@
 {
   return ^_AfterBlock(I times, _AfterBlock func, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
-
-    // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-    if (arguments.length < 1) arguments.push(NSNull.null);
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
     __block I timesInternal = times;
     if (timesInternal <= 0) return SS.apply(func, arguments);
@@ -185,9 +197,7 @@
   return ^(_WrappedBlock func, _WrapBlock wrapper) {
     return ^id(id arg1, ... /* NIL_TERMINATION */){
       ARGS_AO(arguments, arg1);
-
-      // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-      if (arguments.length < 1) arguments.push(NSNull.null);
+      if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
       
       A* args = A.newNSO(func).concat(arguments);
       return SS.apply(wrapper, args);
@@ -198,14 +208,17 @@
 + (_ComposeBlock /* NIL_TERMINATION */(^)(_ComposeBlock func1, ... /* NIL_TERMINATION */))compose
 {
   return ^_ComposeBlock(_ComposeBlock func1, ... /* NIL_TERMINATION */) {
-    // TODO: add type checking 
     ARGS_AO(funcs, func1);
+
+#ifdef DEBUG
+    for (id func in funcs) {
+      _.isBlock(func);
+    }
+#endif
 
     return ^(id arg1, ... /* NIL_TERMINATION */) {
       ARGS_AO(args, arg1);
-
-      // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-      if (args.length < 1) args.push(NSNull.null);
+      if (args.length < 1) args.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
       for (I i = funcs.length - 1; i >= 0; i--) {
         args = [A arrayWithObject:SS.apply(funcs.getAt(i), args)];

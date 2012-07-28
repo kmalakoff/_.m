@@ -266,7 +266,10 @@
 + (A*(^)(I start, I stop, I step))range
 {
   return ^(I start, I stop, I step) {
+#ifdef DEBUG
     NSAssert(step!=0, @"step should not be zero");
+#endif
+    if (step == 0) step = 1;
     I len = MAX(ceil((float)(stop - start) / step), 0);
     I idx = 0;
     A* range = A.newC(len);

@@ -82,8 +82,8 @@ typedef id                  (^_MemoizedBlock)(id arg1, ... /* NIL_TERMINATION */
 typedef id                  (^_MemoizeBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_MemoizeHashBlock)(id arg1, ... /* NIL_TERMINATION */);
 
-typedef void                (^_DelayBlock)();
-typedef void                (^_DeferBlock)();
+typedef void                (^_DelayBlock)(id arg1, ... /* NIL_TERMINATION */);
+typedef void                (^_DeferBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef void                (^_TimeoutBlock)(); /* ADDED */
 
 typedef id                  (^_ThrottledBlock)();

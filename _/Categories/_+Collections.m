@@ -40,7 +40,9 @@
 + (void(^)(id obj, _EachBlock iterator))each
 {
   return ^(id obj, _EachBlock iterator) {
+#ifdef DEBUG
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"each xpecting NSArray or NSDictionary or nil");
+#endif
 
     if (_.isNull(obj)) return;
 
@@ -65,7 +67,9 @@
 + (B(^)(id obj, _EachWithStopBlock iterator))eachWithStop
 {
   return ^B(id obj, _EachWithStopBlock iterator) {
+#ifdef DEBUG
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"eachWithStop expecting NSArray or NSDictionary or nil");
+#endif
 
     if (_.isNull(obj)) return YES;
 
@@ -99,7 +103,9 @@
 + (A*(^)(NSO* obj, _MapBlock iterator))map
 {
   return ^A*(NSO* obj, _MapBlock iterator) {
+#ifdef DEBUG
     NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
+#endif
 
     if (_.isNull(obj))
       return A.new;
@@ -284,7 +290,9 @@
 + (NSO*(^)(id obj, NSS* keyPath))pluck
 {
   return ^NSO*(id obj, NSString *keyPath) {
+#ifdef DEBUG
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
+#endif
 
     if (_.isArray(obj)) {
       A* result = A.new;
@@ -359,7 +367,9 @@
 + (id(^)(id obj, id iteratorOrKey /* _SortByBlock or key */))sortBy
 {
   return ^(id obj, id iteratorOrKey) {
+#ifdef DEBUG
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
+#endif
 
     _SortedIndexBlock iterator = _.isBlock(iteratorOrKey) ? (_SortedIndexBlock) iteratorOrKey : ^(NSO* value){ 
       return value.get(iteratorOrKey); 
@@ -382,7 +392,9 @@
 + (O*(^)(id obj, id iteratorOrKey /* _GroupByBlock or key */))groupBy
 {
   return ^(id obj, id iteratorOrKey) {
+#ifdef DEBUG
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
+#endif
 
     _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, ... /* KEY, COLLECTION */){
       return value.get(iteratorOrKey); 
