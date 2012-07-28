@@ -38,6 +38,10 @@
 + (NSA*(^)(NSD* obj))keys 
 {
   return ^(NSD* obj) {
+#ifdef DEBUG
+    if (!obj) @throw [NSException exceptionWithName:@"TypeError" reason:@"keys expecting non-nil" userInfo:nil];
+#endif
+
     return obj.allKeys;
   };
 }
@@ -98,14 +102,27 @@
   };
 }
 
-+ (NSO*(^)(NSO* obj))clone
++ (NSO*(^)(NSO* obj))clone /* RETURNS MUTABLE IF POSSIBLE */
 {
-  return ^(NSO* obj) {
-    return obj.copy;
+  return ^NSO*(NSO* obj) {
+    if (!obj)
+      return obj;
+    else if ([obj respondsToSelector:@selector(mutableCopyWithZone:)])
+      return obj.mutableCopy;
+    else
+      return obj.copy;
   };
 }
 
-//tap /* NOT SUPPORTED: JavaScript-only */
++ (NSO*(^)(NSO* obj, _TapBlock interceptor))tap
+{
+{
+  return ^(NSO* obj, _TapBlock interceptor) {
+    interceptor(obj);
+    return obj;
+  };
+}
+}
 
 + (B(^)(NSO* obj, id key))has
 {
@@ -133,13 +150,13 @@
 //isElement /* NOT SUPPORTED: JavaScript-only */
 
 + (B(^)(id obj))isArray       { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
-+ (B(^)(id obj))isObject      { return ^B(id obj) { return _.isDictionary(obj) || _.isString(obj) || _.isArray(obj); }; }
++ (B(^)(id obj))isObject      { return ^B(id obj) { return _.isDictionary(obj) || _.isArray(obj) || _.isString(obj) || _.isFunction(obj, nil); }; }
 + (B(^)(id obj))isArguments   { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]] && ((NSA*)obj).isArguments; }; }
 
-+ (B(^)(id obj, id target))isFunction  /* DEFINITION: you call @"fnName".apply(obj, ... NIL_TERMINATION) or @"fnName".call(obj, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
++ (B(^)(id obj, id target))isFunction  /* DEFINITION: it is a block or you call @"fnName".apply(obj, ... NIL_TERMINATION) or @"fnName".call(obj, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
 {
   return ^B(id obj, id target) { 
-    return (_.isString(obj) && !!((NSS*)obj).getScriptFunctionBlock(target)); 
+    return (_.isBlock(obj) ||(_.isString(obj) && !!((NSS*)obj).getScriptFunctionBlock(target)));
   };
 }
 
@@ -163,7 +180,7 @@
 
 //isRegExp /* NOT SUPPORTED: JavaScript-only */
 
-+ (B(^)(N* obj))isNaN         { return ^B(N* obj) { return [obj isEqualToNumber:[NSDecimalNumber notANumber]]; }; }
++ (B(^)(id obj))isNaN         { return ^B(N* obj) { return [obj isKindOfClass:[NSNumber class]] && [obj isEqualToNumber:[NSDecimalNumber notANumber]]; }; }
 
 + (B(^)(id obj))isNull        { return ^B(id obj) { return !obj || [obj isKindOfClass:[NSNull class]]; }; }
 

@@ -20,6 +20,7 @@ no context 'this'
 how to use _ARGS_KEY and ARGS_AO, etc
 DEBUG vs release
 document difference with Underscore _.isObject definition
+isFunction requires a second parameter -> looking up functions
 
 Add link to Underscore.js documentation
 
@@ -226,7 +227,10 @@ Utility
 ------------
 
 noConflict
+
 identity
+identityTruthy /* SPECIALIZED */
+
 times
 mixin
 uniqueId

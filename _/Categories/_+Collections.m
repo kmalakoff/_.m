@@ -145,7 +145,9 @@
 {
   return ^(id obj, _ReduceBlock iterator, id memo) {
     if (!obj) {
+#ifdef DEBUG
       if (!memo) @throw [NSException exceptionWithName:@"TypeError" reason:@"null without inital value" userInfo:nil];
+#endif
       return memo;
     }
   
@@ -159,7 +161,9 @@
       _ARGS_KEY(value);
       internalMemo = iterator(internalMemo, value, key);
     });
+#ifdef DEBUG
     if (!initial) @throw [NSException exceptionWithName:@"TypeError" reason:@"Reduce of empty array with no initial value" userInfo:nil];
+#endif
     return internalMemo;
   };
 }
@@ -170,7 +174,9 @@
 {
   return ^(id obj, _ReduceBlock iterator, id memo) {
     if (!obj) {
+#ifdef DEBUG
       if (!memo) @throw [NSException exceptionWithName:@"TypeError" reason:@"null without inital value" userInfo:nil];
+#endif
       return memo;
     }
 
@@ -187,7 +193,9 @@
       if (!internalMemo) internalMemo = [[NSClassFromString(value.mutableClassName) alloc] init];
       internalMemo = iterator(internalMemo, value, N.I(index), obj);
     }
+#ifdef DEBUG
     if (!initial) @throw [NSException exceptionWithName:@"TypeError" reason:@"Reduce of empty array with no initial value" userInfo:nil];
+#endif
     return internalMemo;
   };
 }
@@ -249,7 +257,7 @@
 + (B(^)(id obj, _CollectionItemTestBlock iterator))any
 {
   return ^B(id obj, _CollectionItemTestBlock iterator) {
-    if (!iterator) iterator = _.identityCollectionItemTest;
+    if (!iterator) iterator = _.identityTruthy;
     __block BOOL result = NO;
     if (obj == nil) return result;
     _.eachWithStop(obj, ^B(id value, ... /* KEY, COLLECTION */) {
@@ -445,6 +453,7 @@
     if (_.isArray(obj))                               return ((NSA*)obj).copy;
 //    if (_.isArguments(obj))                           return ((NSA*)obj).copy;  /* NOT NEEDED: Arugements are an array */
     if ([obj respondsToSelector:@selector(toArray)])  return [obj performSelector:@selector(toArray)];
+    if (_.isFunction(@"toArray", obj))                return @"toArray".call(obj, nil);
     return _.values(obj);
   };
 }

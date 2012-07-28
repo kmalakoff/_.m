@@ -9,6 +9,7 @@
 #import "SS+JavaScript.h"
 #import "SSJSON.h"
 #import "SSArguments.h"
+#import "SS+Types.h"
 #import "NSArray+SS.h"
 #import "NSMutableArray+SS.h"
 #import <objc/message.h>
@@ -71,15 +72,38 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
 - (A*(^)())functionNames
 {
   return ^{
-    A* results = A.new;
+    __block A* results = A.new;
     UI count = 0;
-    Method* methodlist = class_copyMethodList(object_getClass(self), &count);
-
-    for(I index=0;index<count;index++) {
-      SEL methodSelector = method_getName(methodlist[index]);
-      id propertyOrBlock = objc_msgSend(self, methodSelector);
-      if (SS.isBlock(propertyOrBlock)) results.push(NSStringFromSelector(methodSelector));
+    
+    // check the dictionary
+    if (SS.isObject(self))
+    {
+      NSD* dictionary = (NSD*) self;
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+        if (SS.isBlock(value))
+          results.push(key);
+      }];
     }
+    
+    // TODO: should I support properties?
+    
+    // TODO: should I support functions? (some internal methods crash)
+//    Method* methodlist = class_copyMethodList(object_getClass(self), &count);
+//
+//    for(I index=0;index<count;index++) {
+//      // only JavaScript-style properties
+//      if (method_getNumberOfArguments(methodlist[index]) != 2) continue;
+//      char* returnType = method_copyReturnType(methodlist[index]);
+//      SEL methodSelector = method_getName(methodlist[index]);
+//      NSString *name = NSStringFromSelector(methodSelector);
+//      if ([name hasPrefix:@"_"]) continue; // skip internal
+//      @try {
+//        id propertyOrBlock = objc_msgSend(self, methodSelector);
+//        if (SS.isBlock(propertyOrBlock)) results.push(NSStringFromSelector(methodSelector));
+//      }
+//      @catch (NSException* e) {
+//      }
+//    }
     return results;
   };
 }

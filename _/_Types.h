@@ -118,6 +118,8 @@ typedef id                  (^_AfterBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_WrappedBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_WrapBlock)(_WrappedBlock wrapped, id arg1, ... /* NIL_TERMINATION */);
 
+typedef void                (^_TapBlock)(id obj);
+
 typedef id                  (^_ComposeBlock)(id arg1, ... /* NIL_TERMINATION */);
 
 typedef id                  (^_IdentityBlock)(id value);

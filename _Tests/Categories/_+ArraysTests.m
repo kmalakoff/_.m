@@ -163,7 +163,7 @@
 - (void)test_indexOf
 {
   A* numbers = AI(1, 2, 3);
-//  numbers.indexOf = null;
+//  numbers.indexOf = null; /* NOT SUPPORTED: JavaScript-only because of native function */
   self.equalI(_.indexOf(numbers, N.I(2)), 1, @"can compute indexOf, even without the native function");
   I result = (^(I arg1, ...  /* NIL_TERMINATION */){ ARGS_AI(arguments, arg1); return _.indexOf(arguments, N.I(2)); })(1, 2, 3, /* AI_END_TERMINATION */ AI_END);
   self.equalI(result, 1, @"works on an arguments object");
@@ -185,7 +185,7 @@
 - (void)test_lastIndexOf
 {
   A* numbers = AI(1, 0, 1, 0, 0, 1, 0, 0, 0);
-//  numbers.lastIndexOf = null;
+//  numbers.lastIndexOf = null; /* NOT SUPPORTED: JavaScript-only because of native function */
   self.equalI(_.lastIndexOf(numbers, N.I(1)), 5, @"can compute lastIndexOf, even without the native function");
   self.equalI(_.lastIndexOf(numbers, N.I(0)), 8, @"lastIndexOf the other element");
   I result = (^(I arg1, ...  /* NIL_TERMINATION */){ ARGS_AI(arguments, arg1); return _.lastIndexOf(arguments, N.I(1)); })(1, 0, 1, 0, 0, 1, 0, 0, 0, /* AI_END_TERMINATION */ AI_END);

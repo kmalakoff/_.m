@@ -166,14 +166,14 @@
 
 - (void)test_all
 {
-  self.ok(_.all(A.new, /* SPECIALIZED */ _.identityCollectionItemTest), @"the empty set");
-  self.ok(_.all(AB(true, true, true), /* SPECIALIZED */ _.identityCollectionItemTest), @"all true values");
-  self.ok(!_.all(AB(true, false, true), /* SPECIALIZED */ _.identityCollectionItemTest), @"one false value");
+  self.ok(_.all(A.new, /* SPECIALIZED */ _.identityTruthy), @"the empty set");
+  self.ok(_.all(AB(true, true, true), /* SPECIALIZED */ _.identityTruthy), @"all true values");
+  self.ok(!_.all(AB(true, false, true), /* SPECIALIZED */ _.identityTruthy), @"one false value");
   self.ok(_.all(AI(0, 10, 28), ^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }), @"even numbers");
   self.ok(!_.all(AI(0, 11, 28), ^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }), @"an odd number");
-  self.ok(_.all(AI(1), /* SPECIALIZED */ _.identityCollectionItemTest) == true, @"cast to boolean - true");
-  self.ok(_.all(AI(0), /* SPECIALIZED */ _.identityCollectionItemTest) == false, @"cast to boolean - false");
-  self.ok(_.every(AB(true, true, true), /* SPECIALIZED */ _.identityCollectionItemTest), @"aliased as 'every'");
+  self.ok(_.all(AI(1), /* SPECIALIZED */ _.identityTruthy) == true, @"cast to boolean - true");
+  self.ok(_.all(AI(0), /* SPECIALIZED */ _.identityTruthy) == false, @"cast to boolean - false");
+  self.ok(_.every(AB(true, true, true), /* SPECIALIZED */ _.identityTruthy), @"aliased as 'every'");
 }
 
 - (void)test_any
@@ -185,8 +185,8 @@
   self.ok(!_.any(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"", N.B(false)), /* MANDATORY */ nil), @"falsy values");
   self.ok(!_.any(AI(1, 11, 29), ^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }), @"all odd numbers");
   self.ok(_.any(AI(1, 10, 29), ^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }), @"an even number");
-  self.ok(_.any(AI(1), /* SPECIALIZED */ _.identityCollectionItemTest) == true, @"cast to boolean - true");
-  self.ok(_.any(AI(0), /* SPECIALIZED */ _.identityCollectionItemTest) == false, @"cast to boolean - false");
+  self.ok(_.any(AI(1), /* SPECIALIZED */ _.identityTruthy) == true, @"cast to boolean - true");
+  self.ok(_.any(AI(0), /* SPECIALIZED */ _.identityTruthy) == false, @"cast to boolean - false");
   self.ok(_.some(AB(false, false, true), /* MANDATORY */ nil), @"aliased as 'some'");
 }
 
@@ -317,8 +317,14 @@
 
 - (void)test_toArray
 {
-//  self.ok(!_.isArray(arguments), @"arguments object is not an array");
-//  self.ok(_.isArray(_.toArray(arguments)), @"arguments object converted into array");
+  (^(id arg1, ...) {
+    ARGS_AO(arguments, arg1);
+    self.equalI(arguments.length, 2, @"argument passed");
+
+//    self.ok(!_.isArray(arguments), @"arguments object is not an array"); /* NOT SUPPORTED: JavaScript-only because of arguments object */
+    self.ok(_.isArray(_.toArray(arguments)), @"arguments object converted into array");
+  })(N.I(0), S.new, nil);
+
   NSA* a = AI(1,2,3);
   self.ok(_.toArray(a) != a, @"array is cloned");
   self.equal(_.toArray(a).join(@", "), @"1, 2, 3", @"cloned array contains same elements");
@@ -326,13 +332,13 @@
   NSA* numbers = _.toArray(OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)}));
   self.equal(numbers.join(@", "), @"1, 2, 3", @"object flattened into array");
 
-//  var objectWithToArrayFunction = {toArray: ^{
-//      return [1, 2, 3];
-//  }};
-//  self.equal(_.toArray(objectWithToArrayFunction).join(@", "), @"1, 2, 3", @"toArray method used if present");
-//
-//  var objectWithToArrayValue = {toArray: 1};
-//  self.equal(_.toArray(objectWithToArrayValue).join(@", "), @"1", @"toArray property ignored if not a function");
+  O* objectWithToArrayFunction = OKV({@"toArray", ^{
+    return AI(1, 2, 3);
+  }});
+  self.equal(_.toArray(objectWithToArrayFunction).join(@", "), @"1, 2, 3", @"toArray method used if present");
+
+  O* objectWithToArrayValue = OKV({@"toArray", N.I(1)});
+  self.equal(_.toArray(objectWithToArrayValue).join(@", "), @"1", @"toArray property ignored if not a function");
 }
 
 - (void)test_size

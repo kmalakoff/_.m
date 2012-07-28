@@ -43,7 +43,7 @@
   };
 }
 
-+ (_CollectionItemTestBlock)identityCollectionItemTest
++ (_CollectionItemTestBlock)identityTruthy
 {
   return ^(id value, ... /* KEY, COLLECTION */) {
     return _.isTruthy(value);

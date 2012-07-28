@@ -122,6 +122,16 @@ const NSS* SSTypeObject = @"object";
   };
 }
 
+- (A*(^)(NSO* obj))push
+{
+  return ^(NSO* obj) {
+    #ifdef DEBUG
+      NSAssert(nil, @"push not implemented for this type");
+    #endif
+    return A.new;
+  };
+}
+
 // helper
 - (NSComparisonResult)compare:(NSO*)other
 {

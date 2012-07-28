@@ -29,5 +29,6 @@
 
 #import <Foundation/Foundation.h>
 
+#define NF_NaN              [NSNumber numberWithFloat:NAN]
 #define NF_POS_INFINITY     [NSNumber numberWithFloat:INFINITY]
 #define NF_NEG_INFINITY     [NSNumber numberWithFloat:-INFINITY]

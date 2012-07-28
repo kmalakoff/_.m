@@ -74,15 +74,13 @@
 //}
 
 - (void)test_memoize {
-  __block _MemoizeBlock _fib = nil;
-  _MemoizeBlock fib = ^N*(N* nNumber, ... /* NIL_TERMINATION */) {
+  __block _MemoizeBlock fib = ^N*(N* nNumber, ... /* NIL_TERMINATION */) {
     I n = nNumber.I;
     if (n < 2) return nNumber;
-    N* n1 = _fib(N.I(n - 1)); // can't refer to itself -> use _{name}
-    N* n2 = _fib(N.I(n - 2)); // can't refer to itself -> use _{name}
+    N* n1 = fib(N.I(n - 1));
+    N* n2 = fib(N.I(n - 2));
     return N.I(n1.I + n2.I);
   };
-  _fib = fib; // can't refer to itself -> use _{name}
   
   _MemoizedBlock fastFib = _.memoize(fib, /* MANDATORY */ nil);
   self.equal(fib(N.I(10)), N.I(55), @"a memoized version of fibonacci produces identical results");
@@ -112,7 +110,7 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block B deferred = false;
-//    _.defer(^(B value){ deferred = value; }, true);
+//    _.defer(^(B value){ deferred = value; }, true);   /* NOT SUPPORTED: to simplify the API rather than specializing a version with and without arguments or making the common case (without arguments) require arguments. Try without argument using block capture and if it doesn't work, submit a feature request) */
     _.defer(^(){ deferred = true; });
     _.delay(^(){ self.self.ok(deferred, @"deferred the function"); test.start(); }, 50);
   });
@@ -217,12 +215,10 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block I counter = 0;
-    __block _DebouncedBlock _debouncedIncr = nil;
-    _DebouncedBlock debouncedIncr = _.debounce(^(id arg1, ... /* NIL_TERMINATION */){
+    __block _DebouncedBlock debouncedIncr = _.debounce(^(id arg1, ... /* NIL_TERMINATION */){
       counter++;
-      if (counter < 5) _debouncedIncr(); // can't refer to itself -> use _{name}
+      if (counter < 5) debouncedIncr();
     }, 50, true, /* NIL_TERMINATION */ nil);
-    _debouncedIncr = debouncedIncr; // can't refer to itself -> use _{name}
     debouncedIncr();
     self.equalI(counter, 1, @"incr was called immediately");
     _.delay(^(){ self.equalI(counter, 1, @"incr was debounced"); test.start(); }, 70);

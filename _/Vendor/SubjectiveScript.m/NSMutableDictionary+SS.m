@@ -63,8 +63,9 @@
 - (O*(^)(const KV* values /* NIL_TERMINATION */))setKV
 {
   return ^(const KV* values /* NIL_TERMINATION */) {
-    for (const id* value = (const id*) values; *value != nil; value+=2) {
-      [self setValue:value[1] forKey:value[0]];
+    for (const id* pair = (const id*) values; *pair != nil; pair+=2) {
+      id value = pair[1];
+      [self setValue:value ? value : NSNull.null forKey:pair[0]];
     }
     return self;
   };

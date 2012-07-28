@@ -35,8 +35,9 @@
 {
   return ^(const KV* values /* NIL_TERMINATION */) {
     O* result = O.new;
-    for (const id* value = (const id*) values; *value != nil; value+=2) {
-      [result setValue:value[1] forKey:value[0]];
+    for (const id* pair = (const id*) values; *pair != nil; pair+=2) {
+      id value = pair[1];
+      [result setValue:value ? value : NSNull.null forKey:pair[0]];
     }
     return result;
   };

@@ -43,9 +43,9 @@
 
 + (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))defaults;
 
-+ (NSO*(^)(NSO* obj))clone;
++ (NSO*(^)(NSO* obj))clone; /* RETURNS MUTABLE IF POSSIBLE */
 
-//tap /* NOT SUPPORTED: JavaScript-only */
++ (NSO*(^)(NSO* obj, _TapBlock interceptor))tap;
 
 + (B(^)(NSO* obj, id key))has;
 
@@ -61,7 +61,7 @@
 
 + (B(^)(id obj))isArguments;
 
-+ (B(^)(id obj, id target))isFunction;  /* DEFINITION: you call @"fnName".apply(target, ... NIL_TERMINATION) or @"fnName".call(target, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
++ (B(^)(id obj, id target))isFunction;  /* DEFINITION: it is a block or you call @"fnName".apply(target, ... NIL_TERMINATION) or @"fnName".call(target, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
 
 + (B(^)(id obj))isString;
 
@@ -75,7 +75,7 @@
 
 //isRegExp /* NOT SUPPORTED: JavaScript-only */
 
-+ (B(^)(N* obj))isNaN;
++ (B(^)(id obj))isNaN;
 
 + (B(^)(id obj))isNull;
 
