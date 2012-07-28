@@ -57,7 +57,7 @@
 //  __block A* tripled = _.mapWithContext(AI(1, 2, 3), ^(N* num, ..., O* this){ return N.I(num.I * ((N*)this.get(@"multiplier")).I); }, OKV({@"multiplier", N.I(3)})); // CHANGE
 //  self.equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
 
-  doubled = /* SPECIALIZED */ __(AI(1, 2, 3)).map(^(N* num, ... /* KEY, COLLECTION */){ return N.I(num.I * 2); }).valueA();
+  doubled =  __(AI(1, 2, 3)).map(^(N* num, ... /* KEY, COLLECTION */){ return N.I(num.I * 2); }).valueA();
   self.equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
 
   /* NOT SUPPORTED: JavaScript-only because of DOM */
@@ -85,7 +85,7 @@
   sum = _.inject(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0);
   self.equalI(sum.I, 6, @"aliased as 'inject'");
 
-  sum = /* SPECIALIZED */ __(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).valueN();
+  sum =  __(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).valueN();
   self.equalI(sum.I, 6, @"OO-style reduce");
 
   sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, /* MANDATORY */ 0);

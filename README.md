@@ -19,6 +19,9 @@ variable length: add nil termination requirement -> look for /* NIL_TERMINATION 
 no context 'this'
 how to use _ARGS_KEY and ARGS_AO, etc
 DEBUG vs release
+document difference with Underscore _.isObject definition
+
+Add link to Underscore.js documentation
 
 Other Changes
 ------------
@@ -89,8 +92,8 @@ _.zipObject = function(keys, values)
 indexOf
 _.indexOf = function(array, item, isSorted)
 + (I (^)(A* array, id value, B isSorted))indexOf;
-+ (I(^)(NSA* array, id value))indexOf; // CHANGE: specialized sorted method -> TODO: check others with sorting
-+ (I(^)(NSA* array, id value))indexOfSorted;
++ (I(^)(NSA* array, id value))indexOf;
++ (I(^)(NSA* array, id value))indexOfSorted; // SPECIALIZED: sorted method
 
 lastIndexOf
 _.lastIndexOf = function(array, item)
@@ -158,6 +161,11 @@ bind
 bindAll
 memoize
 delay
++ (void(^)(_DelayBlock func, I waitNS))delay; /* REMOVED: ARGUMENTS -> too rare use case and can capture in block
++ (void(^)(_DelayBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */
+
++ (void(^)(_DeferBlock func))defer;
++ (void(^)(_DeferBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */
 defer
 throttle
 debounce

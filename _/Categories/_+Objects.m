@@ -124,9 +124,7 @@
 + (B(^)(NSO* obj))isEmpty  { 
   return ^B(NSO* obj) {
     if (obj == nil) return YES;
-    // TODO: why doesn't this work: if (_.isArray(obj) || _.isString(obj)) return obj.length == 0;
-    if (_.isArray(obj)) return ((NSA*)obj).count == 0;
-    if (_.isString(obj)) return ((NSS*)obj).length == 0;
+    if (_.isArray(obj) || _.isString(obj)) return obj.length == 0;
     if (_.isDictionary(obj)) return ((O*)obj).isEmpty();
     return (B) YES;
   }; 

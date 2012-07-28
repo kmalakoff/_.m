@@ -31,6 +31,6 @@
 
 @interface SS (Number)
 
-+ (N*(^)(NSS* string))parseInt; // TODO: can I return a NaN like in JavaScript? Put in global namespace?
++ (N*(^)(NSS* string))parseInt;
 
 @end

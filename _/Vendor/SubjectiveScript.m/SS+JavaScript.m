@@ -44,7 +44,7 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
 {
   return ^id(id block, NSA* arguments) {
   
-    // TODO: figure out a safe way to call blocks by signature
+    // TODO: is there a safer and more flexible way to call blocks by signature?
     switch(arguments.count) {
       case 0: return ((SSBlock0)block)();
       case 1: return ((SSBlock1)block)(arguments.getArgAt(0), nil);

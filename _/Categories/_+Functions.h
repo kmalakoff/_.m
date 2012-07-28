@@ -36,11 +36,11 @@
 
 + (_MemoizedBlock /* NIL_TERMINATION */(^)(_MemoizeBlock func, _MemoizeHashBlock hasher))memoize;
 
-+ (void(^)(_DelayBlock func, I waitNS, id arg1, ... /* NIL_TERMINATION */))delay;
-+ (void(^)(_DelayBlock func, I waitNS, id arg1, ... /* NIL_TERMINATION */))delayBG; /* ADDED: BACKGROUND QUEUE */
++ (void(^)(_DelayBlock func, I waitNS))delay;
++ (void(^)(_DelayBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */
 
-+ (void(^)(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */))defer;
-+ (void(^)(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */))deferBG; /* ADDED: BACKGROUND QUEUE */
++ (void(^)(_DeferBlock func))defer;
++ (void(^)(_DeferBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */
 
 + (_ThrottledBlock(^)(_ThrottleBlock func, I waitNS, id arg1, ... /* NIL_TERMINATION */))throttle;
 

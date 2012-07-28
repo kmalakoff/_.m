@@ -16,7 +16,7 @@
 {
   self.equal(_.first(AI(1, 2, 3), /* MANDATORY */ -1), N.I(1), @"can pull out the first element of an array");
   self.equal(_.first(AI(1, 2, 3), /* MANDATORY */ AI_END), N.I(1), @"can pull out the first element of an array (AI_END)");
-  self.equal(/* SPECIALIZED */ __(AI(1, 2, 3)).first(/* MANDATORY */ -1), N.I(1), @"can perform OO-style 'first()'");
+  self.equal( __(AI(1, 2, 3)).first(/* MANDATORY */ -1), N.I(1), @"can perform OO-style 'first()'");
   self.equal(_.first(AI(1,2,3), 0).join(@", "), @"", @"can pass an index to first");
   self.equal(_.first(AI(1,2,3), 2).join(@", "), @"1, 2", @"can pass an index to first");
   self.equal(_.first(AI(1,2,3), 5).join(@", "), @"1, 2, 3", @"can pass an index to first");
@@ -35,7 +35,7 @@
   self.equal(_.initial(AI(1,2,3,4,5), /* MANDATORY */ -1).join(@", "), @"1, 2, 3, 4", @"working initial()");
   self.equal(_.initial(AI(1,2,3,4,5), /* MANDATORY */ AI_END).join(@", "), @"1, 2, 3, 4", @"working initial() (AI_END)");
   self.equal(_.initial(AI(1,2,3,4), 2).join(@", "), @"1, 2", @"initial can take an index");
-  A* result = (A*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return /* SPECIALIZED */ __(arguments).initial(/* MANDATORY */ -1).valueNSA(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
+  A* result = (A*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  __(arguments).initial(/* MANDATORY */ -1).valueNSA(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   self.equal(result.join(@", "), @"1, 2, 3", @"initial works on arguments object");
   result = _.map(AO(AI(1,2,3),AI(1,2,3)), /* SPECIALIZED */ _.initialIterator);
   self.equal(_.flatten(result, /* MANDATORY */ YES).join(@","), @"1,2,1,2", @"initial works with _.map");
@@ -48,7 +48,7 @@
   self.equal(_.last(AI(1,2,3), 0).join(@", "), @"", @"can pass an index to last");
   self.equal(_.last(AI(1,2,3), 2).join(@", "), @"2, 3", @"can pass an index to last");
   self.equal(_.last(AI(1,2,3), 5).join(@", "), @"1, 2, 3", @"can pass an index to last");
-  N* resultNumber = (N*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  /* SPECIALIZED */ __(arguments).last(/* MANDATORY */ -1).valueN(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
+  N* resultNumber = (N*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return   __(arguments).last(/* MANDATORY */ -1).valueN(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   self.equal(resultNumber, N.I(4), @"works on an arguments object");
   A* result = _.map(AO(AI(1,2,3),AI(1,2,3)), /* SPECIALIZED */ _.lastIterator);
   self.equal(result.join(@","), @"3,3", @"works well with _.map");
@@ -61,7 +61,7 @@
   self.equal(_.rest(numbers, /* MANDATORY */ AI_END).join(@", "), @"2, 3, 4", @"working rest() (AI_END)");
   self.equal(_.rest(numbers, 0).join(@", "), @"1, 2, 3, 4", @"working rest(0)");
   self.equal(_.rest(numbers, 2).join(@", "), @"3, 4", @"rest can take an index");
-  A* result = (A*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return /* SPECIALIZED */ __(arguments).tail( /* MANDATORY */ -1).valueNSA(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
+  A* result = (A*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  __(arguments).tail( /* MANDATORY */ -1).valueNSA(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   self.equal(result.join(@", "), @"2, 3, 4", @"aliased as tail and works on arguments object");
   result = _.map(AO(AI(1,2,3),AI(1,2,3)), /* SPECIALIZED */ _.restIterator);
   self.equal(_.flatten(result,/* MANDATORY */  YES).join(@","), @"2,3,2,3", @"works well with _.map");
@@ -70,7 +70,7 @@
 - (void)test_compact
 {
   self.equalI(_.compact(AO(N.I(0), N.I(1), N.B(NO), N.I(2), N.B(NO), N.I(3))).length, 3, @"can trim out all falsy values");
-  I result = (^(id arg1, ... /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return/* SPECIALIZED */ __(arguments).compact().valueNSA().length; })(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3), /* NIL_TERMINATION */ nil);
+  I result = (^(id arg1, ... /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return __(arguments).compact().valueNSA().length; })(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3), /* NIL_TERMINATION */ nil);
   self.equalI(result, 3, @"works on an arguments object");
 };
 

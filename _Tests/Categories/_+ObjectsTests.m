@@ -10,7 +10,7 @@
 #import "Underscore.h"
 #import "SubjectiveScript.h"
 
-@implementation _OKVbjectsTests
+@implementation __ObjectsTests
 
 //keys
 //values
@@ -25,8 +25,7 @@
 
 - (void)test_isEmpty
 {
-  // TODO: wrapper
-self.ok(!_.isEmpty(AI(1)), @"[1] is not empty"); //  self.ok(!__(AI(1)).isEmpty(), @"[1] is not empty");
+  self.ok(!_.isEmpty(AI(1)), @"[1] is not empty"); //  self.ok(!__(AI(1)).isEmpty(), @"[1] is not empty");
   self.ok(_.isEmpty(A.new), @"[] is empty");
   self.ok(!_.isEmpty(OKV({@"one", N.I(1)})), @"{one : 1} is not empty");
   self.ok(_.isEmpty(O.new), @"{} is empty");

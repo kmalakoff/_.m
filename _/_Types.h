@@ -31,33 +31,50 @@
 
 // Helpers to access collection iteration (each, map, etc) with variable arguments
 #define _ARGS_KEY(_lastNamedArg) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
-  id key = va_arg(argList, id); \
-  va_end(argList);
+  id key; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    key = va_arg(argList, id); \
+    va_end(argList); \
+  }
 #define _ARGS_KEY_COLLECTION(_lastNamedArg, _collection) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
-  id key = va_arg(argList, id); \
-  id _collection = va_arg(argList, id); \
-  va_end(argList);
+  id key; \
+  id _collection; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    key = va_arg(argList, id); \
+    _collection = va_arg(argList, id); \
+    va_end(argList); \
+  }
 #define _ARGS_INDEX(_lastNamedArg) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
-  I index = ((N*) va_arg(argList, N*)).I; \
-  va_end(argList);
+  I index; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    index = ((N*) va_arg(argList, N*)).I; \
+    va_end(argList); \
+  }
 #define _ARGS_INDEX_COLLECTION(_lastNamedArg, _collection) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
-  I index = ((N*) va_arg(argList, N*)).I; \
-  id _collection = va_arg(argList, id); \
-  va_end(argList);
+  I index; \
+  id _collection; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    index = ((N*) va_arg(argList, N*)).I; \
+    _collection = va_arg(argList, id); \
+    va_end(argList); \
+  }
 #define _ARGS_COLLECTION(_lastNamedArg, _collection) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
-  va_arg(argList, id); \
-  id _collection = va_arg(argList, id); \
-  va_end(argList);
+  id _collection; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    va_arg(argList, id); \
+    _collection = va_arg(argList, id); \
+    va_end(argList); \
+  }
 
 typedef void                (^_EachBlock)(id value, ... /* KEY, COLLECTION */);
 typedef B                   (^_EachWithStopBlock)(id value, ... /* KEY, COLLECTION */);
@@ -82,8 +99,8 @@ typedef id                  (^_MemoizedBlock)(id arg1, ... /* NIL_TERMINATION */
 typedef id                  (^_MemoizeBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_MemoizeHashBlock)(id arg1, ... /* NIL_TERMINATION */);
 
-typedef void                (^_DelayBlock)(id arg1, ... /* NIL_TERMINATION */);
-typedef void                (^_DeferBlock)(id arg1, ... /* NIL_TERMINATION */);
+typedef void                (^_DelayBlock)();
+typedef void                (^_DeferBlock)();
 typedef void                (^_TimeoutBlock)(); /* ADDED */
 
 typedef id                  (^_ThrottledBlock)();

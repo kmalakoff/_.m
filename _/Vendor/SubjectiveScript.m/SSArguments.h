@@ -29,35 +29,83 @@
 
 #import "NSMutableArray+SS.h"
 
-// TODO: can I make the arguments inline and returnable?
-
 // any number of arguments of type id or NSObject terminated with nil
 #define ARGS_AO(_name, _lastNamedArg) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
   A* _name = A.newArguments; \
-  for (NSO* arg = _lastNamedArg; arg != nil; arg = va_arg(argList, NSO*)) { [_name addObject:arg]; } \
-  va_end(argList);
-
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    for (NSO* arg = _lastNamedArg; arg != nil; arg = va_arg(argList, NSO*)) { [_name addObject:arg]; } \
+    va_end(argList); \
+  }
+  
 // any number of arguments of type NSInteger terminated with AI_END
 #define AI_END (I)NSNotFound
 #define ARGS_AI(_name, _lastNamedArg) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
   A* _name = A.newArguments; \
-  for (I arg = _lastNamedArg; arg != AI_END; arg = va_arg(argList, I)) { [_name addObject:N.I(arg)]; } \
-  va_end(argList);
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    for (I arg = _lastNamedArg; arg != AI_END; arg = va_arg(argList, I)) { [_name addObject:N.I(arg)]; } \
+    va_end(argList); \
+  }
+
+// one argument of type BOOL
+#define ARG_B(_name, _lastNamedArg) \
+  I _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = va_arg(argList, B); \
+    va_end(argList); \
+  }
 
 // one argument of type NSInteger
 #define ARG_I(_name, _lastNamedArg) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
-  I _name = va_arg(argList, I); \
-  va_end(argList);
+  I _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = va_arg(argList, I); \
+    va_end(argList); \
+  }
+
+// one argument of type NSUInteger
+#define ARG_UI(_name, _lastNamedArg) \
+  UI _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = va_arg(argList, UI); \
+    va_end(argList); \
+  }
+
+// one argument of type float
+#define ARG_F(_name, _lastNamedArg) \
+  F _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = va_arg(argList, F); \
+    va_end(argList); \
+  }
 
 // one argument of type NSNumber
 #define ARG_N(_name, _lastNamedArg) \
-  va_list argList; \
-  va_start(argList, _lastNamedArg); \
-  N* _name = va_arg(argList, N*); \
-  va_end(argList);
+  N* _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = va_arg(argList, N*); \
+    va_end(argList); \
+  }
+
+// one argument of type NSNumber
+#define ARG_NSO(_name, _lastNamedArg) \
+  NSO* _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = va_arg(argList, NSO*); \
+    va_end(argList); \
+  }

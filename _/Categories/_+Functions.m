@@ -61,51 +61,31 @@
   };
 }
 
-+ (void(^)(_DelayBlock func, I wait, id arg1, ... /* NIL_TERMINATION */))delay
++ (void(^)(_DelayBlock func, I wait))delay
 {
-  return ^(_DelayBlock func, I wait, id arg1, ... /* NIL_TERMINATION */) {
-    ARGS_AO(arguments, arg1);
-    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-
-    SS.dispatchMain(^{
-      SS.apply(func, arguments);
-    }, wait);
+  return ^(_DelayBlock func, I wait) {
+    SS.dispatchMain(func, wait);
   };
 }
 
-+ (void(^)(_DelayBlock func, I wait, id arg1, ... /* NIL_TERMINATION */))delayBG
++ (void(^)(_DelayBlock func, I wait))delayBG
 {
-  return ^(_DelayBlock func, I wait, id arg1, ... /* NIL_TERMINATION */) {
-    ARGS_AO(arguments, arg1);
-    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-
-    SS.dispatchBackground(^{
-      SS.apply(func, arguments);
-    }, wait);
+  return ^(_DelayBlock func, I wait) {
+    SS.dispatchBackground(func, wait);
   };
 }
 
-+ (void(^)(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */))defer
++ (void(^)(_DeferBlock func))defer
 { 
-  return ^(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */) {
-    ARGS_AO(arguments, arg1);
-    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-
-    SS.dispatchMain(^{
-      SS.apply(func, arguments);
-    }, 0);
+  return ^(_DeferBlock func) {
+    SS.dispatchMain(func, 0);
   };
 }
 
-+ (void(^)(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */))deferBG
++ (void(^)(_DeferBlock func))deferBG
 { 
-  return ^(_DeferBlock func, id arg1, ... /* NIL_TERMINATION */) {
-    ARGS_AO(arguments, arg1);
-    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
-
-    SS.dispatchBackground(^{
-      SS.apply(func, arguments);
-    }, 0);
+  return ^(_DeferBlock func) {
+    SS.dispatchBackground(func, 0);
   };
 }
 

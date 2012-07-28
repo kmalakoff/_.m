@@ -28,8 +28,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <objc/objc.h> // TODO: why do I need to manually include these files? (fix compiler warning)
-#import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 
