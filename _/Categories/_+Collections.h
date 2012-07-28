@@ -56,7 +56,7 @@
 + (B(^)(id obj, _CollectionItemTestBlock iterator))all;
 + (B(^)(id obj, _CollectionItemTestBlock iterator))every; // ALIAS
 
-+ (B(^)(id obj, /* MANDATORY */ _CollectionItemTestBlock iterator))any;
++ (B(^)(id obj, /* REQUIRED */ _CollectionItemTestBlock iterator))any;
 + (B(^)(id obj, _CollectionItemTestBlock iterator))some; // ALIAS
 
 + (B(^)(id obj, id target))include;

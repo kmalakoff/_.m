@@ -81,9 +81,6 @@
 		0A5842FF15B8FC19000BC230 /* _Wrapper+Collections.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A5842AB15B8FC18000BC230 /* _Wrapper+Collections.h */; };
 		0A58430015B8FC19000BC230 /* _Wrapper+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */; };
 		0A58430115B8FC19000BC230 /* _Wrapper+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */; };
-		0A58430215B8FC19000BC230 /* _Wrapper+Functions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A5842AD15B8FC18000BC230 /* _Wrapper+Functions.h */; };
-		0A58430315B8FC19000BC230 /* _Wrapper+Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842AE15B8FC18000BC230 /* _Wrapper+Functions.m */; };
-		0A58430415B8FC19000BC230 /* _Wrapper+Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842AE15B8FC18000BC230 /* _Wrapper+Functions.m */; };
 		0A58430515B8FC19000BC230 /* _Wrapper+Objects.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A5842AF15B8FC18000BC230 /* _Wrapper+Objects.h */; };
 		0A58430615B8FC19000BC230 /* _Wrapper+Objects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842B015B8FC18000BC230 /* _Wrapper+Objects.m */; };
 		0A58430715B8FC19000BC230 /* _Wrapper+Objects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5842B015B8FC18000BC230 /* _Wrapper+Objects.m */; };
@@ -108,7 +105,6 @@
 		0A58434115B8FC7A000BC230 /* _Wrapper+ArraysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58432C15B8FC7A000BC230 /* _Wrapper+ArraysTests.m */; };
 		0A58434215B8FC7A000BC230 /* _Wrapper+ChainingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58432E15B8FC7A000BC230 /* _Wrapper+ChainingTests.m */; };
 		0A58434315B8FC7A000BC230 /* _Wrapper+CollectionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433015B8FC7A000BC230 /* _Wrapper+CollectionsTests.m */; };
-		0A58434415B8FC7A000BC230 /* _Wrapper+FunctionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433215B8FC7A000BC230 /* _Wrapper+FunctionsTests.m */; };
 		0A58434515B8FC7A000BC230 /* _Wrapper+ObjectsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433415B8FC7A000BC230 /* _Wrapper+ObjectsTests.m */; };
 		0A58434615B8FC7A000BC230 /* _Wrapper+UtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433615B8FC7A000BC230 /* _Wrapper+UtilityTests.m */; };
 		0A58434815B8FC7A000BC230 /* _WrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433915B8FC7A000BC230 /* _WrapperTests.m */; };
@@ -199,8 +195,6 @@
 		0A5842A815B8FC18000BC230 /* _Wrapper+Arrays.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Arrays.m"; sourceTree = "<group>"; };
 		0A5842AB15B8FC18000BC230 /* _Wrapper+Collections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Collections.h"; sourceTree = "<group>"; };
 		0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Collections.m"; sourceTree = "<group>"; };
-		0A5842AD15B8FC18000BC230 /* _Wrapper+Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Functions.h"; sourceTree = "<group>"; };
-		0A5842AE15B8FC18000BC230 /* _Wrapper+Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Functions.m"; sourceTree = "<group>"; };
 		0A5842AF15B8FC18000BC230 /* _Wrapper+Objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Objects.h"; sourceTree = "<group>"; };
 		0A5842B015B8FC18000BC230 /* _Wrapper+Objects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Objects.m"; sourceTree = "<group>"; };
 		0A5842B115B8FC18000BC230 /* _Wrapper+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Utility.h"; sourceTree = "<group>"; };
@@ -231,8 +225,6 @@
 		0A58432E15B8FC7A000BC230 /* _Wrapper+ChainingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+ChainingTests.m"; sourceTree = "<group>"; };
 		0A58432F15B8FC7A000BC230 /* _Wrapper+CollectionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+CollectionsTests.h"; sourceTree = "<group>"; };
 		0A58433015B8FC7A000BC230 /* _Wrapper+CollectionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+CollectionsTests.m"; sourceTree = "<group>"; };
-		0A58433115B8FC7A000BC230 /* _Wrapper+FunctionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+FunctionsTests.h"; sourceTree = "<group>"; };
-		0A58433215B8FC7A000BC230 /* _Wrapper+FunctionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+FunctionsTests.m"; sourceTree = "<group>"; };
 		0A58433315B8FC7A000BC230 /* _Wrapper+ObjectsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+ObjectsTests.h"; sourceTree = "<group>"; };
 		0A58433415B8FC7A000BC230 /* _Wrapper+ObjectsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+ObjectsTests.m"; sourceTree = "<group>"; };
 		0A58433515B8FC7A000BC230 /* _Wrapper+UtilityTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+UtilityTests.h"; sourceTree = "<group>"; };
@@ -434,8 +426,6 @@
 				0A5842A815B8FC18000BC230 /* _Wrapper+Arrays.m */,
 				0A5842AB15B8FC18000BC230 /* _Wrapper+Collections.h */,
 				0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */,
-				0A5842AD15B8FC18000BC230 /* _Wrapper+Functions.h */,
-				0A5842AE15B8FC18000BC230 /* _Wrapper+Functions.m */,
 				0A5842AF15B8FC18000BC230 /* _Wrapper+Objects.h */,
 				0A5842B015B8FC18000BC230 /* _Wrapper+Objects.m */,
 				0A5842B115B8FC18000BC230 /* _Wrapper+Utility.h */,
@@ -495,8 +485,6 @@
 				0A58432E15B8FC7A000BC230 /* _Wrapper+ChainingTests.m */,
 				0A58432F15B8FC7A000BC230 /* _Wrapper+CollectionsTests.h */,
 				0A58433015B8FC7A000BC230 /* _Wrapper+CollectionsTests.m */,
-				0A58433115B8FC7A000BC230 /* _Wrapper+FunctionsTests.h */,
-				0A58433215B8FC7A000BC230 /* _Wrapper+FunctionsTests.m */,
 				0A58433315B8FC7A000BC230 /* _Wrapper+ObjectsTests.h */,
 				0A58433415B8FC7A000BC230 /* _Wrapper+ObjectsTests.m */,
 				0A58433515B8FC7A000BC230 /* _Wrapper+UtilityTests.h */,
@@ -543,7 +531,6 @@
 				0A5842F615B8FC19000BC230 /* SubjectiveScript.h in Headers */,
 				0A5842F915B8FC19000BC230 /* _Wrapper+Arrays.h in Headers */,
 				0A5842FF15B8FC19000BC230 /* _Wrapper+Collections.h in Headers */,
-				0A58430215B8FC19000BC230 /* _Wrapper+Functions.h in Headers */,
 				0A58430515B8FC19000BC230 /* _Wrapper+Objects.h in Headers */,
 				0A58430815B8FC19000BC230 /* _Wrapper+Utility.h in Headers */,
 				0A58430E15B8FC19000BC230 /* _Types.h in Headers */,
@@ -680,7 +667,6 @@
 				0A5842F715B8FC19000BC230 /* SubjectiveScript.m in Sources */,
 				0A5842FA15B8FC19000BC230 /* _Wrapper+Arrays.m in Sources */,
 				0A58430015B8FC19000BC230 /* _Wrapper+Collections.m in Sources */,
-				0A58430315B8FC19000BC230 /* _Wrapper+Functions.m in Sources */,
 				0A58430615B8FC19000BC230 /* _Wrapper+Objects.m in Sources */,
 				0A58430915B8FC19000BC230 /* _Wrapper+Utility.m in Sources */,
 				0A58431015B8FC19000BC230 /* _Wrapper.m in Sources */,
@@ -718,7 +704,6 @@
 				0A5842F815B8FC19000BC230 /* SubjectiveScript.m in Sources */,
 				0A5842FB15B8FC19000BC230 /* _Wrapper+Arrays.m in Sources */,
 				0A58430115B8FC19000BC230 /* _Wrapper+Collections.m in Sources */,
-				0A58430415B8FC19000BC230 /* _Wrapper+Functions.m in Sources */,
 				0A58430715B8FC19000BC230 /* _Wrapper+Objects.m in Sources */,
 				0A58430A15B8FC19000BC230 /* _Wrapper+Utility.m in Sources */,
 				0A58431115B8FC19000BC230 /* _Wrapper.m in Sources */,
@@ -733,7 +718,6 @@
 				0A58434115B8FC7A000BC230 /* _Wrapper+ArraysTests.m in Sources */,
 				0A58434215B8FC7A000BC230 /* _Wrapper+ChainingTests.m in Sources */,
 				0A58434315B8FC7A000BC230 /* _Wrapper+CollectionsTests.m in Sources */,
-				0A58434415B8FC7A000BC230 /* _Wrapper+FunctionsTests.m in Sources */,
 				0A58434515B8FC7A000BC230 /* _Wrapper+ObjectsTests.m in Sources */,
 				0A58434615B8FC7A000BC230 /* _Wrapper+UtilityTests.m in Sources */,
 				0A58434815B8FC7A000BC230 /* _WrapperTests.m in Sources */,

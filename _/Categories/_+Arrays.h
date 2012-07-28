@@ -60,8 +60,8 @@
 
 + (A*(^)(NSA* array))uniq;
 + (A*(^)(NSA* array))unique; // ALIAS
-+ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniq3; /* SPECIALIZED */
-+ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))unique3; /* SPECIALIZED */
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniqAdvanced; /* SPECIALIZED */
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniqueAdvanced; /* SPECIALIZED */ // ALIAS
 
 + (A*(^)(NSA* array, ... /* NIL_TERMINATION */))zip;
 
@@ -72,7 +72,7 @@
 
 + (I(^)(NSA* array, id value))lastIndexOf;
 
-+ (A*(^)(I count))range1; /* SPECIALIZED */
++ (A*(^)(UI count))rangeAuto; /* SPECIALIZED */
 + (A*(^)(I start, I stop, I step))range;
 
 @end

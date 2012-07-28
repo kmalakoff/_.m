@@ -121,7 +121,7 @@
   self.ok([(NSS*)clone.get(@"name") isEqualToString:@"curly"] && [(NSS*)moe.get(@"name") isEqualToString:@"moe"], @"clones can change shallow attributes without affecting the original");
 
   clone.get(@"lucky").push(N.I(101));
-  self.equal(_.last((A*)moe.get(@"lucky"), /* MANDATORY */ -1), N.I(101), @"changes to deep attributes are shared with the original");
+  self.equal(_.last((A*)moe.get(@"lucky"), /* REQUIRED */ -1), N.I(101), @"changes to deep attributes are shared with the original");
 
 //  self.equal(_.clone(undefined), void 0, @"non objects should not be changed by clone"); /* NOT SUPPORTED: JavaScript-only because of undefined */
   self.equal(_.clone(N.I(1)), N.I(1), @"non objects should not be changed by clone");
@@ -303,7 +303,7 @@
 //  self.ok(!_.isEqual({value: 1}, new First), @"Object instances and objects sharing equivalent properties are not self.equal");
 //  self.ok(!_.isEqual({value: 2}, new Second), @"The prototype chain of objects should not be examined");
 
-  // TODO: support circular structure?
+  // REVIEW: support circular structure?
 
 //  // Circular Arrays.
 //  (aA = A.new).push(aA);
@@ -362,7 +362,7 @@
   self.ok(!_.isEqual(isEqualObj, O.new), @"Objects that do not implement equivalent `isEqual` methods are not self.equal");
   self.ok(!_.isEqual(O.new, isEqualObj), @"Commutative self.equality is implemented for objects with different `isEqual` methods");
 
-  // TODO: needed in ObjectiveC? Slows down comparison
+  // REVIEW: needed in ObjectiveC? Slows down comparison
   // Custom `isEqual` methods - comparing different types
 //  LocalizedString* localized_string1 = [[LocalizedString alloc] initWithId:10];
 //  LocalizedString* localized_string2 = [[LocalizedString alloc] initWithId:10];
@@ -525,9 +525,9 @@
 
 - (void)test_isFunction
 {
-  self.ok(!_.isFunction(AI(1, 2, 3), /* MANDATORY */ nil), @"arrays are not functions");
-  self.ok(!_.isFunction(@"moe", /* MANDATORY */ nil), @"strings are not functions");
-  self.ok(_.isFunction(_.isFunction, /* MANDATORY */ nil), @"but functions are");
+  self.ok(!_.isFunction(AI(1, 2, 3), /* REQUIRED */ nil), @"arrays are not functions");
+  self.ok(!_.isFunction(@"moe", /* REQUIRED */ nil), @"strings are not functions");
+  self.ok(_.isFunction(_.isFunction, /* REQUIRED */ nil), @"but functions are");
 //  self.ok(_.isFunction(iFunction), @"even from another frame"); /* NOT SUPPORTED: JavaScript-only because of frame */
 }
 
@@ -612,13 +612,12 @@
   self.equal(intercepted, N.I(1), @"passes tapped object to interceptor");
   self.equal(returned, N.I(1), @"returns tapped object");
 
-  // TODO - chaining
-//  returned = __(AI(1,2,3)).chain().
-//    map(^(N* n){ return N.I(n.I * 2); }).
-//    max().
-//    tap(interceptor).
-//    valueN();
-//  self.ok(returned == N.I(6) && intercepted == N.I(6), @"can use tapped objects in a chain");
+  returned = __(AI(1,2,3)).chain().
+    map(^(N* n, /* REQUIRED */ ...){ return N.I(n.I * 2); }).
+    max(/* REQUIRED*/ nil).
+    tap(interceptor).
+    valueN();
+  self.ok(returned == N.I(6) && intercepted == N.I(6), @"can use tapped objects in a chain");
 }
   
 @end

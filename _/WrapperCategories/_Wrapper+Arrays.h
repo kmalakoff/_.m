@@ -34,13 +34,17 @@
 - (_Wrapper*(^)(I n))first;
 - (_Wrapper*(^)(I n))head;
 - (_Wrapper*(^)(I n))take;
+//firstIterator /* NOT WRAPPED */
 
 - (_Wrapper*(^)(I n))initial;
+//initialIterator /* NOT WRAPPED */
 
 - (_Wrapper*(^)(I n))last;
+//lastIterator /* NOT WRAPPED */
 
 - (_Wrapper*(^)(I index))rest;
 - (_Wrapper*(^)(I index))tail;
+// restIterator /* NOT WRAPPED */
 
 - (_Wrapper*(^)())compact;
 
@@ -55,19 +59,20 @@
 - (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))difference;
 
 - (_Wrapper*(^)())uniq;
-- (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniq3; /* SPECIALIZED */
-- (_Wrapper*(^)(B isSorted, _MapBlock iterator))unique;
+- (_Wrapper*(^)())unique; // ALIAS
+- (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniqAdvanced; /* SPECIALIZED */
+- (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniqueAdvanced; // ALIAS
 
 - (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))zip;
 
-// zipObject /* NO OO-STYLE WRAPPER VERSION */
+- (_Wrapper*(^)(NSA* keys, NSA* values))zipObject;
 
 - (_Wrapper*(^)(id value))indexOf;
 - (_Wrapper*(^)(id value))indexOfSorted; /* SPECIALIZED */
 
 - (_Wrapper*(^)(id value))lastIndexOf;
 
-// range1 /* NO OO-STYLE WRAPPER VERSION */
-// range /* NO OO-STYLE WRAPPER VERSION */
+- (_Wrapper*(^)(UI count))rangeAuto; /* SPECIALIZED */
+- (_Wrapper*(^)(I start, I stop, I step))rangeAdvanced;
 
 @end

@@ -127,13 +127,14 @@
     return _.chain(_.uniq(self.valueNSA()));
   };
 }
-- (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniq3
+- (_Wrapper*(^)())unique { return self.uniq; } // ALIAS
+- (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniqAdvanced //
 {
   return ^(B isSorted, _MapBlock iterator) {
-    return _.chain(_.uniq3(self.valueNSA(), isSorted, iterator));
+    return _.chain(_.uniqAdvanced(self.valueNSA(), isSorted, iterator));
   };
 }
-- (_Wrapper*(^)(B isSorted, _MapBlock iterator))unique { return self.uniq3; } // ALIAS
+- (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniqueAdvanced { return self.uniqAdvanced; } // ALIAS
 
 - (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))zip
 {
@@ -150,7 +151,12 @@
   };
 }
 
-// zipObject /* NO OO-STYLE WRAPPER VERSION */
+- (_Wrapper*(^)(NSA* keys, NSA* values))zipObject
+{
+  return ^(NSA* keys, NSA* values) {
+    return _.chain(_.zipObject(keys, values));
+  };
+}
 
 - (_Wrapper*(^)(id item))indexOf
 {
@@ -173,6 +179,17 @@
   };
 }
 
-// range /* NO OO-STYLE WRAPPER VERSION */
+- (_Wrapper*(^)(UI count))rangeAuto /* SPECIALIZED */
+{
+  return ^(UI count) {
+    return _.chain(_.range(0, count, 1));
+  };
+}
+- (_Wrapper*(^)(I start, I stop, I step))rangeAdvanced
+{
+  return ^(I start, I stop, I step) {
+    return _.chain(_.range(start, stop, step));
+  };
+}
 
 @end

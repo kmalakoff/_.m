@@ -32,10 +32,10 @@
 @interface NSArray (SS)
 
 + (A*(^)(UI count))newSparse;
-+ (A*(^)(const B* values, I count))newB;
-+ (A*(^)(const I* values, I count))newI;
-+ (A*(^)(const UI* values, I count))newUI;
-+ (A*(^)(const F* values, I count))newF;
++ (A*(^)(const B* values, UI count))newB;
++ (A*(^)(const I* values, UI count))newI;
++ (A*(^)(const UI* values, UI count))newUI;
++ (A*(^)(const F* values, UI count))newF;
 + (A*(^)(const id* values /* NIL_TERMINATION */))newO;
 
 - (NSS*)mutableClassName;

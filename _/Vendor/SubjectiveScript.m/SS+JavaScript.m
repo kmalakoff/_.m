@@ -45,7 +45,7 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
 {
   return ^id(id block, NSA* arguments) {
   
-    // TODO: is there a safer and more flexible way to call blocks by signature?
+    // REVIEW: is there a safer and more flexible way to call blocks by signature?
     switch(arguments.count) {
       case 0: return ((SSBlock0)block)();
       case 1: return ((SSBlock1)block)(arguments.getArgAt(0), nil);
@@ -84,9 +84,9 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
       }];
     }
     
-    // TODO: should I support properties?
+    // REVIEW: should I support properties?
     
-    // TODO: should I support functions? (some internal methods crash)
+    // REVIEW: should I support functions? (some internal methods crash)
 //    Method* methodlist = class_copyMethodList(object_getClass(self), &count);
 //
 //    UI count = 0;

@@ -82,16 +82,16 @@
     return N.I(n1.I + n2.I);
   };
   
-  _MemoizedBlock fastFib = _.memoize(fib, /* MANDATORY */ nil);
+  _MemoizedBlock fastFib = _.memoize(fib, /* REQUIRED */ nil);
   self.equal(fib(N.I(10)), N.I(55), @"a memoized version of fibonacci produces identical results");
-  self.equal(fastFib(N.I(10), /* MANDATORY */ nil), N.I(55), @"a memoized version of fibonacci produces identical results");
+  self.equal(fastFib(N.I(10), /* REQUIRED */ nil), N.I(55), @"a memoized version of fibonacci produces identical results");
 
   _MemoizeBlock o = ^(NSS* str, ... /* NIL_TERMINATION */) {
     return str;
   };
-  _MemoizedBlock fastO = _.memoize(o, /* MANDATORY */ nil);
+  _MemoizedBlock fastO = _.memoize(o, /* REQUIRED */ nil);
   self.equal(o(@"toString"), @"toString", @"checks hasOwnProperty");
-  self.equal(fastO(@"toString", /* MANDATORY */ nil), @"toString", @"checks hasOwnProperty");
+  self.equal(fastO(@"toString", /* REQUIRED */ nil), @"toString", @"checks hasOwnProperty");
 }
 
 - (void)test_delay 
@@ -119,9 +119,9 @@
 - (void)test_throttle 
 {
   self.asyncTest(^(QUnitTest* test) {
-    __block I counter = 0;
-    _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* MANDATORY */ return nil; };
-    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* MANDATORY */ nil );
+    __block UI counter = 0;
+    _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* REQUIRED */ return nil; };
+    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil );
     throttledIncr(); throttledIncr(); throttledIncr();
     SS.setTimeout(^{ throttledIncr(); }, 70);
     SS.setTimeout(^{ throttledIncr(); }, 120);
@@ -140,8 +140,8 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block N* value = nil;
-    _ThrottleBlock update = ^id(N* val, ... /* NIL_TERMINATION */){ value = val; /* MANDATORY */ return nil; };
-    _ThrottledBlock throttledUpdate = _.throttle(update, 100, /* MANDATORY */ nil );
+    _ThrottleBlock update = ^id(N* val, ... /* NIL_TERMINATION */){ value = val; /* REQUIRED */ return nil; };
+    _ThrottledBlock throttledUpdate = _.throttle(update, 100, /* REQUIRED */ nil );
     throttledUpdate(N.I(1), nil); throttledUpdate(N.I(2), nil); throttledUpdate(N.I(3), nil);
     SS.setTimeout(^(){ throttledUpdate(N.I(4)); }, 120);
     SS.setTimeout(^(){ throttledUpdate(N.I(5)); }, 140);
@@ -154,9 +154,9 @@
 - (void)test_throttle_once
 {
   self.asyncTest(^(QUnitTest* test) {
-    __block I counter = 0;
+    __block UI counter = 0;
     _ThrottleBlock incr = ^N*(id arg1, ... /* NIL_TERMINATION */){ return N.I(++counter); };
-    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* MANDATORY */ nil );
+    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil );
     N* result = throttledIncr();
     _.delay(^(){
       self.equalI(result.I, 1, @"throttled ^s return their value");
@@ -169,8 +169,8 @@
 {
   self.asyncTest(^(QUnitTest* test) {
     __block I  counter = 0;
-    _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* MANDATORY */ return nil; };
-    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* MANDATORY */ nil);
+    _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* REQUIRED */ return nil; };
+    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil);
     throttledIncr(); throttledIncr();
     _.delay(^(){ self.equalI(counter, 2, @"incr was called twice"); test.start(); }, 220);
   });
@@ -181,7 +181,7 @@
   self.asyncTest(^(QUnitTest* test) {
     __block I  counter = 0;
     _DebounceBlock incr = ^(id arg1, ... /* NIL_TERMINATION */){ counter++; };
-    _DebouncedBlock debouncedIncr = _.debounce(incr, 50, /* MANDATORY */ false, /* NIL_TERMINATION */ nil);
+    _DebouncedBlock debouncedIncr = _.debounce(incr, 50, /* REQUIRED */ false, /* NIL_TERMINATION */ nil);
     debouncedIncr(); debouncedIncr(); debouncedIncr();
     SS.setTimeout(^{ debouncedIncr(); }, 30);
     SS.setTimeout(^{ debouncedIncr(); }, 60);
@@ -195,7 +195,7 @@
 - (void)test_throttle_asap
 {
   self.asyncTest(^(QUnitTest* test) {
-    __block I counter = 0;
+    __block UI counter = 0;
     _DebounceBlock incr = ^(id arg1, ... /* NIL_TERMINATION */){ 
       counter++; 
     };
@@ -214,7 +214,7 @@
 - (void)test_throttle_asap_recursively
 {
   self.asyncTest(^(QUnitTest* test) {
-    __block I counter = 0;
+    __block UI counter = 0;
     __block _DebouncedBlock debouncedIncr = _.debounce(^(id arg1, ... /* NIL_TERMINATION */){
       counter++;
       if (counter < 5) debouncedIncr();
@@ -227,7 +227,7 @@
 
 - (void)test_once {
   __block I num = 0;
-  _OncedBlock increment = _.once(^id(id arg1, ... /* NIL_TERMINATION */){ num++; /* MANDATORY */ return nil; }, /* NIL_TERMINATION */ nil);
+  _OncedBlock increment = _.once(^id(id arg1, ... /* NIL_TERMINATION */){ num++; /* REQUIRED */ return nil; }, /* NIL_TERMINATION */ nil);
   increment();
   increment();
   self.equalI(num, 1, @"once");
@@ -238,7 +238,7 @@
   _WrappedBlock backwards = _.wrap(greet, ^S*(_WrappedBlock func, NSS* name, ... /* NIL_TERMINATION */){
     return ((S*)func(name)).append(@" ").append(name.split(@"").reverse().join(@"")); 
   });
-  self.equal(backwards(@"moe", /* MANDATORY */ nil), @"hi: moe eom", @"wrapped the saluation function");
+  self.equal(backwards(@"moe", /* REQUIRED */ nil), @"hi: moe eom", @"wrapped the saluation function");
 
   _WrappedBlock inner = ^(id arg1, ... /* NIL_TERMINATION */){ return @"Hello "; };
   O* obj   = OKV({@"name", @"Moe"});
@@ -249,7 +249,7 @@
     return NSNull.null; 
   };
   _WrappedBlock wrapped = _.wrap(noop, ^A*(_WrappedBlock fn, id arg1, ... /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return A.newNSO(fn).concat(arguments); });
-  A* ret     = wrapped(AO(@"whats", @"your"), @"vector", @"victor", /* MANDATORY */ nil);
+  A* ret     = wrapped(AO(@"whats", @"your"), @"vector", @"victor", /* REQUIRED */ nil);
   self.deepEqual(ret, AO(noop, AO(@"whats", @"your"), @"vector", @"victor"), @"deep wrapping");
 }
 
@@ -259,7 +259,7 @@
   _ComposeBlock composed = _.compose(exclaim, greet, /* NIL TERMINATION */ nil);
   self.equal(composed(@"moe"), @"hi: moe!", @"can compose a function that takes another");
 
-  composed = _.compose(greet, exclaim, /* MANDATORY */ nil);
+  composed = _.compose(greet, exclaim, /* REQUIRED */ nil);
   self.equal(composed(@"moe"), @"hi: moe!", @"in this case, the functions are also commutative");
 }
 

@@ -150,7 +150,7 @@
         return [a isEqual:b];
     }
 
-    // TODO: specialized functions needed?
+    // REVIEW: override functions needed?
 //    if (_.isFunction(@"isEqual", a))
 //      @"isEqual".apply(a, [A arrayWithObject:b]);
 //    if (_.isFunction(@"isEqual", b))

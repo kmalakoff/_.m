@@ -31,9 +31,12 @@
 
 @interface _Wrapper (Collections)
 
-//each
+- (_Wrapper*(^)(_EachBlock iterator))each;
+- (_Wrapper*(^)(_EachBlock iterator))forEach; // ALIAS
+- (_Wrapper*(^)(_EachWithStopBlock iterator))eachWithStop; /* SPECIALIZED: returns YES if processed all elements without a request to stop */
 
 - (_Wrapper*(^)(_MapBlock iterator))map;
+- (_Wrapper*(^)(_MapBlock iterator))collect; // ALIAS
 
 - (_Wrapper*(^)(_ReduceBlock iterator, id memo))reduce;
 - (_Wrapper*(^)(_ReduceBlock iterator, id memo))foldl; // ALIAS
@@ -42,33 +45,40 @@
 - (_Wrapper*(^)(_ReduceBlock iterator, id memo))reduceRight;
 - (_Wrapper*(^)(_ReduceBlock iterator, id memo))foldr; // ALIAS
 
-//find
+- (_Wrapper*(^)(_FindBlock iterator))find;
+- (_Wrapper*(^)(_FindBlock iterator))detect; // ALIAS
 
 - (_Wrapper*(^)(_CollectionItemTestBlock iterator))filter;
 - (_Wrapper*(^)(_CollectionItemTestBlock iterator))select; // ALIAS
 
-//reject
-//all
-//any
+- (_Wrapper*(^)(_CollectionItemTestBlock iterator))reject;
+
+- (_Wrapper*(^)(_CollectionItemTestBlock iterator))all;
+- (_Wrapper*(^)(_CollectionItemTestBlock iterator))every; // ALIAS
+
+- (_Wrapper*(^)(/* REQUIRED */ _CollectionItemTestBlock iterator))any;
+- (_Wrapper*(^)(_CollectionItemTestBlock iterator))some; // ALIAS
 
 - (_Wrapper*(^)(id target))include;
 - (_Wrapper*(^)(id target))contains; // ALIAS
 
-//invoke
+- (_Wrapper*(^)(NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke;
 
 - (_Wrapper*(^)(NSString *keyPath))pluck;
 
-//max
-//min
+- (_Wrapper*(^)(_MaxBlock iterator))max;
+- (_Wrapper*(^)(_MinBlock iterator))min;
 
 - (_Wrapper*(^)(_SortBlock iterator))sort; /* ADDED to allow sorting in chaining */
+- (_Wrapper*(^)(id iteratorOrKey /* _SortByBlock or key */))sortBy;
+- (_Wrapper*(^)(id iteratorOrKey /* _GroupByBlock or key */))groupBy;
 
-//sortBy
-//groupBy
-//sortedIndex
+- (_Wrapper*(^)(id obj, _SortedIndexBlock iterator))sortedIndex;
 
-//shuffle
-//toArray
-//size
+- (_Wrapper*(^)())shuffle;
+
+- (_Wrapper*(^)())toArray;
+
+- (_Wrapper*(^)())size;
 
 @end

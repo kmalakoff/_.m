@@ -81,7 +81,7 @@ _.difference = function(array)
 uniq
 _.uniq = _.unique = function(array, isSorted, iterator)
 + (id(^)(A* array, array))uniq;
-+ (id(^)(A* array, array, B isSorted, _MapBlock iterator))uniq3;
++ (id(^)(A* array, array, B isSorted, _MapBlock iterator))uniqAdvanced;
 
 zip
 _.zip = function(...)

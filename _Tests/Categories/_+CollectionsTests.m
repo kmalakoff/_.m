@@ -88,22 +88,22 @@
   sum =  __(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).valueN();
   self.equalI(sum.I, 6, @"OO-style reduce");
 
-  sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, /* MANDATORY */ 0);
+  sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, /* REQUIRED */ 0);
   self.equalI(sum.I, 6, @"default initial value");
 
   E* ifnull;
   @try {
-    _.reduce(nil, ^(/* MANDATORY */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, 0);
+    _.reduce(nil, ^(/* REQUIRED */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, 0);
   } @catch (E* ex) {
     ifnull = ex;
   }
   self.ok(ifnull.instanceof(@"NSException"), @"handles a null (without inital value) properly");
 
-  self.equal(_.reduce(nil, ^(/* MANDATORY */ N* sum, N* num, ... /* KEY, COLLECTION */){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
+  self.equal(_.reduce(nil, ^(/* REQUIRED */ N* sum, N* num, ... /* KEY, COLLECTION */){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
 
   /* NOT SUPPORTED: JavaScript-only because of 'undefined' */
 //  self.equal(_.reduce(A.new, ^{}, undefined), undefined, @"undefined can be passed as a special case");
-  self.raises(^{ _.reduce(A.new, ^(/* MANDATORY */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, /* MANDATORY */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
+  self.raises(^{ _.reduce(A.new, ^(/* REQUIRED */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, /* REQUIRED */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
 }
 
 - (void)test_reduceRight
@@ -114,29 +114,29 @@
   list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.append(str); }, S.new);
   self.equal(list, @"bazbarfoo", @"aliased as 'foldr'");
 
-  list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.append(str); }, /* MANDATORY */ nil);
+  list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.append(str); }, /* REQUIRED */ nil);
   self.equal(list, @"bazbarfoo", @"default initial value");
 
   E* ifnull;
   @try {
-    _.reduceRight(nil, ^(/* MANDATORY */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, 0);
+    _.reduceRight(nil, ^(/* REQUIRED */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, 0);
   } @catch (E* ex) {
     ifnull = ex;
   }
   self.ok(ifnull.instanceof(@"NSException"), @"handles a null (without inital value) properly");
 
-  self.equal(_.reduceRight(nil, ^(/* MANDATORY */ N* sum, N* num, ... /* KEY, COLLECTION */){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
+  self.equal(_.reduceRight(nil, ^(/* REQUIRED */ N* sum, N* num, ... /* KEY, COLLECTION */){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
 
   /* NOT SUPPORTED: JavaScript-only because of 'undefined' */
 //  self.equal(_.reduceRight(A.new, ^{}, undefined), undefined, @"undefined can be passed as a special case");
-  self.raises(^{ _.reduceRight(A.new, ^(/* MANDATORY */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, /* MANDATORY */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
+  self.raises(^{ _.reduceRight(A.new, ^(/* REQUIRED */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, /* REQUIRED */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
 }
 
 - (void)test_find
 {
   A* array = AI(1, 2, 3, 4);
   self.strictEqual(_.find(array, ^B(N* n) { return n.I > 2; }), N.I(3), @"should return first found `value`");
-  self.strictEqual(_.find(array, ^B(/* MANDATORY */ id value) { return false; }), nil, @"should return `undefined` if `value` is not found");
+  self.strictEqual(_.find(array, ^B(/* REQUIRED */ id value) { return false; }), nil, @"should return `undefined` if `value` is not found");
 }
 
 - (void)test_detect
@@ -178,16 +178,16 @@
 
 - (void)test_any
 {
-  self.ok(!_.any(A.new, /* MANDATORY */ nil), @"the empty set");
-  self.ok(!_.any(AB(false, false, false), /* MANDATORY */ nil), @"all false values");
-  self.ok(_.any(AB(false, false, true), /* MANDATORY */ nil), @"one true value");
-  self.ok(_.any(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"yes", N.B(false)), /* MANDATORY */ nil), @"a string");
-  self.ok(!_.any(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"", N.B(false)), /* MANDATORY */ nil), @"falsy values");
+  self.ok(!_.any(A.new, /* REQUIRED */ nil), @"the empty set");
+  self.ok(!_.any(AB(false, false, false), /* REQUIRED */ nil), @"all false values");
+  self.ok(_.any(AB(false, false, true), /* REQUIRED */ nil), @"one true value");
+  self.ok(_.any(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"yes", N.B(false)), /* REQUIRED */ nil), @"a string");
+  self.ok(!_.any(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"", N.B(false)), /* REQUIRED */ nil), @"falsy values");
   self.ok(!_.any(AI(1, 11, 29), ^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }), @"all odd numbers");
   self.ok(_.any(AI(1, 10, 29), ^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }), @"an even number");
   self.ok(_.any(AI(1), /* SPECIALIZED */ _.identityTruthy) == true, @"cast to boolean - true");
   self.ok(_.any(AI(0), /* SPECIALIZED */ _.identityTruthy) == false, @"cast to boolean - false");
-  self.ok(_.some(AB(false, false, true), /* MANDATORY */ nil), @"aliased as 'some'");
+  self.ok(_.some(AB(false, false, true), /* REQUIRED */ nil), @"aliased as 'some'");
 }
 
 - (void)test_include
@@ -201,7 +201,7 @@
 - (void)test_invoke
 {
   NSA* list = AO(AI(5, 1, 7), AI(3, 2, 1));
-  NSA* result = (NSA*) _.invoke(list, @"sort", /* MANDATORY */ NSNull.null, /* NIL_TERMINATION */ nil);
+  NSA* result = (NSA*) _.invoke(list, @"sort", /* REQUIRED */ NSNull.null, /* NIL_TERMINATION */ nil);
   self.equal(result.getAt(0).join(@", "), @"1, 5, 7", @"first array sorted");
   self.equal(result.getAt(1).join(@", "), @"1, 2, 3", @"second array sorted");
 }
@@ -240,32 +240,32 @@
 
 - (void)test_max
 {
-  self.equal(N.I(3), _.max(AI(1, 2, 3), /* MANDATORY */ nil), @"can perform a regular Math.max");
+  self.equal(N.I(3), _.max(AI(1, 2, 3), /* REQUIRED */ nil), @"can perform a regular Math.max");
 
   N* neg = (N*) _.max(AI(1, 2, 3), ^(N* num){ return N.I(-num.I); });
   self.equal(neg, N.I(1), @"can perform a computation-based max");
 
-  self.equal(NF_NEG_INFINITY, _.max(O.new, /* MANDATORY */ nil), @"Maximum value of an empty object");
-  self.equal(NF_NEG_INFINITY, _.max(A.new, /* MANDATORY */ nil), @"Maximum value of an empty array");
+  self.equal(NF_NEG_INFINITY, _.max(O.new, /* REQUIRED */ nil), @"Maximum value of an empty object");
+  self.equal(NF_NEG_INFINITY, _.max(A.new, /* REQUIRED */ nil), @"Maximum value of an empty array");
 
-  self.equal(N.I(299999), _.max(_.range(1,300000, /* MANDATORY */ 1), /* MANDATORY */ nil ), @"Maximum value of a too-big array");
+  self.equal(N.I(299999), _.max(_.range(1,300000, /* REQUIRED */ 1), /* REQUIRED */ nil ), @"Maximum value of a too-big array");
 }
 
 - (void)test_min
 {
-  self.equal(N.I(1), _.min(AI(1, 2, 3), /* MANDATORY */ nil), @"can perform a regular Math.min");
+  self.equal(N.I(1), _.min(AI(1, 2, 3), /* REQUIRED */ nil), @"can perform a regular Math.min");
 
   N* neg = (N*) _.min(AI(1, 2, 3), ^(N* num){ return N.I(-num.I); });
   self.equalI(neg.I, 3, @"can perform a computation-based min");
 
-  self.equal(NF_POS_INFINITY, _.min(O.new, /* MANDATORY */ nil), @"Minimum value of an empty object");
-  self.equal(NF_POS_INFINITY, _.min(A.new, /* MANDATORY */ nil), @"Minimum value of an empty array");
+  self.equal(NF_POS_INFINITY, _.min(O.new, /* REQUIRED */ nil), @"Minimum value of an empty object");
+  self.equal(NF_POS_INFINITY, _.min(A.new, /* REQUIRED */ nil), @"Minimum value of an empty array");
 
   Date* now = [Date distantFuture];
   Date* then = Date.new;
-  self.equal(_.min(AO(now, then), /* MANDATORY */ nil), then, @"the time is now");
+  self.equal(_.min(AO(now, then), /* REQUIRED */ nil), then, @"the time is now");
 
-  self.equal(N.I(1), _.min(_.range(1,300000, /* MANDATORY */ 1), /* MANDATORY */ nil), @"Minimum value of a too-big array");
+  self.equal(N.I(1), _.min(_.range(1,300000, /* REQUIRED */ 1), /* REQUIRED */ nil), @"Minimum value of a too-big array");
 }
 
 - (void)test_sortBy
@@ -300,17 +300,17 @@
 - (void)test_sortedIndex
 {
   A* numbers = AI(10, 20, 30, 40, 50); N* num = N.I(35);
-  I indexForNum = _.sortedIndex(numbers, num, /* MANDATORY */ nil);
+  I indexForNum = _.sortedIndex(numbers, num, /* REQUIRED */ nil);
   self.equalI(indexForNum, 3, @"35 should be inserted at index 3");
 
-  I indexFor30 = _.sortedIndex(numbers, N.I(30), /* MANDATORY */ nil);
+  I indexFor30 = _.sortedIndex(numbers, N.I(30), /* REQUIRED */ nil);
   self.equalI(indexFor30, 2, @"30 should be inserted at index 2");
 }
 
 - (void)test_shuffle
 {
-  A* numbers = _.range1(10); /* SPECIALIZED */
-  NSA* shuffled = _.shuffle(numbers).sort(/* MANDATORY */ nil);
+  A* numbers = _.rangeAuto(10); /* SPECIALIZED */
+  NSA* shuffled = _.shuffle(numbers).sort(/* REQUIRED */ nil);
   self.notStrictEqual(numbers, shuffled, @"original object is unmodified");
   self.equal(shuffled.join(@","), numbers.join(@","), @"contains the same members before and after shuffle");
 }

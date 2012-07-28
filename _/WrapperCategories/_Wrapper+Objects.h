@@ -31,33 +31,54 @@
 
 @interface _Wrapper (Objects)
 
-//keys
-//values
-//functions
-//extend
-//pick
-//defaults
-//clone
-//tap
-//has
+- (_Wrapper*(^)())keys;
+- (_Wrapper*(^)())values;
+
+- (_Wrapper*(^)())functions;
+- (_Wrapper*(^)())methods;
+
+- (_Wrapper*(^)(NSD* obj1, ... /* NIL_TERMINATION */))extend;
+
+- (_Wrapper*(^)(id key1, ... /* NIL_TERMINATION */))pick;
+
+- (_Wrapper*(^)(NSD* obj1, ... /* NIL_TERMINATION */))defaults;
+
+- (_Wrapper*(^)())clone; /* RETURNS MUTABLE IF POSSIBLE */
+
+- (_Wrapper*(^)(_TapBlock interceptor))tap;
+
+- (_Wrapper*(^)(id key))has;
 
 - (_Wrapper*(^)(id b))isEqual;
 
-//isEmpty
-//isElement
-//isArray
-//isObject
-//isArguments
-//isFunction
-//isString
-//isNumber
-//isFinite
-//isBoolean
-//isDate
-//isRegExp
-//isNaN
-//isNull
-//isUndefined
-//isDictionary   // ADDED
+- (_Wrapper*(^)())isEmpty;
+
+//isElement /* NOT SUPPORTED: JavaScript-only */
+
+- (_Wrapper*(^)())isArray;
+
+- (_Wrapper*(^)())isObject;
+
+- (_Wrapper*(^)())isArguments;
+
+- (_Wrapper*(^)(id target))isFunction;  /* DEFINITION: it is a block or you call @"fnName".apply(target, ... NIL_TERMINATION) or @"fnName".call(target, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
+
+- (_Wrapper*(^)())isString;
+
+- (_Wrapper*(^)())isNumber;
+
+- (_Wrapper*(^)())isFinite;
+
+- (_Wrapper*(^)())isBoolean;
+
+- (_Wrapper*(^)())isDate;
+
+//isRegExp /* NOT SUPPORTED: JavaScript-only */
+
+- (_Wrapper*(^)())isNaN;
+
+- (_Wrapper*(^)())isNull;
+
+//isUndefined /* NOT SUPPORTED: JavaScript-only */
 
 @end

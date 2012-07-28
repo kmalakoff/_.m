@@ -97,7 +97,7 @@
     __block B throttling;
     __block B more;
 
-    _DebouncedBlock whenDone = _.debounce(^(id arg1, ... /* NIL_TERMINATION */ /* NIL_TERMINATION */){ more = throttling = false; }, waitNS, /* MANDATORY */ false, /* NIL_TERMINATION */ nil);
+    _DebouncedBlock whenDone = _.debounce(^(id arg1, ... /* NIL_TERMINATION */ /* NIL_TERMINATION */){ more = throttling = false; }, waitNS, /* REQUIRED */ false, /* NIL_TERMINATION */ nil);
     return ^{
       id result;
       __block SSTimeout* timeout;

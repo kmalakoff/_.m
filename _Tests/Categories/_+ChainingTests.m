@@ -23,8 +23,8 @@
 //    @"He sleeps all night and he works all day"
 //  );
 //  O* counts = (O*) __(lyrics).chain()
-//    .map(^(NSS* line, /* MANDATORY */ id index) { return line.split(@""); })
-//    .flatten( /* MANDATORY */ false )
+//    .map(^(NSS* line, /* REQUIRED */ id index) { return line.split(@""); })
+//    .flatten( /* REQUIRED */ false )
 //    .reduce(^(O* hash, N* l, ... /* KEY, COLLECTION */) {
 //      N* value = (N*) hash.getOrAdd(l, ^{ return N.I(0); });
 //      hash.set(l, N.I(value.I+1));

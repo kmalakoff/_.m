@@ -50,7 +50,7 @@
       NSA* array = obj;
       if(!array.length) return;
 
-      I count = [array count];
+      UI count = [array count];
       for (I index=0; index<count; index++) {
         iterator([array objectAtIndex:index], N.I(index), obj);
       }
@@ -77,7 +77,7 @@
       NSA* array = obj;
       if(!array.length) return YES;
 
-      I count = [array count];
+      UI count = [array count];
       for (I index=0; index<count; index++) {
         if (!iterator([array objectAtIndex:index], N.I(index), obj))
           return NO;
@@ -115,7 +115,7 @@
       if(!array.length) return A.new;
 
       A* result = [A arrayWithCapacity:array.length];
-      I count = [array count];
+      UI count = [array count];
       for (I index=0; index<count; index++) {
         id mapped = iterator([array objectAtIndex:index], N.I(index), obj);
         if (mapped)

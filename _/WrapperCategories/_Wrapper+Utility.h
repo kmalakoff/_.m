@@ -31,15 +31,21 @@
 
 @interface _Wrapper (Utility)
 
-//noConflict
-//identity
+//noConflict /* NOT SUPPORTED: JavaScript-only */
+
+//- (_IdentityBlock)identity; /* NOT WRAPPED */
+//- (_CollectionItemTestBlock)identityTruthy; /* SPECIALIZED */ /* NOT WRAPPED */
 
 - (_Wrapper*(^)(_TimesBlock iterator))times;
 
-//mixin
-//uniqueId
-//escape
-//result
-//template
+//mixin /* NOT SUPPORTED: JavaScript-only: use Objective-C categories on '_' instead */
+
+//- (NSS*(^)(NSS* prefix))uniqueId; /* NOT WRAPPED */
+
+//escape /* NOT SUPPORTED: JavaScript-only...could be implemented with GTMNSString+HTML, but currently not ARC compatible and adds significant size to the library */
+
+- (_Wrapper*(^)(id property))result;
+
+//template /* NOT SUPPORTED: JavaScript-only */
 
 @end

@@ -29,19 +29,121 @@
 
 #import "_Wrapper+Objects.h"
 #import "_+Objects.h"
+#import "_+Collections.h"
+#import "_+Extensions.h"
+#import "_+Arrays.h"
 #import "SubjectiveScript.h"
 
 @implementation _Wrapper (Objects)
 
-//keys
-//values
-//functions
-//extend
-//pick
-//defaults
-//clone
-//tap
-//has
+- (_Wrapper*(^)())keys
+{
+  return ^() {
+    return _.chain(_.keys(self.valueNSD()));
+  };
+}
+
+- (_Wrapper*(^)())values
+{
+  return ^() {
+    return _.chain(_.values(self.valueNSD()));
+  };
+}
+
+- (_Wrapper*(^)())functions
+{
+  return ^() {
+    return _.chain(_.functions(self.valueNSD()));
+  };
+}
+
+- (_Wrapper*(^)())methods
+{
+  return ^() {
+    return _.chain(_.methods(self.valueNSD()));
+  };
+}
+
+- (_Wrapper*(^)(NSD* obj1, ... /* NIL_TERMINATION */))extend
+{
+  return ^(NSD* obj1, ... /* NIL_TERMINATION */) {
+#ifdef DEBUG
+      NSAssert(_.isDictionary(self.value()), @"sort expecting NSDictionary");
+#endif
+    O* obj = self.valueO();
+    if (!obj) return self;
+
+    ARGS_AO(objects, obj1);
+    
+    _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
+      [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+        [obj setObject:value forKey:key];
+      }];
+    });
+    return self;
+  };
+}
+
+- (_Wrapper*(^)(id key1, ... /* NIL_TERMINATION */))pick
+{
+  return ^(id key1, ... /* NIL_TERMINATION */) {
+#ifdef DEBUG
+      NSAssert(_.isDictionary(self.value()), @"sort expecting NSDictionary");
+#endif
+    O* obj = self.valueO();
+    if (!obj) return self;
+
+    ARGS_AO(keys, key1);
+
+    __block O* result = O.new;
+    _.each(_.flatten(keys, true), ^(NSO* key, ... /* KEY, COLLECTION */) {
+      if (key.in(obj)) result.set(key, obj.get(key));
+    });
+    return _.chain(result);
+  };
+}
+
+- (_Wrapper*(^)(NSD* obj1, ... /* NIL_TERMINATION */))defaults
+{
+  return ^(NSD* obj1, ... /* NIL_TERMINATION */) {
+#ifdef DEBUG
+      NSAssert(_.isDictionary(self.value()), @"sort expecting NSDictionary");
+#endif
+    O* obj = self.valueO();
+    if (!obj) return self;
+
+    ARGS_AO(objects, obj1);
+
+    _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
+      [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, BOOL *stop) {
+        if (!key.in(obj)) [obj setObject:value forKey:key];
+      }];
+    });
+    return _.chain(obj);
+  };
+}
+
+- (_Wrapper*(^)())clone /* RETURNS MUTABLE IF POSSIBLE */
+{
+  return ^() {
+    return _.chain(_.methods(self.valueNSD()));
+  };
+}
+
+- (_Wrapper*(^)(_TapBlock interceptor))tap
+{
+  return ^(_TapBlock interceptor) {
+    _.tap(self.value(), interceptor);
+    return self;
+  };
+}
+
+- (_Wrapper*(^)(id key))has
+{
+  return ^(id key) {
+    return _.chain(N.B(_.has(self.value(), key)));
+  };
+}
 
 - (_Wrapper*(^)(id b))isEqual
 {
@@ -50,21 +152,94 @@
   };
 }
 
-//isEmpty
-//isElement
-//isArray
-//isObject
-//isArguments
-//isFunction
-//isString
-//isNumber
-//isFinite
-//isBoolean
-//isDate
-//isRegExp
-//isNaN
-//isNull
-//isUndefined
-//isDictionary   // ADDED
+- (_Wrapper*(^)())isEmpty
+{
+  return ^() {
+    return _.chain(N.B(_.isEmpty(self.value())));
+  };
+}
+
+//isElement /* NOT SUPPORTED: JavaScript-only */
+
+- (_Wrapper*(^)())isArray
+{
+  return ^() {
+    return _.chain(N.B(_.isArray(self.value())));
+  };
+}
+
+- (_Wrapper*(^)())isObject
+{
+  return ^() {
+    return _.chain(N.B(_.isObject(self.value())));
+  };
+}
+
+- (_Wrapper*(^)())isArguments
+{
+  return ^() {
+    return _.chain(N.B(_.isArguments(self.value())));
+  };
+}
+
+- (_Wrapper*(^)(id target))isFunction  /* DEFINITION: it is a block or you call @"fnName".apply(target, ... NIL_TERMINATION) or @"fnName".call(target, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
+{
+  return ^(id target) {
+    return _.chain(N.B(_.isFunction(self.value(), target)));
+  };
+}
+
+- (_Wrapper*(^)())isString
+{
+  return ^() {
+    return _.chain(N.B(_.isString(self.value())));
+  };
+}
+
+- (_Wrapper*(^)())isNumber
+{
+  return ^() {
+    return _.chain(N.B(_.isNumber(self.value())));
+  };
+}
+
+- (_Wrapper*(^)())isFinite
+{
+  return ^() {
+    return _.chain(N.B(_.isFinite(self.value())));
+  };
+}
+
+- (_Wrapper*(^)())isBoolean
+{
+  return ^() {
+    return _.chain(N.B(_.isBoolean(self.value())));
+  };
+}
+
+- (_Wrapper*(^)())isDate
+{
+  return ^() {
+    return _.chain(N.B(_.isDate(self.value())));
+  };
+}
+
+//isRegExp /* NOT SUPPORTED: JavaScript-only */
+
+- (_Wrapper*(^)())isNaN
+{
+  return ^() {
+    return _.chain(N.B(_.isNaN(self.value())));
+  };
+}
+
+- (_Wrapper*(^)())isNull
+{
+  return ^() {
+    return _.chain(N.B(_.isNull(self.value())));
+  };
+}
+
+//isUndefined /* NOT SUPPORTED: JavaScript-only */
 
 @end

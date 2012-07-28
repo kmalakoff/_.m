@@ -183,7 +183,7 @@
   };
 }
 + (A*(^)(NSA* array))unique { return self.uniq; } // ALIAS
-+ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniq3
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniqAdvanced
 {
   return ^(NSA* array, B isSorted, _MapBlock iterator) {
     NSA* initial = iterator ? _.map(array, iterator) : array;
@@ -200,14 +200,14 @@
     return results;
   };
 }
-+ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))unique3 { return self.uniq3; } // ALIAS
++ (A*(^)(NSA* array, B isSorted, _MapBlock iterator))uniqueAdvanced { return self.uniqAdvanced; } // ALIAS
 
 + (A*(^)(NSA* array, ... /* NIL_TERMINATION */))zip
 {
   return ^(NSA* array, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, array);
 
-    N* lengthNumber = (N*) _.max(_.pluck(arguments, @"length"), /* MANDATORY */ nil);
+    N* lengthNumber = (N*) _.max(_.pluck(arguments, @"length"), /* REQUIRED */ nil);
     I length = lengthNumber.I;
     A* results = A.newC(length);
     for (I i = 0; i < length; i++) {
@@ -240,7 +240,7 @@
 + (I(^)(NSA* array, id item))indexOfSorted
 {
   return ^I(NSA* array, id item) {
-    I i = _.sortedIndex(array, item, /* MANDATORY */ nil);
+    I i = _.sortedIndex(array, item, /* REQUIRED */ nil);
     return [array.getAt(i) isEqual:item] ? i : -1;
   };
 }
@@ -256,9 +256,9 @@
   };
 }
 
-+ (A*(^)(I count))range1 /* SPECIALIZED */
++ (A*(^)(UI count))rangeAuto /* SPECIALIZED */
 {
-  return ^(I count) {
+  return ^(UI count) {
     return _.range(0, count, 1);
   };
 }

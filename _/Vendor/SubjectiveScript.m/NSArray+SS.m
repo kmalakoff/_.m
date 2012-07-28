@@ -53,9 +53,9 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-+ (A*(^)(const B* values, I count))newB
++ (A*(^)(const B* values, UI count))newB
 {
-  return ^(const B* values, I count) {
+  return ^(const B* values, UI count) {
     A* result = [A arrayWithCapacity:count];
     
     for (I index=0; index<count; index++) {
@@ -65,9 +65,9 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-+ (A*(^)(const I* values, I count))newI
++ (A*(^)(const I* values, UI count))newI
 {
-  return ^(const I* values, I count) {
+  return ^(const I* values, UI count) {
     A* result = [A arrayWithCapacity:count];
     
     for (I index=0; index<count; index++) {
@@ -77,9 +77,9 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-+ (A*(^)(const UI* values, I count))newUI
++ (A*(^)(const UI* values, UI count))newUI
 {
-  return ^(const UI* values, I count) {
+  return ^(const UI* values, UI count) {
     A* result = [A arrayWithCapacity:count];
     
     for (I index=0; index<count; index++) {
@@ -89,9 +89,9 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-+ (A*(^)(const F* values, I count))newF
++ (A*(^)(const F* values, UI count))newF
 {
-  return ^(const F* values, I count) {
+  return ^(const F* values, UI count) {
     A* result = [A arrayWithCapacity:count];
     
     for (I index=0; index<count; index++) {
@@ -155,7 +155,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
 { 
   return ^(NSS* separator) { 
     S* result = S.new;
-    I count = self.count;
+    UI count = self.count;
     
     for (I index=0; index<count; index++) {
       NSO* item = [self objectAtIndex:index];

@@ -44,6 +44,5 @@
 // publish  wrapper categories
 #import "_Wrapper+Arrays.h"
 #import "_Wrapper+Collections.h"
-#import "_Wrapper+Functions.h"
 #import "_Wrapper+Objects.h"
 #import "_Wrapper+Utility.h"
