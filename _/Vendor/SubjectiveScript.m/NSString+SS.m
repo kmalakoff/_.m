@@ -65,6 +65,7 @@ const NSS* SSTypeString = @"string";
 }
 
 - (const NSS*)typeof { return SSTypeString; }
+- (S*(^)())toMutable { return ^{ return self.mutableCopy; }; }
 - (NSS*(^)())toString { return ^{ return self; }; }
 
 - (NSO*(^)(I index))getAt

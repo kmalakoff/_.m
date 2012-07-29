@@ -44,6 +44,7 @@
 }
 
 - (NSS*)mutableClassName { return NSStringFromClass([O class]); }
+- (O*(^)())toMutable { return ^{ return self.mutableCopy; }; }
 - (NSS*(^)())toString { return ^{ return self.description; }; }
 
 - (B(^)())isEmpty { return ^B() { return ([self keyEnumerator].nextObject == nil); }; }

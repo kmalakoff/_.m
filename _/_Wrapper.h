@@ -34,7 +34,7 @@
 - (_Wrapper*(^)())chain;
 
 - (NSO*(^)())value;
-- (B(^)())valueB;       /* SPECIALIZED */
+- (B(^)())valueB;       /* SPECIALIZED */   // TODO: add tests including mutable and immutable conversions
 - (I(^)())valueI;       /* SPECIALIZED */
 - (UI(^)())valueUI;     /* SPECIALIZED */
 - (F(^)())valueF;       /* SPECIALIZED */

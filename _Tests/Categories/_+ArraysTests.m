@@ -14,19 +14,19 @@
 
 - (void)test_first
 {
-  self.equal(_.first(AI(1, 2, 3), /* REQUIRED */ -1), N.I(1), @"can pull out the first element of an array");
-  self.equal(_.first(AI(1, 2, 3), /* REQUIRED */ AI_END), N.I(1), @"can pull out the first element of an array (AI_END)");
-  self.equal( __(AI(1, 2, 3)).first(/* REQUIRED */ -1), N.I(1), @"can perform OO-style 'first()'");
+  self.equal(_.first(AI(1,2,3), /* REQUIRED */ -1), N.I(1), @"can pull out the first element of an array");
+  self.equal(_.first(AI(1,2,3), /* REQUIRED */ AI_END), N.I(1), @"can pull out the first element of an array (AI_END)");
+  self.equalI(__(AI(1,2,3)).first(/* REQUIRED */ -1).valueI(), 1, @"can perform OO-style 'first()'");
   self.equal(_.first(AI(1,2,3), 0).join(@", "), @"", @"can pass an index to first");
   self.equal(_.first(AI(1,2,3), 2).join(@", "), @"1, 2", @"can pass an index to first");
   self.equal(_.first(AI(1,2,3), 5).join(@", "), @"1, 2, 3", @"can pass an index to first");
   N* resultNumber = (N*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return _.first(arguments, /* REQUIRED */ -1); })(4, 3, 2, 1, /* AI_END_TERMINATION */ AI_END);
   self.equal(resultNumber, N.I(4), @"works on an arguments object.");
-  A* result = _.map(AO(AI(1,2,3),AI(1,2,3)), /* SPECIALIZED */ _.firstIterator);
+  NSA* result = _.map(AO(AI(1,2,3),AI(1,2,3)), /* SPECIALIZED */ _.firstIterator);
   self.equal(result.join(@","), @"1,1", @"works well with _.map");
-  result = (A*) (^{ return _.take(AI(1,2,3), 2); })();
+  result = (NSA*) (^{ return _.take(AI(1,2,3), 2); })();
   self.equal(result.join(@","), @"1,2", @"aliased as take");
-  result = (A*) (^{ return _.head(AI(1,2,3), 2); })();
+  result = (NSA*) (^{ return _.head(AI(1,2,3), 2); })();
   self.equal(result.join(@","), @"1,2", @"aliased as head");
 }
 
@@ -35,7 +35,7 @@
   self.equal(_.initial(AI(1,2,3,4,5), /* REQUIRED */ -1).join(@", "), @"1, 2, 3, 4", @"working initial()");
   self.equal(_.initial(AI(1,2,3,4,5), /* REQUIRED */ AI_END).join(@", "), @"1, 2, 3, 4", @"working initial() (AI_END)");
   self.equal(_.initial(AI(1,2,3,4), 2).join(@", "), @"1, 2", @"initial can take an index");
-  A* result = (A*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  __(arguments).initial(/* REQUIRED */ -1).valueNSA(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
+  NSA* result = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  __(arguments).initial(/* REQUIRED */ -1).valueNSA(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   self.equal(result.join(@", "), @"1, 2, 3", @"initial works on arguments object");
   result = _.map(AO(AI(1,2,3),AI(1,2,3)), /* SPECIALIZED */ _.initialIterator);
   self.equal(_.flatten(result, /* REQUIRED */ YES).join(@","), @"1,2,1,2", @"initial works with _.map");
@@ -48,7 +48,7 @@
   self.equal(_.last(AI(1,2,3), 0).join(@", "), @"", @"can pass an index to last");
   self.equal(_.last(AI(1,2,3), 2).join(@", "), @"2, 3", @"can pass an index to last");
   self.equal(_.last(AI(1,2,3), 5).join(@", "), @"1, 2, 3", @"can pass an index to last");
-  N* resultNumber = (N*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return   __(arguments).last(/* REQUIRED */ -1).valueN(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
+  NSA* resultNumber = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return   __(arguments).last(/* REQUIRED */ -1).valueN(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   self.equal(resultNumber, N.I(4), @"works on an arguments object");
   A* result = _.map(AO(AI(1,2,3),AI(1,2,3)), /* SPECIALIZED */ _.lastIterator);
   self.equal(result.join(@","), @"3,3", @"works well with _.map");
@@ -61,10 +61,10 @@
   self.equal(_.rest(numbers, /* REQUIRED */ AI_END).join(@", "), @"2, 3, 4", @"working rest() (AI_END)");
   self.equal(_.rest(numbers, 0).join(@", "), @"1, 2, 3, 4", @"working rest(0)");
   self.equal(_.rest(numbers, 2).join(@", "), @"3, 4", @"rest can take an index");
-  A* result = (A*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  __(arguments).tail( /* REQUIRED */ -1).valueNSA(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
+  NSA* result = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  __(arguments).tail(/* REQUIRED */ -1).valueNSA(); })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   self.equal(result.join(@", "), @"2, 3, 4", @"aliased as tail and works on arguments object");
   result = _.map(AO(AI(1,2,3),AI(1,2,3)), /* SPECIALIZED */ _.restIterator);
-  self.equal(_.flatten(result,/* REQUIRED */  YES).join(@","), @"2,3,2,3", @"works well with _.map");
+  self.equal(_.flatten(result, /* REQUIRED */  YES).join(@","), @"2,3,2,3", @"works well with _.map");
 }
 
 - (void)test_compact
@@ -105,11 +105,11 @@
   self.equal(_.uniq(list).join(@", "), @"1, 2, 3, 4", @"can find the unique values of an unsorted array"); 
 
   list = AI(1, 1, 1, 2, 2, 3);
-  self.equal(_.uniqAdvanced(list, YES, /* REQUIRED */ nil).join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster");
+  self.equal(_.uniqAdvanced(list, YES, /* REQUIRED */ nil).join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster"); /* SPECIALIZED */
 
   list = AO(OKV({@"name", @"moe"}), OKV({@"name", @"curly"}), OKV({@"name", @"larry"}), OKV({@"name", @"curly"}));
   _MapBlock iterator = ^(O* value, ... /* KEY, COLLECTION */) { return value.get(@"name"); };
-  self.equal(_.map( /* SPECIALIZED */ _.uniqAdvanced(list, NO, iterator), iterator).join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator");
+  self.equal(_.map(/* SPECIALIZED */ _.uniqAdvanced(list, NO, iterator), iterator).join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator");
 
   iterator = ^(N* value, ... /* KEY, COLLECTION */) { return N.I(value.I + 1); };
   list = AI(1, 2, 2, 3, 4, 4);

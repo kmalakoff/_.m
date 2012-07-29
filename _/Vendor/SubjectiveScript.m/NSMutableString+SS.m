@@ -65,6 +65,7 @@
 }
 
 - (NSS*)mutableClassName { return NSStringFromClass([S class]); }
+- (S*(^)())toMutable { return ^{ return self; }; }
 
 - (S*(^)(NSS* value))append
 {

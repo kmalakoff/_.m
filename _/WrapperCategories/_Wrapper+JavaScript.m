@@ -18,7 +18,7 @@
 {
   return ^() {
 #ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
+    NSAssert(_.isArray(self.value()), @"pop expecting NSArray");
 #endif
     A* array = self.valueA();
     if (!array) return self;
@@ -32,7 +32,7 @@
 {
   return ^(id value) {
 #ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
+    NSAssert(_.isArray(self.value()), @"push expecting NSArray");
 #endif
     A* array = self.valueA();
     if (!array) return self;
@@ -46,7 +46,7 @@
 {
   return ^() {
 #ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
+    NSAssert(_.isArray(self.value()), @"reverse expecting NSArray");
 #endif
     A* array = self.valueA();
     if (!array) return self;
@@ -72,7 +72,7 @@
 {
   return ^(I start, I count, id item1, ... /* NIL_TERMINATED */) {
 #ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
+    NSAssert(_.isArray(self.value()), @"splice expecting NSArray");
 #endif
     A* array = self.valueA();
     if (!array) return self;
@@ -91,7 +91,7 @@
 {
   return ^(id item1, ... /* NIL_TERMINATED */) {
 #ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
+    NSAssert(_.isArray(self.value()), @"unshift expecting NSArray");
 #endif
     A* array = self.valueA();
     if (!array) return self;
@@ -109,7 +109,7 @@
 {
   return ^(NSA* other) {
 #ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
+    NSAssert(_.isArray(self.value()), @"concat expecting NSArray");
 #endif
     A* array = self.valueA();
     if (!array) return self;
@@ -122,7 +122,7 @@
 {
   return ^(NSS* separator) {
 #ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
+    NSAssert(_.isArray(self.value()), @"join expecting NSArray");
 #endif
     A* array = self.valueA();
     if (!array) return self;
@@ -135,7 +135,7 @@
 {
   return ^(I start, I count) {
 #ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
+    NSAssert(_.isArray(self.value()), @"slice expecting NSArray");
 #endif
     A* array = self.valueA();
     if (!array) return self;

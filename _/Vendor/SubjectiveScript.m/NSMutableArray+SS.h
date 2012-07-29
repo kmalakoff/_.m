@@ -35,6 +35,8 @@
 + (A*(^)(UI capacity))newC;
 + (A*(^)(id obj))newNSO;
 
+- (A*(^)())toMutable;
+
 - (A*(^)(id indexNumber, id value))set;
 - (A*(^)(I index, id value))setAt;
 

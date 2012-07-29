@@ -34,6 +34,7 @@
 + (O*(^)(const KV* values /* NIL_TERMINATION */))newKV;
 
 - (NSS*)mutableClassName;
+- (O*(^)())toMutable;
 - (NSS*(^)())toString;
 
 - (B(^)())isEmpty;

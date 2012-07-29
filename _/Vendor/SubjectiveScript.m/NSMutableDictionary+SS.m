@@ -38,6 +38,8 @@
   };
 }
 
+- (O*(^)())toMutable { return ^{ return self; }; }
+
 - (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd
 {
   return ^(id key, SSGetOrAddBlock add) {

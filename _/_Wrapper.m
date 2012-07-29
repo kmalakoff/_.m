@@ -113,6 +113,7 @@
 {
   return ^{
     if ([self._wrapped isKindOfClass:[NSMutableString class]]) return (S*)self._wrapped;
+    if ([self._wrapped isKindOfClass:[NSString class]]) return (S*)self._wrapped.mutableCopy;
     NSLog(@"valueS is not a NSMutableString");
     return (S*)nil;
   };
@@ -131,6 +132,7 @@
 {
   return ^{
     if ([self._wrapped isKindOfClass:[NSMutableArray class]]) return (A*)self._wrapped;
+    if ([self._wrapped isKindOfClass:[NSArray class]]) return (A*)self._wrapped.mutableCopy;
     NSLog(@"valueA is not a NSMutableArray");
     return (A*)nil;
   };
@@ -149,6 +151,7 @@
 {
   return ^{
     if ([self._wrapped isKindOfClass:[NSMutableDictionary class]]) return (O*)self._wrapped;
+    if ([self._wrapped isKindOfClass:[NSDictionary class]]) return (O*)self._wrapped.mutableCopy;
     NSLog(@"valueO is not a NSMutableDictionary");
     return (O*)nil;
   };

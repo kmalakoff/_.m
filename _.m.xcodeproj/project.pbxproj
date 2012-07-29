@@ -111,6 +111,7 @@
 		0A8D934F15C4BA5000B07CCE /* _Wrapper+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A8D934D15C4BA5000B07CCE /* _Wrapper+JavaScript.h */; };
 		0A8D935015C4BA5000B07CCE /* _Wrapper+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */; };
 		0A8D935115C4BA5000B07CCE /* _Wrapper+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */; };
+		0A8D935515C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D935415C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m */; };
 		0A8E677315BA7CFF00E50BE4 /* _Wrapper+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A8E677115BA7CFF00E50BE4 /* _Wrapper+Private.h */; };
 		0A8E677415BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */; };
 		0A8E677515BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */; };
@@ -236,6 +237,8 @@
 		0A58433915B8FC7A000BC230 /* _WrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WrapperTests.m; sourceTree = "<group>"; };
 		0A8D934D15C4BA5000B07CCE /* _Wrapper+JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+JavaScript.h"; sourceTree = "<group>"; };
 		0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+JavaScript.m"; sourceTree = "<group>"; };
+		0A8D935315C4CCAB00B07CCE /* _Wrapper+JavaScriptTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+JavaScriptTests.h"; sourceTree = "<group>"; };
+		0A8D935415C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+JavaScriptTests.m"; sourceTree = "<group>"; };
 		0A8E677115BA7CFF00E50BE4 /* _Wrapper+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Private.h"; sourceTree = "<group>"; };
 		0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Private.m"; sourceTree = "<group>"; };
 		0A93F13D15BBC4B500971790 /* SS+GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SS+GCD.h"; sourceTree = "<group>"; };
@@ -431,12 +434,12 @@
 				0A5842A815B8FC18000BC230 /* _Wrapper+Arrays.m */,
 				0A5842AB15B8FC18000BC230 /* _Wrapper+Collections.h */,
 				0A5842AC15B8FC18000BC230 /* _Wrapper+Collections.m */,
+				0A8D934D15C4BA5000B07CCE /* _Wrapper+JavaScript.h */,
+				0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */,
 				0A5842AF15B8FC18000BC230 /* _Wrapper+Objects.h */,
 				0A5842B015B8FC18000BC230 /* _Wrapper+Objects.m */,
 				0A5842B115B8FC18000BC230 /* _Wrapper+Utility.h */,
 				0A5842B215B8FC18000BC230 /* _Wrapper+Utility.m */,
-				0A8D934D15C4BA5000B07CCE /* _Wrapper+JavaScript.h */,
-				0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */,
 				0A8E677015BA7CFF00E50BE4 /* _Private */,
 			);
 			path = WrapperCategories;
@@ -492,6 +495,8 @@
 				0A58432E15B8FC7A000BC230 /* _Wrapper+ChainingTests.m */,
 				0A58432F15B8FC7A000BC230 /* _Wrapper+CollectionsTests.h */,
 				0A58433015B8FC7A000BC230 /* _Wrapper+CollectionsTests.m */,
+				0A8D935315C4CCAB00B07CCE /* _Wrapper+JavaScriptTests.h */,
+				0A8D935415C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m */,
 				0A58433315B8FC7A000BC230 /* _Wrapper+ObjectsTests.h */,
 				0A58433415B8FC7A000BC230 /* _Wrapper+ObjectsTests.m */,
 				0A58433515B8FC7A000BC230 /* _Wrapper+UtilityTests.h */,
@@ -738,6 +743,7 @@
 				0A061F6115BD034C0091BBA9 /* QUnitTest.m in Sources */,
 				0A061F6915BD26A90091BBA9 /* QUnitTest+Private.m in Sources */,
 				0A8D935115C4BA5000B07CCE /* _Wrapper+JavaScript.m in Sources */,
+				0A8D935515C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

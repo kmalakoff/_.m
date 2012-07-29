@@ -56,6 +56,8 @@
   };
 }
 
+- (A*(^)())toMutable { return ^{ return self; }; }
+
 - (A*(^)(id indexNumber, id value))set
 {
   return ^(N* indexNumber, id value) {

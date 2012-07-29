@@ -33,6 +33,8 @@
 
 + (A*(^)(UI capacity))newC;
 
+- (O*(^)())toMutable;
+
 - (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd;
 - (O*(^)(id key, id value))set;
 - (O*(^)(const KV* values /* NIL_TERMINATION */))setKV;

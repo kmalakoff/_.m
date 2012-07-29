@@ -38,7 +38,7 @@
 - (_Wrapper*(^)(I n))first
 {
   return ^id(I n) {
-    return (n>=0) ? self.valueNSA().slice(0, n) : self.valueNSA().get(0);
+    return _.chain(_.first(self.valueNSA(), n));
   };
 }
 - (_Wrapper*(^)(I n))head { return self.first; } // ALIAS
@@ -47,7 +47,7 @@
 - (_Wrapper*(^)(I n))initial
 {
   return ^(I n) {
-    return _.chain(self.valueNSA().slice(0, self.valueNSA().length - ((n<0) ? 1 : n)));
+    return _.chain(_.initial(self.valueNSA(), n));
   };
 }
 
@@ -61,7 +61,7 @@
 - (_Wrapper*(^)(I index))rest
 {
   return ^(I index) {
-    return _.chain(self.valueNSA().slice((index<0) ? 1 : index, self.valueNSA().length));
+    return _.chain(_.rest(self.valueNSA(), index));
   };
 }
 - (_Wrapper*(^)(I index))tail { return self.rest; } // ALIAS
@@ -89,11 +89,11 @@
   };
 }
 
-- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))union_
+- (_Wrapper*(^)(NSA* array2, ... /* NIL_TERMINATION */))union_
 {
-  return ^(NSA* array1, ... /* NIL_TERMINATION */) {
-    ARGS_AO(arguments, array1);
-
+  return ^(NSA* array2, ... /* NIL_TERMINATION */) {
+    ARGS_AO(arguments, array2);
+    arguments.unshift(self.valueNSA(), nil);
     return _.chain(_.uniq(_.flatten(arguments, YES)));
   };
 }
@@ -185,7 +185,7 @@
     return _.chain(_.range(0, count, 1));
   };
 }
-- (_Wrapper*(^)(I start, I stop, I step))rangeAdvanced
+- (_Wrapper*(^)(I start, I stop, I step))range
 {
   return ^(I start, I stop, I step) {
     return _.chain(_.range(start, stop, step));

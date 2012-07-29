@@ -35,6 +35,8 @@
 + (NSS*(^)(NSA* array))newA;
 + (NSS*(^)(NSS* format, ...))newFormatted;
 
+- (S*(^)())toMutable;
+
 - (const NSS*)typeof;
 - (NSS*(^)())toString;
 - (NSO*(^)(I index))getAt;

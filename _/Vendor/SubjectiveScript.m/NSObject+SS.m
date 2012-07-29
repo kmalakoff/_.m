@@ -49,6 +49,7 @@ const NSS* SSTypeObject = @"object";
 }
 - (NSS*)className { return NSStringFromClass([self class]); }
 - (NSS*)mutableClassName { return nil; }
+- (NSO*(^)())toMutable { return ^NSO*{ return nil; };}
 - (B(^)(NSS* className))instanceof {
   return ^(NSS* className) {
     return [self isKindOfClass:NSClassFromString(className)];

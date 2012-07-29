@@ -35,6 +35,7 @@
 - (NSS*(^)())toString;
 - (NSS*)className;
 - (NSS*)mutableClassName;
+- (NSO*(^)())toMutable;
 - (B(^)(NSS* className))instanceof;
 
 // use dynamic type checking for some JavaScript operations to reduce manual casting

@@ -63,7 +63,7 @@
 - (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniqAdvanced; /* SPECIALIZED */
 - (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniqueAdvanced; // ALIAS
 
-- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))zip;
+- (_Wrapper*(^)(NSA* array2, ... /* NIL_TERMINATION */))zip;
 
 - (_Wrapper*(^)(NSA* keys, NSA* values))zipObject;
 
@@ -73,6 +73,6 @@
 - (_Wrapper*(^)(id value))lastIndexOf;
 
 - (_Wrapper*(^)(UI count))rangeAuto; /* SPECIALIZED */
-- (_Wrapper*(^)(I start, I stop, I step))rangeAdvanced;
+- (_Wrapper*(^)(I start, I stop, I step))range;
 
 @end

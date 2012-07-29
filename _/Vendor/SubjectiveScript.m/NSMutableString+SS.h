@@ -37,6 +37,7 @@
 + (S*(^)(NSS* format, ...))newFormatted;
 
 - (NSS*)mutableClassName;
+- (S*(^)())toMutable;
 - (S*(^)(NSS* value))append;
 
 @end

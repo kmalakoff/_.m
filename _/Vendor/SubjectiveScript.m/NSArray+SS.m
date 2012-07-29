@@ -113,6 +113,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
 }
 
 - (NSS*)mutableClassName { return NSStringFromClass([S class]); }
+- (A*(^)())toMutable { return ^{ return self.mutableCopy; }; }
 - (NSS*(^)())toString { return ^{ return S.newFormatted(@"[%@]", self.join(@",")); }; }
 - (UI)length { return self.count; }
 

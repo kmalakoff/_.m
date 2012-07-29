@@ -39,6 +39,7 @@
 + (A*(^)(const id* values /* NIL_TERMINATION */))newO;
 
 - (NSS*)mutableClassName;
+- (A*(^)())toMutable;
 - (NSS*(^)())toString;
 - (B)isArguments; 
 - (void(^)())setIsArguments;

@@ -22,7 +22,7 @@
   );
   O* counts = (O*) __(lyrics).chain()
     .map(^(NSS* line, ... /* KEY, COLLECTION */) { return line.split(@""); })
-    .flatten( /* REQUIRED */ false )
+    .flatten(/* REQUIRED */ false )
     .reduce(^(O* hash, N* l, ... /* KEY, COLLECTION */) {
       N* value = (N*) hash.getOrAdd(l, ^{ return N.I(0); });
       hash.set(l, N.I(value.I+1));
