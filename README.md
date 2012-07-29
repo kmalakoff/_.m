@@ -17,7 +17,7 @@ _> OKV({k, v}, {k, v}) syntax
 explain the reason for and use of KH
 variable length: add nil termination requirement -> look for /* NIL_TERMINATION */ in the function definition or test
 no context 'this'
-how to use _ARGS_KEY and ARGS_AO, etc
+how to use ARGS_KEY and ARGS_AO, etc
 DEBUG vs release
 document difference with Underscore _.isObject definition
 isFunction requires a second parameter -> looking up functions

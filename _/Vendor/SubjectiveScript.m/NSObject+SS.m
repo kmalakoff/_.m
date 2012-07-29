@@ -133,7 +133,7 @@ const NSS* SSTypeObject = @"object";
   };
 }
 
-- (A*(^)(NSO* obj))push
+- (A*(^)(id value))push
 {
   return ^(NSO* obj) {
     #ifdef DEBUG

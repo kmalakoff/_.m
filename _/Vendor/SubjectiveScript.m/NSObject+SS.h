@@ -45,7 +45,7 @@
 - (UI)length;
 - (S*(^)(NSS* separator))join;
 - (B(^)(NSO* obj))in;
-- (A*(^)(NSO* obj))push;
+- (A*(^)(id value))push;
 
 // helper
 - (NSComparisonResult)compare:(NSO*)other;

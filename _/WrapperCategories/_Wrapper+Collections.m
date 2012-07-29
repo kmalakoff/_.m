@@ -154,16 +154,6 @@
   };
 }
 
-- (_Wrapper*(^)(_SortBlock iterator))sort { /* ADDED to allow sorting in chaining */
-  return ^(_SortBlock iterator) {
-#ifdef DEBUG
-    NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
-#endif
-
-    return _.chain(self.valueA().sort(iterator));
-  };
-}
-
 - (_Wrapper*(^)(id iteratorOrKey /* _SortByBlock or key */))sortBy
 {
   return ^(id iteratorOrKey /* _SortByBlock or key */) {

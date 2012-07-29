@@ -151,7 +151,15 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-- (S*(^)(NSS* separator))join 
+// accessor Array functions
+- (A*(^)(NSA* other))concat
+{
+  return ^(NSA* other) {
+    return ((A*)self.mutableCopy).concat(other);
+  };  
+}
+
+- (S*(^)(NSS* separator))join
 { 
   return ^(NSS* separator) { 
     S* result = S.new;
@@ -182,23 +190,19 @@ static char* const SSIsArgumentsKey = "IsArguments";
   }; 
 }
 
-- (NSA*(^)(UI start, UI count))slice
+- (NSA*(^)(I start, I count))slice
 {
-  return ^(UI start, UI count) {
-    if ((start + count)>self.length-1) count = self.length - start; // clamp to end of array
-    if (count<=0) return NSA.new;
-    return [self subarrayWithRange:NSMakeRange(start, count)];
+  return ^(I start, I count) {
+    NSRange range = self.makeRange(start, count);
+    if (range.length<=0) return NSA.new;
+    return [self subarrayWithRange:range];
   };
 }
 
 - (A*(^)())reverse
 {
   return ^{
-    A* result = A.newC(self.count); 
-    for (id item in [self reverseObjectEnumerator]) {
-      [result addObject:item];
-    }
-    return result;
+    return ((A*)self.mutableCopy).reverse();
   };
 }
 
@@ -216,24 +220,12 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-- (NSA*(^)(SSCompareBlock block))sort
+- (NSRange(^)(I start, I count))makeRange
 {
-  return ^NSA*(SSCompareBlock block) {
-    if (SS.isBlock(block))
-      return [self sortedArrayUsingComparator:block];
-    A* sortedCopy = self.mutableCopy;
-    [sortedCopy sortUsingSelector:@selector(compare:)];
-    return sortedCopy;
+  return ^(I start, I count) {
+    if ((start + count)>self.length-1) count = self.length - start; // clamp to end of array
+    return NSMakeRange(start, count);
   };
-}
-
-- (A*(^)(NSA* other))concat
-{
-  return ^(NSA* other) {
-    A* result = self.mutableCopy;
-    [result addObjectsFromArray:other];
-    return result;
-  };  
 }
 
 @end

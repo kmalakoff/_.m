@@ -30,7 +30,7 @@
 #import "SSTypes.h"
 
 // Helpers to access collection iteration (each, map, etc) with variable arguments
-#define _ARGS_KEY(_lastNamedArg) \
+#define ARGS_KEY(_lastNamedArg) \
   id key; \
   { \
     va_list argList; \
@@ -38,7 +38,7 @@
     key = va_arg(argList, id); \
     va_end(argList); \
   }
-#define _ARGS_KEY_COLLECTION(_lastNamedArg, _collection) \
+#define ARGS_KEY_COLLECTION(_lastNamedArg, _collection) \
   id key; \
   id _collection; \
   { \
@@ -48,7 +48,7 @@
     _collection = va_arg(argList, id); \
     va_end(argList); \
   }
-#define _ARGS_INDEX(_lastNamedArg) \
+#define ARGS_INDEX(_lastNamedArg) \
   I index; \
   { \
     va_list argList; \
@@ -56,7 +56,7 @@
     index = ((N*) va_arg(argList, N*)).I; \
     va_end(argList); \
   }
-#define _ARGS_INDEX_COLLECTION(_lastNamedArg, _collection) \
+#define ARGS_INDEX_COLLECTION(_lastNamedArg, _collection) \
   I index; \
   id _collection; \
   { \
@@ -66,7 +66,7 @@
     _collection = va_arg(argList, id); \
     va_end(argList); \
   }
-#define _ARGS_COLLECTION(_lastNamedArg, _collection) \
+#define ARGS_COLLECTION(_lastNamedArg, _collection) \
   id _collection; \
   { \
     va_list argList; \
@@ -91,9 +91,9 @@ typedef NSO*                (^_MaxBlock)(id value);
 
 typedef NSComparisonResult  (^_SortBlock)(id left, id right); /* ADDED */
 
-typedef NSO*                (^_SortByBlock)(id value);
+typedef NSO*                (^_SortByBlock)(id value, ... /* KEY, COLLECTION */);
 typedef NSO*                (^_GroupByBlock)(id value, ... /* KEY, COLLECTION */);
-typedef NSO*                (^_SortedIndexBlock)(id value);
+typedef NSO*                (^_SortedIndexBlock)(id value, ... /* KEY, COLLECTION */);
 
 typedef id                  (^_MemoizedBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_MemoizeBlock)(id arg1, ... /* NIL_TERMINATION */);

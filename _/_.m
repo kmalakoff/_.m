@@ -32,9 +32,9 @@
 
 @implementation _
 
-+ (_Wrapper*(^)(NSO* obj))chain;
++ (_Wrapper*(^)(id obj))chain;
 {
-  return ^(NSO* obj) {
+  return ^(id obj) {
     return [[_Wrapper alloc] initWithObject:obj];
   };
 }
@@ -42,4 +42,4 @@
 @end
 
 // OO-style representation
-_Wrapper* __(NSO* obj) { return _.chain(obj); }
+_Wrapper* __(id obj) { return _.chain(obj); }

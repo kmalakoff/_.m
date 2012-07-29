@@ -15,7 +15,7 @@
 - (void)test_each
 {
   _.each(AI(1, 2, 3), ^(N* num, ... /* KEY, COLLECTION */) {
-    _ARGS_INDEX(num);
+    ARGS_INDEX(num);
     self.equalI(num.I, index + 1, @"each iterators provide value and iteration count");
   });
 
@@ -32,12 +32,12 @@
   answers =  A.new;
   O* obj = OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)});
 //  obj.constructor.prototype.four = 4; 
-  _.each(obj, ^(id value, ... /* KEY, COLLECTION */){ _ARGS_KEY(value); answers.push(key); });
+  _.each(obj, ^(id value, ... /* KEY, COLLECTION */){ ARGS_KEY(value); answers.push(key); });
   self.equal(answers.join(@", "), @"one, two, three", @"iterating over objects works, and ignores the object prototype.");
 //  delete obj.constructor.prototype.four;
 
   __block BOOL answer = false;
-  _.each(AI(1, 2, 3), ^(N* num, ... /* KEY, COLLECTION */){ _ARGS_COLLECTION(num, arr); if (_.include(arr, num)) answer = true; });
+  _.each(AI(1, 2, 3), ^(N* num, ... /* KEY, COLLECTION */){ ARGS_COLLECTION(num, arr); if (_.include(arr, num)) answer = true; });
   self.ok(answer, @"can reference the original collection from inside the iterator");
 
   __block I iAnswers = 0;

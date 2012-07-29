@@ -55,4 +55,4 @@ typedef id              KV[2];
 typedef void                (^SSDispatchBlock)();
 typedef void                (^SSTimeoutBlock)();
 typedef id                  (^SSGetOrAddBlock)();
-typedef NSComparisonResult  (^SSCompareBlock)(id left, id right);
+typedef NSComparisonResult  (^SSSortBlock)(id left, id right);

@@ -174,7 +174,7 @@
       if (!_.include(memo, value)) {
         memo.push(value);
 
-        _ARGS_KEY(value);
+        ARGS_KEY(value);
         results.push(array.get(key));
       }
       return memo;
@@ -192,7 +192,7 @@
       if (isSorted ? (_.last(memo, -1) != value || !memo.length) : !_.include(memo, value)) {
         memo.push(value);
 
-        _ARGS_KEY(value);
+        ARGS_KEY(value);
         results.push(array.get(key));
       }
       return memo;

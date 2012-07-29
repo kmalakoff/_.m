@@ -48,12 +48,14 @@
 - (NSO*(^)(UI index))getAt;
 - (NSO*(^)(UI index))getArgAt;
 
+// accessor Array functions
+- (A*(^)(NSA* other))concat;
 - (S*(^)(NSS* separator))join;
-- (NSA*(^)(UI start, UI count))slice;
+- (NSA*(^)(I start, I count))slice; // TODO: test with negative parameters
+
 - (A*(^)())reverse;
 - (A*(^)())flatten;
-- (NSA*(^)(SSCompareBlock block))sort;
-- (A*(^)(NSA* other))concat;
+- (NSRange(^)(I start, I count))makeRange;
 
 @end
 

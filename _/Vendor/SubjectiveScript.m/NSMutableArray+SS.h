@@ -37,6 +37,16 @@
 
 - (A*(^)(id indexNumber, id value))set;
 - (A*(^)(I index, id value))setAt;
+
+// accessor Array functions
+- (A*(^)(NSA* other))concat;
+
+// mutator Array functions
+- (NSO*(^)())pop;
 - (A*(^)(id value))push;
+- (A*(^)())reverse;
+- (A*(^)(SSSortBlock iterator))sort;
+- (NSA*(^)(I start, I count, id item1, ... /* NIL_TERMINATED */))splice;
+- (A*(^)(id item1, ... /* NIL_TERMINATED */))unshift;
 
 @end

@@ -46,3 +46,4 @@
 #import "_Wrapper+Collections.h"
 #import "_Wrapper+Objects.h"
 #import "_Wrapper+Utility.h"
+#import "_Wrapper+JavaScript.h"

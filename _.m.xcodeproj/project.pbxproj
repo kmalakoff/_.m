@@ -108,6 +108,9 @@
 		0A58434515B8FC7A000BC230 /* _Wrapper+ObjectsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433415B8FC7A000BC230 /* _Wrapper+ObjectsTests.m */; };
 		0A58434615B8FC7A000BC230 /* _Wrapper+UtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433615B8FC7A000BC230 /* _Wrapper+UtilityTests.m */; };
 		0A58434815B8FC7A000BC230 /* _WrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433915B8FC7A000BC230 /* _WrapperTests.m */; };
+		0A8D934F15C4BA5000B07CCE /* _Wrapper+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A8D934D15C4BA5000B07CCE /* _Wrapper+JavaScript.h */; };
+		0A8D935015C4BA5000B07CCE /* _Wrapper+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */; };
+		0A8D935115C4BA5000B07CCE /* _Wrapper+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */; };
 		0A8E677315BA7CFF00E50BE4 /* _Wrapper+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A8E677115BA7CFF00E50BE4 /* _Wrapper+Private.h */; };
 		0A8E677415BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */; };
 		0A8E677515BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */; };
@@ -231,6 +234,8 @@
 		0A58433615B8FC7A000BC230 /* _Wrapper+UtilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+UtilityTests.m"; sourceTree = "<group>"; };
 		0A58433815B8FC7A000BC230 /* _WrapperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WrapperTests.h; sourceTree = "<group>"; };
 		0A58433915B8FC7A000BC230 /* _WrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WrapperTests.m; sourceTree = "<group>"; };
+		0A8D934D15C4BA5000B07CCE /* _Wrapper+JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+JavaScript.h"; sourceTree = "<group>"; };
+		0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+JavaScript.m"; sourceTree = "<group>"; };
 		0A8E677115BA7CFF00E50BE4 /* _Wrapper+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Private.h"; sourceTree = "<group>"; };
 		0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Private.m"; sourceTree = "<group>"; };
 		0A93F13D15BBC4B500971790 /* SS+GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SS+GCD.h"; sourceTree = "<group>"; };
@@ -430,6 +435,8 @@
 				0A5842B015B8FC18000BC230 /* _Wrapper+Objects.m */,
 				0A5842B115B8FC18000BC230 /* _Wrapper+Utility.h */,
 				0A5842B215B8FC18000BC230 /* _Wrapper+Utility.m */,
+				0A8D934D15C4BA5000B07CCE /* _Wrapper+JavaScript.h */,
+				0A8D934E15C4BA5000B07CCE /* _Wrapper+JavaScript.m */,
 				0A8E677015BA7CFF00E50BE4 /* _Private */,
 			);
 			path = WrapperCategories;
@@ -544,6 +551,7 @@
 				0A93F13F15BBC4B700971790 /* SS+GCD.h in Headers */,
 				0A93F14315BBC65500971790 /* SS+SystemCompatibility.h in Headers */,
 				0A9BA88D15BC2DF300C7E871 /* SS+JavaScript.h in Headers */,
+				0A8D934F15C4BA5000B07CCE /* _Wrapper+JavaScript.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +684,7 @@
 				0A93F14015BBC4B700971790 /* SS+GCD.m in Sources */,
 				0A93F14515BBC6F300971790 /* SS+SystemCompatibility.m in Sources */,
 				0A9BA88E15BC2DF300C7E871 /* SS+JavaScript.m in Sources */,
+				0A8D935015C4BA5000B07CCE /* _Wrapper+JavaScript.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,6 +737,7 @@
 				0A9BA88F15BC2DF300C7E871 /* SS+JavaScript.m in Sources */,
 				0A061F6115BD034C0091BBA9 /* QUnitTest.m in Sources */,
 				0A061F6915BD26A90091BBA9 /* QUnitTest+Private.m in Sources */,
+				0A8D935115C4BA5000B07CCE /* _Wrapper+JavaScript.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

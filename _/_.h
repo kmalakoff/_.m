@@ -34,11 +34,11 @@
 
 @interface _ : NSObject
 
-+ (_Wrapper*(^)(NSO* obj))chain;
++ (_Wrapper*(^)(id obj))chain;
 
 // value - see _Wrapper.h
 
 @end
 
 // OO-style representation /* CHANGE: IMPLEMENTED WITH _Wrapper SO REQUIRES .value() TO EXTRACT THE RESULT WHEN USED */
-_Wrapper* __(NSO* obj); /* SPECIALIZED - CANNOT DEFINE '_' AS BOTH FUNCTION AND CLASS. FUNCTION IS '__', CLASS IS '_' */
+_Wrapper* __(id obj); /* SPECIALIZED - CANNOT DEFINE '_' AS BOTH FUNCTION AND CLASS. FUNCTION IS '__', CLASS IS '_' */

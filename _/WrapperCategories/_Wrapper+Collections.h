@@ -69,7 +69,6 @@
 - (_Wrapper*(^)(_MaxBlock iterator))max;
 - (_Wrapper*(^)(_MinBlock iterator))min;
 
-- (_Wrapper*(^)(_SortBlock iterator))sort; /* ADDED to allow sorting in chaining */
 - (_Wrapper*(^)(id iteratorOrKey /* _SortByBlock or key */))sortBy;
 - (_Wrapper*(^)(id iteratorOrKey /* _GroupByBlock or key */))groupBy;
 

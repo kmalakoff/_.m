@@ -33,6 +33,7 @@
 #import "_+Utility.h"
 #import "_+Extensions.h"
 #import "_Wrapper+Collections.h"
+#import "_Wrapper+JavaScript.h"
 #import "SubjectiveScript.h"
 
 @implementation _ (Collections)
@@ -158,7 +159,7 @@
       initial = true;
       if (!internalMemo) internalMemo = [[NSClassFromString(value.mutableClassName) alloc] init];
       
-      _ARGS_KEY(value);
+      ARGS_KEY(value);
       internalMemo = iterator(internalMemo, value, key);
     });
 #ifdef DEBUG
@@ -224,8 +225,8 @@
     A* results = A.new;
     if (obj == nil) return results;
     _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
-      _ARGS_KEY(value);
-      if (iterator(value, key)) results.push(value);
+      ARGS_KEY(value);
+      if (iterator(value, key, obj)) results.push(value);
     });
     return results;
   };
@@ -238,8 +239,8 @@
     A* results = A.new;
     if (obj == nil) return results;
     _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
-      _ARGS_KEY(value);
-      if (!iterator(value, key)) results.push(value);
+      ARGS_KEY(value);
+      if (!iterator(value, key, obj)) results.push(value);
     });
     return results;
   };
@@ -261,8 +262,8 @@
     __block BOOL result = NO;
     if (obj == nil) return result;
     _.eachWithStop(obj, ^B(id value, ... /* KEY, COLLECTION */) {
-      _ARGS_KEY(value);
-      if (result || (result = iterator(value, key)))
+      ARGS_KEY(value);
+      if (result || (result = iterator(value, key, obj)))
         return NO;
       return YES;
     });
@@ -379,13 +380,14 @@
     NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
 #endif
 
-    _SortedIndexBlock iterator = _.isBlock(iteratorOrKey) ? (_SortedIndexBlock) iteratorOrKey : ^(NSO* value){ 
+    _SortByBlock iterator = _.isBlock(iteratorOrKey) ? (_SortByBlock) iteratorOrKey : ^(NSO* value, ...){
       return value.get(iteratorOrKey); 
     };
 
     return _.chain(obj)
       .map(^(NSO* value, ... /* KEY, COLLECTION */) {
-        return OKV({@"value", value}, {@"criteria", iterator(value)});
+        ARGS_KEY_COLLECTION(value, collection);
+        return OKV({@"value", value}, {@"criteria", iterator(value, key, collection)});
       })
       .sort(^(NSDictionary *left, NSDictionary *right) {
         id a = [left valueForKey:@"criteria"];
@@ -410,7 +412,7 @@
     
     __block O* result = O.new;
     _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
-      _ARGS_KEY(value);
+      ARGS_KEY(value);
       key = iterator(value, key, obj);
       A* values = (A*) result.getOrAdd(key, ^{ return A.new; });
       values.push(value);
@@ -422,7 +424,9 @@
 + (I(^)(NSA* array, id obj, _SortedIndexBlock iterator))sortedIndex
 {
   return ^(NSA* array, id obj, _SortedIndexBlock iterator) {
-    if (!iterator) iterator = _.identity;
+    if (!iterator)
+      iterator = ^(id value, ...) { return value; };
+      
     NSO* value = iterator(obj);
     I low = 0, high = array.length;
     while (low < high) {
@@ -438,7 +442,7 @@
   return ^(id obj) {
     __block A* shuffled = _.isArray(obj) ? ((NSA*)obj).mutableCopy : _.values(obj);
     _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
-      _ARGS_INDEX(value);
+      ARGS_INDEX(value);
       I rand = arc4random() % (index + 1);
       [shuffled exchangeObjectAtIndex:rand withObjectAtIndex:index];
     });

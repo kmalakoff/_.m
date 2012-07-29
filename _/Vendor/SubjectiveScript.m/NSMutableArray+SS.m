@@ -30,6 +30,8 @@
 #import "NSMutableArray+SS.h"
 #import "NSArray+SS.h"
 #import "NSNumber+SS.h"
+#import "SSArguments.h"
+#import "SS+Types.h"
 
 @implementation NSMutableArray (SS)
 
@@ -76,10 +78,85 @@
   };
 }
 
+// accessor Array functions
+- (A*(^)(NSA* other))concat
+{
+  return ^(NSA* other) {
+    A* result = self.mutableCopy;
+    [result addObjectsFromArray:other];
+    return result;
+  };
+}
+
+// mutator Array functions
 - (A*(^)(id))push
 {
   return ^(id value) {
     [self addObject:value];
+    return self;
+  };
+}
+
+- (NSO*(^)())pop
+{
+  return ^() {
+    id value = [self lastObject];
+    [self removeLastObject];
+    return value;
+  };
+}
+
+- (A*(^)())reverse
+{
+  return ^{
+    A* result = A.newC(self.count); 
+    for (id item in self.reverseObjectEnumerator) {
+      [result addObject:item];
+    }
+    return result;
+  };
+}
+
+- (A*(^)(SSSortBlock iterator))sort
+{
+  return ^(SSSortBlock block) {
+    if (SS.isBlock(block))
+      [self sortUsingComparator:block];
+    else
+      [self sortUsingSelector:@selector(compare:)];
+    return self;
+  };
+}
+
+- (NSA*(^)(I start, I count, id item1, ... /* NIL_TERMINATED */))splice
+{
+  return ^(I start, I count, id item1, ... /* NIL_TERMINATED */) {
+    ARGS_AO(items, item1);
+
+    NSA* results;
+    NSRange range = self.makeRange(start, count);
+    if (range.length>0)
+    {
+      results = [self subarrayWithRange:range];
+      [self removeObjectsInRange:range];
+    }
+    else
+      results = NSA.new;
+
+    for (id item in items.reverseObjectEnumerator)
+      [self insertObject:item atIndex:0];
+
+    return results;
+  };
+}
+
+- (A*(^)(id item1, ...))unshift
+{
+  return ^(id item1, ...) {
+    ARGS_AO(items, item1);
+    for (id item in items.reverseObjectEnumerator)
+      [self insertObject:item atIndex:0];
+
     return self;
   };
 }
