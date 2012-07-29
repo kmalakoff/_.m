@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSString-Versioning.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/22/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -29,5 +29,13 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSString (Versioning)
+
+// version should be in the form @"3.1.1" or @"4.0"
+- (B(^)(NSS* version))VersionEqualTo;
+- (B(^)(NSS* version))VersionGreaterThan;
+- (B(^)(NSS* version))VersionGreaterThanOrEqualTo;
+- (B(^)(NSS* version))VersionLessThan;
+- (B(^)(NSS* version))VersionLessThanOrEqualTo;
+
 @end

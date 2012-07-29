@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  SS+JavaScript.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/22/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,24 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "SS.h"
+#import "SS+System.h"
 
-@interface SS : NSObject
+@interface SS (JavaScript)
+
+// JSON
++ (NSS*(^)(NSO* obj))stringify;
+
+// functions
++ (id(^)(id function, id arg1, ... /* NIL_TERMINATED*/))call;
++ (id(^)(id function, NSA* arguments))apply;
+
+// global functions
++ (N*(^)(NSS* string))parseInt;
+
+// timeouts
++ (SSTaskId*(^)(SSTaskIdBlock block, I waitNS))setTimeout;
++ (SSTaskId*(^)(SSTaskIdBlock block, I waitNS))setTimeoutBackground;
++ (void(^)(SSTaskId* timeout))clearTimeout;
+
 @end

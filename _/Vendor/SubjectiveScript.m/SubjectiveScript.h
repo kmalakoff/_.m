@@ -32,17 +32,17 @@
 #endif
 
 // core
-#import "SSTypes.h"
-#import "SSConstants.h"
-#import "SSArguments.h"
 #import "SS.h"
-#import "SS+Types.h"
-#import "SS+Number.h"
-#import "SS+SystemCompatibility.h"
-#import "SS+GCD.h"
-#import "SS+JavaScript.h"
 
-// categories
+// helpers
+#import "SSArguments.h"
+#import "NSString+Versioning.h"
+#import "SS+Functions.h"
+#import "SS+System.h"
+
+// types and extensions
+#import "SSTypes.h"
+#import "SS+Types.h"
 #import "NSObject+SS.h"
 #import "NSArray+SS.h"
 #import "NSMutableArray+SS.h"
@@ -52,3 +52,18 @@
 #import "NSMutableString+SS.h"
 #import "NSNumber+SS.h"
 #import "NSDate+SS.h"
+
+// JavaScript Emulation
+#import "SS+JavaScript.h"
+#import "NSObject+JavaScript.h"
+#import "NSArray+JavaScript.h"
+#import "NSMutableArray+JavaScript.h"
+#import "NSDictionary+JavaScript.h"
+#import "NSMutableDictionary+JavaScript.h"
+#import "NSString+JavaScript.h"
+#import "NSMutableString+JavaScript.h"
+#import "NSNumber+JavaScript.h"
+#import "NSDate+JavaScript.h"
+
+// Ruby Emulation
+#import "NSString+Ruby.h"

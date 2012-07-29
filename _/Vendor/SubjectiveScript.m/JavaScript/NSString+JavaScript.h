@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSString+JavaScript.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -29,5 +29,16 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSString (JavaScript)
+
+- (const NSS*)typeof;
+- (NSS*(^)())toString;
+
+- (NSA*(^)(NSS* separator))split;
+- (S*(^)(NSS* value))add;
+
+// function calling of form @"functionName".call(object, arg1, nil) and @"functionName".apply(object, arguments)
+- (id(^)(id target, id arg1, ... /* NIL_TERMINATED*/))call;
+- (id(^)(id target, NSA* arguments))apply;
+
 @end

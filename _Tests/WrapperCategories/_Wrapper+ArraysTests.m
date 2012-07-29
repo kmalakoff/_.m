@@ -77,15 +77,13 @@
 
 - (void)test_flatten
 {
-  if (SS.JSON) {
-    SSJSON* JSON = SS.JSON;
-  
+//  if (window.JSON) {
     A* list = AO(N.I(1), AI(2), AO(N.I(3), AO(AO(AI(4)))));
-    equal(JSON.stringify(_.chain(list).flatten(/* REQUIRED */ NO).NSA), @"[1,2,3,4]", @"can flatten nested arrays");
-    equal(JSON.stringify(_.chain(list).flatten(/* REQUIRED */ YES).NSA), @"[1,2,3,[[[4]]]]", @"can shallowly flatten nested arrays");
+    equal(SS.stringify(_.chain(list).flatten(/* REQUIRED */ NO).NSA), @"[1,2,3,4]", @"can flatten nested arrays");
+    equal(SS.stringify(_.chain(list).flatten(/* REQUIRED */ YES).NSA), @"[1,2,3,[[[4]]]]", @"can shallowly flatten nested arrays");
     A* result = (A*) (^(id arg1, ...  /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return _.chain(arguments).flatten(/* REQUIRED */ NO).A; })(N.I(1), AI(2), AO(N.I(3), AO(AO(AI(4)))), /* NIL_TERMINATION */ nil);
-    equal(JSON.stringify(result), @"[1,2,3,4]", @"works on an arguments object");
-  }
+    equal(SS.stringify(result), @"[1,2,3,4]", @"works on an arguments object");
+//  }
 }
 
 - (void)test_without

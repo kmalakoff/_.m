@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  SSTypes.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,7 +27,40 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import <Foundation/Foundation.h>
+#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
-@interface SS : NSObject
-@end
+// fundamental types
+typedef BOOL            B;
+typedef NSInteger       I;
+typedef NSUInteger      UI;
+typedef float           F;
+typedef double          D;
+typedef id              KV[2];
+
+// object types
+#define NSO             NSObject
+#define A               NSMutableArray
+#define NSA             NSArray
+#define O               NSMutableDictionary
+#define NSD             NSDictionary
+#define S               NSMutableString
+#define NSS             NSString
+#define Date            NSDate
+#define N               NSNumber
+#define E               NSException
+
+// number helpers
+#define NF_NaN              [NSNumber numberWithFloat:NAN]
+#define NF_POS_INFINITY     [NSNumber numberWithFloat:INFINITY]
+#define NF_NEG_INFINITY     [NSNumber numberWithFloat:-INFINITY]
+
+// tasks
+typedef NSNumber SSTaskId;
+
+// blocks
+typedef void                (^SSDispatchBlock)();
+typedef void                (^SSTaskIdBlock)();
+typedef id                  (^SSGetOrAddBlock)();
+typedef NSComparisonResult  (^SSSortBlock)(id left, id right);

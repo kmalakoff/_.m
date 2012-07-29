@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSNumber+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -29,5 +29,23 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSNumber (SS)
+
++ (N*(^)(B value))B;
+- (B)B;
+
++ (N*(^)(I value))I;
+- (I)I;
+
++ (N*(^)(UI value))UI;
+- (UI)UI;
+
++ (N*(^)(F value))F;
+- (F)F;
+
++ (N*(^)(D value))D;
+- (D)D;
+
+- (B)isBoolean;
+
 @end

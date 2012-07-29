@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSDictionary+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,7 +27,26 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSDictionary+SS.h"
 
-@interface SS : NSObject
+@implementation NSDictionary (SS)
+
++ (O*(^)(const KV* values /* NIL_TERMINATION */))newKV
+{
+  return ^(const KV* values /* NIL_TERMINATION */) {
+    O* result = O.new;
+    for (const id* pair = (const id*) values; *pair != nil; pair+=2) {
+      id value = pair[1];
+      [result setValue:value ? value : NSNull.null forKey:pair[0]];
+    }
+    return result;
+  };
+}
+
+- (NSS*)mutableClassName { return NSStringFromClass([O class]); }
+- (O*(^)())toMutable { return ^{ return self.mutableCopy; }; }
+
+- (B(^)())isEmpty { return ^B() { return ([self keyEnumerator].nextObject == nil); }; }
+- (NSO*(^)(NSO* key))get { return ^(NSO* key) { return [self objectForKey:key]; }; }
+
 @end

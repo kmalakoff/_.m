@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSMutableDictionary+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,7 +27,50 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSMutableDictionary+SS.h"
 
-@interface SS : NSObject
+@implementation NSMutableDictionary (Object)
+
++ (O*(^)(UI capacity))newC
+{
+  return ^(UI capacity) {
+    return [O dictionaryWithCapacity:capacity];
+  };
+}
+
+- (O*(^)())toMutable { return ^{ return self; }; }
+
+- (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd
+{
+  return ^(id key, SSGetOrAddBlock add) {
+    id value = [self objectForKey:key];
+    if (value) return value;
+    
+    // create a new one
+    value = add();
+    [self setValue:value forKey:key];
+    return value;
+  };
+}
+
+- (O*(^)(id key, id value))set
+{
+  return ^(id key, id value) {
+    if (!value) value = NSNull.null;
+    [self setValue:value forKey:key];
+    return self;
+  };
+}
+
+- (O*(^)(const KV* values /* NIL_TERMINATION */))setKV
+{
+  return ^(const KV* values /* NIL_TERMINATION */) {
+    for (const id* pair = (const id*) values; *pair != nil; pair+=2) {
+      id value = pair[1];
+      [self setValue:value ? value : NSNull.null forKey:pair[0]];
+    }
+    return self;
+  };
+}
+
 @end

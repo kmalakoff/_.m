@@ -109,13 +109,13 @@
 
 - (void)test_reduceRight
 {
-  S* list = _.reduceRight(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.append(str); }, S.new);
+  S* list = _.reduceRight(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.add(str); }, S.new);
   equal(list, @"bazbarfoo", @"can perform right folds");
 
-  list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.append(str); }, S.new);
+  list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.add(str); }, S.new);
   equal(list, @"bazbarfoo", @"aliased as 'foldr'");
 
-  list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.append(str); }, /* REQUIRED */ nil);
+  list = _.foldr(AO(@"foo", @"bar", @"baz"), ^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.add(str); }, /* REQUIRED */ nil);
   equal(list, @"bazbarfoo", @"default initial value");
 
   E* ifnull;

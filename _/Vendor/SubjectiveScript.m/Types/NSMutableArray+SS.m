@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSMutableArray+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,7 +27,57 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSMutableArray+SS.h"
+#import "NSArray+SS.h"
+#import "NSNumber+SS.h"
+#import "SSArguments.h"
+#import "SS+Types.h"
 
-@interface SS : NSObject
+@implementation NSMutableArray (SS)
+
++ (A*)newArguments
+{
+  A* result = A.new;
+  result.markAsArguments();
+  return result;
+}
+
++ (A*(^)(UI capacity))newC
+{
+  return ^(UI capacity) {
+    return [A arrayWithCapacity:capacity];
+  };
+}
+
++ (A*(^)(id obj))newNSO
+{
+  return ^(id obj) {
+    return [A arrayWithObject:obj];
+  };
+}
+
+- (A*(^)())toMutable { return ^{ return self; }; }
+
+- (A*(^)(id indexNumber, id value))set
+{
+  return ^(N* indexNumber, id value) {
+    if (!value) value = NSNull.null;
+    return self.setAt(indexNumber.I, value);
+  };
+}
+- (A*(^)(I index, id value))setAt
+{
+  return ^(I index, id value) {
+    // need to expand and fill the array
+    if (index >= self.count) {
+      for (I addIndex=self.count; addIndex<index; addIndex++)
+        [self addObject:NSNull.null];
+      [self addObject:value];
+    }
+    else
+      [self replaceObjectAtIndex:index withObject:value];
+    return self;
+  };
+}
+
 @end

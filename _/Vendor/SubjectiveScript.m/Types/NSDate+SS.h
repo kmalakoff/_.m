@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSDate+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -29,5 +29,8 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSDate (SS)
+
++ (Date*(^)(I year, I month, I day))newYMD;
+
 @end

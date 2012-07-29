@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSObject+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -29,5 +29,26 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSObject (SS)
+
+- (NSS*)className;
+- (NSS*)mutableClassName;
+- (NSO*(^)())toMutable;
+
+// use dynamic type checking for some JavaScript operations to reduce manual casting
+- (UI)count;
+- (NSO*(^)(id key))get;
+- (NSO*(^)(I index))getAt;
+- (NSO*(^)(id key, NSO* value))set;
+
+// number coersion if posible
+- (B)B;
+- (I)I;
+- (UI)UI;
+- (F)F;
+- (D)D;
+
+// helper
+- (NSComparisonResult)compare:(NSO*)other;
+
 @end

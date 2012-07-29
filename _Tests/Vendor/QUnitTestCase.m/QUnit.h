@@ -31,47 +31,54 @@
 # error QUnit.m requires Automatic Reference Counting to be enabled
 #endif
 
-#import "QUnitTests.h"
+#import <SenTestingKit/SenTestingKit.h> // adds QUnit syntax on top of SenTestingKit
+
+@interface QUnit : NSObject
+@end
+
+#ifndef QUNIT_TESTS
+#define QUNIT_TESTS
+#import "QUnit+Tests.h"
 
 /////////////////////////////
 // Equality
 /////////////////////////////
 
 #define equal(_actual, _expected, _description, ...) \
-  [QUnitTests equal:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:NO];
+  [QUnit equal:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:NO];
 
 #define equalI(_actual, _expected, _description, ...) \
-  [QUnitTests equal:self actual:[NSNumber numberWithInteger:_actual] expected:[NSNumber numberWithInteger:_expected] expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:NO];
+  [QUnit equal:self actual:[NSNumber numberWithInteger:_actual] expected:[NSNumber numberWithInteger:_expected] expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:NO];
 
 #define strictEqual(_actual, _expected, _description, ...) \
-  [QUnitTests equal:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:YES];
+  [QUnit equal:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:YES];
 
 #define deepEqual(_actual, _expected, _description, ...) \
-  [QUnitTests deepEqual:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__];
+  [QUnit deepEqual:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__];
 
 /////////////////////////////
 // Non-Equality
 /////////////////////////////
 
 #define notEqual(_actual, _expected, _description, ...) \
-  [QUnitTests notEqual:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:NO];
+  [QUnit notEqual:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:NO];
 
 #define notStrictEqual(_actual, _expected, _description, ...) \
-  [QUnitTests notEqual:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:YES];
+  [QUnit notEqual:self actual:_actual expected:_expected expression:[NSString stringWithFormat:@"(%s) == (%s)", #_actual, #_expected] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__ strict:YES];
 
 /////////////////////////////
 // Acceptance
 /////////////////////////////
 
 #define ok(_result, _description, ...) \
-  [QUnitTests ok:self result:_result expression:[NSString stringWithFormat:@"(%s) == true", #_result] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__];
+  [QUnit ok:self result:_result expression:[NSString stringWithFormat:@"(%s) == true", #_result] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__];
 
 /////////////////////////////
 // Exceptions
 /////////////////////////////
 
 #define raises(_callback, _expectedExceptionName, _description, ...) \
-  [QUnitTests raises:self callback:_callback expectedExceptionName:_expectedExceptionName expression:[NSString stringWithFormat:@"(%s)", #_callback] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__];
+  [QUnit raises:self callback:_callback expectedExceptionName:_expectedExceptionName expression:[NSString stringWithFormat:@"(%s)", #_callback] description:[NSString stringWithFormat:(_description), ##__VA_ARGS__] filename:[NSString stringWithUTF8String:__FILE__] lineNumber:__LINE__];
 
 /////////////////////////////
 // Asynchronous
@@ -89,3 +96,5 @@
     }); \
   _callback(); \
 }
+
+#endif

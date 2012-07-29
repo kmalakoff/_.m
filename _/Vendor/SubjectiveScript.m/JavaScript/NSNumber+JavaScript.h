@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSNumber+JavaScript.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -29,5 +29,9 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSNumber (JavaScript)
+
+- (const NSS*)typeof;
+- (NSS*(^)())toString;
+
 @end

@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSArray+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -29,5 +29,30 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSArray (SS)
+
++ (A*(^)(UI count))newSparse;
++ (A*(^)(const B* values, UI count))newB;
++ (A*(^)(const I* values, UI count))newI;
++ (A*(^)(const UI* values, UI count))newUI;
++ (A*(^)(const F* values, UI count))newF;
++ (A*(^)(const id* values /* NIL_TERMINATION */))newO;
+
+- (NSS*)mutableClassName;
+- (A*(^)())toMutable;
+- (B)isArguments; 
+- (void(^)())markAsArguments;
+
+- (NSO*(^)(UI index))getAt;
+- (NSO*(^)(UI index))getArgAt;
+
+- (NSRange(^)(I start, I count))resolveRange;
+
 @end
+
+// new array helpers
+#define AB(...)   A.newB((B[]){__VA_ARGS__},    sizeof((B[]){__VA_ARGS__})/sizeof(B))
+#define AI(...)   A.newI((I[]){__VA_ARGS__},    sizeof((I[]){__VA_ARGS__})/sizeof(I))
+#define AUI(...)  A.newUI((UI[]){__VA_ARGS__},  sizeof((UI[]){__VA_ARGS__})/sizeof(UI))
+#define AF(...)   A.newF((F[]){__VA_ARGS__},    sizeof((F[]){__VA_ARGS__})/sizeof(F))
+#define AO(...)   A.newO((id[]){__VA_ARGS__, nil})

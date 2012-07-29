@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSNumber+JavaScript.m
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,22 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSNumber+JavaScript.h"
+#import "NSNumber+SS.h"
 
-@interface SS : NSObject
+static const NSS* SSJSIdentifierNumber = @"number";
+static const NSS* SSJSIdentifierBoolean = @"boolean";
+
+@implementation NSNumber (JavaScript)
+
+- (const NSS*)typeof { return self.isBoolean ? SSJSIdentifierNumber : SSJSIdentifierBoolean; }
+- (NSS*(^)())toString { 
+  return ^{ 
+    if (self.isBoolean)
+      return self.boolValue ? @"true" : @"false";
+    else
+      return self.description; 
+  }; 
+}
+
 @end

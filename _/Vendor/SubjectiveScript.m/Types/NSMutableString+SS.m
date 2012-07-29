@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSMutableString+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,7 +27,44 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSMutableString+SS.h"
+#import "NSString+SS.h"
 
-@interface SS : NSObject
+@implementation NSMutableString (SS)
+
++ (S*(^)(UI capacity))newC
+{
+  return ^(UI capacity) {
+    return [S stringWithCapacity:capacity];
+  };
+}
+
++ (S*(^)(NSS* value))newS
+{
+  return ^(NSS* value) {
+    return NSS.newS(value).mutableCopy;
+  };
+}
+
++ (S*(^)(NSA* array))newA
+{
+  return ^(NSA* array) {
+    return NSS.newA(array).mutableCopy;
+  };
+}
+
++ (S*(^)(NSS* format, ...))newFormatted
+{
+  return ^(NSS* format, ...) {
+    va_list args;
+    va_start(args, format);
+    NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    return result.mutableCopy;
+  };
+}
+
+- (NSS*)mutableClassName { return NSStringFromClass([S class]); }
+- (S*(^)())toMutable { return ^{ return self; }; }
+
 @end

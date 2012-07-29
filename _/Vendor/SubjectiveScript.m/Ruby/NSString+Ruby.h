@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSString+Ruby.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,8 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import <Foundation/Foundation.h>
 
-@interface SS : NSObject
+@interface NSString (Ruby)
+
 @end

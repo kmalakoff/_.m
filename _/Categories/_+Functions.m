@@ -64,28 +64,28 @@
 + (void(^)(_DelayBlock func, I wait))delay
 {
   return ^(_DelayBlock func, I wait) {
-    SS.dispatchMain(func, wait);
+    SS.setTimeout(func, wait);
   };
 }
 
-+ (void(^)(_DelayBlock func, I wait))delayBG
++ (void(^)(_DelayBlock func, I wait))delayBackground
 {
   return ^(_DelayBlock func, I wait) {
-    SS.dispatchBackground(func, wait);
+    SS.setTimeoutBackground(func, wait);
   };
 }
 
 + (void(^)(_DeferBlock func))defer
 { 
   return ^(_DeferBlock func) {
-    SS.dispatchMain(func, 0);
+    SS.setTimeout(func, 0);
   };
 }
 
 + (void(^)(_DeferBlock func))deferBG
 { 
   return ^(_DeferBlock func) {
-    SS.dispatchBackground(func, 0);
+    SS.setTimeoutBackground(func, 0);
   };
 }
 
@@ -100,7 +100,7 @@
     _DebouncedBlock whenDone = _.debounce(^(id arg1, ... /* NIL_TERMINATION */ /* NIL_TERMINATION */){ more = throttling = false; }, waitNS, /* REQUIRED */ false, /* NIL_TERMINATION */ nil);
     return ^{
       id result;
-      __block SSTimeout* timeout;
+      __block _Timeout* timeout;
       _TimeoutBlock later = ^{
         timeout = nil;
         if (more) SS.apply(func, arguments);
@@ -125,7 +125,7 @@
     ARGS_AO(arguments, arg1);
       if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
-    __block SSTimeout* timeout;
+    __block _Timeout* timeout;
     return ^{
       _DebouncedBlock later = ^{
         timeout = nil;

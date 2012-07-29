@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  SS-System.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/22/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,13 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "SS.h"
 
-@interface SS : NSObject
+@interface SS (System)
+
++ (NSS*)iOSVersion;
+
++ (SSTaskId*(^)(SSTaskIdBlock block, I waitNS, BOOL background))addTask;
++ (void(^)(SSTaskId* taskId))stopTask;
+
 @end

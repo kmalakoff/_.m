@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSString-Versioning.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/22/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -26,8 +26,46 @@
 //  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
+// Technique from http://stackoverflow.com/questions/3339722/check-iphone-ios-version
+//
 
-#import "SSTypes.h"
+#import "NSString+Versioning.h"
 
-@interface SS : NSObject
+@implementation NSString (Versioning)
+
+- (B(^)(NSS* version))VersionEqualTo
+{
+  return ^B(NSS* version) {
+    return ([self compare:version options:NSNumericSearch] == NSOrderedSame);
+  };
+}
+
+- (B(^)(NSS* version))VersionGreaterThan
+{
+  return ^B(NSS* version) {
+    return ([self compare:version options:NSNumericSearch] == NSOrderedDescending);
+  };
+}
+
+- (B(^)(NSS* version))VersionGreaterThanOrEqualTo
+{
+  return ^B(NSS* version) {
+    return ([self compare:version options:NSNumericSearch] != NSOrderedAscending);
+  };
+}
+
+- (B(^)(NSS* version))VersionLessThan
+{
+  return ^B(NSS* version) {
+    return ([self compare:version options:NSNumericSearch] == NSOrderedAscending);
+  };
+}
+
+- (B(^)(NSS* version))VersionLessThanOrEqualTo
+{
+  return ^B(NSS* version) {
+    return ([self compare:version options:NSNumericSearch] != NSOrderedDescending);
+  };
+}
+
 @end

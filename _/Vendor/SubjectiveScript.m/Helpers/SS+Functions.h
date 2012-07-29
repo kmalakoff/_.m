@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  SS+Functions.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,12 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "SS.h"
 
-@interface SS : NSObject
+@interface SS (Functions)
+
++ (A*(^)(NSO* obj))functionNames;
++ (id(^)(id target, NSS* functionName))resolveFunction;
++ (id(^)(id block, NSA* arguments))callFunction;
+
 @end

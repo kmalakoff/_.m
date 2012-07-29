@@ -237,7 +237,7 @@
 - (void)test_wrap {
   _WrappedBlock greet = ^S*(NSS* name, ... /* NIL_TERMINATION */){ return @"hi: ".add(name); };
   _WrappedBlock backwards = _.wrap(greet, ^S*(_WrappedBlock func, NSS* name, ... /* NIL_TERMINATION */){
-    return ((S*)func(name)).append(@" ").append(name.split(@"").reverse().join(@"")); 
+    return ((S*)func(name)).append(@" ").add(name.split(@"").reverse().join(@""));
   });
   equal(backwards(@"moe", /* REQUIRED */ nil), @"hi: moe eom", @"wrapped the saluation function");
 

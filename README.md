@@ -163,7 +163,7 @@ bindAll
 memoize
 delay
 + (void(^)(_DelayBlock func, I waitNS))delay; /* REMOVED: ARGUMENTS -> too rare use case and can capture in block
-+ (void(^)(_DelayBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */
++ (void(^)(_DelayBlock func, I waitNS))delayBackground; /* ADDED: BACKGROUND QUEUE */
 
 + (void(^)(_DeferBlock func))defer;
 + (void(^)(_DeferBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */

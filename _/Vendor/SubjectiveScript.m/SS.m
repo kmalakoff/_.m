@@ -30,5 +30,4 @@
 #import "SS.h"
 
 @implementation SS
-
 @end

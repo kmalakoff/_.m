@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSMutableArray+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -29,5 +29,15 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSMutableArray (SS)
+
++ (A*)newArguments;
++ (A*(^)(UI capacity))newC;
++ (A*(^)(id obj))newNSO;
+
+- (A*(^)())toMutable;
+
+- (A*(^)(id indexNumber, id value))set;
+- (A*(^)(I index, id value))setAt;
+
 @end

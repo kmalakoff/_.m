@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSMutableArray+JavaScript.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -29,5 +29,17 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSMutableArray (JavaScript)
+
+// accessor Array functions
+- (A*(^)(NSA* other))concat;
+
+// mutator Array functions
+- (NSO*(^)())pop;
+- (A*(^)(id value))push;
+- (A*(^)())reverse;
+- (A*(^)(SSSortBlock iterator))sort;
+- (NSA*(^)(I start, I count, id item1, ... /* NIL_TERMINATED */))splice;
+- (A*(^)(id item1, ... /* NIL_TERMINATED */))unshift;
+
 @end

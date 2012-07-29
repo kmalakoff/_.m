@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSMutableString+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -29,5 +29,14 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSMutableString (SS)
+
++ (S*(^)(UI capacity))newC;
++ (S*(^)(NSS* value))newS;
++ (S*(^)(NSA* array))newA;
++ (S*(^)(NSS* format, ...))newFormatted;
+
+- (NSS*)mutableClassName;
+- (S*(^)())toMutable;
+
 @end

@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSArray+JavaScript.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -29,5 +29,18 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSArray (JavaScript)
+
+- (NSS*(^)())toString;
+- (UI)length;
+- (B(^)(id key))hasOwnProperty;
+
+// accessor Array functions
+- (A*(^)(NSA* other))concat;
+- (S*(^)(NSS* separator))join;
+- (NSA*(^)(I start, I count))slice; // TODO: test with negative parameters
+
+- (A*(^)())reverse;
+- (A*(^)())flatten;
+
 @end

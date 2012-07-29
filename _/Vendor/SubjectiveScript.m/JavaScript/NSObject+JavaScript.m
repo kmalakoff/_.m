@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSObject+JavaScript.m
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,67 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSObject+JavaScript.h"
+#import "NSObject+SS.h"
+#import "SS+Types.h"
 
-@interface SS : NSObject
+const NSS* SSJSIdentifierObject = @"object";
+
+@implementation NSObject (JavaScript)
+
+- (const NSS*)typeof {return SSJSIdentifierObject; }
+- (B(^)(NSS* className))instanceof {
+  return ^(NSS* className) {
+    return [self isKindOfClass:NSClassFromString(className)];
+  };
+}
+- (NSS*(^)())toString
+{
+  return ^{
+    if (SS.isNull(self)) return @"";
+    return self.description;
+  };
+}
+
+// array
+- (UI)length
+{
+  // base class can be triggered by KeyValueCoding
+  if (SS.isArray(self)) return ((NSA*)self).count;
+  if (SS.isString(self)) return ((NSS*)self).length;
+  return 0;
+}
+- (S*(^)(NSS* separator))join
+{
+#ifdef DEBUG
+  NSAssert(nil, @"join not implemented for this type");
+#endif
+
+  return nil;
+}
+- (A*(^)(id value))push
+{
+  return ^(NSO* obj) {
+    #ifdef DEBUG
+      NSAssert(nil, @"push not implemented for this type");
+    #endif
+    return A.new;
+  };
+}
+
+// object
+- (B(^)(id key))hasOwnProperty
+{
+  return ^B(id key) {
+    return false;
+  };
+}
+
+- (B(^)(NSO* obj))in
+{
+  return ^B(NSO* obj) {
+    return obj.get(self) != nil;
+  };
+}
+
 @end

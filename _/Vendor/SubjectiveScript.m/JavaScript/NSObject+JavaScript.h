@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSObject+JavaScript.h
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -29,5 +29,19 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSObject (JavaScript)
+
+- (const NSS*)typeof;
+- (B(^)(NSS* className))instanceof;
+- (NSS*(^)())toString;
+
+// array
+- (UI)length;
+- (S*(^)(NSS* separator))join;
+- (A*(^)(id value))push;
+
+// object
+- (B(^)(id key))hasOwnProperty;
+- (B(^)(NSO* obj))in;
+
 @end

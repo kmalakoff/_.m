@@ -37,7 +37,7 @@
 + (_MemoizedBlock /* NIL_TERMINATION */(^)(_MemoizeBlock func, _MemoizeHashBlock hasher))memoize;
 
 + (void(^)(_DelayBlock func, I waitNS))delay;
-+ (void(^)(_DelayBlock func, I waitNS))delayBG; /* ADDED: BACKGROUND QUEUE */
++ (void(^)(_DelayBlock func, I waitNS))delayBackground; /* ADDED: BACKGROUND QUEUE */
 
 + (void(^)(_DeferBlock func))defer;
 + (void(^)(_DeferBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */

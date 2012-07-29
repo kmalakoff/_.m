@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSMutableDictionary+SS.h
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -29,5 +29,16 @@
 
 #import "SSTypes.h"
 
-@interface SS : NSObject
+@interface NSMutableDictionary (SS)
+
++ (A*(^)(UI capacity))newC;
+
+- (O*(^)())toMutable;
+
+- (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd;
+- (O*(^)(id key, id value))set;
+- (O*(^)(const KV* values /* NIL_TERMINATION */))setKV;
+
 @end
+
+#define OsetKV(_o, ...) _o.setKV((KV[]){__VA_ARGS__, /* NIL_TERMINATION */ nil})

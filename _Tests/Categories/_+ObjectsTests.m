@@ -430,7 +430,7 @@
 /* NOT SUPPORTED: JavaScript-only because of DOM elements */
 //// Setup remote variables for iFrame tests.
 //var iframe = document.createElement(@"iframe");
-//jQuery(iframe).appendTo(document.body);
+//jQuery(iframe).addTo(document.body);
 //var iDoc = iframe.contentDocument || iframe.contentWindow.document;
 //iDoc.write(
 //  "<script>\

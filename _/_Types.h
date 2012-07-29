@@ -76,6 +76,11 @@
     va_end(argList); \
   }
 
+// timeouts
+typedef SSTaskId            _Timeout;
+typedef void                (^_TimeoutBlock)();
+
+// blocks
 typedef void                (^_EachBlock)(id value, ... /* KEY, COLLECTION */);
 typedef B                   (^_EachWithStopBlock)(id value, ... /* KEY, COLLECTION */);
 typedef NSO*                (^_MapBlock)(id value, ... /* KEY, COLLECTION */);
@@ -101,7 +106,6 @@ typedef id                  (^_MemoizeHashBlock)(id arg1, ... /* NIL_TERMINATION
 
 typedef void                (^_DelayBlock)();
 typedef void                (^_DeferBlock)();
-typedef void                (^_TimeoutBlock)(); /* ADDED */
 
 typedef id                  (^_ThrottledBlock)();
 typedef id                  (^_ThrottleBlock)(id arg1, ... /* NIL_TERMINATION */);

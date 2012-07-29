@@ -1,8 +1,8 @@
 //
-//  SS.h
+//  NSDictionary+JavaScript.m
 //  SubjectiveScript.m
 //
-//  Created by Kevin Malakoff on 7/17/12.
+//  Created by Kevin Malakoff on 7/29/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,12 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSDictionary+JavaScript.h"
 
-@interface SS : NSObject
+@implementation NSDictionary (JavaScript)
+
+- (NSS*(^)())toString { return ^{ return self.description; }; }
+
+- (B(^)(id key))hasOwnProperty { return ^B(id key) { return [self objectForKey:key] != nil; }; }
+
 @end

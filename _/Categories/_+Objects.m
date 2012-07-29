@@ -57,7 +57,7 @@
 + (A*(^)(NSD* obj))functions 
 {
   return ^(NSD* obj) {
-    return obj.functionNames();
+    return SS.functionNames(obj);
   };
 }
 + (A*(^)(NSD* obj))methods { return _.functions; } // ALIAS 
@@ -178,7 +178,7 @@
 + (B(^)(id obj, id target))isFunction  /* DEFINITION: it is a block or you call @"fnName".apply(obj, ... NIL_TERMINATION) or @"fnName".call(obj, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
 {
   return ^B(id obj, id target) { 
-    return (_.isBlock(obj) ||(_.isString(obj) && !!((NSS*)obj).getScriptFunctionBlock(target)));
+    return (_.isBlock(obj) ||(_.isString(obj) && !!SS.resolveFunction(target, obj)));
   };
 }
 

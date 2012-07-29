@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSDate+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,7 +27,21 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSDate+SS.h"
 
-@interface SS : NSObject
+@implementation NSDate (SS)
+
++ (Date*(^)(I year, I month, I day))newYMD
+{
+  return ^(I year, I month, I day) {
+    NSDateComponents *components = NSDateComponents.new;
+    components.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    components.year = year;
+    components.month = month;
+    components.day = day;
+
+    return components.date;
+  };
+}
+
 @end

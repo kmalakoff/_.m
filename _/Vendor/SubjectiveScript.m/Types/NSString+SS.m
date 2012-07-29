@@ -1,5 +1,5 @@
 //
-//  SS.h
+//  NSString+SS.m
 //  SubjectiveScript.m
 //
 //  Created by Kevin Malakoff on 7/17/12.
@@ -27,7 +27,48 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "SSTypes.h"
+#import "NSString+SS.h"
+#import "NSMutableString+SS.h"
+#import "NSMutableArray+SS.h"
+#import "SS+JavaScript.h"
+#import "SubjectiveScript.h"
 
-@interface SS : NSObject
+@implementation NSString (SS)
+
++ (NSS*(^)(NSS* value))newS
+{
+  return ^(NSS* value) {
+    return [NSString stringWithString:value];
+  };
+}
+
++ (NSS*(^)(NSA* array))newA
+{
+  return ^(NSA* array) {
+    // JavaScript flattens the arrays and then joins them
+    A* flattened = array.flatten();
+    return flattened.join(@",");
+  };
+}
+
++ (NSS*(^)(NSS* format, ...))newFormatted
+{
+  return ^(NSS* format, ...) {
+    va_list args;
+    va_start(args, format);
+    NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    return result;
+  };
+}
+
+- (S*(^)())toMutable { return ^{ return self.mutableCopy; }; }
+
+- (NSO*(^)(I index))getAt
+{
+  return ^(I index) {
+    return [self substringWithRange:NSMakeRange(index, 1)];
+  };
+}
+
 @end
