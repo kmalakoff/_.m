@@ -58,7 +58,7 @@
     }
     else {
       NSD* dictionary = obj;
-      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
         iterator(value, key, obj);
       }];
     }
@@ -89,7 +89,7 @@
     else {
       __block B processedWithoutStop = YES;
       NSD* dictionary = obj;
-      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
         if (!iterator(value, key, obj)) {
           processedWithoutStop = NO;
           *stop = YES;
@@ -129,7 +129,7 @@
       NSD* dictionary = (NSD*) obj;
 
       A* result = [A arrayWithCapacity:obj.length];
-      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
         id mapped = iterator(value, key, obj);
         if (mapped)
           [result addObject:mapped];
@@ -153,7 +153,7 @@
     }
   
     __block id internalMemo = memo;
-    __block BOOL initial = false;
+    __block B initial = false;
     if (obj == nil) obj = A.new;
     _.each(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
       initial = true;
@@ -185,7 +185,7 @@
     if (_.isDictionary(obj)) return _.reduce(_.toArray(obj).reverse().mutableCopy, iterator, memo);
 
     id internalMemo = memo;
-    __block BOOL initial = false;
+    __block B initial = false;
     if (obj == nil) obj = A.new;
     A* array = obj;
     for (I index=array.count-1; index>=0; index--) {
@@ -259,7 +259,7 @@
 {
   return ^B(id obj, _CollectionItemTestBlock iterator) {
     if (!iterator) iterator = _.identityTruthy;
-    __block BOOL result = NO;
+    __block B result = NO;
     if (obj == nil) return result;
     _.eachWithStop(obj, ^B(id value, ... /* KEY, COLLECTION */) {
       ARGS_KEY(value);
@@ -275,7 +275,7 @@
 + (B(^)(id obj, id target))include
 {
   return ^B(id obj, id target) {
-    BOOL found = NO;
+    B found = NO;
     if (obj == nil) return found;
     found = _.any(obj, ^B(id value, ... /* KEY, COLLECTION */) {
       return value == target;

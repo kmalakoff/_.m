@@ -121,7 +121,7 @@
   self.asyncTest(^(QUnitTest* test) {
     __block UI counter = 0;
     _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* REQUIRED */ return nil; };
-    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil );
+    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil);
     throttledIncr(); throttledIncr(); throttledIncr();
     SS.setTimeout(^{ throttledIncr(); }, 70);
     SS.setTimeout(^{ throttledIncr(); }, 120);
@@ -141,7 +141,7 @@
   self.asyncTest(^(QUnitTest* test) {
     __block N* value = nil;
     _ThrottleBlock update = ^id(N* val, ... /* NIL_TERMINATION */){ value = val; /* REQUIRED */ return nil; };
-    _ThrottledBlock throttledUpdate = _.throttle(update, 100, /* REQUIRED */ nil );
+    _ThrottledBlock throttledUpdate = _.throttle(update, 100, /* REQUIRED */ nil);
     throttledUpdate(N.I(1), nil); throttledUpdate(N.I(2), nil); throttledUpdate(N.I(3), nil);
     SS.setTimeout(^(){ throttledUpdate(N.I(4)); }, 120);
     SS.setTimeout(^(){ throttledUpdate(N.I(5)); }, 140);
@@ -156,7 +156,7 @@
   self.asyncTest(^(QUnitTest* test) {
     __block UI counter = 0;
     _ThrottleBlock incr = ^N*(id arg1, ... /* NIL_TERMINATION */){ return N.I(++counter); };
-    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil );
+    _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil);
     N* result = throttledIncr();
     _.delay(^(){
       self.equalI(result.I, 1, @"throttled ^s return their value");

@@ -171,7 +171,7 @@
 - (_Wrapper*(^)(id obj, _SortedIndexBlock iterator))sortedIndex
 {
   return ^(id obj, _SortedIndexBlock iterator) {
-    return _.chain(N.I(_.sortedIndex(self.valueNSA(), obj, iterator)));
+    return _.chain(N.I(_.sortedIndex(self.NSA, obj, iterator)));
   };
 }
 

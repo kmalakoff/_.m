@@ -172,7 +172,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
 
       // JavaScript collapses arrays on join only if they do not contain other arrays and there are multiple elements. A bit quirky, but supported.
       if ((index>0) && SS.isArray(item) && (((NSA*)item).count==1)) {
-        BOOL hasArrays = NO;
+        B hasArrays = NO;
         for (NSO* subitem in (NSA*)item) {
           if (SS.isArray(subitem)) {
             hasArrays = YES;

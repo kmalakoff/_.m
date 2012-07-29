@@ -41,7 +41,7 @@
 - (_Wrapper*(^)(_TimesBlock iterator))times
 {
   return ^(_TimesBlock iterator) {
-    _.times(self.valueI(), iterator);
+    _.times(self.I, iterator);
     return self;
   };
 }

@@ -39,28 +39,28 @@
 - (_Wrapper*(^)())keys
 {
   return ^() {
-    return _.chain(_.keys(self.valueNSD()));
+    return _.chain(_.keys(self.NSD));
   };
 }
 
 - (_Wrapper*(^)())values
 {
   return ^() {
-    return _.chain(_.values(self.valueNSD()));
+    return _.chain(_.values(self.NSD));
   };
 }
 
 - (_Wrapper*(^)())functions
 {
   return ^() {
-    return _.chain(_.functions(self.valueNSD()));
+    return _.chain(_.functions(self.NSD));
   };
 }
 
 - (_Wrapper*(^)())methods
 {
   return ^() {
-    return _.chain(_.methods(self.valueNSD()));
+    return _.chain(_.methods(self.NSD));
   };
 }
 
@@ -70,13 +70,13 @@
 #ifdef DEBUG
       NSAssert(_.isDictionary(self.value()), @"sort expecting NSDictionary");
 #endif
-    O* obj = self.valueO();
+    O* obj = self.O;
     if (!obj) return self;
 
     ARGS_AO(objects, obj1);
     
     _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
-      [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+      [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
         [obj setObject:value forKey:key];
       }];
     });
@@ -90,7 +90,7 @@
 #ifdef DEBUG
       NSAssert(_.isDictionary(self.value()), @"sort expecting NSDictionary");
 #endif
-    O* obj = self.valueO();
+    O* obj = self.O;
     if (!obj) return self;
 
     ARGS_AO(keys, key1);
@@ -109,13 +109,13 @@
 #ifdef DEBUG
       NSAssert(_.isDictionary(self.value()), @"sort expecting NSDictionary");
 #endif
-    O* obj = self.valueO();
+    O* obj = self.O;
     if (!obj) return self;
 
     ARGS_AO(objects, obj1);
 
     _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
-      [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, BOOL *stop) {
+      [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, B *stop) {
         if (!key.in(obj)) [obj setObject:value forKey:key];
       }];
     });
@@ -126,7 +126,7 @@
 - (_Wrapper*(^)())clone /* RETURNS MUTABLE IF POSSIBLE */
 {
   return ^() {
-    return _.chain(_.methods(self.valueNSD()));
+    return _.chain(_.clone(self.value()));
   };
 }
 

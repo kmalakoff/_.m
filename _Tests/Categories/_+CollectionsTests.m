@@ -36,7 +36,7 @@
   self.equal(answers.join(@", "), @"one, two, three", @"iterating over objects works, and ignores the object prototype.");
 //  delete obj.constructor.prototype.four;
 
-  __block BOOL answer = false;
+  __block B answer = false;
   _.each(AI(1, 2, 3), ^(N* num, ... /* KEY, COLLECTION */){ ARGS_COLLECTION(num, arr); if (_.include(arr, num)) answer = true; });
   self.ok(answer, @"can reference the original collection from inside the iterator");
 
@@ -57,7 +57,7 @@
 //  __block A* tripled = _.mapWithContext(AI(1, 2, 3), ^(N* num, ..., O* this){ return N.I(num.I * ((N*)this.get(@"multiplier")).I); }, OKV({@"multiplier", N.I(3)})); // CHANGE
 //  self.equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
 
-  doubled =  __(AI(1, 2, 3)).map(^(N* num, ... /* KEY, COLLECTION */){ return N.I(num.I * 2); }).valueA();
+  doubled =  __(AI(1, 2, 3)).map(^(N* num, ... /* KEY, COLLECTION */){ return N.I(num.I * 2); }).A;
   self.equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
 
   /* NOT SUPPORTED: JavaScript-only because of DOM */
@@ -85,7 +85,7 @@
   sum = _.inject(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0);
   self.equalI(sum.I, 6, @"aliased as 'inject'");
 
-  sum =  __(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).valueN();
+  sum =  __(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).N;
   self.equalI(sum.I, 6, @"OO-style reduce");
 
   sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, /* REQUIRED */ 0);
@@ -195,7 +195,7 @@
   self.ok(_.include(AI(1,2,3), N.I(2)), @"two is in the array");
   self.ok(!_.include(AI(1,3,9), N.I(2)), @"two is not in the array");
   self.ok(_.contains(OKV({@"moe",N.I(1)}, {@"larry",N.I(3)}, {@"curly", N.I(9)}), N.I(3)) == true, @"_.include on objects checks their values");
-  self.ok(__(AI(1,2,3)).include(N.I(2)).valueB(), @"OO-style include");
+  self.ok(__(AI(1,2,3)).include(N.I(2)).B, @"OO-style include");
 }
 
 - (void)test_invoke
@@ -248,7 +248,7 @@
   self.equal(NF_NEG_INFINITY, _.max(O.new, /* REQUIRED */ nil), @"Maximum value of an empty object");
   self.equal(NF_NEG_INFINITY, _.max(A.new, /* REQUIRED */ nil), @"Maximum value of an empty array");
 
-  self.equal(N.I(299999), _.max(_.range(1,300000, /* REQUIRED */ 1), /* REQUIRED */ nil ), @"Maximum value of a too-big array");
+  self.equal(N.I(299999), _.max(_.range(1,300000, /* REQUIRED */ 1), /* REQUIRED */ nil), @"Maximum value of a too-big array");
 }
 
 - (void)test_min

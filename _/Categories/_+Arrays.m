@@ -103,7 +103,7 @@
   };
 }
 
-+ (A*)flatten:(NSA*)array shallow:(BOOL)shallow output:(A*)output
++ (A*)flatten:(NSA*)array shallow:(B)shallow output:(A*)output
 {
   for (id value in array) {
     if (_.isArray(value)) {
@@ -116,9 +116,9 @@
   return output;
 }
 
-+ (A*(^)(NSA* array, BOOL shallow))flatten
++ (A*(^)(NSA* array, B shallow))flatten
 {
-  return ^(NSA* array, BOOL shallow) {
+  return ^(NSA* array, B shallow) {
     A* output = A.new;
     [self flatten:array shallow:shallow output:output];
     return output;

@@ -103,7 +103,6 @@
 		0A58433F15B8FC7A000BC230 /* _+UtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58432515B8FC7A000BC230 /* _+UtilityTests.m */; };
 		0A58434015B8FC7A000BC230 /* QUnitTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58432915B8FC7A000BC230 /* QUnitTestCase.m */; };
 		0A58434115B8FC7A000BC230 /* _Wrapper+ArraysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58432C15B8FC7A000BC230 /* _Wrapper+ArraysTests.m */; };
-		0A58434215B8FC7A000BC230 /* _Wrapper+ChainingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58432E15B8FC7A000BC230 /* _Wrapper+ChainingTests.m */; };
 		0A58434315B8FC7A000BC230 /* _Wrapper+CollectionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433015B8FC7A000BC230 /* _Wrapper+CollectionsTests.m */; };
 		0A58434515B8FC7A000BC230 /* _Wrapper+ObjectsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433415B8FC7A000BC230 /* _Wrapper+ObjectsTests.m */; };
 		0A58434615B8FC7A000BC230 /* _Wrapper+UtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433615B8FC7A000BC230 /* _Wrapper+UtilityTests.m */; };
@@ -225,8 +224,6 @@
 		0A58432915B8FC7A000BC230 /* QUnitTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUnitTestCase.m; sourceTree = "<group>"; };
 		0A58432B15B8FC7A000BC230 /* _Wrapper+ArraysTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+ArraysTests.h"; sourceTree = "<group>"; };
 		0A58432C15B8FC7A000BC230 /* _Wrapper+ArraysTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+ArraysTests.m"; sourceTree = "<group>"; };
-		0A58432D15B8FC7A000BC230 /* _Wrapper+ChainingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+ChainingTests.h"; sourceTree = "<group>"; };
-		0A58432E15B8FC7A000BC230 /* _Wrapper+ChainingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+ChainingTests.m"; sourceTree = "<group>"; };
 		0A58432F15B8FC7A000BC230 /* _Wrapper+CollectionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+CollectionsTests.h"; sourceTree = "<group>"; };
 		0A58433015B8FC7A000BC230 /* _Wrapper+CollectionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+CollectionsTests.m"; sourceTree = "<group>"; };
 		0A58433315B8FC7A000BC230 /* _Wrapper+ObjectsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+ObjectsTests.h"; sourceTree = "<group>"; };
@@ -491,8 +488,6 @@
 			children = (
 				0A58432B15B8FC7A000BC230 /* _Wrapper+ArraysTests.h */,
 				0A58432C15B8FC7A000BC230 /* _Wrapper+ArraysTests.m */,
-				0A58432D15B8FC7A000BC230 /* _Wrapper+ChainingTests.h */,
-				0A58432E15B8FC7A000BC230 /* _Wrapper+ChainingTests.m */,
 				0A58432F15B8FC7A000BC230 /* _Wrapper+CollectionsTests.h */,
 				0A58433015B8FC7A000BC230 /* _Wrapper+CollectionsTests.m */,
 				0A8D935315C4CCAB00B07CCE /* _Wrapper+JavaScriptTests.h */,
@@ -730,7 +725,6 @@
 				0A58433F15B8FC7A000BC230 /* _+UtilityTests.m in Sources */,
 				0A58434015B8FC7A000BC230 /* QUnitTestCase.m in Sources */,
 				0A58434115B8FC7A000BC230 /* _Wrapper+ArraysTests.m in Sources */,
-				0A58434215B8FC7A000BC230 /* _Wrapper+ChainingTests.m in Sources */,
 				0A58434315B8FC7A000BC230 /* _Wrapper+CollectionsTests.m in Sources */,
 				0A58434515B8FC7A000BC230 /* _Wrapper+ObjectsTests.m in Sources */,
 				0A58434615B8FC7A000BC230 /* _Wrapper+UtilityTests.m in Sources */,

@@ -68,7 +68,7 @@
     ARGS_AO(objects, obj1);
 
     _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
-      [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+      [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
         [obj setObject:value forKey:key];
       }];
     });
@@ -95,7 +95,7 @@
     ARGS_AO(objects, obj1);
 
     _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
-      [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, BOOL *stop) {
+      [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, B *stop) {
         if (!key.in(obj)) [obj setObject:value forKey:key];
       }];
     });

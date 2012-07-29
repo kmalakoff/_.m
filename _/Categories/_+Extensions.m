@@ -33,9 +33,9 @@
 + (_FindBlock(^)(NSString* key, id match))propTester;
 {
   return ^(NSString* key, id match) {
-    return ^BOOL(id object) 
+    return ^B(NSD* obj)
     {
-      NSString *value = [object valueForKey:key];
+      NSString *value = [obj valueForKey:key];
       return (value == match);
     };
   };
@@ -44,10 +44,10 @@
 + (_FindBlock(^)(NSString* key, NSString *match))propStringTester;
 {
   return ^(NSString* key, NSString *match) {
-    return ^BOOL(id object) 
+    return ^(NSD* obj)
     {
-      NSString *value = [object valueForKey:key];
-      return ([value isEqualToString:match]);
+      NSString *value = [obj valueForKey:key];
+      return [value isEqualToString:match];
     };
   };
 }

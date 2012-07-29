@@ -8,6 +8,6 @@
 
 #import "_+ArraysTests.h"
 
-@interface _WrapperOKVbjectsTests : QUnitTestCase
+@interface _WrapperObjectsTests : QUnitTestCase
 
 @end

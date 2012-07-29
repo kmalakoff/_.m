@@ -40,7 +40,7 @@
     return n.I % 4 == 0;
   }).sortBy(^(N* n, ... /* KEY, COLLECTION */) {
     return N.I(-n.I);
-  }).valueNSA();
+  }).NSA;
   self.equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");
 }
 
@@ -53,7 +53,7 @@
     return n.I % 4 == 0;
   }).sortBy(^(N* n, ... /* KEY, COLLECTION */) {
     return N.I(-n.I);
-  }).valueNSA();
+  }).NSA;
   self.equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");
 }
 
@@ -66,7 +66,7 @@
     .unshift(N.I(17), /* NIL_TERMINATED */ nil)
     .pop()
     .map(^(N* n, ... /* KEY, COLLECTION */){ return N.I(n.I * 2); })
-    .valueNSA();
+    .NSA;
   self.equal(numbers.join(@", "), @"34, 10, 8, 6, 4, 2, 10, 10", @"can chain together array ^s.");
 }
 

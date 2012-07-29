@@ -20,7 +20,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"pop expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     array.pop();
@@ -34,7 +34,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"push expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     array.push(value);
@@ -48,7 +48,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"reverse expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     return _.chain(array.reverse());
@@ -61,7 +61,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"sort expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     return _.chain(array.sort(iterator));
@@ -74,7 +74,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"splice expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     NSA* results = array.splice(start, count, nil);
@@ -93,7 +93,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"unshift expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     ARGS_AO(items, item1);
@@ -111,7 +111,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"concat expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     return _.chain(array.concat(other));
@@ -124,7 +124,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"join expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     return _.chain(array.join(separator));
@@ -137,7 +137,7 @@
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"slice expecting NSArray");
 #endif
-    A* array = self.valueA();
+    A* array = self.A;
     if (!array) return self;
 
     return _.chain(array.slice(start, count));

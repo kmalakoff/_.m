@@ -34,16 +34,17 @@
 - (_Wrapper*(^)())chain;
 
 - (NSO*(^)())value;
-- (B(^)())valueB;       /* SPECIALIZED */   // TODO: add tests including mutable and immutable conversions
-- (I(^)())valueI;       /* SPECIALIZED */
-- (UI(^)())valueUI;     /* SPECIALIZED */
-- (F(^)())valueF;       /* SPECIALIZED */
-- (N*(^)())valueN;      /* SPECIALIZED */
-- (NSS*(^)())valueNSS;  /* SPECIALIZED */
-- (S*(^)())valueS;      /* SPECIALIZED */
-- (NSA*(^)())valueNSA;  /* SPECIALIZED */
-- (A*(^)())valueA;      /* SPECIALIZED */
-- (NSD*(^)())valueNSD;  /* SPECIALIZED */
-- (O*(^)())valueO;      /* SPECIALIZED */
+- (B)B;             /* SPECIALIZED */   
+- (I)I;             /* SPECIALIZED */
+- (UI)UI;           /* SPECIALIZED */
+- (F)F;             /* SPECIALIZED */
+- (N*)N;            /* SPECIALIZED */
+- (NSS*)NSS;        /* SPECIALIZED */
+- (S*)S;            /* SPECIALIZED */
+- (NSA*)NSA;        /* SPECIALIZED */
+- (A*)A;            /* SPECIALIZED */
+- (NSD*)NSD;        /* SPECIALIZED */
+- (O*)O;            /* SPECIALIZED */
+- (Date*)Date;      /* SPECIALIZED */
 
 @end

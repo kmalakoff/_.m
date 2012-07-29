@@ -48,7 +48,7 @@
 
 + (A*(^)(NSA* array))compact;
 
-+ (A*(^)(NSA* array, BOOL shallow))flatten;
++ (A*(^)(NSA* array, B shallow))flatten;
  
 + (A*(^)(NSA* array, id value1, ... /* NIL_TERMINATION */))without;
 

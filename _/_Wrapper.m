@@ -55,106 +55,91 @@
   };
 }
 
-- (B(^)())valueB
+- (B)B
 {
-  return ^{
-    if (_.isBoolean(self._wrapped)) return ((N*)self._wrapped).boolValue;
-    NSLog(@"valueB is not a boolean");
-    return NO;
-  };
+  if (_.isBoolean(self._wrapped)) return ((N*)self._wrapped).boolValue;
+  NSLog(@"B is not a boolean");
+  return NO;
 }
 
-- (I(^)())valueI
+- (I)I
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).integerValue;
-    NSLog(@"valueI is not a NSNumber");
-    return 0;
-  };
+  if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).integerValue;
+  NSLog(@"I is not a NSNumber");
+  return 0;
 }
 
-- (UI(^)())valueUI
+- (UI)UI
 {
-  return ^UI{
-    if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).unsignedIntegerValue;
-    NSLog(@"valueUI is not a NSNumber");
-    return 0;
-  };
+  if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).unsignedIntegerValue;
+  NSLog(@"UI is not a NSNumber");
+  return 0;
 }
 
-- (F(^)())valueF
+- (F)F
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).floatValue;
-    NSLog(@"valueF is not a NSNumber");
-    return 0.0f;
-  };
+  if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).floatValue;
+  NSLog(@"F is not a NSNumber");
+  return 0.0f;
 }
 
-- (N*(^)())valueN
+- (N*)N
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSNumber class]]) return (N*)self._wrapped;
-    NSLog(@"valueN is not a NSNumber");
-    return (N*)nil;
-  };
+  if ([self._wrapped isKindOfClass:[NSNumber class]]) return (N*)self._wrapped;
+  NSLog(@"N is not a NSNumber");
+  return nil;
 }
 
-- (NSS*(^)())valueNSS
+- (NSS*)NSS
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSString class]]) return (NSS*)self._wrapped;
-    NSLog(@"valueNSS is not a NSString");
-    return (NSS*)nil;
-  };
+  if ([self._wrapped isKindOfClass:[NSString class]]) return (NSS*)self._wrapped;
+  NSLog(@"NSS is not a NSString");
+  return nil;
 }
 
-- (S*(^)())valueS
+- (S*)S
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSMutableString class]]) return (S*)self._wrapped;
-    if ([self._wrapped isKindOfClass:[NSString class]]) return (S*)self._wrapped.mutableCopy;
-    NSLog(@"valueS is not a NSMutableString");
-    return (S*)nil;
-  };
+  if ([self._wrapped isKindOfClass:[NSMutableString class]]) return (S*)self._wrapped;
+  if ([self._wrapped isKindOfClass:[NSString class]]) return (S*)self._wrapped.mutableCopy;
+  NSLog(@"S is not a NSMutableString");
+  return nil;
 }
 
-- (NSA*(^)())valueNSA
+- (NSA*)NSA
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSArray class]]) return (NSA*)self._wrapped;
-    NSLog(@"valueNSA is not a NSArray");
-    return (NSA*)nil;
-  };
+  if ([self._wrapped isKindOfClass:[NSArray class]]) return (NSA*)self._wrapped;
+  NSLog(@"NSA is not a NSArray");
+  return nil;
 }
 
-- (A*(^)())valueA
+- (A*)A
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSMutableArray class]]) return (A*)self._wrapped;
-    if ([self._wrapped isKindOfClass:[NSArray class]]) return (A*)self._wrapped.mutableCopy;
-    NSLog(@"valueA is not a NSMutableArray");
-    return (A*)nil;
-  };
+  if ([self._wrapped isKindOfClass:[NSMutableArray class]]) return (A*)self._wrapped;
+  if ([self._wrapped isKindOfClass:[NSArray class]]) return (A*)self._wrapped.mutableCopy;
+  NSLog(@"A is not a NSMutableArray");
+  return nil;
 }
 
-- (NSD*(^)())valueNSD
+- (NSD*)NSD
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSDictionary class]]) return (NSD*)self._wrapped;
-    NSLog(@"valueNSD is not a NSDictionary");
-    return (NSD*)nil;
-  };
+  if ([self._wrapped isKindOfClass:[NSDictionary class]]) return (NSD*)self._wrapped;
+  NSLog(@"NSD is not a NSDictionary");
+  return nil;
 }
 
-- (O*(^)())valueO
+- (O*)O
 {
-  return ^{
-    if ([self._wrapped isKindOfClass:[NSMutableDictionary class]]) return (O*)self._wrapped;
-    if ([self._wrapped isKindOfClass:[NSDictionary class]]) return (O*)self._wrapped.mutableCopy;
-    NSLog(@"valueO is not a NSMutableDictionary");
-    return (O*)nil;
-  };
+  if ([self._wrapped isKindOfClass:[NSMutableDictionary class]]) return (O*)self._wrapped;
+  if ([self._wrapped isKindOfClass:[NSDictionary class]]) return (O*)self._wrapped.mutableCopy;
+  NSLog(@"O is not a NSMutableDictionary");
+  return nil;
+}
+
+- (Date*)Date
+{
+  if ([self._wrapped isKindOfClass:[NSDate class]]) return (Date*)self._wrapped;
+  NSLog(@"O is not a NSDate");
+  return nil;
 }
 
 @end

@@ -78,7 +78,7 @@ typedef id(^SSBlock6)(id arg1, id arg2, id arg3, id arg4, id arg5, id arg6, ...)
     if (SS.isObject(self))
     {
       NSD* dictionary = (NSD*) self;
-      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
         if (SS.isBlock(value))
           results.push(key);
       }];

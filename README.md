@@ -59,7 +59,7 @@ _.compact = function(array)
 
 flatten
 _.flatten = function(array, shallow)
-+ (A*(^)(A* array, BOOL shallow))flatten;
++ (A*(^)(A* array, B shallow))flatten;
 // CHANGE: shallow is mandatory or should have two versions? (N* used for compatiblity with map not as an index)
 
 without

@@ -48,7 +48,7 @@
 
 - (_Wrapper*(^)())compact;
 
-- (_Wrapper*(^)(BOOL shallow))flatten;
+- (_Wrapper*(^)(B shallow))flatten;
  
 - (_Wrapper*(^)(id value1, ... /* NIL_TERMINATION */))without;
 

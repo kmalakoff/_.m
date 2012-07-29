@@ -75,8 +75,8 @@
 {
   O* result;
   self.equal(_.extend(O.new, OKV({@"a",@"b"}), /* NIL TERMINATED */ nil).get(@"a"), @"b", @"can extend an object with the attributes of another");
-  self.equal(_.extend(OKV({@"a",@"x"}, {@"a",@"b"}), /* NIL TERMINATED */ nil).get(@"a"), @"b", @"properties in source override destination");
-  self.equal(_.extend(OKV({@"x",@"x"}, {@"a",@"b"}), /* NIL TERMINATED */ nil).get(@"x"), @"x", @"properties not in source dont get overriden");
+  self.equal(_.extend(OKV({@"a",@"x"}), OKV({@"a",@"b"}), /* NIL TERMINATED */ nil).get(@"a"), @"b", @"properties in source override destination");
+  self.equal(_.extend(OKV({@"x",@"x"}), OKV({@"a",@"b"}), /* NIL TERMINATED */ nil).get(@"x"), @"x", @"properties not in source dont get overriden");
   result = _.extend(OKV({@"x",@"x"}), OKV({@"a",@"a"}), OKV({@"b",@"b"}), /* NIL TERMINATED */ nil);
   self.ok(_.isEqual(result, OKV({@"x",@"x"}, {@"a",@"a"}, {@"b",@"b"})), @"can extend from multiple source objects");
   result = _.extend(OKV({@"x",@"x"}), OKV({@"a",@"a"}, {@"x",N.I(2)}), OKV({@"a",@"b"}));
@@ -90,9 +90,9 @@
   O* result;
   result = _.pick(OKV({@"a",N.I(1)}, {@"b",N.I(2)}, {@"c",N.I(3)}), @"a", @"c", /* NIL TERMINATED */ nil);
   self.ok(_.isEqual(result, OKV({@"a",N.I(1)}, {@"c",N.I(3)})), @"can restrict properties to those named");
-  result = _.pick(OKV({@"a",N.I(1)}, {@"b",N.I(2)}, {@"c",N.I(3)}), AO(@"b", @"c"));
+  result = _.pick(OKV({@"a",N.I(1)}, {@"b",N.I(2)}, {@"c",N.I(3)}), AO(@"b", @"c"), /* NIL TERMINATED */ nil);
   self.ok(_.isEqual(result, OKV({@"b",N.I(2)}, {@"c",N.I(3)})), @"can restrict properties to those named in an array");
-  result = _.pick(OKV({@"a",N.I(1)}, {@"b",N.I(2)}, {@"c",N.I(3)}), AO(@"a"), @"b");
+  result = _.pick(OKV({@"a",N.I(1)}, {@"b",N.I(2)}, {@"c",N.I(3)}), AO(@"a"), @"b", /* NIL TERMINATED */ nil);
   self.ok(_.isEqual(result, OKV({@"a",N.I(1)}, {@"b",N.I(2)})), @"can restrict properties to those named in mixed args");
 }
 
@@ -168,7 +168,7 @@
 //  self.ok(!_.isEqual(0, new Number(-0)), @"Commutative self.equality is implemented for `new Number(0)` and `-0`"); /* NOT SUPPORTED: JavaScript-only because of primitives */
 
   self.ok(!_.isEqual(N.I(75), N.I(63)), @"Number objects with different primitive values are not self.equal");
-  self.ok(!_.isEqual(N.I(63), OKV({@"valueOf", ^(){ return 63; }})), @"Number objects and objects with a `valueOf` method are not self.equal");
+  self.ok(!_.isEqual(N.I(63), OKV({@"Of", ^(){ return 63; }})), @"Number objects and objects with a `Of` method are not self.equal");
 
   // Comparisons involving `NaN`.
   self.ok(_.isEqual(NF_NaN, NF_NaN), @"`NaN` is self.equal to `NaN`");
@@ -351,7 +351,7 @@
 
   // Chaining.
   self.ok(!_.isEqual(__(OKV({@"x", N.I(1)}, {@"y", /*undefined*/ nil})).chain(), __(OKV({@"x", N.I(1)}, {@"z", N.I(2)})).chain()), @"Chained objects containing different values are not self.equal");
-  self.equalI(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain().isEqual(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain()).valueB(), YES, @"`isEqual` can be chained");
+  self.equalI(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain().isEqual(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain()).B, YES, @"`isEqual` can be chained");
 
   // Custom `isEqual` methods.
   __block O* isEqualObj = OKV({@"isEqual", ^(O* o){ return o.get(@"isEqual") == isEqualObj.get(@"isEqual"); }}, {@"unique", O.new});
@@ -612,11 +612,11 @@
   self.equal(intercepted, N.I(1), @"passes tapped object to interceptor");
   self.equal(returned, N.I(1), @"returns tapped object");
 
-  returned = __(AI(1,2,3)).chain().
-    map(^(N* n, /* REQUIRED */ ...){ return N.I(n.I * 2); }).
-    max(/* REQUIRED*/ nil).
-    tap(interceptor).
-    valueN();
+  returned = __(AI(1,2,3)).chain()
+    .map(^(N* n, /* REQUIRED */ ...){ return N.I(n.I * 2); })
+    .max(/* REQUIRED*/ nil)
+    .tap(interceptor)
+    .N;
   self.ok(returned == N.I(6) && intercepted == N.I(6), @"can use tapped objects in a chain");
 }
   

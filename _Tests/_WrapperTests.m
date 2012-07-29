@@ -10,4 +10,7 @@
 
 @implementation _WrapperTests
 
+// TODO: add tests
+// TODO: add tests including mutable and immutable conversions
+
 @end

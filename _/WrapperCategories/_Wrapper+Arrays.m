@@ -38,7 +38,7 @@
 - (_Wrapper*(^)(I n))first
 {
   return ^id(I n) {
-    return _.chain(_.first(self.valueNSA(), n));
+    return _.chain(_.first(self.NSA, n));
   };
 }
 - (_Wrapper*(^)(I n))head { return self.first; } // ALIAS
@@ -47,21 +47,21 @@
 - (_Wrapper*(^)(I n))initial
 {
   return ^(I n) {
-    return _.chain(_.initial(self.valueNSA(), n));
+    return _.chain(_.initial(self.NSA, n));
   };
 }
 
 - (_Wrapper*(^)(I n))last
 {
   return ^(I n) {
-    return _.chain(_.last(self.valueNSA(), n));
+    return _.chain(_.last(self.NSA, n));
   };
 }
 
 - (_Wrapper*(^)(I index))rest
 {
   return ^(I index) {
-    return _.chain(_.rest(self.valueNSA(), index));
+    return _.chain(_.rest(self.NSA, index));
   };
 }
 - (_Wrapper*(^)(I index))tail { return self.rest; } // ALIAS
@@ -69,14 +69,14 @@
 - (_Wrapper*(^)())compact
 {
   return ^{
-    return _.chain(_.compact(self.valueNSA()));
+    return _.chain(_.compact(self.NSA));
   };
 }
 
-- (_Wrapper*(^)(BOOL shallow))flatten
+- (_Wrapper*(^)(B shallow))flatten
 {
-  return ^(BOOL shallow) {
-    return _.chain(_.flatten(self.valueNSA(), shallow));
+  return ^(B shallow) {
+    return _.chain(_.flatten(self.NSA, shallow));
   };
 }
 
@@ -85,7 +85,7 @@
   return ^(id value1, ... /* NIL_TERMINATION */) {
     ARGS_AO(items, value1);
 
-    return _.chain(_.difference(self.valueNSA(), items, /* NIL_TERMINATION */ nil));
+    return _.chain(_.difference(self.NSA, items, /* NIL_TERMINATION */ nil));
   };
 }
 
@@ -93,7 +93,7 @@
 {
   return ^(NSA* array2, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, array2);
-    arguments.unshift(self.valueNSA(), nil);
+    arguments.unshift(self.NSA, nil);
     return _.chain(_.uniq(_.flatten(arguments, YES)));
   };
 }
@@ -103,7 +103,7 @@
   return ^(NSA* array1, ... /* NIL_TERMINATION */) {
     ARGS_AO(rest, array1);
 
-    return _.chain(_.filter(_.uniq(self.valueNSA()), ^(id item, ... /* KEY, COLLECTION */) {
+    return _.chain(_.filter(_.uniq(self.NSA), ^(id item, ... /* KEY, COLLECTION */) {
       return _.every(rest, ^B(id other, ... /* KEY, COLLECTION */) {
         return _.indexOf(other, item) >= 0;
       });
@@ -117,21 +117,21 @@
     ARGS_AO(rest, array1);
 
     rest = _.flatten(rest, YES);
-    return _.chain(_.filter(self.valueNSA(), ^B(id value, ... /* KEY, COLLECTION */) { return !_.include(rest, value); }));
+    return _.chain(_.filter(self.NSA, ^B(id value, ... /* KEY, COLLECTION */) { return !_.include(rest, value); }));
   };
 }
 
 - (_Wrapper*(^)())uniq
 {
   return ^{
-    return _.chain(_.uniq(self.valueNSA()));
+    return _.chain(_.uniq(self.NSA));
   };
 }
 - (_Wrapper*(^)())unique { return self.uniq; } // ALIAS
 - (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniqAdvanced //
 {
   return ^(B isSorted, _MapBlock iterator) {
-    return _.chain(_.uniqAdvanced(self.valueNSA(), isSorted, iterator));
+    return _.chain(_.uniqAdvanced(self.NSA, isSorted, iterator));
   };
 }
 - (_Wrapper*(^)(B isSorted, _MapBlock iterator))uniqueAdvanced { return self.uniqAdvanced; } // ALIAS
@@ -161,21 +161,21 @@
 - (_Wrapper*(^)(id item))indexOf
 {
   return ^(id item) {
-    return _.chain(N.I(_.indexOf(self.valueNSA(), item)));
+    return _.chain(N.I(_.indexOf(self.NSA, item)));
   };
 }
 
 - (_Wrapper*(^)(id item))indexOfSorted
 {
   return ^(id item) {
-    return _.chain(N.I(_.indexOfSorted(self.valueNSA(), item)));
+    return _.chain(N.I(_.indexOfSorted(self.NSA, item)));
   };
 }
 
 - (_Wrapper*(^)(id value))lastIndexOf
 {
   return ^(id value) {
-    return _.chain(N.I(_.lastIndexOf(self.valueNSA(), value)));
+    return _.chain(N.I(_.lastIndexOf(self.NSA, value)));
   };
 }
 
