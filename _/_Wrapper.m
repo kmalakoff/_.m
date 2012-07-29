@@ -30,6 +30,7 @@
 #import "_Wrapper.h"
 #import "_Wrapper+Private.h"
 #import "_+Objects.h"
+#import "SubjectiveScript.h"
 
 @interface _Wrapper ()
 
@@ -55,33 +56,11 @@
   };
 }
 
-- (B)B
-{
-  if (_.isBoolean(self._wrapped)) return ((N*)self._wrapped).boolValue;
-  NSLog(@"B is not a boolean");
-  return NO;
-}
-
-- (I)I
-{
-  if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).integerValue;
-  NSLog(@"I is not a NSNumber");
-  return 0;
-}
-
-- (UI)UI
-{
-  if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).unsignedIntegerValue;
-  NSLog(@"UI is not a NSNumber");
-  return 0;
-}
-
-- (F)F
-{
-  if ([self._wrapped isKindOfClass:[NSNumber class]]) return ((N*)self._wrapped).floatValue;
-  NSLog(@"F is not a NSNumber");
-  return 0.0f;
-}
+- (B)B { return self._wrapped.B; }
+- (I)I { return self._wrapped.I; }
+- (UI)UI { return self._wrapped.UI; }
+- (F)F { return self._wrapped.F; }
+- (D)D { return self._wrapped.D; }
 
 - (N*)N
 {

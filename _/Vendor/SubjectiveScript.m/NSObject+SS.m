@@ -144,6 +144,47 @@ const NSS* SSTypeObject = @"object";
   };
 }
 
+// number coersion if posible
+- (B)B
+{
+#ifdef DEBUG
+  NSAssert(nil, @"B not implemented for this type");
+#endif
+  return NO;
+}
+
+- (I)I
+{
+#ifdef DEBUG
+  NSAssert(nil, @"I not implemented for this type");
+#endif
+  return 0;
+}
+
+- (UI)UI
+{
+#ifdef DEBUG
+  NSAssert(nil, @"UI not implemented for this type");
+#endif
+  return 0;
+}
+
+- (F)F
+{
+#ifdef DEBUG
+  NSAssert(nil, @"F not implemented for this type");
+#endif
+  return 0;
+}
+
+- (D)D
+{
+#ifdef DEBUG
+  NSAssert(nil, @"D not implemented for this type");
+#endif
+  return 0;
+}
+
 // helper
 - (NSComparisonResult)compare:(NSO*)other
 {

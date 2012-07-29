@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 
-#import "_+ArraysTests.h"
+#import <SenTestingKit/SenTestingKit.h>
 
-@interface __ChainingTests : QUnitTestCase
+@interface __ChainingTests : SenTestCase
 
 @end

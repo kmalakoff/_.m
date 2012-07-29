@@ -7,6 +7,7 @@
 //
 
 #import "_Wrapper+JavaScriptTests.h"
+#import "QUnit.h"
 #import "Underscore.h"
 #import "SubjectiveScript.h"
 

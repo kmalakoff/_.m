@@ -48,6 +48,13 @@
 - (B(^)(NSO* obj))in;
 - (A*(^)(id value))push;
 
+// number coersion if posible
+- (B)B;
+- (I)I;
+- (UI)UI;
+- (F)F;
+- (D)D;
+
 // helper
 - (NSComparisonResult)compare:(NSO*)other;
 

@@ -7,6 +7,7 @@
 //
 
 #import "_+ChainingTests.h"
+#import "QUnit.h"
 #import "Underscore.h"
 #import "SubjectiveScript.h"
 
@@ -28,7 +29,7 @@
       hash.set(l, N.I(value.I+1));
       return hash;
   }, O.new).value();
-  self.ok(((N*)counts.get(@"a")).I == 16 && ((N*)counts.get(@"e")).I == 10, @"counted all the letters in the song");
+  ok(counts.get(@"a").I == 16 && counts.get(@"e").I == 10, @"counted all the letters in the song");
 }
 
 - (void)test_select_reject_sortBy
@@ -41,7 +42,7 @@
   }).sortBy(^(N* n, ... /* KEY, COLLECTION */) {
     return N.I(-n.I);
   }).NSA;
-  self.equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");
+  equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");
 }
 
 - (void)test_select_reject_sortBy_in_functional_style
@@ -54,7 +55,7 @@
   }).sortBy(^(N* n, ... /* KEY, COLLECTION */) {
     return N.I(-n.I);
   }).NSA;
-  self.equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");
+  equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");
 }
 
 - (void)test_reverse_concat_unshift_pop_map
@@ -67,7 +68,7 @@
     .pop()
     .map(^(N* n, ... /* KEY, COLLECTION */){ return N.I(n.I * 2); })
     .NSA;
-  self.equal(numbers.join(@", "), @"34, 10, 8, 6, 4, 2, 10, 10", @"can chain together array ^s.");
+  equal(numbers.join(@", "), @"34, 10, 8, 6, 4, 2, 10, 10", @"can chain together array ^s.");
 }
 
 @end

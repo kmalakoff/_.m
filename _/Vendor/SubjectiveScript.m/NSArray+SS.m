@@ -123,7 +123,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
 - (B(^)(id key))hasOwnProperty
 {
   return ^B(id key) {
-    N* indexNumber = ((N*)key);
+    N* indexNumber = (N*)key;
   
     // requesting a property
     if ([key isKindOfClass:[NSString class]])

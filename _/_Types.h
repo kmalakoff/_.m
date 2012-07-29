@@ -53,7 +53,7 @@
   { \
     va_list argList; \
     va_start(argList, _lastNamedArg); \
-    index = ((N*) va_arg(argList, N*)).I; \
+    index =  ((N*)va_arg(argList, N*)).I; \
     va_end(argList); \
   }
 #define ARGS_INDEX_COLLECTION(_lastNamedArg, _collection) \
@@ -62,7 +62,7 @@
   { \
     va_list argList; \
     va_start(argList, _lastNamedArg); \
-    index = ((N*) va_arg(argList, N*)).I; \
+    index =  va_arg(argList, N*)).I; \
     _collection = va_arg(argList, id); \
     va_end(argList); \
   }

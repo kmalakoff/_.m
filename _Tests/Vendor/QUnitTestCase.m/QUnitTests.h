@@ -1,8 +1,8 @@
 //
-//  QUnitTestCase.h
-//  QUnitTestCase.m
+//  QUnitTests.h
+//  QUnit.m
 //
-//  Created by Kevin Malakoff on 7/18/12.
+//  Created by Kevin Malakoff on 7/23/12.
 //  Copyright (c) 2012 Kevin Malakoff. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person
@@ -28,23 +28,16 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "QUnitTestTypes.h"
-#import "QUnitTest.h"
 
-@interface QUnitTestCase : SenTestCase
+@interface QUnitTests : NSObject
 
-- (void(^)(id actual, id expected, NSString *message, ...))equal;
-- (void(^)(NSInteger actual, NSInteger expected, NSString *message, ...))equalI;
-- (void(^)(id actual, id expected, NSString *message, ...))notEqual;
-- (void(^)(NSInteger actual, NSInteger expected, NSString *message, ...))notEqualI;
-- (void(^)(id actual, id expected, NSString *message, ...))strictEqual;
-- (void(^)(id actual, id expected, NSString *message, ...))notStrictEqual;
-- (void(^)(id actual, id expected, NSString *message, ...))deepEqual;
++ (void)equal:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict;
++ (void)deepEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber;
 
-- (void(^)(BOOL result, NSString *message, ...))ok;
-- (void(^)(QURaiseBlock block, NSString *expected, NSString *message, ...))raises;
++ (void)notEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict;
 
-- (void(^)(QUAsyncTestBlock callback))asyncTest;
-- (void(^)(id expected, QUAsyncTestBlockExpected callback))asyncTestExpected;
++ (void)ok:(SenTestCase*)testCase result:(BOOL)result expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber;
+
++ (void)raises:(SenTestCase*)testCase callback:(void(^)())callback expectedExceptionName:(NSString*)expectedExceptionName expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber;
 
 @end
