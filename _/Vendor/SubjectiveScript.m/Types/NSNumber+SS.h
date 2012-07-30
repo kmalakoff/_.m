@@ -46,6 +46,6 @@
 + (N*(^)(D value))D;
 - (D)D;
 
-- (B)isBoolean;
+- (B(^)())isBoolean;
 
 @end

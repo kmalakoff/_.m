@@ -30,15 +30,11 @@
 #import "NSNumber+JavaScript.h"
 #import "NSNumber+SS.h"
 
-static const NSS* SSJSIdentifierNumber = @"number";
-static const NSS* SSJSIdentifierBoolean = @"boolean";
-
 @implementation NSNumber (JavaScript)
 
-- (const NSS*)typeof { return self.isBoolean ? SSJSIdentifierNumber : SSJSIdentifierBoolean; }
-- (NSS*(^)())toString { 
+- (NSS*(^)())toString {
   return ^{ 
-    if (self.isBoolean)
+    if (self.isBoolean())
       return self.boolValue ? @"true" : @"false";
     else
       return self.description; 

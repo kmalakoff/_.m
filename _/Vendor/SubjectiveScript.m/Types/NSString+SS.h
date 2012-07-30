@@ -37,6 +37,9 @@
 
 - (S*(^)())toMutable;
 
-- (NSO*(^)(I index))getAt;
+- (NSS*(^)(UI index))getAt;
+
+- (B(^)(NSS* string))startsWith;
+- (B(^)(NSS* string))endsWith;
 
 @end

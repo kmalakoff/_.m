@@ -10,6 +10,9 @@
 
 @interface _Wrapper (JavaScript)
 
+- (_Wrapper*)length;
+- (_Wrapper*(^)(id key))hasOwnProperty;
+
 // Add all mutator Array functions to the wrapper.
 - (_Wrapper*(^)())pop;
 - (_Wrapper*(^)(id value))push;
@@ -17,6 +20,7 @@
 - (_Wrapper*(^)(_SortBlock iterator))sort;
 - (_Wrapper*(^)(I start, I count, id item1, ... /* NIL_TERMINATED */))splice;
 - (_Wrapper*(^)(id item1, ... /* NIL_TERMINATED */))unshift;
+- (_Wrapper*(^)())shift;
 
 // Add all accessor Array functions to the wrapper.
 - (_Wrapper*(^)(NSA* other))concat;

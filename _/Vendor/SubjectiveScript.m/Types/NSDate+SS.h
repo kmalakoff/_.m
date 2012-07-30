@@ -31,6 +31,7 @@
 
 @interface NSDate (SS)
 
+// note the month is 0-indexed based like JavaScript
 + (Date*(^)(I year, I month, I day))newYMD;
 
 @end

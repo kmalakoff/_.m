@@ -100,12 +100,14 @@ static char* const SSIsArgumentsKey = "IsArguments";
   };
 }
 
-+ (A*(^)(const id* values /* NIL_TERMINATION */))newO
++ (A*(^)(const id* values, UI count))newO
 {
-  return ^(const id* values) {
+  return ^(const id* values, UI count) {
     A* result = A.new;
-    for (const id* value=values; *value != nil; value++) {
-      [result addObject:*value];
+    for (I index=0; index<count; index++) {
+      id value = values[index];
+      if (!value) value = NSNull.null;
+      [result addObject:value];
     }
     return result;
   };
@@ -114,7 +116,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
 - (NSS*)mutableClassName { return NSStringFromClass([S class]); }
 - (A*(^)())toMutable { return ^{ return self.mutableCopy; }; }
 
-- (B)isArguments { return objc_getAssociatedObject(self, SSIsArgumentsKey) != nil; } 
+- (B(^)())isArguments{ return ^B(){ return objc_getAssociatedObject(self, SSIsArgumentsKey) != nil; }; }
 - (void(^)())markAsArguments { return ^{ objc_setAssociatedObject(self, SSIsArgumentsKey, SSTypeArguments, OBJC_ASSOCIATION_ASSIGN); }; } // set the stored key
 
 - (NSO*(^)(UI index))getAt
@@ -137,7 +139,12 @@ static char* const SSIsArgumentsKey = "IsArguments";
 - (NSRange(^)(I start, I count))resolveRange
 {
   return ^(I start, I count) {
-    if ((start + count)>self.count-1) count = self.count - start; // clamp to end of array
+    if (start<0)
+      start = self.count + start;
+    if (count<0)
+      count = (self.count - start) + count;
+    if ((start + count)>self.count-1)
+      count = self.count - start;
     return NSMakeRange(start, count);
   };
 }

@@ -39,12 +39,12 @@
 
 + (A*)_runningTaskList
 {
-  static NSMutableArray *sharedInstance = nil;
+  static NSMutableArray *singleton = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    sharedInstance = A.new;
+    singleton = A.new;
   });
-  return sharedInstance;
+  return singleton;
 }
 
 + (SSTaskId*(^)(SSTaskIdBlock block, I waitNS, BOOL background))addTask

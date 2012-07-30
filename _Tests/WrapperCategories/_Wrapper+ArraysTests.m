@@ -39,7 +39,7 @@
   NSA* result = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  _.chain(arguments).initial(/* REQUIRED */ -1).NSA; })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   equal(result.join(@", "), @"1, 2, 3", @"initial works on arguments object");
   result = _.chain(AO(AI(1,2,3),AI(1,2,3))).map(/* SPECIALIZED */ _.initialIterator).NSA;
-  equal(_.chain(result).flatten(/* REQUIRED */ YES).NSA.join(@","), @"1,2,1,2", @"initial works with _.map");
+  equal(_.chain(result).flatten(/* REQUIRED */ true).NSA.join(@","), @"1,2,1,2", @"initial works with _.map");
 }
 
 - (void)test_last
@@ -65,13 +65,13 @@
   NSA* result = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  _.chain(arguments).tail(/* REQUIRED */ -1).NSA; })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   equal(result.join(@", "), @"2, 3, 4", @"aliased as tail and works on arguments object");
   result = _.chain(AO(AI(1,2,3),AI(1,2,3))).map(/* SPECIALIZED */ _.restIterator).NSA;
-  equal(_.chain(result).flatten(/* REQUIRED */  YES).NSA.join(@","), @"2,3,2,3", @"works well with _.map");
+  equal(_.chain(result).flatten(/* REQUIRED */  true).NSA.join(@","), @"2,3,2,3", @"works well with _.map");
 }
 
 - (void)test_compact
 {
-  equalI(_.chain(AO(N.I(0), N.I(1), N.B(NO), N.I(2), N.B(NO), N.I(3))).compact().NSA.length, 3, @"can trim out all falsy values");
-  I result = (^(id arg1, ... /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return _.chain(arguments).compact().NSA.length; })(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3), /* NIL_TERMINATION */ nil);
+  equalI(_.chain(AO(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3))).compact().length.UI, 3, @"can trim out all falsy values");
+  I result = (^(id arg1, ... /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return _.chain(arguments).compact().length.UI; })(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3), /* NIL_TERMINATION */ nil);
   equalI(result, 3, @"works on an arguments object");
 };
 
@@ -79,9 +79,9 @@
 {
 //  if (window.JSON) {
     A* list = AO(N.I(1), AI(2), AO(N.I(3), AO(AO(AI(4)))));
-    equal(SS.stringify(_.chain(list).flatten(/* REQUIRED */ NO).NSA), @"[1,2,3,4]", @"can flatten nested arrays");
-    equal(SS.stringify(_.chain(list).flatten(/* REQUIRED */ YES).NSA), @"[1,2,3,[[[4]]]]", @"can shallowly flatten nested arrays");
-    A* result = (A*) (^(id arg1, ...  /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return _.chain(arguments).flatten(/* REQUIRED */ NO).A; })(N.I(1), AI(2), AO(N.I(3), AO(AO(AI(4)))), /* NIL_TERMINATION */ nil);
+    equal(SS.stringify(_.chain(list).flatten(/* REQUIRED */ false).NSA), @"[1,2,3,4]", @"can flatten nested arrays");
+    equal(SS.stringify(_.chain(list).flatten(/* REQUIRED */ true).NSA), @"[1,2,3,[[[4]]]]", @"can shallowly flatten nested arrays");
+    A* result = (A*) (^(id arg1, ...  /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return _.chain(arguments).flatten(/* REQUIRED */ false).A; })(N.I(1), AI(2), AO(N.I(3), AO(AO(AI(4)))), /* NIL_TERMINATION */ nil);
     equal(SS.stringify(result), @"[1,2,3,4]", @"works on an arguments object");
 //  }
 }
@@ -94,8 +94,8 @@
   equal(result.join(@", "), @"2, 3, 4", @"works on an arguments object");
 
   list = AO(OKV({@"one", N.I(1)}), OKV({@"two", N.I(2)}));
-  ok(_.chain(list).without(OKV({@"one", N.I(1)}), /* NIL_TERMINATION */ nil).NSA.length == 2, @"uses real object identity for comparisons.");
-  ok(_.chain(list).without(list.get(0), /* NIL_TERMINATION */ nil).NSA.length == 1, @"ditto.");
+  ok(_.chain(list).without(OKV({@"one", N.I(1)}), /* NIL_TERMINATION */ nil).length.UI == 2, @"uses real object identity for comparisons.");
+  ok(_.chain(list).without(list.get(0), /* NIL_TERMINATION */ nil).length.UI == 1, @"ditto.");
 }
 
 - (void)test_uniq
@@ -104,15 +104,15 @@
   equal(_.chain(list).uniq().NSA.join(@", "), @"1, 2, 3, 4", @"can find the unique values of an unsorted array");
 
   list = AI(1, 1, 1, 2, 2, 3);
-  equal(_.chain(list).uniqAdvanced(YES, /* REQUIRED */ nil).NSA.join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster"); /* SPECIALIZED */
+  equal(_.chain(list).uniqAdvanced(true, /* REQUIRED */ nil).NSA.join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster"); /* SPECIALIZED */
 
   list = AO(OKV({@"name", @"moe"}), OKV({@"name", @"curly"}), OKV({@"name", @"larry"}), OKV({@"name", @"curly"}));
   _MapBlock iterator = ^(O* value, ... /* KEY, COLLECTION */) { return value.get(@"name"); };
-  equal(_.chain(list)./* SPECIALIZED */ uniqAdvanced(NO, iterator).map(iterator).NSA.join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator");
+  equal(_.chain(list)./* SPECIALIZED */ uniqAdvanced(false, iterator).map(iterator).NSA.join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator");
 
   iterator = ^(N* value, ... /* KEY, COLLECTION */) { return N.I(value.I + 1); };
   list = AI(1, 2, 2, 3, 4, 4);
-  equal(_.chain(list).uniqAdvanced(YES, iterator).NSA.join(@", "), @"1, 2, 3, 4", @"iterator works with sorted array");
+  equal(_.chain(list).uniqAdvanced(true, iterator).NSA.join(@", "), @"1, 2, 3, 4", @"iterator works with sorted array");
 
   A* result = (A*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return _.chain(arguments).uniq().A; })(1, 2, 1, 3, 1, 4, /* AI_END_TERMINATION */ AI_END);
   equal(result.join(@", "), @"1, 2, 3, 4", @"works on an arguments object");
@@ -147,7 +147,7 @@
 
 - (void)test_zip
 {
-  A* names = AO(@"moe", @"larry", @"curly"); A* ages = AI(30, 40, 50); A* leaders = AB(YES);
+  A* names = AO(@"moe", @"larry", @"curly"); A* ages = AI(30, 40, 50); A* leaders = AB(true);
   NSA* stooges = _.chain(nil).zip(names, ages, leaders, /* NIL_TERMINATION */ nil).NSA;
   equal(S.newA(stooges), @"moe,30,true,larry,40,,curly,50,", @"zipped together arrays of different lengths");
 }

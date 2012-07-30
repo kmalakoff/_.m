@@ -41,6 +41,6 @@
 - (NSA*(^)(I start, I count))slice; // TODO: test with negative parameters
 
 - (A*(^)())reverse;
-- (A*(^)())flatten;
+- (A*(^)(B shallow))flatten;
 
 @end

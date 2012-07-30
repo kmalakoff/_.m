@@ -46,7 +46,7 @@
 {
   return ^(NSA* array) {
     // JavaScript flattens the arrays and then joins them
-    A* flattened = array.flatten();
+    A* flattened = array.flatten(true);
     return flattened.join(@",");
   };
 }
@@ -64,10 +64,26 @@
 
 - (S*(^)())toMutable { return ^{ return self.mutableCopy; }; }
 
-- (NSO*(^)(I index))getAt
+- (NSS*(^)(UI index))getAt
 {
-  return ^(I index) {
-    return [self substringWithRange:NSMakeRange(index, 1)];
+  return ^NSS*(UI index) {
+    if (index>=self.count) return nil;
+    unichar character = [self characterAtIndex:index];
+    return [NSString stringWithCharacters:&character length:1];
+  };
+}
+
+- (B(^)(NSS* string))startsWith
+{
+  return ^(NSS* string) {
+    return [self hasPrefix:string];
+  };
+}
+
+- (B(^)(NSS* string))endsWith
+{
+  return ^(NSS* string) {
+    return [self hasSuffix:string];
   };
 }
 

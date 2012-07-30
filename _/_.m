@@ -30,7 +30,11 @@
 #import "_.h"
 #import "_Wrapper+Private.h"
 
+static NSS* _VERSION = @"0.0.1";
+
 @implementation _
+
++ (NSString*)VERSION { return _VERSION; }
 
 + (_Wrapper*(^)(id obj))chain;
 {

@@ -37,7 +37,7 @@ typedef NSInteger       I;
 typedef NSUInteger      UI;
 typedef float           F;
 typedef double          D;
-typedef id              KV[2];
+typedef id              KV[2];  // key-value pair
 
 // object types
 #define NSO             NSObject
@@ -56,8 +56,9 @@ typedef id              KV[2];
 #define NF_POS_INFINITY     [NSNumber numberWithFloat:INFINITY]
 #define NF_NEG_INFINITY     [NSNumber numberWithFloat:-INFINITY]
 
-// tasks
+// tasks and timeouts
 typedef NSNumber SSTaskId;
+typedef SSTaskId SSTimeout;
 
 // blocks
 typedef void                (^SSDispatchBlock)();

@@ -30,13 +30,58 @@
 #import "SS+JavaScript.h"
 #import "NSObject+JavaScript.h"
 #import "NSNumber+SS.h"
+#import "NSMutableString+SS.h"
 #import "SS+Functions.h"
+#import "SS+Types.h"
 #import "SSArguments.h"
+
+const NSS* SSJSTypeOfObject = @"object";
+const NSS* SSJSTypeOfString = @"string";
+const NSS* SSJSTypeOfNumber = @"number";
+const NSS* SSJSTypeOfBoolean = @"boolean";
 
 @implementation SS (JavaScript)
 
 // JSON
-+ (NSS*(^)(NSO* obj))stringify { return ^(NSO* obj) { return obj.toString(); }; }
++ (NSS*(^)(NSO* obj))stringify
+{
+  return ^NSS*(NSO* obj) {
+    if (SS.isNull(obj))
+      return @"null";
+    if (SS.isString(obj))
+      return [NSString stringWithFormat:@"\"%@\"", obj];
+    if (SS.isObject(obj)) {
+      NSD* dictionary = (NSD*)obj;
+      __block S* result = S.newS(@"{");
+
+      [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [result appendString:self.stringify(key)];
+        [result appendString:@":"];
+        [result appendString:self.stringify(obj)];
+      }];
+      
+      [result appendString:@"}"];
+      return result;
+    }
+    if (SS.isArray(obj)) {
+      NSA* array = (NSA*)obj;
+      __block S* result = S.newS(@"[");
+      BOOL writeSeparator = NO;
+
+      for(NSO* item in array) {
+        if (writeSeparator)
+          [result appendString:@","];
+        [result appendString:self.stringify(item)];
+        writeSeparator = YES;
+      };
+      
+      [result appendString:@"]"];
+      return result;
+    }
+  
+    return obj.toString();
+  };
+}
 
 // functions
 + (id(^)(id function, id arg1, ... /* NIL_TERMINATED*/))call
@@ -67,23 +112,36 @@
   };
 }
 
++ (const NSS*(^)(id obj))typeof_
+{
+  return ^const NSS*(id obj) {
+    if (SS.isArray(obj) || SS.isObject(obj) || SS.isDate(obj)) return SSJSTypeOfObject;
+    if (SS.isString(obj)) return SSJSTypeOfString;
+    if (SS.isNumber(obj)) return ((N*)obj).isBoolean() ? SSJSTypeOfBoolean : SSJSTypeOfNumber;
+    if (SS.isNumber(obj)) return ((N*)obj).isBoolean() ? SSJSTypeOfBoolean : SSJSTypeOfNumber;
+    
+    NSLog(@"unrecognized type for typeof_");
+    return @"unknown type";
+  };
+}
+
 // timeouts
-+ (SSTaskId*(^)(SSTaskIdBlock block, I waitNS))setTimeout
++ (SSTimeout*(^)(SSTaskIdBlock block, I waitNS))setTimeout
 {
   return ^(SSTaskIdBlock block, I waitNS) {
     return SS.addTask(block, waitNS, false);
   };
 }
-+ (SSTaskId*(^)(SSTaskIdBlock block, I waitNS))setTimeoutBackground
++ (SSTimeout*(^)(SSTaskIdBlock block, I waitNS))setTimeoutBackground
 {
   return ^(SSTaskIdBlock block, I waitNS) {
     return SS.addTask(block, waitNS, true);
   };
 }
 
-+ (void(^)(SSTaskId* timeout))clearTimeout
++ (void(^)(SSTimeout* timeout))clearTimeout
 {
-  return ^(SSTaskId* timeout) {
+  return ^(SSTimeout* timeout) {
     return SS.stopTask(timeout);
   };
 }

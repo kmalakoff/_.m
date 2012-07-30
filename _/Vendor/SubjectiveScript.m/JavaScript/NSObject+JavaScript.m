@@ -31,14 +31,11 @@
 #import "NSObject+SS.h"
 #import "SS+Types.h"
 
-const NSS* SSJSIdentifierObject = @"object";
-
 @implementation NSObject (JavaScript)
 
-- (const NSS*)typeof {return SSJSIdentifierObject; }
-- (B(^)(NSS* className))instanceof {
-  return ^(NSS* className) {
-    return [self isKindOfClass:NSClassFromString(className)];
+- (B(^)(Class class))instanceof {
+  return ^(Class class) {
+    return [self isKindOfClass:class];
   };
 }
 - (NSS*(^)())toString

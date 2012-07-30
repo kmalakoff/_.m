@@ -13,6 +13,24 @@
 
 @implementation _Wrapper (JavaScript)
 
+- (_Wrapper*)length
+{
+#ifdef DEBUG
+  NSAssert(_.isArray(self.value()), @"pop expecting NSArray");
+#endif
+  A* array = self.A;
+  if (!array) return _.chain(0);
+
+  return _.chain(N.UI(array.length));
+}
+
+- (_Wrapper*(^)(id key))hasOwnProperty
+{
+  return ^(id key) {
+    return _.chain(N.B(self.value().hasOwnProperty(key)));
+  };
+}
+
 // Add all mutator Array functions to the wrapper.
 - (_Wrapper*(^)())pop
 {
@@ -24,7 +42,7 @@
     if (!array) return self;
 
     array.pop();
-    return self; // chining doesn't return the popped element but the array
+    return self; // chaining doesn't return the popped element but the array
   };
 }
 
@@ -81,7 +99,7 @@
 
     ARGS_AO(items, item1);
     for (id item in items.reverseObjectEnumerator)
-      [array insertObject:item atIndex:0];
+      [array insertObject:item atIndex:start];
 
     return _.chain(results);
   };
@@ -101,6 +119,19 @@
       [array insertObject:item atIndex:0];
     }
     return self;
+  };
+}
+
+- (_Wrapper*(^)())shift
+{
+  return ^() {
+#ifdef DEBUG
+    NSAssert(_.isArray(self.value()), @"unshift expecting NSArray");
+#endif
+    A* array = self.A;
+    if (!array) return self;
+
+    return _.chain(array.shift());
   };
 }
 

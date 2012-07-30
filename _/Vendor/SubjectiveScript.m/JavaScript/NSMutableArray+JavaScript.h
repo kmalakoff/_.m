@@ -33,13 +33,14 @@
 
 // accessor Array functions
 - (A*(^)(NSA* other))concat;
+- (A*(^)())reverse;
 
 // mutator Array functions
 - (NSO*(^)())pop;
 - (A*(^)(id value))push;
-- (A*(^)())reverse;
 - (A*(^)(SSSortBlock iterator))sort;
 - (NSA*(^)(I start, I count, id item1, ... /* NIL_TERMINATED */))splice;
 - (A*(^)(id item1, ... /* NIL_TERMINATED */))unshift;
+- (NSO*(^)())shift;
 
 @end

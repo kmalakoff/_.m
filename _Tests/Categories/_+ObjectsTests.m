@@ -35,7 +35,7 @@
 {
   return ^B(NSO* that) {
     if (_.isString(that)) return [mString isEqualToString:(NSS*)that];
-    else if (that.instanceof(@"LocalizedString")) return mId == ((LocalizedString*)that)->mId;
+    else if (that.instanceof(LocalizedString.class)) return mId == ((LocalizedString*)that)->mId;
     return false;
   };
 }
@@ -352,7 +352,7 @@
 
   // Chaining.
   ok(!_.isEqual(__(OKV({@"x", N.I(1)}, {@"y", /*undefined*/ nil})).chain(), __(OKV({@"x", N.I(1)}, {@"z", N.I(2)})).chain()), @"Chained objects containing different values are not equal");
-  equalI(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain().isEqual(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain()).B, YES, @"`isEqual` can be chained");
+  equalI(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain().isEqual(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain()).B, true, @"`isEqual` can be chained");
 
   // Custom `isEqual` methods.
   __block O* isEqualObj = OKV({@"isEqual", ^(O* o){ return o.get(@"isEqual") == isEqualObj.get(@"isEqual"); }}, {@"unique", O.new});
@@ -461,7 +461,7 @@
   ok(!_.isArguments(@"string"), @"a string is not an arguments object");
   ok(!_.isArguments(_.isArguments), @"a function is not an arguments object");
   ok(_.isArguments(args), @"but the arguments object is an arguments object");
-  ok(!_.isArguments(_.toArray(args)), @"but not when it\"s converted into an array");
+  ok(!_.isArguments(_.toArray(args)), @"but not when it's converted into an array");
   ok(!_.isArguments(AI(1,2,3)), @"and not vanilla arrays.");
 //  ok(_.isArguments(iArguments), @"even from another frame"); /* NOT SUPPORTED: JavaScript-only because of frame */
 }
@@ -478,7 +478,7 @@
 //  ok(!_.isObject(undefined), @"and not undefined"); /* NOT SUPPORTED: JavaScript-only because of undefined */
   ok(/* CHANGE: string literals are objects since they can use NSString functions ! */ _.isObject(@"string"), @"and not string");
   ok(!_.isObject(N.I(12)), @"and not number");
-  ok(!_.isObject(N.B(YES)), @"and not boolean");
+  ok(!_.isObject(N.B(true)), @"and not boolean");
   ok(_.isObject(S.newS(@"string")), @"but S.newS()");
 }
 

@@ -110,16 +110,24 @@
   };
 }
 
-- (A*(^)())flatten
++ (A*)flatten:(NSA*)array shallow:(B)shallow output:(A*)output
 {
-  return ^{
-    A* output = A.new;
-    for (id value in self) {
-      if (SS.isArray(value))
-        [output addObjectsFromArray:((NSA*)value).flatten()];
-      else
-        output.push(value);
+  for (id value in array) {
+    if (SS.isArray(value)) {
+      shallow ? [output addObjectsFromArray:value] : (void) [self flatten:value shallow:shallow output:output];
+    } else {
+      output.push(value);
     }
+  }
+  
+  return output;
+}
+
+- (A*(^)(B shallow))flatten
+{
+  return ^(B shallow){
+    A* output = A.new;
+    [NSArray flatten:self shallow:shallow output:output];
     return output;
   };
 }

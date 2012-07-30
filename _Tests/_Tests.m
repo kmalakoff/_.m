@@ -7,7 +7,15 @@
 //
 
 #import "_Tests.h"
+#import "Underscore.h"
+#import "SubjectiveScript.h"
+#import "QUnit.h"
 
 @implementation _Tests
+
+- (void)test_version
+{
+  ok(_.VERSION.VersionGreaterThanOrEqualTo(@"0.0.1"), @"expected version");
+}
 
 @end

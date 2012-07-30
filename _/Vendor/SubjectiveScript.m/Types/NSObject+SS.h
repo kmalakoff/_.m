@@ -38,7 +38,7 @@
 // use dynamic type checking for some JavaScript operations to reduce manual casting
 - (UI)count;
 - (NSO*(^)(id key))get;
-- (NSO*(^)(I index))getAt;
+- (NSO*(^)(UI index))getAt;
 - (NSO*(^)(id key, NSO* value))set;
 
 // number coersion if posible

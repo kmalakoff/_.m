@@ -76,7 +76,7 @@
 - (_Wrapper*(^)(B shallow))flatten
 {
   return ^(B shallow) {
-    return _.chain(_.flatten(self.NSA, shallow));
+    return _.chain(self.NSA.flatten(shallow));
   };
 }
 

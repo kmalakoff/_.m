@@ -41,10 +41,11 @@
 
 // global functions
 + (N*(^)(NSS* string))parseInt;
++ (const NSS*(^)(id obj))typeof_;
 
 // timeouts
-+ (SSTaskId*(^)(SSTaskIdBlock block, I waitNS))setTimeout;
-+ (SSTaskId*(^)(SSTaskIdBlock block, I waitNS))setTimeoutBackground;
-+ (void(^)(SSTaskId* timeout))clearTimeout;
++ (SSTimeout*(^)(SSTaskIdBlock block, I waitNS))setTimeout;
++ (SSTimeout*(^)(SSTaskIdBlock block, I waitNS))setTimeoutBackground;
++ (void(^)(SSTimeout* timeout))clearTimeout;
 
 @end

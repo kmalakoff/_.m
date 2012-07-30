@@ -31,6 +31,12 @@
 
 @interface NSDate (JavaScript)
 
+// note the month is 0-indexed based like JavaScript
++ (Date*(^)(I year, I month, I day))newYMD_JS;
+
 - (NSS*(^)())toString;
+
++ (NSDateFormatter*)ISO8601Writter;
++ (NSDateFormatter*)ISO8601Parser;
 
 @end

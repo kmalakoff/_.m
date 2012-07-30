@@ -64,6 +64,3 @@
 #import "NSMutableString+JavaScript.h"
 #import "NSNumber+JavaScript.h"
 #import "NSDate+JavaScript.h"
-
-// Ruby Emulation
-#import "NSString+Ruby.h"

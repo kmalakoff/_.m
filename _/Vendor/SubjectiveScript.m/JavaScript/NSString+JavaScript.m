@@ -32,11 +32,8 @@
 #import "SSArguments.h"
 #import "SS+Functions.h"
 
-const NSS* SSJSIdentifierString = @"string";
-
 @implementation NSString (JavaScript)
 
-- (const NSS*)typeof { return SSJSIdentifierString; }
 - (NSS*(^)())toString { return ^{ return self; }; }
 
 - (NSA*(^)(NSS* separator))split
@@ -48,7 +45,8 @@ const NSS* SSJSIdentifierString = @"string";
       UI count = self.length;
       A *characters = A.newC(count);
       for (I index=0; index<count; index++) {
-        characters.push([self substringWithRange:NSMakeRange(index, 1)]);
+        unichar character = [self characterAtIndex:index];
+        characters.push([NSString stringWithCharacters:&character length:1]);
       }
       return characters;
     }

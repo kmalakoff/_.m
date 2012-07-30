@@ -31,7 +31,6 @@
 
 @interface NSString (JavaScript)
 
-- (const NSS*)typeof;
 - (NSS*(^)())toString;
 
 - (NSA*(^)(NSS* separator))split;

@@ -31,7 +31,7 @@
 
 @implementation NSDictionary (JavaScript)
 
-- (NSS*(^)())toString { return ^{ return self.description; }; }
+- (NSS*(^)())toString { return ^{ return @"[object Object]"; }; }
 
 - (B(^)(id key))hasOwnProperty { return ^B(id key) { return [self objectForKey:key] != nil; }; }
 

@@ -73,9 +73,9 @@
     return self.getAt(index);
   };
 }
-- (NSO*(^)(I index))getAt
+- (NSO*(^)(UI index))getAt
 {
-  return ^NSO*(I index) {
+  return ^NSO*(UI index) {
 #ifdef DEBUG
     NSAssert(nil, @"getAt not implemented for this type");
 #endif

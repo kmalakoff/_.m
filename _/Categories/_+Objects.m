@@ -173,7 +173,7 @@
 
 + (B(^)(id obj))isArray       { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]]; }; }
 + (B(^)(id obj))isObject      { return ^B(id obj) { return _.isDictionary(obj) || _.isArray(obj) || _.isString(obj) || _.isFunction(obj, nil); }; }
-+ (B(^)(id obj))isArguments   { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]] && ((NSA*)obj).isArguments; }; }
++ (B(^)(id obj))isArguments   { return ^B(id obj) { return [obj isKindOfClass:[NSArray class]] && ((NSA*)obj).isArguments(); }; }
 
 + (B(^)(id obj, id target))isFunction  /* DEFINITION: it is a block or you call @"fnName".apply(obj, ... NIL_TERMINATION) or @"fnName".call(obj, ... NIL_TERMINATION) it using a block property or static function. See NSString+SS.h */
 {
@@ -196,7 +196,7 @@
   }; 
 }
 
-+ (B(^)(id obj))isBoolean     { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]] && ((N*)obj).isBoolean; }; }
++ (B(^)(id obj))isBoolean     { return ^B(id obj) { return [obj isKindOfClass:[NSNumber class]] && ((N*)obj).isBoolean(); }; }
 
 + (B(^)(id obj))isDate        { return ^B(id obj) { return [obj isKindOfClass:[NSDate class]]; }; }
 

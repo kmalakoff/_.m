@@ -81,6 +81,6 @@ static char* const SSIsBooleanKey = "IsBoolean";
 }
 - (D)D { return self.doubleValue; }
 
-- (B)isBoolean { return objc_getAssociatedObject(self, SSIsBooleanKey) != nil; } // check for the stored key
+- (B(^)())isBoolean{ return ^B(){ return objc_getAssociatedObject(self, SSIsBooleanKey) != nil; }; }
 
 @end

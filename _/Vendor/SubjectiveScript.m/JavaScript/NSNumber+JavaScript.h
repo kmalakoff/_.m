@@ -31,7 +31,6 @@
 
 @interface NSNumber (JavaScript)
 
-- (const NSS*)typeof;
 - (NSS*(^)())toString;
 
 @end

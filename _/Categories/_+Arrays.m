@@ -103,25 +103,10 @@
   };
 }
 
-+ (A*)flatten:(NSA*)array shallow:(B)shallow output:(A*)output
-{
-  for (id value in array) {
-    if (_.isArray(value)) {
-      shallow ? [output addObjectsFromArray:value] : (void) [self flatten:value shallow:shallow output:output];
-    } else {
-      output.push(value);
-    }
-  }
-  
-  return output;
-}
-
 + (A*(^)(NSA* array, B shallow))flatten
 {
   return ^(NSA* array, B shallow) {
-    A* output = A.new;
-    [self flatten:array shallow:shallow output:output];
-    return output;
+    return array.flatten(shallow);
   };
 }
 
@@ -138,7 +123,7 @@
   return ^(NSA* array, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, array);
 
-    return _.uniq([self flatten:arguments shallow:YES output:A.new]);
+    return _.uniq(arguments.flatten(YES));
   };
 }
 

@@ -27,10 +27,6 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !__has_feature(objc_arc)
-# error QUnit.m requires Automatic Reference Counting to be enabled
-#endif
-
 #import <SenTestingKit/SenTestingKit.h> // adds QUnit syntax on top of SenTestingKit
 
 @interface QUnit : NSObject

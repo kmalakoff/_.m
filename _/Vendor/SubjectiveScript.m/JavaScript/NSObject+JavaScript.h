@@ -31,8 +31,7 @@
 
 @interface NSObject (JavaScript)
 
-- (const NSS*)typeof;
-- (B(^)(NSS* className))instanceof;
+- (B(^)(Class class))instanceof;
 - (NSS*(^)())toString;
 
 // array

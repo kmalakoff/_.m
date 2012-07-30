@@ -322,7 +322,7 @@
 
   // Chaining.
   ok(!_.chain(_.chain(OKV({@"x", N.I(1)}, {@"y", /*undefined*/ nil})).chain()).isEqual(_.chain(OKV({@"x", N.I(1)}, {@"z", N.I(2)})).chain()).B, @"Chained objects containing different values are not equal");
-  equalI(_.chain(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain().isEqual(_.chain(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain()).B, YES, @"`isEqual` can be chained");
+  equalI(_.chain(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain().isEqual(_.chain(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain()).B, true, @"`isEqual` can be chained");
 
   // Custom `isEqual` methods.
   __block O* isEqualObj = OKV({@"isEqual", ^(O* o){ return o.get(@"isEqual") == isEqualObj.get(@"isEqual"); }}, {@"unique", O.new});
@@ -448,7 +448,7 @@
 //  ok(!_.isObject(undefined), @"and not undefined"); /* NOT SUPPORTED: JavaScript-only because of undefined */
   ok(/* CHANGE: string literals are objects since they can use NSString functions ! */ _.chain(@"string").isObject().B, @"and not string");
   ok(!_.chain(N.I(12)).isObject().B, @"and not number");
-  ok(!_.chain(N.B(YES)).isObject().B, @"and not boolean");
+  ok(!_.chain(N.B(true)).isObject().B, @"and not boolean");
   ok(_.chain(S.newS(@"string")).isObject().B, @"but S.newS()");
 }
 

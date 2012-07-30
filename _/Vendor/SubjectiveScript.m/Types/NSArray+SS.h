@@ -36,11 +36,11 @@
 + (A*(^)(const I* values, UI count))newI;
 + (A*(^)(const UI* values, UI count))newUI;
 + (A*(^)(const F* values, UI count))newF;
-+ (A*(^)(const id* values /* NIL_TERMINATION */))newO;
++ (A*(^)(const id* values, UI count))newO;
 
 - (NSS*)mutableClassName;
 - (A*(^)())toMutable;
-- (B)isArguments; 
+- (B(^)())isArguments;
 - (void(^)())markAsArguments;
 
 - (NSO*(^)(UI index))getAt;
@@ -55,4 +55,4 @@
 #define AI(...)   A.newI((I[]){__VA_ARGS__},    sizeof((I[]){__VA_ARGS__})/sizeof(I))
 #define AUI(...)  A.newUI((UI[]){__VA_ARGS__},  sizeof((UI[]){__VA_ARGS__})/sizeof(UI))
 #define AF(...)   A.newF((F[]){__VA_ARGS__},    sizeof((F[]){__VA_ARGS__})/sizeof(F))
-#define AO(...)   A.newO((id[]){__VA_ARGS__, nil})
+#define AO(...)   A.newO((id[]){__VA_ARGS__},   sizeof((id[]){__VA_ARGS__})/sizeof(id))

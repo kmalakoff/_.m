@@ -101,7 +101,7 @@
       results = NSA.new;
 
     for (id item in items.reverseObjectEnumerator)
-      [self insertObject:item atIndex:0];
+      [self insertObject:item atIndex:range.location];
 
     return results;
   };
@@ -115,6 +115,16 @@
       [self insertObject:item atIndex:0];
 
     return self;
+  };
+}
+
+- (NSO*(^)())shift
+{
+  return ^NSO*() {
+    if (!self.count) return nil;
+    id value = [self objectAtIndex:0];
+    [self removeObjectAtIndex:0];
+    return value;
   };
 }
 

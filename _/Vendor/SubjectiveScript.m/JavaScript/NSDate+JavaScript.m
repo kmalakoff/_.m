@@ -28,9 +28,63 @@
 //
 
 #import "NSDate+JavaScript.h"
+#import "ISO8601DateFormatter.h"
 
 @implementation NSDate (JavaScript)
 
-- (NSS*(^)())toString { return ^{ return self.description; }; } // TODO: update to ISO8601 format
++ (Date*(^)(I year, I month, I day))newYMD_JS
+{
+  return ^(I year, I month, I day) {
+    NSDateComponents *components = NSDateComponents.new;
+    components.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    components.year = year;
+    components.month = month+1;
+    components.day = day;
+
+    return components.date;
+  };
+}
+
+- (NSS*(^)())toString
+{
+  return ^{
+    return [[Date ISO8601Writter] stringFromDate:self];
+  };
+}
+
++ (NSDateFormatter*)ISO8601Writter
+{
+  static NSDateFormatter *singleton = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    NSTimeZone *utcTimeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    NSCalendar *utcCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    utcCalendar.timeZone = utcTimeZone;
+
+    singleton = NSDateFormatter.new;
+    singleton.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.000'Z'";
+    singleton.timeZone = utcTimeZone;
+    singleton.calendar = utcCalendar;
+    singleton.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+  });
+  return singleton;
+}
+
++ (NSDateFormatter*)ISO8601Parser
+{
+  static ISO8601DateFormatter *singleton = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    NSTimeZone *utcTimeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    NSCalendar *utcCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    utcCalendar.timeZone = utcTimeZone;
+
+    singleton = ISO8601DateFormatter.new;
+    singleton.format = ISO8601DateFormatCalendar;
+    singleton.defaultTimeZone = utcTimeZone;
+    singleton.includeTime = YES;
+  });
+  return (NSDateFormatter*) singleton;
+}
 
 @end

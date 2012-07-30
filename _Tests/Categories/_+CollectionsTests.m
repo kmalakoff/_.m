@@ -98,7 +98,7 @@
   } @catch (E* ex) {
     ifnull = ex;
   }
-  ok(ifnull.instanceof(@"NSException"), @"handles a null (without inital value) properly");
+  ok(ifnull.instanceof(NSException.class), @"handles a null (without inital value) properly");
 
   equal(_.reduce(nil, ^(/* REQUIRED */ N* sum, N* num, ... /* KEY, COLLECTION */){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
 
@@ -124,7 +124,7 @@
   } @catch (E* ex) {
     ifnull = ex;
   }
-  ok(ifnull.instanceof(@"NSException"), @"handles a null (without inital value) properly");
+  ok(ifnull.instanceof(NSException.class), @"handles a null (without inital value) properly");
 
   equal(_.reduceRight(nil, ^(/* REQUIRED */ N* sum, N* num, ... /* KEY, COLLECTION */){ return NSNull.null; }, N.I(138)), N.I(138), @"handles a null (with initial value) properly");
 
