@@ -17,7 +17,7 @@
 {
   _.each(AI(1, 2, 3), ^(N* num, ... /* KEY, COLLECTION */) {
     ARGS_INDEX(num);
-    equalI(num.I, index + 1, @"each iterators provide value and iteration count");
+    equal(num.I, index + 1, @"each iterators provide value and iteration count");
   });
 
   /* NOT SUPPORTED: JavaScript-only because of 'this' context */
@@ -43,7 +43,7 @@
 
   __block I iAnswers = 0;
   _.each(nil, ^(id v, ... /* KEY, COLLECTION */){ ++iAnswers; });
-  equalI(iAnswers, 0, @"handles a nil properly");
+  equal(iAnswers, 0, @"handles a nil properly");
 }
 
 - (void)test_map
@@ -76,7 +76,7 @@
 - (void)test_reduce
 {
   N* sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0);
-  equalI(sum.I, 6, @"can sum up an array");
+  equal(sum.I, 6, @"can sum up an array");
 
   /* NOT SUPPORTED: JavaScript-only because of 'this' context */
 //  NSD* context = {multiplier : 3};
@@ -84,13 +84,13 @@
 //  equal(sum, 18, @"can reduce with a context object");
 
   sum = _.inject(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0);
-  equalI(sum.I, 6, @"aliased as 'inject'");
+  equal(sum.I, 6, @"aliased as 'inject'");
 
   sum =  __(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).N;
-  equalI(sum.I, 6, @"OO-style reduce");
+  equal(sum.I, 6, @"OO-style reduce");
 
   sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, /* REQUIRED */ 0);
-  equalI(sum.I, 6, @"default initial value");
+  equal(sum.I, 6, @"default initial value");
 
   E* ifnull;
   @try {
@@ -143,7 +143,7 @@
 - (void)test_detect
 {
   N* result = _.detect(AI(1, 2, 3), ^B(N* num){ return num.I * 2 == 4; });
-  equalI(result.I, 2, @"found the first '2' and broke the loop");
+  equal(result.I, 2, @"found the first '2' and broke the loop");
 }
 
 - (void)test_filter
@@ -257,7 +257,7 @@
   equal(N.I(1), _.min(AI(1, 2, 3), /* REQUIRED */ nil), @"can perform a regular Math.min");
 
   N* neg = (N*) _.min(AI(1, 2, 3), ^(N* num){ return N.I(-num.I); });
-  equalI(neg.I, 3, @"can perform a computation-based min");
+  equal(neg.I, 3, @"can perform a computation-based min");
 
   equal(NF_POS_INFINITY, _.min(O.new, /* REQUIRED */ nil), @"Minimum value of an empty object");
   equal(NF_POS_INFINITY, _.min(A.new, /* REQUIRED */ nil), @"Minimum value of an empty array");
@@ -302,10 +302,10 @@
 {
   A* numbers = AI(10, 20, 30, 40, 50); N* num = N.I(35);
   I indexForNum = _.sortedIndex(numbers, num, /* REQUIRED */ nil);
-  equalI(indexForNum, 3, @"35 should be inserted at index 3");
+  equal(indexForNum, 3, @"35 should be inserted at index 3");
 
   I indexFor30 = _.sortedIndex(numbers, N.I(30), /* REQUIRED */ nil);
-  equalI(indexFor30, 2, @"30 should be inserted at index 2");
+  equal(indexFor30, 2, @"30 should be inserted at index 2");
 }
 
 - (void)test_shuffle
@@ -320,7 +320,7 @@
 {
   (^(id arg1, ...) {
     ARGS_AO(arguments, arg1);
-    equalI(arguments.length, 2, @"argument passed");
+    equal(arguments.length, 2, @"argument passed");
 
 //    ok(!_.isArray(arguments), @"arguments object is not an array"); /* NOT SUPPORTED: JavaScript-only because of arguments object */
     ok(_.isArray(_.toArray(arguments)), @"arguments object converted into array");
@@ -344,8 +344,8 @@
 
 - (void)test_size
 {
-  equalI(_.size(OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)})), 3, @"can compute the size of an object");
-  equalI(_.size(AI(1, 2, 3)), 3, @"can compute the size of an array");
+  equal(_.size(OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)})), 3, @"can compute the size of an object");
+  equal(_.size(AI(1, 2, 3)), 3, @"can compute the size of an array");
 }
 
 @end

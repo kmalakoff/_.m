@@ -352,7 +352,7 @@
 
   // Chaining.
   ok(!_.isEqual(__(OKV({@"x", N.I(1)}, {@"y", /*undefined*/ nil})).chain(), __(OKV({@"x", N.I(1)}, {@"z", N.I(2)})).chain()), @"Chained objects containing different values are not equal");
-  equalI(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain().isEqual(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain()).B, true, @"`isEqual` can be chained");
+  equal(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain().isEqual(__(OKV({@"x", N.I(1)}, {@"y", N.I(2)})).chain()).B, true, @"`isEqual` can be chained");
 
   // Custom `isEqual` methods.
   __block O* isEqualObj = OKV({@"isEqual", ^(O* o){ return o.get(@"isEqual") == isEqualObj.get(@"isEqual"); }}, {@"unique", O.new});

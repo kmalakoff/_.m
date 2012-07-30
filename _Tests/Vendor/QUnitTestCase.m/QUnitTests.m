@@ -1,5 +1,5 @@
 //
-//  QUnitTest.m
+//  QUnitTests.m
 //  QUnit.m
 //
 //  Created by Kevin Malakoff on 7/23/12.
@@ -27,9 +27,9 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "QUnit.h"
+#import "QUnitTests.h"
 
-@implementation QUnit (Tests)
+@implementation QUnitTests
 
 + (void)equal:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict
 {
@@ -72,12 +72,12 @@
   
     // check each element
     for (NSInteger index=0; index<actualArray.count; index++) {
-      [QUnit equal:testCase actual:[actualArray objectAtIndex:index] expected:[expectedArray objectAtIndex:index] expression:expression description:description filename:filename lineNumber:lineNumber strict:YES];
+      [QUnitTests equal:testCase actual:[actualArray objectAtIndex:index] expected:[expectedArray objectAtIndex:index] expression:expression description:description filename:filename lineNumber:lineNumber strict:YES];
     }
   }
 
   else
-    [QUnit equal:testCase actual:actual expected:expected expression:expression description:description filename:filename lineNumber:lineNumber strict:YES];
+    [QUnitTests equal:testCase actual:actual expected:expected expression:expression description:description filename:filename lineNumber:lineNumber strict:YES];
 }
 
 + (void)notEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict

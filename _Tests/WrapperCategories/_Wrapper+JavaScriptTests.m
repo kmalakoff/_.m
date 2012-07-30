@@ -15,7 +15,7 @@
 
 - (void)test_length
 {
-  equalI(_.chain(AI(1,2,3)).length.UI, 3, @"length works");
+  equal(_.chain(AI(1,2,3)).length.UI, 3, @"length works");
 }
 
 - (void)test_hasOwnProperty

@@ -131,9 +131,9 @@
     SS.setTimeout(^{ throttledIncr(); }, 220);
     SS.setTimeout(^{ throttledIncr(); }, 240);
     _.delay(^(){ 
-      equalI(counter, 1, @"incr was called immediately"); 
+      equal(counter, 1, @"incr was called immediately"); 
     }, 30);
-    _.delay(^(){ equalI(counter, 4, @"incr was throttled"); start(); }, 400);
+    _.delay(^(){ equal(counter, 4, @"incr was throttled"); start(); }, 400);
   });
 }
 
@@ -160,8 +160,8 @@
     _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil);
     N* result = throttledIncr();
     _.delay(^(){
-      equalI(result.I, 1, @"throttled ^s return their value");
-      equalI(counter, 1, @"incr was called once"); start();
+      equal(result.I, 1, @"throttled ^s return their value");
+      equal(counter, 1, @"incr was called once"); start();
     }, 220);
   });
 }
@@ -173,7 +173,7 @@
     _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* REQUIRED */ return nil; };
     _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil);
     throttledIncr(); throttledIncr();
-    _.delay(^(){ equalI(counter, 2, @"incr was called twice"); start(); }, 220);
+    _.delay(^(){ equal(counter, 2, @"incr was called twice"); start(); }, 220);
   });
 }
 
@@ -189,7 +189,7 @@
     SS.setTimeout(^{ debouncedIncr(); }, 90);
     SS.setTimeout(^{ debouncedIncr(); }, 120);
     SS.setTimeout(^{ debouncedIncr(); }, 150);
-    _.delay(^(){ equalI(counter, 1, @"incr was debounced"); start(); }, 220);
+    _.delay(^(){ equal(counter, 1, @"incr was debounced"); start(); }, 220);
   });
 }
 
@@ -202,13 +202,13 @@
     };
     _DebouncedBlock debouncedIncr = _.debounce(incr, 50, true, /* NIL_TERMINATION */ nil);
     debouncedIncr(); debouncedIncr(); debouncedIncr();
-    equalI(counter, 1, @"incr was called immediately");
+    equal(counter, 1, @"incr was called immediately");
     SS.setTimeout(^{ debouncedIncr(); }, 30);
     SS.setTimeout(^{ debouncedIncr(); }, 60);
     SS.setTimeout(^{ debouncedIncr(); }, 90);
     SS.setTimeout(^{ debouncedIncr(); }, 120);
     SS.setTimeout(^{ debouncedIncr(); }, 150);
-    _.delay(^(){ equalI(counter, 1, @"incr was debounced"); start(); }, 220);
+    _.delay(^(){ equal(counter, 1, @"incr was debounced"); start(); }, 220);
   });
 }
 
@@ -221,8 +221,8 @@
       if (counter < 5) debouncedIncr();
     }, 50, true, /* NIL_TERMINATION */ nil);
     debouncedIncr();
-    equalI(counter, 1, @"incr was called immediately");
-    _.delay(^(){ equalI(counter, 1, @"incr was debounced"); start(); }, 70);
+    equal(counter, 1, @"incr was called immediately");
+    _.delay(^(){ equal(counter, 1, @"incr was debounced"); start(); }, 70);
   });
 }
 
@@ -231,7 +231,7 @@
   _OncedBlock increment = _.once(^id(id arg1, ... /* NIL_TERMINATION */){ num++; /* REQUIRED */ return nil; }, /* NIL_TERMINATION */ nil);
   increment();
   increment();
-  equalI(num, 1, @"once");
+  equal(num, 1, @"once");
 }
 
 - (void)test_wrap {

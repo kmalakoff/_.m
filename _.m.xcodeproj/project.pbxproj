@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A02E1A915C69E07006BD268 /* QUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A02E1A615C69E07006BD268 /* QUnitTests.m */; };
+		0A02E1AA15C69E07006BD268 /* QUWrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A02E1A815C69E07006BD268 /* QUWrap.m */; };
 		0A32614915B8FB4800237F52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32614815B8FB4800237F52 /* Foundation.framework */; };
 		0A32614F15B8FB4900237F52 /* _.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A32614E15B8FB4900237F52 /* _.m */; };
 		0A32615715B8FB4900237F52 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32615615B8FB4900237F52 /* SenTestingKit.framework */; };
@@ -148,8 +150,6 @@
 		0A8E677315BA7CFF00E50BE4 /* _Wrapper+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A8E677115BA7CFF00E50BE4 /* _Wrapper+Private.h */; };
 		0A8E677415BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */; };
 		0A8E677515BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E677215BA7CFF00E50BE4 /* _Wrapper+Private.m */; };
-		0AF192D615C5328F00937CC7 /* QUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF192D315C5328F00937CC7 /* QUnit.m */; };
-		0AF192D715C5328F00937CC7 /* QUnit+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF192D515C5328F00937CC7 /* QUnit+Tests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +163,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A02E1A515C69E07006BD268 /* QUnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUnitTests.h; sourceTree = "<group>"; };
+		0A02E1A615C69E07006BD268 /* QUnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUnitTests.m; sourceTree = "<group>"; };
+		0A02E1A715C69E07006BD268 /* QUWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUWrap.h; sourceTree = "<group>"; };
+		0A02E1A815C69E07006BD268 /* QUWrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUWrap.m; sourceTree = "<group>"; };
 		0A32614515B8FB4800237F52 /* lib_.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib_.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A32614815B8FB4800237F52 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A32614C15B8FB4900237F52 /* _-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "_-Prefix.pch"; sourceTree = "<group>"; };
@@ -284,9 +288,6 @@
 		0AC0449315B9675C006C4984 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		0AC0449415B9675C006C4984 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		0AF192D215C5328F00937CC7 /* QUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUnit.h; sourceTree = "<group>"; };
-		0AF192D315C5328F00937CC7 /* QUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUnit.m; sourceTree = "<group>"; };
-		0AF192D415C5328F00937CC7 /* QUnit+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QUnit+Tests.h"; sourceTree = "<group>"; };
-		0AF192D515C5328F00937CC7 /* QUnit+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QUnit+Tests.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -577,9 +578,10 @@
 			isa = PBXGroup;
 			children = (
 				0AF192D215C5328F00937CC7 /* QUnit.h */,
-				0AF192D315C5328F00937CC7 /* QUnit.m */,
-				0AF192D415C5328F00937CC7 /* QUnit+Tests.h */,
-				0AF192D515C5328F00937CC7 /* QUnit+Tests.m */,
+				0A02E1A515C69E07006BD268 /* QUnitTests.h */,
+				0A02E1A615C69E07006BD268 /* QUnitTests.m */,
+				0A02E1A715C69E07006BD268 /* QUWrap.h */,
+				0A02E1A815C69E07006BD268 /* QUWrap.m */,
 			);
 			name = QUnit.m;
 			path = QUnitTestCase.m;
@@ -837,8 +839,6 @@
 				0A8E677515BA7CFF00E50BE4 /* _Wrapper+Private.m in Sources */,
 				0A8D935115C4BA5000B07CCE /* _Wrapper+JavaScript.m in Sources */,
 				0A8D935515C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m in Sources */,
-				0AF192D615C5328F00937CC7 /* QUnit.m in Sources */,
-				0AF192D715C5328F00937CC7 /* QUnit+Tests.m in Sources */,
 				0A3980A715C682AD00C9B5F0 /* NSString+Versioning.m in Sources */,
 				0A3980AA15C682AD00C9B5F0 /* SS+Functions.m in Sources */,
 				0A3980AD15C682AD00C9B5F0 /* SS+System.m in Sources */,
@@ -865,6 +865,8 @@
 				0A3980EE15C682AD00C9B5F0 /* ISO8601DateFormatter.m in Sources */,
 				0A3980F115C682AD00C9B5F0 /* SS.m in Sources */,
 				0A3980F415C682AD00C9B5F0 /* SubjectiveScript.m in Sources */,
+				0A02E1A915C69E07006BD268 /* QUnitTests.m in Sources */,
+				0A02E1AA15C69E07006BD268 /* QUWrap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

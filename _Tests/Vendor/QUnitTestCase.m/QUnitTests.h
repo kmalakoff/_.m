@@ -1,5 +1,5 @@
 //
-//  QUnit.h
+//  QUnitTests.h
 //  QUnit.m
 //
 //  Created by Kevin Malakoff on 7/23/12.
@@ -27,9 +27,10 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "QUnit.h"
+#import <Foundation/Foundation.h>
+#import <SenTestingKit/SenTestingKit.h> // adds QUnit syntax on top of SenTestingKit
 
-@interface QUnit (Tests)
+@interface QUnitTests : NSObject
 
 + (void)equal:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict;
 + (void)deepEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber;

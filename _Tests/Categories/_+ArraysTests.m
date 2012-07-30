@@ -17,7 +17,7 @@
 {
   equal(_.first(AI(1,2,3), /* REQUIRED */ -1), N.I(1), @"can pull out the first element of an array");
   equal(_.first(AI(1,2,3), /* REQUIRED */ AI_END), N.I(1), @"can pull out the first element of an array (AI_END)");
-  equalI(__(AI(1,2,3)).first(/* REQUIRED */ -1).I, 1, @"can perform OO-style 'first()'");
+  equal(__(AI(1,2,3)).first(/* REQUIRED */ -1).I, 1, @"can perform OO-style 'first()'");
   equal(_.first(AI(1,2,3), 0).join(@", "), @"", @"can pass an index to first");
   equal(_.first(AI(1,2,3), 2).join(@", "), @"1, 2", @"can pass an index to first");
   equal(_.first(AI(1,2,3), 5).join(@", "), @"1, 2, 3", @"can pass an index to first");
@@ -70,9 +70,9 @@
 
 - (void)test_compact
 {
-  equalI(_.compact(AO(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3))).length, 3, @"can trim out all falsy values");
+  equal(_.compact(AO(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3))).length, 3, @"can trim out all falsy values");
   I result = (^(id arg1, ... /* NIL_TERMINATION */){ ARGS_AO(arguments, arg1); return __(arguments).compact().length.UI; })(N.I(0), N.I(1), N.B(false), N.I(2), N.B(false), N.I(3), /* NIL_TERMINATION */ nil);
-  equalI(result, 3, @"works on an arguments object");
+  equal(result, 3, @"works on an arguments object");
 };
 
 - (void)test_flatten
@@ -163,33 +163,33 @@
 {
   A* numbers = AI(1, 2, 3);
 //  numbers.indexOf = null; /* NOT SUPPORTED: JavaScript-only because of native function */
-  equalI(_.indexOf(numbers, N.I(2)), 1, @"can compute indexOf, even without the native function");
+  equal(_.indexOf(numbers, N.I(2)), 1, @"can compute indexOf, even without the native function");
   I result = (^(I arg1, ...  /* NIL_TERMINATION */){ ARGS_AI(arguments, arg1); return _.indexOf(arguments, N.I(2)); })(1, 2, 3, /* AI_END_TERMINATION */ AI_END);
-  equalI(result, 1, @"works on an arguments object");
-  equalI(_.indexOf(nil, N.I(2)), -1, @"handles nulls properly");
+  equal(result, 1, @"works on an arguments object");
+  equal(_.indexOf(nil, N.I(2)), -1, @"handles nulls properly");
 
   numbers = AI(10, 20, 30, 40, 50); N* num = N.I(35);
   I index = /* SPECIALIZED */ _.indexOfSorted(numbers, num);
-  equalI(index, -1, @"35 is not in the list");
+  equal(index, -1, @"35 is not in the list");
 
   numbers = AI(10, 20, 30, 40, 50); num = N.I(40);
   index = /* SPECIALIZED */ _.indexOfSorted(numbers, num);
-  equalI(index, 3, @"40 is in the list");
+  equal(index, 3, @"40 is in the list");
 
   numbers = AI(1, 40, 40, 40, 40, 40, 40, 40, 50, 60, 70); num = N.I(40);
   index = /* SPECIALIZED */ _.indexOfSorted(numbers, num);
-  equalI(index, 1, @"40 is in the list");
+  equal(index, 1, @"40 is in the list");
 }
 
 - (void)test_lastIndexOf
 {
   A* numbers = AI(1, 0, 1, 0, 0, 1, 0, 0, 0);
 //  numbers.lastIndexOf = null; /* NOT SUPPORTED: JavaScript-only because of native function */
-  equalI(_.lastIndexOf(numbers, N.I(1)), 5, @"can compute lastIndexOf, even without the native function");
-  equalI(_.lastIndexOf(numbers, N.I(0)), 8, @"lastIndexOf the other element");
+  equal(_.lastIndexOf(numbers, N.I(1)), 5, @"can compute lastIndexOf, even without the native function");
+  equal(_.lastIndexOf(numbers, N.I(0)), 8, @"lastIndexOf the other element");
   I result = (^(I arg1, ...  /* NIL_TERMINATION */){ ARGS_AI(arguments, arg1); return _.lastIndexOf(arguments, N.I(1)); })(1, 0, 1, 0, 0, 1, 0, 0, 0, /* AI_END_TERMINATION */ AI_END);
-  equalI(result, 5, @"works on an arguments object");
-  equalI(_.indexOf(nil, N.I(2)), -1, @"handles nulls properly");
+  equal(result, 5, @"works on an arguments object");
+  equal(_.indexOf(nil, N.I(2)), -1, @"handles nulls properly");
 }
 
 - (void)test_range
