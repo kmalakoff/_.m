@@ -11,34 +11,35 @@
 
 @implementation QUWrap
 
-+ (id)wrap:(void*)value type:(char[2])type
++ (id)wrap:(unsigned long long)value type:(char[2])type
 {
-  NSAssert(type[0]!=_C_FLT && type[0]!=_C_DBL, @"QUnit current doesn't support floats and doubles");
-
   switch(type[0])
   {
     case _C_ID:
+    case _C_PTR:
 #if __has_feature(objc_arc)
-      return (__bridge id)value;
+      return (__bridge id)(void*)value;
 #else
       return (id)value;
 #endif
+    case _C_UCHR:
+    case _C_SHT:
+    case _C_USHT:
     case _C_INT:
-      return [NSNumber numberWithInt:(int)value];
     case _C_UINT:
-      return [NSNumber numberWithUnsignedInt:(unsigned int)value];
     case _C_LNG:
-      return [NSNumber numberWithInteger:(NSInteger)value];
     case _C_ULNG:
-      return [NSNumber numberWithUnsignedInteger:(NSUInteger)value];
+      return [NSNumber numberWithInt:(NSInteger)value];
     case _C_CHR:
+    case _C_BOOL:
       return [NSNumber numberWithBool:(BOOL)value];
+    case _C_FLT:
+      return [NSNumber numberWithFloat:(float)value];
+    case _C_DBL:
+      return [NSNumber numberWithDouble:(double)value];
     default:
-#if __has_feature(objc_arc)
-      return (__bridge id)value;
-#else
-      return (id)value;
-#endif
+      @throw [NSException exceptionWithName:@"TypeError" reason:@"QUnit: unsupported comparison type" userInfo:nil];
+      return (id)nil;
   }
 }
 

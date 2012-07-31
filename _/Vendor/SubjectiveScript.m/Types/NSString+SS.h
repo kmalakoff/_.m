@@ -36,6 +36,7 @@
 + (NSS*(^)(NSS* format, ...))newFormatted;
 
 - (S*(^)())toMutable;
+- (UI)count;
 
 - (NSS*(^)(UI index))getAt;
 

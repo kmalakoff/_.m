@@ -63,6 +63,7 @@
 }
 
 - (S*(^)())toMutable { return ^{ return self.mutableCopy; }; }
+- (UI)count { return self.length; }
 
 - (NSS*(^)(UI index))getAt
 {

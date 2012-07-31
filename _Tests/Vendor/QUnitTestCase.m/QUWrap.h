@@ -11,9 +11,8 @@
 
 @interface QUWrap : NSObject
 
-+ (id)wrap:(void*)value type:(char[2])type;
++ (id)wrap:(unsigned long long)value type:(char[2])type;
 
 @end
 
-
-#define QUWrapValue(_value) [QUWrap wrap:(void*)_value type:@encode(__typeof__(_value))]
+#define QUWrapValue(_value) [QUWrap wrap:(unsigned long long)_value type:@encode(__typeof__(_value))]
