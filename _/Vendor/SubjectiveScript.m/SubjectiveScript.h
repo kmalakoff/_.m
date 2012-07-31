@@ -33,6 +33,7 @@
 
 // core
 #import "SS.h"
+#import "NSDictionary+NamedProperties.h"
 
 // helpers
 #import "SSArguments.h"

@@ -11,6 +11,16 @@
 #import "Underscore.h"
 #import "SubjectiveScript.h"
 
+// for test_sortByNamed
+@interface Stooge : O
+  @property (strong) NSS* name;
+  @property (strong) N* age;
+@end
+@implementation Stooge
+  @dynamic name, age;
+  IMPLEMENT_NAMED_PROPERTIES
+@end
+
 @implementation __CollectionsTests
 
 - (void)test_each
@@ -273,6 +283,21 @@
 {
   A* people = AO(OKV({@"name", @"curly"}, {@"age", N.I(50)}), OKV({@"name", @"moe"}, {@"age", N.I(30)}));
   people = _.sortBy(people, ^(O* person){ return person.get(@"age"); });
+  equal(_.pluck(people, @"name").join(@", "), @"moe, curly", @"stooges sorted by age");
+
+/* NOT SUPPORTED: JavaScript-only because of undefined */
+//  A* list = [undefined, 4, 1, undefined, 3, 2];
+//  equal(_.sortBy(list, _.identity).join(@","), @"1,2,3,4,,", @"sortBy with undefined values");
+
+  A* list = AO(@"one", @"two", @"three", @"four", @"five");
+  NSA* sorted = _.sortBy(list, @"length");
+  equal(sorted.join(@" "), @"one two four five three", @"sorted by length");
+}
+
+- (void)test_sortByNamed
+{
+  A* people = AO(OTKV(Stooge, {@"name", @"curly"}, {@"age", N.I(50)}), OTKV(Stooge, {@"name", @"moe"}, {@"age", N.I(30)}));
+  people = _.sortBy(people, ^(Stooge* person){ return person.age; });
   equal(_.pluck(people, @"name").join(@", "), @"moe, curly", @"stooges sorted by age");
 
 /* NOT SUPPORTED: JavaScript-only because of undefined */

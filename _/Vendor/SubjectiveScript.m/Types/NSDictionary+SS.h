@@ -31,7 +31,8 @@
 
 @interface NSDictionary (SS)
 
-+ (O*(^)(const KV* values /* NIL_TERMINATION */))newKV;
+- (id)initWithKV:(const KV*) values /* NIL_TERMINATED */;
++ (O*(^)(NSD* other))newO;
 
 - (NSS*)mutableClassName;
 - (O*(^)())toMutable;
@@ -41,4 +42,4 @@
 
 @end
 
-#define OKV(...) O.newKV((KV[]){__VA_ARGS__, /* NIL_TERMINATION */ nil})
+#define OTKV(_T, ...)   ((_T*)[[_T alloc] initWithKV:(KV[]){__VA_ARGS__, /* NIL_TERMINATION */ nil}])

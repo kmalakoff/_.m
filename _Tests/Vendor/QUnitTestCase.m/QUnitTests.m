@@ -51,8 +51,8 @@
 
    [testCase failWithException:([NSException failureInEqualityBetweenObject:actual andObject:expected inFile:filename atLine:lineNumber withDescription:description])];
   }
-  @catch (id anException) {
-    [testCase failWithException:([NSException failureInRaise:expression exception:anException inFile:filename atLine:lineNumber withDescription:description])];
+  @catch (id exception) {
+    [testCase failWithException:([NSException failureInRaise:expression exception:exception inFile:filename atLine:lineNumber withDescription:description])];
   }
 }
 
@@ -100,8 +100,8 @@
 
    [testCase failWithException:([NSException failureInEqualityBetweenObject:actual andObject:expected inFile:filename atLine:lineNumber withDescription:description])];
   }
-  @catch (id anException) {
-    [testCase failWithException:([NSException failureInRaise:expression exception:anException inFile:filename atLine:lineNumber withDescription:description])];
+  @catch (id exception) {
+    [testCase failWithException:([NSException failureInRaise:expression exception:exception inFile:filename atLine:lineNumber withDescription:description])];
   }
 }
 
@@ -118,9 +118,9 @@
   @try {
     callback();
   }
-  @catch (NSException* anException) {
-    if (expectedExceptionName && ![expectedExceptionName isEqual:anException.name])
-     [testCase failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"Unexpected exception type '%@'. Was expecting '%@'", anException.name, expectedExceptionName] inFile:filename atLine:lineNumber withDescription:description])];
+  @catch (NSException* exception) {
+    if (expectedExceptionName && ![expectedExceptionName isEqual:exception.name])
+     [testCase failWithException:([NSException failureInRaise:[NSString stringWithFormat:@"Unexpected exception type '%@'. Was expecting '%@'", exception.name, expectedExceptionName] inFile:filename atLine:lineNumber withDescription:description])];
     return;
   }
 

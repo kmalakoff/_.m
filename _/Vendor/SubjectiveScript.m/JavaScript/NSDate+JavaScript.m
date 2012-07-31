@@ -28,7 +28,7 @@
 //
 
 #import "NSDate+JavaScript.h"
-#import "ISO8601DateFormatter.h"
+// #import "ISO8601DateFormatter.h" // REVIEW: should this be part of the library?
 
 @implementation NSDate (JavaScript)
 
@@ -70,21 +70,21 @@
   return singleton;
 }
 
-+ (NSDateFormatter*)ISO8601Parser
-{
-  static ISO8601DateFormatter *singleton = nil;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    NSTimeZone *utcTimeZone = [NSTimeZone timeZoneWithName:@"UTC"];
-    NSCalendar *utcCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    utcCalendar.timeZone = utcTimeZone;
-
-    singleton = ISO8601DateFormatter.new;
-    singleton.format = ISO8601DateFormatCalendar;
-    singleton.defaultTimeZone = utcTimeZone;
-    singleton.includeTime = YES;
-  });
-  return (NSDateFormatter*) singleton;
-}
+//+ (NSDateFormatter*)ISO8601Parser
+//{
+//  static ISO8601DateFormatter *singleton = nil;
+//  static dispatch_once_t onceToken;
+//  dispatch_once(&onceToken, ^{
+//    NSTimeZone *utcTimeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+//    NSCalendar *utcCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    utcCalendar.timeZone = utcTimeZone;
+//
+//    singleton = ISO8601DateFormatter.new;
+//    singleton.format = ISO8601DateFormatCalendar;
+//    singleton.defaultTimeZone = utcTimeZone;
+//    singleton.includeTime = YES;
+//  });
+//  return (NSDateFormatter*) singleton;
+//}
 
 @end

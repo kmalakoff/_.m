@@ -29,17 +29,26 @@
 
 #import "NSDictionary+SS.h"
 
+// REMOVE
+#import <objc/runtime.h>
+
 @implementation NSDictionary (SS)
 
-+ (O*(^)(const KV* values /* NIL_TERMINATION */))newKV
+- (id)initWithKV:(const KV*) values /* NIL_TERMINATED */
 {
-  return ^(const KV* values /* NIL_TERMINATION */) {
-    O* result = O.new;
-    for (const id* pair = (const id*) values; *pair != nil; pair+=2) {
-      id value = pair[1];
-      [result setValue:value ? value : NSNull.null forKey:pair[0]];
-    }
-    return result;
+  O* dictionary = O.new;
+  for (const id* pair = (const id*) values; *pair != nil; pair+=2) {
+    id value = pair[1];
+    [dictionary setValue:value ? value : NSNull.null forKey:pair[0]];
+  }
+  
+  return [self initWithDictionary:dictionary];
+}
+
++ (O*(^)(NSD* other))newO
+{
+  return ^(NSD* other) {
+    return [O dictionaryWithDictionary:other];
   };
 }
 

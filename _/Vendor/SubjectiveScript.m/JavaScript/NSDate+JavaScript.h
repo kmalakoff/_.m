@@ -37,6 +37,6 @@
 - (NSS*(^)())toString;
 
 + (NSDateFormatter*)ISO8601Writter;
-+ (NSDateFormatter*)ISO8601Parser;
+//+ (NSDateFormatter*)ISO8601Parser;
 
 @end

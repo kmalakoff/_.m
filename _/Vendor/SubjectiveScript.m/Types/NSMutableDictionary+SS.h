@@ -31,14 +31,17 @@
 
 @interface NSMutableDictionary (SS)
 
-+ (A*(^)(UI capacity))newC;
++ (O*(^)(const KV* values /* NIL_TERMINATED */))newWithKV;
++ (O*(^)(UI capacity))newC;
 
 - (O*(^)())toMutable;
 
 - (NSO*(^)(id key, SSGetOrAddBlock add))getOrAdd;
 - (O*(^)(id key, id value))set;
 - (O*(^)(const KV* values /* NIL_TERMINATION */))setKV;
+- (O*(^)(NSD* other))setO;
 
 @end
 
+#define OKV(...)        O.newWithKV((KV[]){__VA_ARGS__, /* NIL_TERMINATION */ nil})
 #define OsetKV(_o, ...) _o.setKV((KV[]){__VA_ARGS__, /* NIL_TERMINATION */ nil})
