@@ -455,7 +455,7 @@
   return ^NSA*(id obj) {
     if (!obj)                                         return NSA.new;
     if (_.isArray(obj))                               return ((NSA*)obj).copy;
-//    if (_.isArguments(obj))                           return ((NSA*)obj).copy;  /* NOT NEEDED: Arugements are an array */
+//    if (_.isArguments(obj))                           return ((NSA*)obj).copy;  /* NOT NEEDED: Arguments are an array */
     if ([obj respondsToSelector:@selector(toArray)])  return [obj performSelector:@selector(toArray)];
     if (_.isFunction(@"toArray", obj))                return @"toArray".call(obj, nil);
     return _.values(obj);

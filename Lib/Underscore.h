@@ -1,5 +1,5 @@
 //
-//  _.h
+//  Underscore.h
 //  _.m
 //
 //  Created by Kevin Malakoff on 7/18/12.
@@ -31,6 +31,7 @@
 # error _.m requires Automatic Reference Counting to be enabled
 #endif
 
+#import "SubjectiveScript.h"
 #import "_Types.h"
 
 // publish _ categories

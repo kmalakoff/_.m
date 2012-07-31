@@ -8,25 +8,10 @@ _.m is a port of Underscore.js to Objective-C
 
 Global Changes
 ------------
-NSObject -> integers, bools are NSNumbers -> use N* and N.I, N.B, etc when iterating and AI, etc for arrays
-null -> nil
-'' and "" to @""
-_> OKV({k, v}, {k, v}) syntax
--> terminators and ignorers AO_, AF_ and _FNone
--> removed all context
-explain the reason for and use of KH
-variable length: add nil termination requirement -> look for /* NIL_TERMINATION */ in the function definition or test
-no context 'this'
-how to use ARGS_KEY and ARGS_AO, etc
-DEBUG vs release
-document difference with Underscore _.isObject definition
-isFunction requires a second parameter -> looking up functions
-
-Add link to Underscore.js documentation
 
 Other Changes
 ------------
-_() 
+_()
 _Wrapper* __(id); -> two underscores
 
 Arrays
@@ -35,7 +20,7 @@ Arrays
 first
 _.first = _.head = _.take = function(array, n, guard)
 + (id(^)(A* array, I n))first;  // mandatory second parameter: -1 replaces missing paramter
-+ (id(^)(A* array, ... /* KEY, COLLECTION */))firstIterator; // CHANGE 
++ (id(^)(A* array, ... /* KEY, COLLECTION */))firstIterator; // CHANGE
 
 
 initial

@@ -110,7 +110,7 @@
     va_end(argList); \
   }
 
-// one argument of type NSNumber
+// one argument of type NSObject
 #define ARG_NSO(_name, _lastNamedArg) \
   NSO* _name; \
   { \
