@@ -18,7 +18,7 @@
   return ^B(id obj) { 
     if (_.isNull(obj)) return YES;
     if (_.isNumber(obj)) return !((N*)obj).B;
-    if (_.isArray(obj) || _.isDictionary(obj)) return !_.isEmpty(obj);
+    if (_.isArray(obj) || _.isDictionary(obj)) return _.isEmpty(obj);
     if (_.isString(obj)) return !(((NSS*)obj).length);
     
     // TODO: write test

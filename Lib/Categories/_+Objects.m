@@ -103,9 +103,9 @@
   };
 }
 
-+ (NSO*(^)(NSO* obj))clone /* RETURNS MUTABLE IF POSSIBLE */
++ (id(^)(NSO* obj))clone /* RETURNS MUTABLE IF POSSIBLE */
 {
-  return ^NSO*(NSO* obj) {
+  return ^id(NSO* obj) {
     if (!obj)
       return obj;
     else if ([obj respondsToSelector:@selector(mutableCopyWithZone:)])

@@ -28,11 +28,11 @@
 - (void)test_times 
 {
   A* vals = A.new;
-  _.chain(N.I(3)).times(^(I i) { vals.push(N.I(i)); });
+  _.chain(N.I(3)).times(^(UI i) { vals.push(N.I(i)); });
   ok(_.isEqual(vals, AI(0,1,2)), @"is 0 indexed");
   //
   vals = A.new;
-  _.chain(N.I(3)).times(^(I i) { vals.push(N.I(i)); });
+  _.chain(N.I(3)).times(^(UI i) { vals.push(N.I(i)); });
   ok(_.isEqual(vals, AI(0,1,2)), @"works as a wrapper");
 }
 

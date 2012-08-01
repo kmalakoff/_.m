@@ -100,7 +100,7 @@ typedef id                  (^_SortByBlock)(id value, ... /* KEY, LIST */);
 typedef id                  (^_GroupByBlock)(id value, ... /* KEY, LIST */);
 typedef id                  (^_SortedIndexBlock)(id value, ... /* KEY, LIST */);
 
-typedef id                  (^_MemoizedBlock)(id arg1, ... /* NIL_TERMINATION */);
+typedef NSO*                (^_MemoizedBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_MemoizeBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_MemoizeHashBlock)(id arg1, ... /* NIL_TERMINATION */);
 
@@ -129,4 +129,4 @@ typedef void                (^_TapBlock)(id obj);
 
 typedef id                  (^_IdentityBlock)(id value);
 
-typedef void                (^_TimesBlock)(I index);
+typedef void                (^_TimesBlock)(UI index);

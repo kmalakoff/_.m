@@ -43,7 +43,7 @@
 
 + (O*(^)(O* obj, NSD* default1, ... /* NIL_TERMINATION */))defaults;
 
-+ (NSO*(^)(NSO* obj))clone; /* RETURNS MUTABLE IF POSSIBLE */
++ (id(^)(NSO* obj))clone; /* RETURNS MUTABLE IF POSSIBLE */
 
 + (NSO*(^)(NSO* obj, _TapBlock interceptor))tap;
 

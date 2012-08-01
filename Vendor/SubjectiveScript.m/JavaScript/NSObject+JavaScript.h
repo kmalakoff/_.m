@@ -43,4 +43,8 @@
 - (B(^)(id key))hasOwnProperty;
 - (B(^)(NSO* obj))in;
 
+// string
+- (NSS*(^)(NSS* string))add;
+- (S*(^)(NSS* string))append;
+
 @end

@@ -187,7 +187,7 @@
 
 + (_ComposedBlock /* NIL_TERMINATION */(^)(_ComposeBlock func1, ... /* NIL_TERMINATION */))compose
 {
-  return ^_ComposeBlock(_ComposeBlock func1, ... /* NIL_TERMINATION */) {
+  return ^_ComposedBlock(_ComposeBlock func1, ... /* NIL_TERMINATION */) {
     ARGS_AO(funcs, func1);
 
 #ifdef DEBUG

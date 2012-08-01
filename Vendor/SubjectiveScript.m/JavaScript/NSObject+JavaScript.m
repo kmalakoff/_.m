@@ -57,7 +57,7 @@
 - (S*(^)(NSS* separator))join
 {
 #ifdef DEBUG
-  NSAssert(nil, @"join not implemented for this type");
+    NSAssert(nil, @"join not implemented for this type");
 #endif
 
   return nil;
@@ -65,9 +65,9 @@
 - (A*(^)(id value))push
 {
   return ^(NSO* obj) {
-    #ifdef DEBUG
-      NSAssert(nil, @"push not implemented for this type");
-    #endif
+#ifdef DEBUG
+    NSAssert(nil, @"push not implemented for this type");
+#endif
     return A.new;
   };
 }
@@ -76,6 +76,9 @@
 - (B(^)(id key))hasOwnProperty
 {
   return ^B(id key) {
+#ifdef DEBUG
+    NSAssert(nil, @"hasOwnProperty not implemented for this type");
+#endif
     return false;
   };
 }
@@ -84,6 +87,27 @@
 {
   return ^B(NSO* obj) {
     return obj.get(self) != nil;
+  };
+}
+
+// string
+- (NSS*(^)(NSS* string))add
+{
+  return ^(NSS* string) {
+#ifdef DEBUG
+    NSAssert(nil, @"add not implemented for this type");
+#endif
+    return string;
+  };
+}
+
+- (S*(^)(NSS* string))append
+{
+  return ^(NSS* string) {
+#ifdef DEBUG
+    NSAssert(nil, @"append not implemented for this type");
+#endif
+    return string.mutableCopy;
   };
 }
 
