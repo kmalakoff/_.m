@@ -35,25 +35,25 @@
 
 @implementation _Wrapper (Arrays)
 
-- (_Wrapper*(^)(I n))first
+- (_Wrapper*(^)(UI n))first
 {
-  return ^id(I n) {
+  return ^id(UI n) {
     return _.chain(_.first(self.NSA, n));
   };
 }
-- (_Wrapper*(^)(I n))head { return self.first; } // ALIAS
-- (_Wrapper*(^)(I n))take { return self.first; } // ALIAS
+- (_Wrapper*(^)(UI n))head { return self.first; } // ALIAS
+- (_Wrapper*(^)(UI n))take { return self.first; } // ALIAS
 
-- (_Wrapper*(^)(I n))initial
+- (_Wrapper*(^)(UI n))initial
 {
-  return ^(I n) {
+  return ^(UI n) {
     return _.chain(_.initial(self.NSA, n));
   };
 }
 
-- (_Wrapper*(^)(I n))last
+- (_Wrapper*(^)(UI n))last
 {
-  return ^(I n) {
+  return ^(UI n) {
     return _.chain(_.last(self.NSA, n));
   };
 }
@@ -103,21 +103,21 @@
   return ^(NSA* array1, ... /* NIL_TERMINATION */) {
     ARGS_AO(rest, array1);
 
-    return _.chain(_.filter(_.uniq(self.NSA), ^(id item, ... /* KEY, COLLECTION */) {
-      return _.every(rest, ^B(id other, ... /* KEY, COLLECTION */) {
+    return _.chain(_.filter(_.uniq(self.NSA), ^(id item, ... /* KEY, LIST */) {
+      return _.every(rest, ^B(id other, ... /* KEY, LIST */) {
         return _.indexOf(other, item) >= 0;
       });
     }));
   };
 }
 
-- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))difference
+- (_Wrapper*(^)(NSA* other1, ... /* NIL_TERMINATION */))difference
 {
-  return ^(NSA* array1, ... /* NIL_TERMINATION */) {
-    ARGS_AO(rest, array1);
+  return ^(NSA* other1, ... /* NIL_TERMINATION */) {
+    ARGS_AO(rest, other1);
 
     rest = _.flatten(rest, YES);
-    return _.chain(_.filter(self.NSA, ^B(id value, ... /* KEY, COLLECTION */) { return !_.include(rest, value); }));
+    return _.chain(_.filter(self.NSA, ^B(id value, ... /* KEY, LIST */) { return !_.include(rest, value); }));
   };
 }
 
@@ -179,16 +179,16 @@
   };
 }
 
-- (_Wrapper*(^)(UI count))rangeAuto /* SPECIALIZED */
-{
-  return ^(UI count) {
-    return _.chain(_.range(0, count, 1));
-  };
-}
 - (_Wrapper*(^)(I start, I stop, I step))range
 {
   return ^(I start, I stop, I step) {
     return _.chain(_.range(start, stop, step));
+  };
+}
+- (_Wrapper*(^)(UI stop))rangeSimple /* SPECIALIZED */
+{
+  return ^(UI stop) {
+    return _.chain(_.range(0, stop, 1));
   };
 }
 

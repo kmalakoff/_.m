@@ -15,7 +15,7 @@
 
 - (void)test_each
 {
-  _.chain(AI(1, 2, 3)).each(^(N* num, ... /* KEY, COLLECTION */) {
+  _.chain(AI(1, 2, 3)).each(^(N* num, ... /* KEY, LIST */) {
     ARGS_INDEX(num);
     equal(num.I, index + 1, @"each iterators provide value and iteration count");
   });
@@ -26,39 +26,39 @@
 //  equal(answers.join(@", "), @"5, 10, 15", @"context object property accessed");
 
   __block A* answers = A.new;
-  _.chain(AI(1, 2, 3)).forEach(^(N* num, ... /* KEY, COLLECTION */){ answers.push(num); });
+  _.chain(AI(1, 2, 3)).forEach(^(N* num, ... /* KEY, LIST */){ answers.push(num); });
   equal(answers.join(@", "), @"1, 2, 3", @"aliased as 'forEach'");
 
   /* NOT SUPPORTED: JavaScript-only because of prototype */
   answers =  A.new;
   O* obj = OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)});
 //  obj.constructor.prototype.four = 4; 
-  _.chain(obj).each(^(id value, ... /* KEY, COLLECTION */){ ARGS_KEY(value); answers.push(key); });
+  _.chain(obj).each(^(id value, ... /* KEY, LIST */){ ARGS_KEY(value); answers.push(key); });
   equal(answers.join(@", "), @"one, two, three", @"iterating over objects works, and ignores the object prototype.");
 //  delete obj.constructor.prototype.four;
 
   __block B answer = false;
-  _.chain(AI(1, 2, 3)).each(^(N* num, ... /* KEY, COLLECTION */){ ARGS_COLLECTION(num, arr); if (_.chain(arr).include(num).B) answer = true; });
+  _.chain(AI(1, 2, 3)).each(^(N* num, ... /* KEY, LIST */){ ARGS_LIST(num, arr); if (_.chain(arr).include(num).B) answer = true; });
   ok(answer, @"can reference the original collection from inside the iterator");
 
   __block I iAnswers = 0;
-  _.chain(nil).each(^(id v, ... /* KEY, COLLECTION */){ ++iAnswers; });
+  _.chain(nil).each(^(id v, ... /* KEY, LIST */){ ++iAnswers; });
   equal(iAnswers, 0, @"handles a nil properly");
 }
 
 - (void)test_map
 {
-  A* doubled = _.chain(AI(1, 2, 3)).map(^(N* num, ... /* KEY, COLLECTION */){ return N.I(num.I * 2); }).A;
+  A* doubled = _.chain(AI(1, 2, 3)).map(^(N* num, ... /* KEY, LIST */){ return N.I(num.I * 2); }).A;
   equal(doubled.join(@", "), @"2, 4, 6", @"doubled numbers");
 
-  doubled = _.chain(AI(1, 2, 3)).collect(^(N* num, ... /* KEY, COLLECTION */){ return N.I(num.I * 2); }).A;
+  doubled = _.chain(AI(1, 2, 3)).collect(^(N* num, ... /* KEY, LIST */){ return N.I(num.I * 2); }).A;
   equal(doubled.join(@", "), @"2, 4, 6", @"aliased as 'collect'");
 
   /* NOT SUPPORTED: JavaScript-only because of 'this' context */
 //  __block A* tripled = _.mapWithContext(AI(1, 2, 3), ^(N* num, ..., O* this){ return N.I(num.I * this.get(@"multiplier")).I); }, OKV({@"multiplier", N.I(3)})); // CHANGE
 //  equal(tripled.join(@", "), @"3, 6, 9", @"tripled numbers with context");
 
-  doubled =  _.chain(AI(1, 2, 3)).map(^(N* num, ... /* KEY, COLLECTION */){ return N.I(num.I * 2); }).A;
+  doubled =  _.chain(AI(1, 2, 3)).map(^(N* num, ... /* KEY, LIST */){ return N.I(num.I * 2); }).A;
   equal(doubled.join(@", "), @"2, 4, 6", @"OO-style doubled numbers");
 
   /* NOT SUPPORTED: JavaScript-only because of DOM */
@@ -69,13 +69,13 @@
 //  NSA* ids = _.map(document.images, ^(n){ return n.id; });
 //  ok(idsAI(0) == "chart_image", @"can use collection methods on HTMLCollections");
 
-  A* ifnil = _.chain(nil).map(^id(id v, ... /* KEY, COLLECTION */){ return nil; }).A;
+  A* ifnil = _.chain(nil).map(^id(id v, ... /* KEY, LIST */){ return nil; }).A;
   ok(_.chain(ifnil).isArray().B && ifnil.length == 0, @"handles a nil properly");
 }
 
 - (void)test_reduce
 {
-  I sum = _.chain(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).I;
+  I sum = _.chain(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, 0).I;
   equal(sum, 6, @"can sum up an array");
 
   /* NOT SUPPORTED: JavaScript-only because of 'this' context */
@@ -83,54 +83,54 @@
 //  N* sum = _.reduce(AI(1, 2, 3), ^(sum, num){ return sum + num * this.multiplier; }, 0, context);
 //  equal(sum, 18, @"can reduce with a context object");
 
-  sum = _.chain(AI(1, 2, 3)).inject(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).I;
+  sum = _.chain(AI(1, 2, 3)).inject(^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, 0).I;
   equal(sum, 6, @"aliased as 'inject'");
 
-  sum =  _.chain(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, 0).I;
+  sum =  _.chain(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, 0).I;
   equal(sum, 6, @"OO-style reduce");
 
-  sum = _.chain(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, COLLECTION */){ return N.I(sum.I + num.I); }, /* REQUIRED */ 0).I;
+  sum = _.chain(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, /* REQUIRED */ 0).I;
   equal(sum, 6, @"default initial value");
 
   E* ifnull;
   @try {
-    _.chain(nil).reduce(^(/* REQUIRED */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, 0);
+    _.chain(nil).reduce(^(/* REQUIRED */ N* memo, N* num, ... /* KEY, LIST */){ return memo; }, 0);
   } @catch (E* ex) {
     ifnull = ex;
   }
   ok(ifnull.instanceof(NSException.class), @"handles a null (without inital value) properly");
 
-  equal(_.chain(nil).reduce(^(/* REQUIRED */ N* sum, N* num, ... /* KEY, COLLECTION */){ return NSNull.null; }, N.I(138)).I, 138, @"handles a null (with initial value) properly");
+  equal(_.chain(nil).reduce(^(/* REQUIRED */ N* sum, N* num, ... /* KEY, LIST */){ return NSNull.null; }, N.I(138)).I, 138, @"handles a null (with initial value) properly");
 
   /* NOT SUPPORTED: JavaScript-only because of 'undefined' */
 //  equal(_.reduce(A.new, ^{}, undefined), undefined, @"undefined can be passed as a special case");
-  raises(^{ _.chain(A.new).reduce(^(/* REQUIRED */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, /* REQUIRED */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
+  raises(^{ _.chain(A.new).reduce(^(/* REQUIRED */ N* memo, N* num, ... /* KEY, LIST */){ return memo; }, /* REQUIRED */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
 }
 
 - (void)test_reduceRight
 {
-  S* list = _.chain(AO(@"foo", @"bar", @"baz")).reduceRight(^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.add(str); }, S.new).S;
+  S* list = _.chain(AO(@"foo", @"bar", @"baz")).reduceRight(^(S* memo, S* str, ... /* KEY, LIST */){ return memo.add(str); }, S.new).S;
   equal(list, @"bazbarfoo", @"can perform right folds");
 
-  list = _.chain(AO(@"foo", @"bar", @"baz")).foldr(^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.add(str); }, S.new).S;
+  list = _.chain(AO(@"foo", @"bar", @"baz")).foldr(^(S* memo, S* str, ... /* KEY, LIST */){ return memo.add(str); }, S.new).S;
   equal(list, @"bazbarfoo", @"aliased as 'foldr'");
 
-  list = _.chain(AO(@"foo", @"bar", @"baz")).foldr(^(S* memo, S* str, ... /* KEY, COLLECTION */){ return memo.add(str); }, /* REQUIRED */ nil).S;
+  list = _.chain(AO(@"foo", @"bar", @"baz")).foldr(^(S* memo, S* str, ... /* KEY, LIST */){ return memo.add(str); }, /* REQUIRED */ nil).S;
   equal(list, @"bazbarfoo", @"default initial value");
 
   E* ifnull;
   @try {
-    _.chain(nil).reduceRight(^(/* REQUIRED */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, 0);
+    _.chain(nil).reduceRight(^(/* REQUIRED */ N* memo, N* num, ... /* KEY, LIST */){ return memo; }, 0);
   } @catch (E* ex) {
     ifnull = ex;
   }
   ok(ifnull.instanceof(NSException.class), @"handles a null (without inital value) properly");
 
-  equal(_.chain(nil).reduceRight(^(/* REQUIRED */ N* sum, N* num, ... /* KEY, COLLECTION */){ return NSNull.null; }, N.I(138)).I, 138, @"handles a null (with initial value) properly");
+  equal(_.chain(nil).reduceRight(^(/* REQUIRED */ N* sum, N* num, ... /* KEY, LIST */){ return NSNull.null; }, N.I(138)).I, 138, @"handles a null (with initial value) properly");
 
   /* NOT SUPPORTED: JavaScript-only because of 'undefined' */
 //  equal(_.reduceRight(A.new, ^{}, undefined), undefined, @"undefined can be passed as a special case");
-  raises(^{ _.chain(A.new).reduceRight(^(/* REQUIRED */ N* memo, N* num, ... /* KEY, COLLECTION */){ return memo; }, /* REQUIRED */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
+  raises(^{ _.chain(A.new).reduceRight(^(/* REQUIRED */ N* memo, N* num, ... /* KEY, LIST */){ return memo; }, /* REQUIRED */ 0); }, @"TypeError", @"throws an error for empty arrays with no initial value");
 }
 
 - (void)test_find
@@ -148,10 +148,10 @@
 
 - (void)test_filter
 {
-  A* evens = _.chain(AI(1, 2, 3, 4, 5, 6)).select(^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }).A;
+  A* evens = _.chain(AI(1, 2, 3, 4, 5, 6)).select(^B(N* num, ... /* KEY, LIST */){ return num.I % 2 == 0; }).A;
   equal(evens.join(@", "), @"2, 4, 6", @"selected each even number");
 
-  evens = _.chain(AI(1, 2, 3, 4, 5, 6)).filter(^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }).A;
+  evens = _.chain(AI(1, 2, 3, 4, 5, 6)).filter(^B(N* num, ... /* KEY, LIST */){ return num.I % 2 == 0; }).A;
   equal(evens.join(@", "), @"2, 4, 6", @"aliased as 'filter'");
 
   /* NOT SUPPORTED: JavaScript-only because of 'this' context */
@@ -161,7 +161,7 @@
 
 - (void)test_reject
 {
-  A* odds = _.chain(AI(1, 2, 3, 4, 5, 6)).reject(^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }).A;
+  A* odds = _.chain(AI(1, 2, 3, 4, 5, 6)).reject(^B(N* num, ... /* KEY, LIST */){ return num.I % 2 == 0; }).A;
   equal(odds.join(@", "), @"1, 3, 5", @"rejected each even number");
 }
 
@@ -170,8 +170,8 @@
   ok(_.chain(A.new).all(/* SPECIALIZED */ _.identityTruthy).B, @"the empty set");
   ok(_.chain(AB(true, true, true)).all(/* SPECIALIZED */ _.identityTruthy).B, @"all true values");
   ok(!_.chain(AB(true, false, true)).all(/* SPECIALIZED */ _.identityTruthy).B, @"one false value");
-  ok(_.chain(AI(0, 10, 28)).all(^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }).B, @"even numbers");
-  ok(!_.chain(AI(0, 11, 28)).all(^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }).B, @"an odd number");
+  ok(_.chain(AI(0, 10, 28)).all(^B(N* num, ... /* KEY, LIST */){ return num.I % 2 == 0; }).B, @"even numbers");
+  ok(!_.chain(AI(0, 11, 28)).all(^B(N* num, ... /* KEY, LIST */){ return num.I % 2 == 0; }).B, @"an odd number");
   ok(_.chain(AI(1)).all(/* SPECIALIZED */ _.identityTruthy).B == true, @"cast to boolean - true");
   ok(_.chain(AI(0)).all(/* SPECIALIZED */ _.identityTruthy).B == false, @"cast to boolean - false");
   ok(_.chain(AB(true, true, true)).every(/* SPECIALIZED */ _.identityTruthy).B, @"aliased as 'every'");
@@ -184,8 +184,8 @@
   ok(_.chain(AB(false, false, true)).any(/* REQUIRED */ nil).B, @"one true value");
   ok(_.chain(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"yes", N.B(false))).any(/* REQUIRED */ nil).B, @"a string");
   ok(!_.chain(AO(/* NIL IS TERMINATOR */ NSNull.null, N.I(0), @"", N.B(false))).any(/* REQUIRED */ nil).B, @"falsy values");
-  ok(!_.chain(AI(1, 11, 29)).any(^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }).B, @"all odd numbers");
-  ok(_.chain(AI(1, 10, 29)).any(^B(N* num, ... /* KEY, COLLECTION */){ return num.I % 2 == 0; }).B, @"an even number");
+  ok(!_.chain(AI(1, 11, 29)).any(^B(N* num, ... /* KEY, LIST */){ return num.I % 2 == 0; }).B, @"all odd numbers");
+  ok(_.chain(AI(1, 10, 29)).any(^B(N* num, ... /* KEY, LIST */){ return num.I % 2 == 0; }).B, @"an even number");
   ok(_.chain(AI(1)).any(/* SPECIALIZED */ _.identityTruthy).B == true, @"cast to boolean - true");
   ok(_.chain(AI(0)).any(/* SPECIALIZED */ _.identityTruthy).B == false, @"cast to boolean - false");
   ok(_.chain(AB(false, false, true)).some(/* REQUIRED */ nil).B, @"aliased as 'some'");
@@ -286,7 +286,7 @@
 
 - (void)test_groupBy
 {
-  O* parity = _.chain(AI(1, 2, 3, 4, 5, 6)).groupBy(^(N* num, ... /* KEY, COLLECTION */){ return N.I(num.I % 2); }).O;
+  O* parity = _.chain(AI(1, 2, 3, 4, 5, 6)).groupBy(^(N* num, ... /* KEY, LIST */){ return N.I(num.I % 2); }).O;
   
   ok(N.I(0).in(parity) && N.I(1).in(parity), @"created a group for each value");
   equal(parity.get(N.I(0)).join(@", "), @"2, 4, 6", @"put each even number in the right group");
@@ -301,16 +301,16 @@
 - (void)test_sortedIndex
 {
   A* numbers = AI(10, 20, 30, 40, 50); N* num = N.I(35);
-  I indexForNum = _.chain(numbers).sortedIndex(num, /* REQUIRED */ nil).I;
+  UI indexForNum = _.chain(numbers).sortedIndex(num, /* REQUIRED */ nil).UI;
   equal(indexForNum, 3, @"35 should be inserted at index 3");
 
-  I indexFor30 = _.chain(numbers).sortedIndex(N.I(30), /* REQUIRED */ nil).I;
+  UI indexFor30 = _.chain(numbers).sortedIndex(N.I(30), /* REQUIRED */ nil).UI;
   equal(indexFor30, 2, @"30 should be inserted at index 2");
 }
 
 - (void)test_shuffle
 {
-  A* numbers = _.chain(nil).rangeAuto(10).A; /* SPECIALIZED */
+  A* numbers = _.chain(nil).rangeSimple(10).A; /* SPECIALIZED */
   NSA* shuffled = _.chain(numbers).shuffle().sort(/* REQUIRED */ nil).NSA;
   notStrictEqual(numbers, shuffled, @"original object is unmodified");
   equal(shuffled.join(@","), numbers.join(@","), @"contains the same members before and after shuffle");

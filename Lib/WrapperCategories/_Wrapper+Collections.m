@@ -84,36 +84,36 @@
 }
 - (_Wrapper*(^)(_FindBlock iterator))detect {return self.find; } // ALIAS
 
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))filter 
+- (_Wrapper*(^)(_ItemTestBlock iterator))filter 
 {
-  return ^(_CollectionItemTestBlock iterator) {
+  return ^(_ItemTestBlock iterator) {
     return _.chain(_.filter(self.value(), iterator));
   };
 }
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))select { return self.filter; } // ALIAS
+- (_Wrapper*(^)(_ItemTestBlock iterator))select { return self.filter; } // ALIAS
 
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))reject
+- (_Wrapper*(^)(_ItemTestBlock iterator))reject
 {
-  return ^(_CollectionItemTestBlock iterator) {
+  return ^(_ItemTestBlock iterator) {
     return _.chain(_.reject(self.value(), iterator));
   };
 }
 
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))all
+- (_Wrapper*(^)(_ItemTestBlock iterator))all
 {
-  return ^(_CollectionItemTestBlock iterator) {
+  return ^(_ItemTestBlock iterator) {
     return _.chain(N.B(_.all(self.value(), iterator)));
   };
 }
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))every { return self.all; } // ALIAS
+- (_Wrapper*(^)(_ItemTestBlock iterator))every { return self.all; } // ALIAS
 
-- (_Wrapper*(^)(/* REQUIRED */ _CollectionItemTestBlock iterator))any
+- (_Wrapper*(^)(/* REQUIRED */ _ItemTestBlock iterator))any
 {
-  return ^(_CollectionItemTestBlock iterator) {
+  return ^(_ItemTestBlock iterator) {
     return _.chain(N.B(_.any(self.value(), iterator)));
   };
 }
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))some { return self.any; } // ALIAS
+- (_Wrapper*(^)(_ItemTestBlock iterator))some { return self.any; } // ALIAS
 
 - (_Wrapper*(^)(id target))include
 {
@@ -128,15 +128,15 @@
   return ^(NSS* methodName, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
 
-    return _.chain(_.map(self.value(), ^(NSO* value, ... /* KEY, COLLECTION */) {
+    return _.chain(_.map(self.value(), ^(NSO* value, ... /* KEY, LIST */) {
       return methodName.apply(value, arguments);
     }));
   };
 }
 
-- (_Wrapper*(^)(NSString *keyPath))pluck {
-  return ^(NSString *keyPath) {
-    return _.chain(_.pluck(self.value(), keyPath));
+- (_Wrapper*(^)(NSString *propertyName))pluck {
+  return ^(NSString *propertyName) {
+    return _.chain(_.pluck(self.value(), propertyName));
   };
 }
 

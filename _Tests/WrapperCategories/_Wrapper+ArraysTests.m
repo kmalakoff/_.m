@@ -15,8 +15,6 @@
 
 - (void)test_first
 {
-  equal(_.chain(AI(1,2,3)).first(/* REQUIRED */ -1).N, N.I(1), @"can pull out the first element of an array");
-  equal(_.chain(AI(1,2,3)).first(/* REQUIRED */ AI_END).N, N.I(1), @"can pull out the first element of an array (AI_END)");
   equal(_.chain(AI(1,2,3)).first(/* REQUIRED */ -1).N, N.I(1), @"can perform OO-style 'first()'");
   equal(_.chain(AI(1,2,3)).first(0).NSA.join(@", "), @"", @"can pass an index to first");
   equal(_.chain(AI(1,2,3)).first(2).NSA.join(@", "), @"1, 2", @"can pass an index to first");
@@ -34,7 +32,6 @@
 - (void)test_initial
 {
   equal(_.chain(AI(1,2,3,4,5)).initial(/* REQUIRED */ -1).NSA.join(@", "), @"1, 2, 3, 4", @"working initial()");
-  equal(_.chain(AI(1,2,3,4,5)).initial(/* REQUIRED */ AI_END).NSA.join(@", "), @"1, 2, 3, 4", @"working initial() (AI_END)");
   equal(_.chain(AI(1,2,3,4)).initial(2).NSA.join(@", "), @"1, 2", @"initial can take an index");
   NSA* result = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  _.chain(arguments).initial(/* REQUIRED */ -1).NSA; })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   equal(result.join(@", "), @"1, 2, 3", @"initial works on arguments object");
@@ -45,7 +42,6 @@
 - (void)test_last
 {
   equal(_.chain(AI(1,2,3)).last(/* REQUIRED */ -1).N, N.I(3), @"can pull out the last element of an array");
-  equal(_.chain(AI(1,2,3)).last(/* REQUIRED */ AI_END).N, N.I(3), @"can pull out the last element of an array (AI_END)");
   equal(_.chain(AI(1,2,3)).last(0).NSA.join(@", "), @"", @"can pass an index to last");
   equal(_.chain(AI(1,2,3)).last(2).NSA.join(@", "), @"2, 3", @"can pass an index to last");
   equal(_.chain(AI(1,2,3)).last(5).NSA.join(@", "), @"1, 2, 3", @"can pass an index to last");
@@ -59,7 +55,6 @@
 {
   A* numbers = AI(1, 2, 3, 4);
   equal(_.chain(numbers).rest(/* REQUIRED */ -1).NSA.join(@", "), @"2, 3, 4", @"working rest()");
-  equal(_.chain(numbers).rest(/* REQUIRED */ AI_END).NSA.join(@", "), @"2, 3, 4", @"working rest() (AI_END)");
   equal(_.chain(numbers).rest(0).NSA.join(@", "), @"1, 2, 3, 4", @"working rest(0)");
   equal(_.chain(numbers).rest(2).NSA.join(@", "), @"3, 4", @"rest can take an index");
   NSA* result = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  _.chain(arguments).tail(/* REQUIRED */ -1).NSA; })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
@@ -107,10 +102,10 @@
   equal(_.chain(list).uniqAdvanced(true, /* REQUIRED */ nil).NSA.join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster"); /* SPECIALIZED */
 
   list = AO(OKV({@"name", @"moe"}), OKV({@"name", @"curly"}), OKV({@"name", @"larry"}), OKV({@"name", @"curly"}));
-  _MapBlock iterator = ^(O* value, ... /* KEY, COLLECTION */) { return value.get(@"name"); };
+  _MapBlock iterator = ^(O* value, ... /* KEY, LIST */) { return value.get(@"name"); };
   equal(_.chain(list)./* SPECIALIZED */ uniqAdvanced(false, iterator).map(iterator).NSA.join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator");
 
-  iterator = ^(N* value, ... /* KEY, COLLECTION */) { return N.I(value.I + 1); };
+  iterator = ^(N* value, ... /* KEY, LIST */) { return N.I(value.I + 1); };
   list = AI(1, 2, 2, 3, 4, 4);
   equal(_.chain(list).uniqAdvanced(true, iterator).NSA.join(@", "), @"1, 2, 3, 4", @"iterator works with sorted array");
 
@@ -194,8 +189,8 @@
 
 - (void)test_range
 {
-  equal(/* SPECIALIZED */ _.chain(nil).rangeAuto(0).NSA.join(@""), @"", @"range with 0 as a first argument generates an empty array");
-  equal(/* SPECIALIZED */ _.chain(nil).rangeAuto(4).NSA.join(@" "), @"0 1 2 3", @"range with a single positive argument generates an array of elements 0,1,2,...,n-1");
+  equal(/* SPECIALIZED */ _.chain(nil).rangeSimple(0).NSA.join(@""), @"", @"range with 0 as a first argument generates an empty array");
+  equal(/* SPECIALIZED */ _.chain(nil).rangeSimple(4).NSA.join(@" "), @"0 1 2 3", @"range with a single positive argument generates an array of elements 0,1,2,...,n-1");
   equal(_.chain(nil).range(5, 8, /* REQUIRED */ 1).NSA.join(@" "), @"5 6 7", @"range with two arguments a &amp; b, a&lt;b generates an array of elements a,a+1,a+2,...,b-2,b-1");
   equal(_.chain(nil).range(8, 5, /* REQUIRED */ 1).NSA.join(@""), @"", @"range with two arguments a &amp; b, b&lt;a generates an empty array");
   equal(_.chain(nil).range(3, 10, 3).NSA.join(@" "), @"3 6 9", @"range with three arguments a &amp; b &amp; c, c &lt; b-a, a &lt; b generates an array of elements a,a+c,a+2c,...,b - (multiplier of a) &lt; c");

@@ -16,7 +16,6 @@
 - (void)test_first
 {
   equal(_.first(AI(1,2,3), /* REQUIRED */ -1), N.I(1), @"can pull out the first element of an array");
-  equal(_.first(AI(1,2,3), /* REQUIRED */ AI_END), N.I(1), @"can pull out the first element of an array (AI_END)");
   equal(__(AI(1,2,3)).first(/* REQUIRED */ -1).I, 1, @"can perform OO-style 'first()'");
   equal(_.first(AI(1,2,3), 0).join(@", "), @"", @"can pass an index to first");
   equal(_.first(AI(1,2,3), 2).join(@", "), @"1, 2", @"can pass an index to first");
@@ -34,7 +33,6 @@
 - (void)test_initial
 {
   equal(_.initial(AI(1,2,3,4,5), /* REQUIRED */ -1).join(@", "), @"1, 2, 3, 4", @"working initial()");
-  equal(_.initial(AI(1,2,3,4,5), /* REQUIRED */ AI_END).join(@", "), @"1, 2, 3, 4", @"working initial() (AI_END)");
   equal(_.initial(AI(1,2,3,4), 2).join(@", "), @"1, 2", @"initial can take an index");
   NSA* result = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  __(arguments).initial(/* REQUIRED */ -1).NSA; })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
   equal(result.join(@", "), @"1, 2, 3", @"initial works on arguments object");
@@ -45,7 +43,6 @@
 - (void)test_last
 {
   equal(_.last(AI(1,2,3), /* REQUIRED */ -1), N.I(3), @"can pull out the last element of an array");
-  equal(_.last(AI(1,2,3), /* REQUIRED */ AI_END), N.I(3), @"can pull out the last element of an array (AI_END)");
   equal(_.last(AI(1,2,3), 0).join(@", "), @"", @"can pass an index to last");
   equal(_.last(AI(1,2,3), 2).join(@", "), @"2, 3", @"can pass an index to last");
   equal(_.last(AI(1,2,3), 5).join(@", "), @"1, 2, 3", @"can pass an index to last");
@@ -59,7 +56,6 @@
 {
   A* numbers = AI(1, 2, 3, 4);
   equal(_.rest(numbers, /* REQUIRED */ -1).join(@", "), @"2, 3, 4", @"working rest()");
-  equal(_.rest(numbers, /* REQUIRED */ AI_END).join(@", "), @"2, 3, 4", @"working rest() (AI_END)");
   equal(_.rest(numbers, 0).join(@", "), @"1, 2, 3, 4", @"working rest(0)");
   equal(_.rest(numbers, 2).join(@", "), @"3, 4", @"rest can take an index");
   NSA* result = (NSA*) (^(I arg1, ... /* AI_END_TERMINATION */){ ARGS_AI(arguments, arg1); return  __(arguments).tail(/* REQUIRED */ -1).NSA; })(1, 2, 3, 4, /* AI_END_TERMINATION */ AI_END);
@@ -107,10 +103,10 @@
   equal(_.uniqAdvanced(list, true, /* REQUIRED */ nil).join(@", "), @"1, 2, 3", @"can find the unique values of a sorted array faster"); /* SPECIALIZED */
 
   list = AO(OKV({@"name", @"moe"}), OKV({@"name", @"curly"}), OKV({@"name", @"larry"}), OKV({@"name", @"curly"}));
-  _MapBlock iterator = ^(O* value, ... /* KEY, COLLECTION */) { return value.get(@"name"); };
+  _MapBlock iterator = ^(O* value, ... /* KEY, LIST */) { return value.get(@"name"); };
   equal(_.map(/* SPECIALIZED */ _.uniqAdvanced(list, false, iterator), iterator).join(@", "), @"moe, curly, larry", @"can find the unique values of an array using a custom iterator");
 
-  iterator = ^(N* value, ... /* KEY, COLLECTION */) { return N.I(value.I + 1); };
+  iterator = ^(N* value, ... /* KEY, LIST */) { return N.I(value.I + 1); };
   list = AI(1, 2, 2, 3, 4, 4);
   equal(_.uniqAdvanced(list, true, iterator).join(@", "), @"1, 2, 3, 4", @"iterator works with sorted array");
 
@@ -194,8 +190,8 @@
 
 - (void)test_range
 {
-  equal(/* SPECIALIZED */ _.rangeAuto(0).join(@""), @"", @"range with 0 as a first argument generates an empty array");
-  equal(/* SPECIALIZED */ _.rangeAuto(4).join(@" "), @"0 1 2 3", @"range with a single positive argument generates an array of elements 0,1,2,...,n-1");
+  equal(/* SPECIALIZED */ _.rangeSimple(0).join(@""), @"", @"range with 0 as a first argument generates an empty array");
+  equal(/* SPECIALIZED */ _.rangeSimple(4).join(@" "), @"0 1 2 3", @"range with a single positive argument generates an array of elements 0,1,2,...,n-1");
   equal(_.range(5, 8, /* REQUIRED */ 1).join(@" "), @"5 6 7", @"range with two arguments a &amp; b, a&lt;b generates an array of elements a,a+1,a+2,...,b-2,b-1");
   equal(_.range(8, 5, /* REQUIRED */ 1).join(@""), @"", @"range with two arguments a &amp; b, b&lt;a generates an empty array");
   equal(_.range(3, 10, 3).join(@" "), @"3 6 9", @"range with three arguments a &amp; b &amp; c, c &lt; b-a, a &lt; b generates an array of elements a,a+c,a+2c,...,b - (multiplier of a) &lt; c");

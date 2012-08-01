@@ -42,7 +42,7 @@
 {
   return ^(_MemoizeBlock func, _MemoizeHashBlock hasher) {
     O* memo = O.new;
-    if (!hasher) hasher = ^id(id arg1, .../* KEY, COLLECTION */) {
+    if (!hasher) hasher = ^id(id arg1, .../* KEY, LIST */) {
       return arg1;
     };
     
@@ -82,7 +82,7 @@
   };
 }
 
-+ (void(^)(_DeferBlock func))deferBG
++ (void(^)(_DeferBlock func))deferBackground
 { 
   return ^(_DeferBlock func) {
     SS.setTimeoutBackground(func, 0);
@@ -185,7 +185,7 @@
   };
 }
 
-+ (_ComposeBlock /* NIL_TERMINATION */(^)(_ComposeBlock func1, ... /* NIL_TERMINATION */))compose
++ (_ComposedBlock /* NIL_TERMINATION */(^)(_ComposeBlock func1, ... /* NIL_TERMINATION */))compose
 {
   return ^_ComposeBlock(_ComposeBlock func1, ... /* NIL_TERMINATION */) {
     ARGS_AO(funcs, func1);

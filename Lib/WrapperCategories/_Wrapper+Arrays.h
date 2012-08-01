@@ -31,15 +31,15 @@
 
 @interface _Wrapper (Arrays)
 
-- (_Wrapper*(^)(I n))first;
-- (_Wrapper*(^)(I n))head;
-- (_Wrapper*(^)(I n))take;
+- (_Wrapper*(^)(UI n))first;
+- (_Wrapper*(^)(UI n))head;
+- (_Wrapper*(^)(UI n))take;
 //firstIterator /* NOT WRAPPED */
 
-- (_Wrapper*(^)(I n))initial;
+- (_Wrapper*(^)(UI n))initial;
 //initialIterator /* NOT WRAPPED */
 
-- (_Wrapper*(^)(I n))last;
+- (_Wrapper*(^)(UI n))last;
 //lastIterator /* NOT WRAPPED */
 
 - (_Wrapper*(^)(I index))rest;
@@ -56,7 +56,7 @@
 
 - (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))intersection;
 
-- (_Wrapper*(^)(NSA* array1, ... /* NIL_TERMINATION */))difference;
+- (_Wrapper*(^)(NSA* other1, ... /* NIL_TERMINATION */))difference;
 
 - (_Wrapper*(^)())uniq;
 - (_Wrapper*(^)())unique; // ALIAS
@@ -72,7 +72,7 @@
 
 - (_Wrapper*(^)(id value))lastIndexOf;
 
-- (_Wrapper*(^)(UI count))rangeAuto; /* SPECIALIZED */
 - (_Wrapper*(^)(I start, I stop, I step))range;
+- (_Wrapper*(^)(UI stop))rangeSimple; /* SPECIALIZED */
 
 @end

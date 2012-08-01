@@ -22,9 +22,9 @@
     @"He sleeps all night and he works all day"
   );
   O* counts = (O*) __(lyrics).chain()
-    .map(^(NSS* line, ... /* KEY, COLLECTION */) { return line.split(@""); })
+    .map(^(NSS* line, ... /* KEY, LIST */) { return line.split(@""); })
     .flatten(/* REQUIRED */ false )
-    .reduce(^(O* hash, N* l, ... /* KEY, COLLECTION */) {
+    .reduce(^(O* hash, N* l, ... /* KEY, LIST */) {
       N* value = (N*) hash.getOrAdd(l, ^{ return N.I(0); });
       hash.set(l, N.I(value.I+1));
       return hash;
@@ -35,11 +35,11 @@
 - (void)test_select_reject_sortBy
 {
   NSA* numbers = AI(1,2,3,4,5,6,7,8,9,10);
-  numbers = __(numbers).select(^B(N* n, ... /* KEY, COLLECTION */) {
+  numbers = __(numbers).select(^B(N* n, ... /* KEY, LIST */) {
     return n.I % 2 == 0;
-  }).reject(^B(N* n, ... /* KEY, COLLECTION */) {
+  }).reject(^B(N* n, ... /* KEY, LIST */) {
     return n.I % 4 == 0;
-  }).sortBy(^(N* n, ... /* KEY, COLLECTION */) {
+  }).sortBy(^(N* n, ... /* KEY, LIST */) {
     return N.I(-n.I);
   }).NSA;
   equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");
@@ -48,11 +48,11 @@
 - (void)test_select_reject_sortBy_in_functional_style
 {
   NSA* numbers = AI(1,2,3,4,5,6,7,8,9,10);
-  numbers = _.chain(numbers).select(^B(N* n, ... /* KEY, COLLECTION */) {
+  numbers = _.chain(numbers).select(^B(N* n, ... /* KEY, LIST */) {
     return n.I % 2 == 0;
-  }).reject(^B(N* n, ... /* KEY, COLLECTION */) {
+  }).reject(^B(N* n, ... /* KEY, LIST */) {
     return n.I % 4 == 0;
-  }).sortBy(^(N* n, ... /* KEY, COLLECTION */) {
+  }).sortBy(^(N* n, ... /* KEY, LIST */) {
     return N.I(-n.I);
   }).NSA;
   equal(numbers.join(@", "), @"10, 6, 2", @"filtered and reversed the numbers");
@@ -66,7 +66,7 @@
     .concat(AI(5, 5, 5))
     .unshift(N.I(17), /* NIL_TERMINATED */ nil)
     .pop()
-    .map(^(N* n, ... /* KEY, COLLECTION */){ return N.I(n.I * 2); })
+    .map(^(N* n, ... /* KEY, LIST */){ return N.I(n.I * 2); })
     .NSA;
   equal(numbers.join(@", "), @"34, 10, 8, 6, 4, 2, 10, 10", @"can chain together array ^s.");
 }

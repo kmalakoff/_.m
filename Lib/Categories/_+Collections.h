@@ -31,53 +31,53 @@
 
 @interface _ (Collections)
 
-+ (void(^)(id obj, _EachBlock iterator))each;
-+ (void(^)(id obj, _EachBlock iterator))forEach; // ALIAS
-+ (B(^)(id obj, _EachWithStopBlock iterator))eachWithStop; /* SPECIALIZED: returns YES if processed all elements without a request to stop */
++ (void(^)(id list, _EachBlock iterator))each;
++ (void(^)(id list, _EachBlock iterator))forEach; // ALIAS
++ (B(^)(id list, _EachWithStopBlock iterator))eachWithStop; /* SPECIALIZED: returns YES if processed all elements without a request to stop */
 
-+ (A*(^)(NSO* obj, _MapBlock iterator))map;
-+ (A*(^)(id obj, _MapBlock iterator))collect; // ALIAS
++ (A*(^)(NSO* list, _MapBlock iterator))map;
++ (A*(^)(id list, _MapBlock iterator))collect; // ALIAS
 
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))reduce;
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))foldl; // ALIAS
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))inject; // ALIAS
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))reduce;
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))foldl; // ALIAS
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))inject; // ALIAS
 
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))reduceRight;
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))foldr; // ALIAS
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))reduceRight;
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))foldr; // ALIAS
 
-+ (id(^)(id obj, _FindBlock iterator))find;
-+ (id(^)(id obj, _FindBlock iterator))detect; // ALIAS
++ (NSO*(^)(id list, _FindBlock iterator))find;
++ (NSO*(^)(id list, _FindBlock iterator))detect; // ALIAS
 
-+ (A*(^)(id obj, _CollectionItemTestBlock iterator))filter;
-+ (A*(^)(id obj, _CollectionItemTestBlock iterator))select; // ALIAS
++ (A*(^)(id list, _ItemTestBlock iterator))filter;
++ (A*(^)(id list, _ItemTestBlock iterator))select; // ALIAS
 
-+ (A*(^)(id obj, _CollectionItemTestBlock iterator))reject;
++ (A*(^)(id list, _ItemTestBlock iterator))reject;
 
-+ (B(^)(id obj, _CollectionItemTestBlock iterator))all;
-+ (B(^)(id obj, _CollectionItemTestBlock iterator))every; // ALIAS
++ (B(^)(id list, _ItemTestBlock iterator))all;
++ (B(^)(id list, _ItemTestBlock iterator))every; // ALIAS
 
-+ (B(^)(id obj, /* REQUIRED */ _CollectionItemTestBlock iterator))any;
-+ (B(^)(id obj, _CollectionItemTestBlock iterator))some; // ALIAS
++ (B(^)(id list, _ItemTestBlock iterator))any;
++ (B(^)(id list, _ItemTestBlock iterator))some; // ALIAS
 
-+ (B(^)(id obj, id target))include;
-+ (B(^)(id obj, id target))contains; // ALIAS
++ (B(^)(id list, id target))include;
++ (B(^)(id list, id target))contains; // ALIAS
 
-+ (NSO*(^)(id obj, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke;
++ (NSO*(^)(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke;
 
-+ (NSO*(^)(id obj, NSString *keyPath))pluck;
++ (NSO*(^)(id list, NSString *propertyName))pluck;
 
-+ (NSO*(^)(NSO* obj, _MaxBlock iterator))max;
-+ (NSO*(^)(NSO* obj, _MinBlock iterator))min;
++ (NSO*(^)(id list, _MaxBlock iterator))max;
++ (NSO*(^)(id list, _MinBlock iterator))min;
 
-+ (id(^)(id obj, id iteratorOrKey /* _SortByBlock or key */))sortBy;
-+ (O*(^)(id obj, id iteratorOrKey /* _GroupByBlock or key */))groupBy;
++ (NSO*(^)(id list, id iteratorOrKey /* _SortByBlock or id */))sortBy;
++ (O*(^)(id list, id iteratorOrKey /* _GroupByBlock or id */))groupBy;
 
-+ (I(^)(NSA* array, id obj, _SortedIndexBlock iterator))sortedIndex;
++ (UI(^)(NSA* array, id list, _SortedIndexBlock iterator))sortedIndex;
 
-+ (A*(^)(id obj))shuffle;
++ (A*(^)(id list))shuffle;
 
-+ (NSA*(^)(id obj))toArray;
++ (NSA*(^)(id list))toArray;
 
-+ (UI(^)(id obj))size;
++ (UI(^)(id list))size;
 
 @end

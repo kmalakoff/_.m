@@ -37,11 +37,11 @@
 - (_Wrapper*(^)())functions;
 - (_Wrapper*(^)())methods;
 
-- (_Wrapper*(^)(NSD* obj1, ... /* NIL_TERMINATION */))extend;
+- (_Wrapper*(^)(NSD* source1, ... /* NIL_TERMINATION */))extend;
 
 - (_Wrapper*(^)(id key1, ... /* NIL_TERMINATION */))pick;
 
-- (_Wrapper*(^)(NSD* obj1, ... /* NIL_TERMINATION */))defaults;
+- (_Wrapper*(^)(NSD* default1, ... /* NIL_TERMINATION */))defaults;
 
 - (_Wrapper*(^)())clone; /* RETURNS MUTABLE IF POSSIBLE */
 

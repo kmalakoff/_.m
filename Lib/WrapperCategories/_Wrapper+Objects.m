@@ -64,18 +64,18 @@
   };
 }
 
-- (_Wrapper*(^)(NSD* obj1, ... /* NIL_TERMINATION */))extend
+- (_Wrapper*(^)(NSD* source1, ... /* NIL_TERMINATION */))extend
 {
-  return ^(NSD* obj1, ... /* NIL_TERMINATION */) {
+  return ^(NSD* source1, ... /* NIL_TERMINATION */) {
 #ifdef DEBUG
       NSAssert(_.isDictionary(self.value()), @"sort expecting NSDictionary");
 #endif
     O* obj = self.O;
     if (!obj) return self;
 
-    ARGS_AO(objects, obj1);
+    ARGS_AO(sources, source1);
     
-    _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
+    _.each(sources, ^(NSD* source, ... /* KEY, LIST */) {
       [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
         [obj setObject:value forKey:key];
       }];
@@ -96,25 +96,25 @@
     ARGS_AO(keys, key1);
 
     __block O* result = O.new;
-    _.each(_.flatten(keys, true), ^(NSO* key, ... /* KEY, COLLECTION */) {
+    _.each(_.flatten(keys, true), ^(NSO* key, ... /* KEY, LIST */) {
       if (key.in(obj)) result.set(key, obj.get(key));
     });
     return _.chain(result);
   };
 }
 
-- (_Wrapper*(^)(NSD* obj1, ... /* NIL_TERMINATION */))defaults
+- (_Wrapper*(^)(NSD* default1, ... /* NIL_TERMINATION */))defaults
 {
-  return ^(NSD* obj1, ... /* NIL_TERMINATION */) {
+  return ^(NSD* default1, ... /* NIL_TERMINATION */) {
 #ifdef DEBUG
       NSAssert(_.isDictionary(self.value()), @"sort expecting NSDictionary");
 #endif
     O* obj = self.O;
     if (!obj) return self;
 
-    ARGS_AO(objects, obj1);
+    ARGS_AO(defaults, default1);
 
-    _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
+    _.each(defaults, ^(NSD* source, ... /* KEY, LIST */) {
       [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, B *stop) {
         if (!key.in(obj)) [obj setObject:value forKey:key];
       }];

@@ -48,23 +48,23 @@
 - (_Wrapper*(^)(_FindBlock iterator))find;
 - (_Wrapper*(^)(_FindBlock iterator))detect; // ALIAS
 
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))filter;
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))select; // ALIAS
+- (_Wrapper*(^)(_ItemTestBlock iterator))filter;
+- (_Wrapper*(^)(_ItemTestBlock iterator))select; // ALIAS
 
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))reject;
+- (_Wrapper*(^)(_ItemTestBlock iterator))reject;
 
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))all;
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))every; // ALIAS
+- (_Wrapper*(^)(_ItemTestBlock iterator))all;
+- (_Wrapper*(^)(_ItemTestBlock iterator))every; // ALIAS
 
-- (_Wrapper*(^)(/* REQUIRED */ _CollectionItemTestBlock iterator))any;
-- (_Wrapper*(^)(_CollectionItemTestBlock iterator))some; // ALIAS
+- (_Wrapper*(^)(/* REQUIRED */ _ItemTestBlock iterator))any;
+- (_Wrapper*(^)(_ItemTestBlock iterator))some; // ALIAS
 
 - (_Wrapper*(^)(id target))include;
 - (_Wrapper*(^)(id target))contains; // ALIAS
 
 - (_Wrapper*(^)(NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke;
 
-- (_Wrapper*(^)(NSString *keyPath))pluck;
+- (_Wrapper*(^)(NSString *propertyName))pluck;
 
 - (_Wrapper*(^)(_MaxBlock iterator))max;
 - (_Wrapper*(^)(_MinBlock iterator))min;

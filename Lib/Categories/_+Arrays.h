@@ -34,17 +34,17 @@
 + (NSO*(^)(NSA* array, I n))first;
 + (NSO*(^)(NSA* array, I n))head; // ALIAS
 + (NSO*(^)(NSA* array, I n))take; // ALIAS
-+ (NSO*(^)(NSA* array, ... /* KEY, COLLECTION */))firstIterator; /* SPECIALIZED */
++ (NSO*(^)(NSA* array, ... /* KEY, LIST */))firstIterator; /* SPECIALIZED */
 
 + (NSA*(^)(NSA* array, I n))initial;
-+ (NSA*(^)(NSA* array, ... /* KEY, COLLECTION */))initialIterator; /* SPECIALIZED */
++ (NSA*(^)(NSA* array, ... /* KEY, LIST */))initialIterator; /* SPECIALIZED */
 
 + (NSO*(^)(NSA* array, I n))last;
-+ (NSO*(^)(NSA* array, ... /* KEY, COLLECTION */))lastIterator; /* SPECIALIZED */
++ (NSO*(^)(NSA* array, ... /* KEY, LIST */))lastIterator; /* SPECIALIZED */
 
 + (NSA*(^)(NSA* array, I index))rest;
 + (NSA*(^)(NSA* array, I index))tail; // ALIAS
-+ (NSA*(^)(NSA* array, ... /* KEY, COLLECTION */))restIterator; /* SPECIALIZED */
++ (NSA*(^)(NSA* array, ... /* KEY, LIST */))restIterator; /* SPECIALIZED */
 
 + (A*(^)(NSA* array))compact;
 
@@ -56,7 +56,7 @@
 
 + (A*(^)(NSA* array, NSA* array1, ... /* NIL_TERMINATION */))intersection;
 
-+ (A*(^)(NSA* array, NSA* array1, ... /* NIL_TERMINATION */))difference;
++ (A*(^)(NSA* array, NSA* other1, ... /* NIL_TERMINATION */))difference;
 
 + (A*(^)(NSA* array))uniq;
 + (A*(^)(NSA* array))unique; // ALIAS
@@ -72,7 +72,7 @@
 
 + (I(^)(NSA* array, id value))lastIndexOf;
 
-+ (A*(^)(UI count))rangeAuto; /* SPECIALIZED */
 + (A*(^)(I start, I stop, I step))range;
++ (A*(^)(UI stop))rangeSimple; /* SPECIALIZED */
 
 @end

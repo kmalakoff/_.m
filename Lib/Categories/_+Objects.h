@@ -37,11 +37,11 @@
 + (A*(^)(NSD* obj))functions;
 + (A*(^)(NSD* obj))methods;
 
-+ (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))extend;
++ (O*(^)(O* destination, NSD* source1, ... /* NIL_TERMINATION */))extend;
 
 + (O*(^)(O* obj, id key1, ... /* NIL_TERMINATION */))pick;
 
-+ (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))defaults;
++ (O*(^)(O* obj, NSD* default1, ... /* NIL_TERMINATION */))defaults;
 
 + (NSO*(^)(NSO* obj))clone; /* RETURNS MUTABLE IF POSSIBLE */
 

@@ -62,17 +62,17 @@
 }
 + (A*(^)(NSD* obj))methods { return _.functions; } // ALIAS 
 
-+ (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))extend
++ (O*(^)(O* destination, NSD* source1, ... /* NIL_TERMINATION */))extend
 {
-  return ^(O* obj, NSD* obj1, ... /* NIL_TERMINATION */) {
-    ARGS_AO(objects, obj1);
+  return ^(O* destination, NSD* source1, ... /* NIL_TERMINATION */) {
+    ARGS_AO(sources, source1);
 
-    _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
+    _.each(sources, ^(NSD* source, ... /* KEY, LIST */) {
       [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
-        [obj setObject:value forKey:key];
+        [destination setObject:value forKey:key];
       }];
     });
-    return obj;
+    return destination;
   };
 }
 
@@ -82,19 +82,19 @@
     ARGS_AO(keys, key1);
 
     __block O* result = O.new;
-    _.each(_.flatten(keys, true), ^(NSO* key, ... /* KEY, COLLECTION */) {
+    _.each(_.flatten(keys, true), ^(NSO* key, ... /* KEY, LIST */) {
       if (key.in(obj)) result.set(key, obj.get(key));
     });
     return result;
   };
 }
 
-+ (O*(^)(O* obj, NSD* obj1, ... /* NIL_TERMINATION */))defaults
++ (O*(^)(O* object, NSD* default1, ... /* NIL_TERMINATION */))defaults
 {
-  return ^(O* obj, NSD* obj1, ... /* NIL_TERMINATION */) {
-    ARGS_AO(objects, obj1);
+  return ^(O* obj, NSD* default1, ... /* NIL_TERMINATION */) {
+    ARGS_AO(defaults, default1);
 
-    _.each(objects, ^(NSD* source, ... /* KEY, COLLECTION */) {
+    _.each(defaults, ^(NSD* source, ... /* KEY, LIST */) {
       [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, B *stop) {
         if (!key.in(obj)) [obj setObject:value forKey:key];
       }];

@@ -38,49 +38,49 @@
 
 @implementation _ (Collections)
 
-+ (void(^)(id obj, _EachBlock iterator))each
++ (void(^)(id list, _EachBlock iterator))each
 {
-  return ^(id obj, _EachBlock iterator) {
+  return ^(id list, _EachBlock iterator) {
 #ifdef DEBUG
-    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"each xpecting NSArray or NSDictionary or nil");
+    NSAssert(_.isArray(list) || _.isDictionary(list) || _.isNull(list), @"each xpecting NSArray or NSDictionary or nil");
 #endif
 
-    if (_.isNull(obj)) return;
+    if (_.isNull(list)) return;
 
-    else if (_.isArray(obj)) {
-      NSA* array = obj;
+    else if (_.isArray(list)) {
+      NSA* array = list;
       if(!array.length) return;
 
       UI count = [array count];
       for (I index=0; index<count; index++) {
-        iterator([array objectAtIndex:index], N.I(index), obj);
+        iterator([array objectAtIndex:index], N.I(index), list);
       }
     }
     else {
-      NSD* dictionary = obj;
+      NSD* dictionary = list;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
-        iterator(value, key, obj);
+        iterator(value, key, list);
       }];
     }
   };
 }
-+ (void(^)(id obj, _EachBlock iterator))forEach { return self.each; }  // ALIAS
-+ (B(^)(id obj, _EachWithStopBlock iterator))eachWithStop
++ (void(^)(id list, _EachBlock iterator))forEach { return self.each; }  // ALIAS
++ (B(^)(id list, _EachWithStopBlock iterator))eachWithStop
 {
-  return ^B(id obj, _EachWithStopBlock iterator) {
+  return ^B(id list, _EachWithStopBlock iterator) {
 #ifdef DEBUG
-    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"eachWithStop expecting NSArray or NSDictionary or nil");
+    NSAssert(_.isArray(list) || _.isDictionary(list) || _.isNull(list), @"eachWithStop expecting NSArray or NSDictionary or nil");
 #endif
 
-    if (_.isNull(obj)) return YES;
+    if (_.isNull(list)) return YES;
 
-    else if (_.isArray(obj)) {
-      NSA* array = obj;
+    else if (_.isArray(list)) {
+      NSA* array = list;
       if(!array.length) return YES;
 
       UI count = [array count];
       for (I index=0; index<count; index++) {
-        if (!iterator([array objectAtIndex:index], N.I(index), obj))
+        if (!iterator([array objectAtIndex:index], N.I(index), list))
           return NO;
       }
 
@@ -88,9 +88,9 @@
     }
     else {
       __block B processedWithoutStop = YES;
-      NSD* dictionary = obj;
+      NSD* dictionary = list;
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
-        if (!iterator(value, key, obj)) {
+        if (!iterator(value, key, list)) {
           processedWithoutStop = NO;
           *stop = YES;
         }
@@ -101,24 +101,24 @@
   };
 }
 
-+ (A*(^)(NSO* obj, _MapBlock iterator))map
++ (A*(^)(NSO* list, _MapBlock iterator))map
 {
-  return ^A*(NSO* obj, _MapBlock iterator) {
+  return ^A*(NSO* list, _MapBlock iterator) {
 #ifdef DEBUG
-    NSAssert(_.isArray(obj) || _.isDictionary(obj) || _.isNull(obj), @"map expecting NSArray or NSDictionary or nil");
+    NSAssert(_.isArray(list) || _.isDictionary(list) || _.isNull(list), @"map expecting NSArray or NSDictionary or nil");
 #endif
 
-    if (_.isNull(obj))
+    if (_.isNull(list))
       return A.new;
 
-    else if (_.isArray(obj)) {
-      NSA* array = (NSA*) obj;
+    else if (_.isArray(list)) {
+      NSA* array = (NSA*) list;
       if(!array.length) return A.new;
 
       A* result = [A arrayWithCapacity:array.length];
       UI count = [array count];
       for (I index=0; index<count; index++) {
-        id mapped = iterator([array objectAtIndex:index], N.I(index), obj);
+        id mapped = iterator([array objectAtIndex:index], N.I(index), list);
         if (mapped)
           [result addObject:mapped];
       }
@@ -126,11 +126,11 @@
       return result;
     }
     else {
-      NSD* dictionary = (NSD*) obj;
+      NSD* dictionary = (NSD*) list;
 
-      A* result = [A arrayWithCapacity:obj.length];
+      A* result = [A arrayWithCapacity:list.length];
       [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
-        id mapped = iterator(value, key, obj);
+        id mapped = iterator(value, key, list);
         if (mapped)
           [result addObject:mapped];
       }];
@@ -140,12 +140,12 @@
     return nil;
   };
 }
-+ (A*(^)(id obj, _MapBlock iterator))collect { return self.map; } // ALIAS
++ (A*(^)(id list, _MapBlock iterator))collect { return self.map; } // ALIAS
 
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))reduce
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))reduce
 {
-  return ^(id obj, _ReduceBlock iterator, id memo) {
-    if (!obj) {
+  return ^(id list, _ReduceBlock iterator, id memo) {
+    if (!list) {
 #ifdef DEBUG
       if (!memo) @throw [NSException exceptionWithName:@"TypeError" reason:@"null without inital value" userInfo:nil];
 #endif
@@ -154,8 +154,8 @@
   
     __block id internalMemo = memo;
     __block B initial = false;
-    if (obj == nil) obj = A.new;
-    _.each(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
+    if (list == nil) list = A.new;
+    _.each(list, ^(NSO* value, ... /* KEY, LIST */) {
       initial = true;
       if (!internalMemo) internalMemo = [[NSClassFromString(value.mutableClassName) alloc] init];
       
@@ -168,13 +168,13 @@
     return internalMemo;
   };
 }
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))inject { return self.reduce; } // ALIAS
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))inject { return self.reduce; } // ALIAS
 
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))reduceRight
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))reduceRight
 {
-  return ^(id obj, _ReduceBlock iterator, id memo) {
-    if (!obj) {
+  return ^NSO*(id list, _ReduceBlock iterator, id memo) {
+    if (!list) {
 #ifdef DEBUG
       if (!memo) @throw [NSException exceptionWithName:@"TypeError" reason:@"null without inital value" userInfo:nil];
 #endif
@@ -182,17 +182,17 @@
     }
 
     // do it the memory intensive way for dictionaries
-    if (_.isDictionary(obj)) return _.reduce(_.toArray(obj).reverse().mutableCopy, iterator, memo);
+    if (_.isDictionary(list)) return _.reduce(_.toArray(list).reverse().mutableCopy, iterator, memo);
 
     id internalMemo = memo;
     __block B initial = false;
-    if (obj == nil) obj = A.new;
-    A* array = obj;
+    if (list == nil) list = A.new;
+    A* array = list;
     for (I index=array.count-1; index>=0; index--) {
       NSO* value = [array objectAtIndex:index];
       initial = true;
       if (!internalMemo) internalMemo = [[NSClassFromString(value.mutableClassName) alloc] init];
-      internalMemo = iterator(internalMemo, value, N.I(index), obj);
+      internalMemo = iterator(internalMemo, value, N.I(index), list);
     }
 #ifdef DEBUG
     if (!initial) @throw [NSException exceptionWithName:@"TypeError" reason:@"Reduce of empty array with no initial value" userInfo:nil];
@@ -200,13 +200,13 @@
     return internalMemo;
   };
 }
-+ (id(^)(id obj, _ReduceBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
++ (NSO*(^)(id list, _ReduceBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
 
-+ (id(^)(id obj, _FindBlock iterator))find
++ (NSO*(^)(id list, _FindBlock iterator))find
 {
-  return ^(id obj, _FindBlock iterator) {
+  return ^(id list, _FindBlock iterator) {
     __block NSO* result;
-    _.any(obj, ^B(id value, ... /* KEY, COLLECTION */) {
+    _.any(list, ^B(id value, ... /* KEY, LIST */) {
       if (iterator(value)) {
         result = value;
         return true;
@@ -217,113 +217,113 @@
   };
 }
 
-+ (id(^)(id obj, _FindBlock iterator))detect { return self.find; } // ALIAS
++ (NSO*(^)(id list, _FindBlock iterator))detect { return self.find; } // ALIAS
 
-+ (A*(^)(id obj, _CollectionItemTestBlock iterator))filter
++ (A*(^)(id list, _ItemTestBlock iterator))filter
 {
-  return ^(id obj, _CollectionItemTestBlock iterator) {
+  return ^(id list, _ItemTestBlock iterator) {
     A* results = A.new;
-    if (obj == nil) return results;
-    _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
+    if (list == nil) return results;
+    _.each(list, ^(id value, ... /* KEY, LIST */) {
       ARGS_KEY(value);
-      if (iterator(value, key, obj)) results.push(value);
+      if (iterator(value, key, list)) results.push(value);
     });
     return results;
   };
 }
-+ (A*(^)(id obj, _CollectionItemTestBlock iterator))select { return self.filter; } // ALIAS
++ (A*(^)(id list, _ItemTestBlock iterator))select { return self.filter; } // ALIAS
 
-+ (A*(^)(id obj, _CollectionItemTestBlock iterator))reject
++ (A*(^)(id list, _ItemTestBlock iterator))reject
 {
-  return ^(id obj, _CollectionItemTestBlock iterator) {
+  return ^(id list, _ItemTestBlock iterator) {
     A* results = A.new;
-    if (obj == nil) return results;
-    _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
+    if (list == nil) return results;
+    _.each(list, ^(id value, ... /* KEY, LIST */) {
       ARGS_KEY(value);
-      if (!iterator(value, key, obj)) results.push(value);
+      if (!iterator(value, key, list)) results.push(value);
     });
     return results;
   };
 }
 
-+ (B(^)(id obj, _CollectionItemTestBlock iterator))all
++ (B(^)(id list, _ItemTestBlock iterator))all
 {
-  return ^B(id obj, _CollectionItemTestBlock iterator) {
-    if (obj == nil) return YES;
-    return _.eachWithStop(obj, iterator);
+  return ^B(id list, _ItemTestBlock iterator) {
+    if (list == nil) return YES;
+    return _.eachWithStop(list, iterator);
   };
 }
-+ (B(^)(id obj, _CollectionItemTestBlock iterator))every {return self.all; } // ALIAS
++ (B(^)(id list, _ItemTestBlock iterator))every {return self.all; } // ALIAS
 
-+ (B(^)(id obj, _CollectionItemTestBlock iterator))any
++ (B(^)(id list, _ItemTestBlock iterator))any
 {
-  return ^B(id obj, _CollectionItemTestBlock iterator) {
+  return ^B(id list, _ItemTestBlock iterator) {
     if (!iterator) iterator = _.identityTruthy;
     __block B result = NO;
-    if (obj == nil) return result;
-    _.eachWithStop(obj, ^B(id value, ... /* KEY, COLLECTION */) {
+    if (list == nil) return result;
+    _.eachWithStop(list, ^B(id value, ... /* KEY, LIST */) {
       ARGS_KEY(value);
-      if (result || (result = iterator(value, key, obj)))
+      if (result || (result = iterator(value, key, list)))
         return NO;
       return YES;
     });
     return !!result;
   };
 }
-+ (B(^)(id obj, _CollectionItemTestBlock iterator))some { return self.any; }
++ (B(^)(id list, _ItemTestBlock iterator))some { return self.any; }
 
-+ (B(^)(id obj, id target))include
++ (B(^)(id list, id target))include
 {
-  return ^B(id obj, id target) {
+  return ^B(id list, id target) {
     B found = NO;
-    if (obj == nil) return found;
-    found = _.any(obj, ^B(id value, ... /* KEY, COLLECTION */) {
+    if (list == nil) return found;
+    found = _.any(list, ^B(id value, ... /* KEY, LIST */) {
       return value == target;
     });
     return found;
   };
 }
-+ (B(^)(id obj, id target))contains { return self.include; } // ALIAS
++ (B(^)(id list, id target))contains { return self.include; } // ALIAS
 
-+ (NSO*(^)(id obj, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke
++ (NSO*(^)(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke
 {
-  return ^NSO*(id obj, NSS* methodName, id arg1, ... /* NIL_TERMINATION */) {
+  return ^NSO*(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
 
-    return _.map(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
+    return _.map(list, ^(NSO* value, ... /* KEY, LIST */) {
       return methodName.apply(value, arguments);
     });
   };
 }
 
-+ (NSO*(^)(id obj, NSS* keyPath))pluck
++ (NSO*(^)(id list, NSS* propertyName))pluck
 {
-  return ^NSO*(id obj, NSString *keyPath) {
+  return ^NSO*(id list, NSString *propertyName) {
 #ifdef DEBUG
-    NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
+    NSAssert(_.isArray(list) || _.isDictionary(list), @"each expecting NSArray or NSDictionary");
 #endif
 
-    if (_.isArray(obj)) {
+    if (_.isArray(list)) {
       A* result = A.new;
-      for (NSO* item in (NSA*)obj) {
-        id value = item.get(keyPath);
+      for (NSO* item in (NSA*)list) {
+        id value = item.get(propertyName);
         result.push(value ? value : NSNull.null);
       }
       return result;
     }
     else
-      return ((NSD*)obj).get(keyPath);
+      return ((NSD*)list).get(propertyName);
   };
 }
 
-+ (NSO*(^)(NSO* obj, _MaxBlock iterator))max
++ (NSO*(^)(id list, _MaxBlock iterator))max
 {
-  return ^NSO*(id obj, _MaxBlock iterator) {
-    if (!iterator && _.isEmpty(obj))
+  return ^NSO*(id list, _MaxBlock iterator) {
+    if (!iterator && _.isEmpty(list))
       return NF_NEG_INFINITY;
 
-    if (_.isArray(obj)) {
-      NSA* array = obj;
+    if (_.isArray(list)) {
+      NSA* array = list;
       NSO* max = array.getAt(0);
       for (NSO* value in array) {
         NSO* computed = iterator ? iterator(value) : value;
@@ -334,8 +334,8 @@
     }  
     
     else {
-      __block O* result = OKV({@"computed", ((NSD*)obj).objectEnumerator.nextObject});
-      _.each(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
+      __block O* result = OKV({@"computed", ((NSD*)list).objectEnumerator.nextObject});
+      _.each(list, ^(NSO* value, ... /* KEY, LIST */) {
         NSO* computed = iterator ? iterator(value) : value;
         computed <= result.get(@"computed") && (result = OKV({@"value", value}, {@"computed", computed}));
       });
@@ -344,14 +344,14 @@
   };
 }
 
-+ (NSO*(^)(NSO* obj, _MinBlock iterator))min
++ (NSO*(^)(id list, _MinBlock iterator))min
 {
-  return ^NSO*(id obj, _MinBlock iterator) {
-    if (!iterator && _.isEmpty(obj))
+  return ^NSO*(id list, _MinBlock iterator) {
+    if (!iterator && _.isEmpty(list))
       return NF_POS_INFINITY;
 
-    if (_.isArray(obj)) {
-      NSA* array = obj;
+    if (_.isArray(list)) {
+      NSA* array = list;
       NSO* min = array.getAt(0);
       for (NSO* value in array) {
         NSO* computed = iterator ? iterator(value) : value;
@@ -363,8 +363,8 @@
     
     else
     {
-      __block O* result = OKV({@"computed", ((NSD*)obj).objectEnumerator.nextObject});
-      _.each(obj, ^(NSO* value, ... /* KEY, COLLECTION */) {
+      __block O* result = OKV({@"computed", ((NSD*)list).objectEnumerator.nextObject});
+      _.each(list, ^(NSO* value, ... /* KEY, LIST */) {
         NSO* computed = iterator ? iterator(value) : value;
         computed >= result.get(@"computed") && (result = OKV({@"value", value}, {@"computed", computed}));
       });
@@ -373,20 +373,20 @@
   };
 }
 
-+ (id(^)(id obj, id iteratorOrKey /* _SortByBlock or key */))sortBy
++ (NSO*(^)(id list, id iteratorOrKey /* _SortByBlock or id */))sortBy
 {
-  return ^(id obj, id iteratorOrKey) {
+  return ^(id list, id iteratorOrKey) {
 #ifdef DEBUG
-    NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
+    NSAssert(_.isArray(list) || _.isDictionary(list), @"each expecting NSArray or NSDictionary");
 #endif
 
     _SortByBlock iterator = _.isBlock(iteratorOrKey) ? (_SortByBlock) iteratorOrKey : ^(NSO* value, ...){
       return value.get(iteratorOrKey); 
     };
 
-    return _.chain(obj)
-      .map(^(NSO* value, ... /* KEY, COLLECTION */) {
-        ARGS_KEY_COLLECTION(value, collection);
+    return _.chain(list)
+      .map(^(NSO* value, ... /* KEY, LIST */) {
+        ARGS_KEY_LIST(value, collection);
         return OKV({@"value", value}, {@"criteria", iterator(value, key, collection)});
       })
       .sort(^(NSDictionary *left, NSDictionary *right) {
@@ -399,21 +399,21 @@
   };
 }
 
-+ (O*(^)(id obj, id iteratorOrKey /* _GroupByBlock or key */))groupBy
++ (O*(^)(id list, id iteratorOrKey /* _GroupByBlock or id */))groupBy
 {
-  return ^(id obj, id iteratorOrKey) {
+  return ^(id list, id iteratorOrKey) {
 #ifdef DEBUG
-    NSAssert(_.isArray(obj) || _.isDictionary(obj), @"each expecting NSArray or NSDictionary");
+    NSAssert(_.isArray(list) || _.isDictionary(list), @"each expecting NSArray or NSDictionary");
 #endif
 
-    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, ... /* KEY, COLLECTION */){
+    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, ... /* KEY, LIST */){
       return value.get(iteratorOrKey); 
     };
     
     __block O* result = O.new;
-    _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
+    _.each(list, ^(id value, ... /* KEY, LIST */) {
       ARGS_KEY(value);
-      key = iterator(value, key, obj);
+      key = iterator(value, key, list);
       A* values = (A*) result.getOrAdd(key, ^{ return A.new; });
       values.push(value);
     });
@@ -421,27 +421,27 @@
   };
 }
 
-+ (I(^)(NSA* array, id obj, _SortedIndexBlock iterator))sortedIndex
++ (UI(^)(NSA* array, id list, _SortedIndexBlock iterator))sortedIndex
 {
-  return ^(NSA* array, id obj, _SortedIndexBlock iterator) {
+  return ^(NSA* array, id list, _SortedIndexBlock iterator) {
     if (!iterator)
       iterator = ^(id value, ...) { return value; };
       
-    NSO* value = iterator(obj);
-    I low = 0, high = array.length;
+    id value = iterator(list);
+    UI low = 0, high = array.length;
     while (low < high) {
-      I mid = (low + high) >> 1;
+      UI mid = (low + high) >> 1;
       ([iterator(array.getAt(mid)) compare:value] == NSOrderedAscending) ? (low = mid + 1) : (high = mid);
     }
     return low;
   };
 }
 
-+ (A*(^)(id obj))shuffle
++ (A*(^)(id list))shuffle
 {
-  return ^(id obj) {
-    __block A* shuffled = _.isArray(obj) ? ((NSA*)obj).mutableCopy : _.values(obj);
-    _.each(obj, ^(id value, ... /* KEY, COLLECTION */) {
+  return ^(id list) {
+    __block A* shuffled = _.isArray(list) ? ((NSA*)list).mutableCopy : _.values(list);
+    _.each(list, ^(id value, ... /* KEY, LIST */) {
       ARGS_INDEX(value);
       I rand = arc4random() % (index + 1);
       [shuffled exchangeObjectAtIndex:rand withObjectAtIndex:index];
@@ -450,22 +450,22 @@
   };
 }
 
-+ (NSA*(^)(id obj))toArray
++ (NSA*(^)(id list))toArray
 {
-  return ^NSA*(id obj) {
-    if (!obj)                                         return NSA.new;
-    if (_.isArray(obj))                               return ((NSA*)obj).copy;
-//    if (_.isArguments(obj))                           return ((NSA*)obj).copy;  /* NOT NEEDED: Arguments are an array */
-    if ([obj respondsToSelector:@selector(toArray)])  return [obj performSelector:@selector(toArray)];
-    if (_.isFunction(@"toArray", obj))                return @"toArray".call(obj, nil);
-    return _.values(obj);
+  return ^NSA*(id list) {
+    if (!list)                                         return NSA.new;
+    if (_.isArray(list))                               return ((NSA*)list).copy;
+//    if (_.isArguments(list))                           return ((NSA*)list).copy;  /* NOT NEEDED: Arguments are an array */
+    if ([list respondsToSelector:@selector(toArray)])  return [list performSelector:@selector(toArray)];
+    if (_.isFunction(@"toArray", list))                return @"toArray".call(list, nil);
+    return _.values(list);
   };
 }
 
-+ (UI(^)(id obj))size {
-  return ^UI(id obj) {
-    if (_.isArray(obj))          return ((NSA*)obj).count;
-    if (_.isDictionary(obj))     return ((NSD*)obj).count;
++ (UI(^)(id list))size {
+  return ^UI(id list) {
+    if (_.isArray(list))          return ((NSA*)list).count;
+    if (_.isDictionary(list))     return ((NSD*)list).count;
     return 0;
   };
 }

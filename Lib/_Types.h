@@ -38,7 +38,7 @@
     key = va_arg(argList, id); \
     va_end(argList); \
   }
-#define ARGS_KEY_COLLECTION(_lastNamedArg, _collection) \
+#define ARGS_KEY_LIST(_lastNamedArg, _collection) \
   id key; \
   id _collection; \
   { \
@@ -56,7 +56,7 @@
     index =  ((N*)va_arg(argList, N*)).I; \
     va_end(argList); \
   }
-#define ARGS_INDEX_COLLECTION(_lastNamedArg, _collection) \
+#define ARGS_INDEX_LIST(_lastNamedArg, _collection) \
   I index; \
   id _collection; \
   { \
@@ -66,7 +66,7 @@
     _collection = va_arg(argList, id); \
     va_end(argList); \
   }
-#define ARGS_COLLECTION(_lastNamedArg, _collection) \
+#define ARGS_LIST(_lastNamedArg, _collection) \
   id _collection; \
   { \
     va_list argList; \
@@ -81,24 +81,24 @@ typedef SSTaskId            _Timeout;
 typedef void                (^_TimeoutBlock)();
 
 // blocks
-typedef void                (^_EachBlock)(id value, ... /* KEY, COLLECTION */);
-typedef B                   (^_EachWithStopBlock)(id value, ... /* KEY, COLLECTION */);
-typedef NSO*                (^_MapBlock)(id value, ... /* KEY, COLLECTION */);
+typedef void                (^_EachBlock)(id value, ... /* KEY, LIST */);
+typedef B                   (^_EachWithStopBlock)(id value, ... /* KEY, LIST */);
+typedef id                  (^_MapBlock)(id value, ... /* KEY, LIST */);
 
-typedef NSO*                (^_ReduceBlock)(id memo, id value, ... /* KEY, COLLECTION */);
+typedef id                  (^_ReduceBlock)(id memo, id value, ... /* KEY, LIST */);
 
 typedef B                   (^_FindBlock)(id value);
 
-typedef B                   (^_CollectionItemTestBlock)(id value, ... /* KEY, COLLECTION */);
+typedef B                   (^_ItemTestBlock)(id value, ... /* KEY, LIST */);
 
-typedef NSO*                (^_MinBlock)(id value);
-typedef NSO*                (^_MaxBlock)(id value);
+typedef id                  (^_MinBlock)(id value);
+typedef id                  (^_MaxBlock)(id value);
 
 typedef NSComparisonResult  (^_SortBlock)(id left, id right); /* ADDED */
 
-typedef NSO*                (^_SortByBlock)(id value, ... /* KEY, COLLECTION */);
-typedef NSO*                (^_GroupByBlock)(id value, ... /* KEY, COLLECTION */);
-typedef NSO*                (^_SortedIndexBlock)(id value, ... /* KEY, COLLECTION */);
+typedef id                  (^_SortByBlock)(id value, ... /* KEY, LIST */);
+typedef id                  (^_GroupByBlock)(id value, ... /* KEY, LIST */);
+typedef id                  (^_SortedIndexBlock)(id value, ... /* KEY, LIST */);
 
 typedef id                  (^_MemoizedBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_MemoizeBlock)(id arg1, ... /* NIL_TERMINATION */);
@@ -122,9 +122,10 @@ typedef id                  (^_AfterBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_WrappedBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_WrapBlock)(_WrappedBlock wrapped, id arg1, ... /* NIL_TERMINATION */);
 
-typedef void                (^_TapBlock)(id obj);
-
+typedef id                  (^_ComposedBlock)(id arg1, ... /* NIL_TERMINATION */);
 typedef id                  (^_ComposeBlock)(id arg1, ... /* NIL_TERMINATION */);
+
+typedef void                (^_TapBlock)(id obj);
 
 typedef id                  (^_IdentityBlock)(id value);
 

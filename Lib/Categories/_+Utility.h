@@ -34,9 +34,9 @@
 //noConflict /* NOT SUPPORTED: JavaScript-only */
 
 + (_IdentityBlock)identity;
-+ (_CollectionItemTestBlock)identityTruthy; /* SPECIALIZED */
++ (_ItemTestBlock)identityTruthy; /* SPECIALIZED */
 
-+ (void(^)(I n, _TimesBlock iterator))times;
++ (void(^)(UI n, _TimesBlock iterator))times;
 
 //mixin /* NOT SUPPORTED: JavaScript-only: use Objective-C categories on '_' instead */
 

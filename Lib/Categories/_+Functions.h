@@ -40,7 +40,7 @@
 + (void(^)(_DelayBlock func, I waitNS))delayBackground; /* ADDED: BACKGROUND QUEUE */
 
 + (void(^)(_DeferBlock func))defer;
-+ (void(^)(_DeferBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */
++ (void(^)(_DeferBlock func))deferBackground; /* ADDED: BACKGROUND QUEUE */
 
 + (_ThrottledBlock(^)(_ThrottleBlock func, I waitNS, id arg1, ... /* NIL_TERMINATION */))throttle;
 
@@ -52,6 +52,6 @@
 
 + (_WrappedBlock /* NIL_TERMINATION */(^)(_WrappedBlock func, _WrapBlock wrapper))wrap;
 
-+ (_ComposeBlock /* NIL_TERMINATION */(^)(_ComposeBlock func1, ... /* NIL_TERMINATION */))compose;
++ (_ComposedBlock /* NIL_TERMINATION */(^)(_ComposeBlock func1, ... /* NIL_TERMINATION */))compose;
 
 @end

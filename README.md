@@ -20,23 +20,23 @@ Arrays
 first
 _.first = _.head = _.take = function(array, n, guard)
 + (id(^)(A* array, I n))first;  // mandatory second parameter: -1 replaces missing paramter
-+ (id(^)(A* array, ... /* KEY, COLLECTION */))firstIterator; // CHANGE
++ (id(^)(A* array, ... /* KEY, LIST */))firstIterator; // CHANGE
 
 
 initial
 _.initial = function(array, n, guard)
 + (A*(^)(A* array, I n))initial; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, ... /* KEY, COLLECTION */))initialIterator; // CHANGE
++ (A*(^)(A* array, ... /* KEY, LIST */))initialIterator; // CHANGE
 
 last
 _.last = function(array, n, guard)
 + (id(^)(A* array, I n))last; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, ... /* KEY, COLLECTION */))lastIterator; // CHANGE
++ (A*(^)(A* array, ... /* KEY, LIST */))lastIterator; // CHANGE
 
 rest
 _.rest = _.tail = function(array, index, guard)
 + (A*(^)(A* array, I index))rest; // mandatory second parameter: -1 replaces missing paramter
-+ (A*(^)(A* array, ... /* KEY, COLLECTION */))restIterator; // CHANGE
++ (A*(^)(A* array, ... /* KEY, LIST */))restIterator; // CHANGE
 
 compact
 _.compact = function(array)
@@ -114,7 +114,7 @@ find
 
 filter
   _.filter = _.select = function(obj, iterator, context) {
-+ (A*(^)(id obj, _CollectionItemTestBlock iterator))filter;
++ (A*(^)(id obj, _ItemTestBlock iterator))filter;
 CHANGE: Context is a JS language feature
 
 reject
@@ -151,7 +151,7 @@ delay
 + (void(^)(_DelayBlock func, I waitNS))delayBackground; /* ADDED: BACKGROUND QUEUE */
 
 + (void(^)(_DeferBlock func))defer;
-+ (void(^)(_DeferBlock func))deferBG; /* ADDED: BACKGROUND QUEUE */
++ (void(^)(_DeferBlock func))deferBackground; /* ADDED: BACKGROUND QUEUE */
 defer
 throttle
 debounce

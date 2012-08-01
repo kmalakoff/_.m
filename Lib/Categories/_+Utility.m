@@ -43,16 +43,16 @@
   };
 }
 
-+ (_CollectionItemTestBlock)identityTruthy
++ (_ItemTestBlock)identityTruthy
 {
-  return ^(id value, ... /* KEY, COLLECTION */) {
+  return ^(id value, ... /* KEY, LIST */) {
     return _.isTruthy(value);
   };
 }
 
-+ (void(^)(I n, _TimesBlock iterator))times
++ (void(^)(UI n, _TimesBlock iterator))times
 {
-  return ^(I n, _TimesBlock iterator) {
+  return ^(UI n, _TimesBlock iterator) {
     for (I i = 0; i < n; i++) iterator(i);
   };
 }
