@@ -9,7 +9,6 @@
 #import "_+UtilityTests.h"
 #import "QUnit.h"
 #import "Underscore.h"
-#import "SubjectiveScript.h"
 
 @implementation __UtilityTests
 

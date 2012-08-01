@@ -8,7 +8,6 @@
 
 #import "_Tests.h"
 #import "Underscore.h"
-#import "SubjectiveScript.h"
 #import "QUnit.h"
 
 @implementation _Tests

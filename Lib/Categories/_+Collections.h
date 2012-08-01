@@ -38,15 +38,15 @@
 + (A*(^)(NSO* list, _MapBlock iterator))map;
 + (A*(^)(id list, _MapBlock iterator))collect; // ALIAS
 
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))reduce;
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))foldl; // ALIAS
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))inject; // ALIAS
++ (id(^)(id list, _ReduceBlock iterator, id memo))reduce;
++ (id(^)(id list, _ReduceBlock iterator, id memo))foldl; // ALIAS
++ (id(^)(id list, _ReduceBlock iterator, id memo))inject; // ALIAS
 
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))reduceRight;
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))foldr; // ALIAS
++ (id(^)(id list, _ReduceBlock iterator, id memo))reduceRight;
++ (id(^)(id list, _ReduceBlock iterator, id memo))foldr; // ALIAS
 
-+ (NSO*(^)(id list, _FindBlock iterator))find;
-+ (NSO*(^)(id list, _FindBlock iterator))detect; // ALIAS
++ (id(^)(id list, _FindBlock iterator))find;
++ (id(^)(id list, _FindBlock iterator))detect; // ALIAS
 
 + (A*(^)(id list, _ItemTestBlock iterator))filter;
 + (A*(^)(id list, _ItemTestBlock iterator))select; // ALIAS
@@ -62,14 +62,14 @@
 + (B(^)(id list, id target))include;
 + (B(^)(id list, id target))contains; // ALIAS
 
-+ (NSO*(^)(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke;
++ (id(^)(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke;
 
 + (NSO*(^)(id list, NSString *propertyName))pluck;
 
-+ (NSO*(^)(id list, _MaxBlock iterator))max;
-+ (NSO*(^)(id list, _MinBlock iterator))min;
++ (id(^)(id list, _MaxBlock iterator))max;
++ (id(^)(id list, _MinBlock iterator))min;
 
-+ (NSO*(^)(id list, id iteratorOrKey /* _SortByBlock or id */))sortBy;
++ (id(^)(id list, id iteratorOrKey /* _SortByBlock or id */))sortBy;
 + (O*(^)(id list, id iteratorOrKey /* _GroupByBlock or id */))groupBy;
 
 + (UI(^)(NSA* array, id list, _SortedIndexBlock iterator))sortedIndex;

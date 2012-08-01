@@ -141,7 +141,7 @@ static char* const SSIsArgumentsKey = "IsArguments";
   return ^(I start, I count) {
     if (start<0)
       start = self.count + start;
-    if (count<0)
+    if (count<=0)
       count = (self.count - start) + count;
     if ((start + count)>self.count-1)
       count = self.count - start;

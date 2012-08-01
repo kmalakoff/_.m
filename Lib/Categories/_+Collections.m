@@ -142,7 +142,7 @@
 }
 + (A*(^)(id list, _MapBlock iterator))collect { return self.map; } // ALIAS
 
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))reduce
++ (id(^)(id list, _ReduceBlock iterator, id memo))reduce
 {
   return ^(id list, _ReduceBlock iterator, id memo) {
     if (!list) {
@@ -168,12 +168,12 @@
     return internalMemo;
   };
 }
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))inject { return self.reduce; } // ALIAS
++ (id(^)(id list, _ReduceBlock iterator, id memo))foldl { return self.reduce; } // ALIAS
++ (id(^)(id list, _ReduceBlock iterator, id memo))inject { return self.reduce; } // ALIAS
 
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))reduceRight
++ (id(^)(id list, _ReduceBlock iterator, id memo))reduceRight
 {
-  return ^NSO*(id list, _ReduceBlock iterator, id memo) {
+  return ^id(id list, _ReduceBlock iterator, id memo) {
     if (!list) {
 #ifdef DEBUG
       if (!memo) @throw [NSException exceptionWithName:@"TypeError" reason:@"null without inital value" userInfo:nil];
@@ -200,12 +200,12 @@
     return internalMemo;
   };
 }
-+ (NSO*(^)(id list, _ReduceBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
++ (id(^)(id list, _ReduceBlock iterator, id memo))foldr { return self.reduceRight; } // ALIAS
 
-+ (NSO*(^)(id list, _FindBlock iterator))find
++ (id(^)(id list, _FindBlock iterator))find
 {
   return ^(id list, _FindBlock iterator) {
-    __block NSO* result;
+    __block id result;
     _.any(list, ^B(id value, ... /* KEY, LIST */) {
       if (iterator(value)) {
         result = value;
@@ -217,7 +217,7 @@
   };
 }
 
-+ (NSO*(^)(id list, _FindBlock iterator))detect { return self.find; } // ALIAS
++ (id(^)(id list, _FindBlock iterator))detect { return self.find; } // ALIAS
 
 + (A*(^)(id list, _ItemTestBlock iterator))filter
 {
@@ -285,10 +285,12 @@
 }
 + (B(^)(id list, id target))contains { return self.include; } // ALIAS
 
-+ (NSO*(^)(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke
++ (id(^)(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */))invoke
 {
-  return ^NSO*(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */) {
+  return ^(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
+
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
     return _.map(list, ^(NSO* value, ... /* KEY, LIST */) {
       return methodName.apply(value, arguments);
@@ -316,19 +318,26 @@
   };
 }
 
-+ (NSO*(^)(id list, _MaxBlock iterator))max
++ (id(^)(id list, _MaxBlock iterator))max
 {
-  return ^NSO*(id list, _MaxBlock iterator) {
+  return ^id(id list, _MaxBlock iterator) {
     if (!iterator && _.isEmpty(list))
       return NF_NEG_INFINITY;
 
     if (_.isArray(list)) {
       NSA* array = list;
-      NSO* max = array.getAt(0);
+      NSO* max = nil;
+      NSO* maxComputed;
       for (NSO* value in array) {
         NSO* computed = iterator ? iterator(value) : value;
-        if ([max compare: computed] == NSOrderedAscending)
-          max = value; 
+        if (!maxComputed) {
+          max = value;
+          maxComputed = computed;
+        }
+        else if ([maxComputed compare: computed] == NSOrderedAscending) {
+          max = value;
+          maxComputed = computed;
+        }
       }
       return max;
     }  
@@ -344,19 +353,26 @@
   };
 }
 
-+ (NSO*(^)(id list, _MinBlock iterator))min
++ (id(^)(id list, _MinBlock iterator))min
 {
-  return ^NSO*(id list, _MinBlock iterator) {
+  return ^id(id list, _MinBlock iterator) {
     if (!iterator && _.isEmpty(list))
       return NF_POS_INFINITY;
 
     if (_.isArray(list)) {
       NSA* array = list;
-      NSO* min = array.getAt(0);
+      NSO* min = nil;
+      NSO* minComputed;
       for (NSO* value in array) {
         NSO* computed = iterator ? iterator(value) : value;
-        if ([min compare: computed] == NSOrderedDescending)
-          min = value; 
+        if (!minComputed) {
+          min = value;
+          minComputed = computed;
+        }
+        else if ([minComputed compare: computed] == NSOrderedDescending) {
+          min = value;
+          minComputed = computed;
+        }
       }
       return min;
     }
@@ -373,7 +389,7 @@
   };
 }
 
-+ (NSO*(^)(id list, id iteratorOrKey /* _SortByBlock or id */))sortBy
++ (id(^)(id list, id iteratorOrKey /* _SortByBlock or id */))sortBy
 {
   return ^(id list, id iteratorOrKey) {
 #ifdef DEBUG

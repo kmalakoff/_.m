@@ -9,7 +9,6 @@
 #import "_+ArraysTests.h"
 #import "QUnit.h"
 #import "Underscore.h"
-#import "SubjectiveScript.h"
 
 @implementation __ArraysTests
 

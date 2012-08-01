@@ -139,9 +139,9 @@
 // helper
 - (NSComparisonResult)compare:(NSO*)other
 {
-  if (SS.isString(self)) return [(NSS*)self compare:(NSS*)other];
-  if (SS.isNumber(self)) return [(N*)self compare:(N*)other];
-  if (SS.isDate(self)) return   [(Date*)self compare:(Date*)other];
+  if (SS.isString(self))  return [(NSS*)self compare:(NSS*)other];
+  if (SS.isNumber(self))  return [(N*)self compare:(N*)other];
+  if (SS.isDate(self))    return [(Date*)self compare:(Date*)other];
 
 #ifdef DEBUG
   NSAssert(nil, @"cannot compare the provided objects");

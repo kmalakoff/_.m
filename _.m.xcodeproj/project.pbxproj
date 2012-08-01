@@ -141,6 +141,7 @@
 		0A32615D15B8FB4900237F52 /* lib_.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32614515B8FB4800237F52 /* lib_.a */; };
 		0A32616315B8FB4900237F52 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A32616115B8FB4900237F52 /* InfoPlist.strings */; };
 		0A32616615B8FB4900237F52 /* _Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A32616515B8FB4900237F52 /* _Tests.m */; };
+		0A410A2A15C93019005E65CA /* _WebsiteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A410A2915C93019005E65CA /* _WebsiteTests.m */; };
 		0A58433A15B8FC7A000BC230 /* _+ArraysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58431B15B8FC7A000BC230 /* _+ArraysTests.m */; };
 		0A58433B15B8FC7A000BC230 /* _+ChainingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58431D15B8FC7A000BC230 /* _+ChainingTests.m */; };
 		0A58433C15B8FC7A000BC230 /* _+CollectionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58431F15B8FC7A000BC230 /* _+CollectionsTests.m */; };
@@ -264,6 +265,8 @@
 		0A32616215B8FB4900237F52 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A32616415B8FB4900237F52 /* _Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _Tests.h; sourceTree = "<group>"; };
 		0A32616515B8FB4900237F52 /* _Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _Tests.m; sourceTree = "<group>"; };
+		0A410A2815C93019005E65CA /* _WebsiteTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _WebsiteTests.h; path = _Tests/Website/_WebsiteTests.h; sourceTree = SOURCE_ROOT; };
+		0A410A2915C93019005E65CA /* _WebsiteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _WebsiteTests.m; path = _Tests/Website/_WebsiteTests.m; sourceTree = SOURCE_ROOT; };
 		0A58431A15B8FC7A000BC230 /* _+ArraysTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_+ArraysTests.h"; sourceTree = "<group>"; };
 		0A58431B15B8FC7A000BC230 /* _+ArraysTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_+ArraysTests.m"; sourceTree = "<group>"; };
 		0A58431C15B8FC7A000BC230 /* _+ChainingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_+ChainingTests.h"; sourceTree = "<group>"; };
@@ -536,6 +539,7 @@
 				0A58433915B8FC7A000BC230 /* _WrapperTests.m */,
 				0A58431915B8FC7A000BC230 /* Categories */,
 				0A58432A15B8FC7A000BC230 /* WrapperCategories */,
+				0A410A2C15C93027005E65CA /* Website */,
 				0A58432615B8FC7A000BC230 /* Vendor */,
 				0A32615F15B8FB4900237F52 /* Supporting Files */,
 			);
@@ -549,6 +553,16 @@
 				0A32616115B8FB4900237F52 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A410A2C15C93027005E65CA /* Website */ = {
+			isa = PBXGroup;
+			children = (
+				0A410A2815C93019005E65CA /* _WebsiteTests.h */,
+				0A410A2915C93019005E65CA /* _WebsiteTests.m */,
+			);
+			name = Website;
+			path = WrapperCategories;
 			sourceTree = "<group>";
 		};
 		0A58431915B8FC7A000BC230 /* Categories */ = {
@@ -864,6 +878,7 @@
 				0A2A8CD515C7D5C9002A71DE /* NSNumber+SS.m in Sources */,
 				0A2A8CD815C7D5C9002A71DE /* NSObject+SS.m in Sources */,
 				0A2A8CDB15C7D5C9002A71DE /* NSString+SS.m in Sources */,
+				0A410A2A15C93019005E65CA /* _WebsiteTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

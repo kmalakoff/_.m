@@ -9,7 +9,6 @@
 #import "_+ObjectsTests.h"
 #import "QUnit.h"
 #import "Underscore.h"
-#import "SubjectiveScript.h"
 
 // For isEqual test
 @interface LocalizedString : NSObject

@@ -9,7 +9,6 @@
 #import "_Wrapper+UtilityTests.h"
 #import "QUnit.h"
 #import "Underscore.h"
-#import "SubjectiveScript.h"
 
 @implementation _Wrapper_UtilityTests
 

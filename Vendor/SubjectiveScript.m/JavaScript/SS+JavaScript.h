@@ -42,6 +42,7 @@
 // global functions
 + (N*(^)(NSS* string))parseInt;
 + (const NSS*(^)(id obj))typeof_;
++ (void(^)(NSO* message))alert;
 
 // timeouts
 + (SSTimeout*(^)(SSTaskIdBlock block, I waitNS))setTimeout;

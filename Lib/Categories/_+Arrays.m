@@ -38,7 +38,8 @@
 + (NSO*(^)(NSA* array, I n))first
 {
   return ^id(NSA* array, I n) {
-    return n>=0 ? array.slice(0, n) : array.get(0);
+    if (n==0) return NSA.new;
+    return n>0 ? array.slice(0, n) : array.get(0);
   };
 }
 + (NSO*(^)(NSA* array, I n))head { return self.first; } // ALIAS

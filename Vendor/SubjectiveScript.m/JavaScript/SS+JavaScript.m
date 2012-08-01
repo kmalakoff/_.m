@@ -35,6 +35,8 @@
 #import "SS+Types.h"
 #import "SSArguments.h"
 
+//#import <UIKit/UIKit.h> // TODO: make mac compliant and test-safe version
+
 const NSS* SSJSTypeOfObject = @"object";
 const NSS* SSJSTypeOfString = @"string";
 const NSS* SSJSTypeOfNumber = @"number";
@@ -122,6 +124,16 @@ const NSS* SSJSTypeOfBoolean = @"boolean";
     
     NSLog(@"unrecognized type for typeof_");
     return @"unknown type";
+  };
+}
+
++ (void(^)(NSO* message))alert
+{
+  return ^(NSO* message) {
+    // TODO: make mac compliant and test-safe version
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"alert" message:message.toString() delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//    [alertView show];
+    NSLog(@"%@", message.toString());
   };
 }
 

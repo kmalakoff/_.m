@@ -9,7 +9,6 @@
 #import "_+CollectionsTests.h"
 #import "QUnit.h"
 #import "Underscore.h"
-#import "SubjectiveScript.h"
 
 // for test_sortByNamed
 @interface Stooge : O
@@ -85,7 +84,7 @@
 
 - (void)test_reduce
 {
-  N* sum = (N*) _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, 0);
+  N* sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, 0);
   equal(sum.I, 6, @"can sum up an array");
 
   /* NOT SUPPORTED: JavaScript-only because of 'this' context */
@@ -99,7 +98,7 @@
   sum =  __(AI(1, 2, 3)).reduce(^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, 0).N;
   equal(sum.I, 6, @"OO-style reduce");
 
-  sum = (N*) _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, /* REQUIRED */ 0);
+  sum = _.reduce(AI(1, 2, 3), ^(N* sum, N* num, ... /* KEY, LIST */){ return N.I(sum.I + num.I); }, /* REQUIRED */ 0);
   equal(sum.I, 6, @"default initial value");
 
   E* ifnull;
