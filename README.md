@@ -1,4 +1,3 @@
-
 ````
 _.m
 ````
@@ -48,13 +47,15 @@ Installing
   + Add all of the files from the Pods/SubjectiveScript.m folder to your project or get them from [SubjectiveScript.m on Github](https://github.com/kmalakoff/SubjectiveScript.m)
   + Include Underscore.h in your project where you need it and away you go!
 
-h4#install_cocoapods Install From CocoaPods
-ul
-  li Install [Ruby](http://www.ruby-lang.org/en/downloads/) and [CocoaPods](href='http://cocoapods.org/#install)
-  li [Configure a Podfile](href='http://cocoapods.org/#get_started) in the root directory of your XCode project. For example:
-    pre.
+#Install From CocoaPods
+  + Install [Ruby](http://www.ruby-lang.org/en/downloads/) and [CocoaPods](href='http://cocoapods.org/#install)
+  + [Configure a Podfile](href='http://cocoapods.org/#get_started) in the root directory of your XCode project. For example:
+
+```
       platform :ios
       pod '_.m',                  '~> 0.1.0'
       pod 'SubjectiveScript.m',   '~> 0.1.0'
-  li Install the pods from the Podfile 'pod install {YourProject}.xcodeproj'
-  li Use the generated '{YourProject}.xcworkspace' file instead of '{YourProject}.xcodeproj'
+```
+
+  + Install the pods from the Podfile 'pod install {YourProject}.xcodeproj'
+  + Use the generated '{YourProject}.xcworkspace' file instead of '{YourProject}.xcodeproj'
