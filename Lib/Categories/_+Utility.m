@@ -62,8 +62,12 @@
 + (NSS*(^)(NSS* prefix))uniqueId
 {
   return ^(NSS* prefix) {
-    static I id = 0; id++;
-    return prefix ? [NSString stringWithFormat:@"%@%d", prefix, id] : [NSString stringWithFormat:@"%d", id];
+    static I theId = 0; theId++;
+#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+    return prefix ? [NSString stringWithFormat:@"%@%d", prefix, theId] : [NSString stringWithFormat:@"%d", theId];
+#elif defined TARGET_OS_MAC
+    return prefix ? [NSString stringWithFormat:@"%@%ld", prefix, theId] : [NSString stringWithFormat:@"%ld", theId];
+#endif
   };
 }
 

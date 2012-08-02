@@ -31,11 +31,37 @@
 
 #import "SS+System.h"
 #import "NSString+Versioning.h"
+
+#include "TargetConditionals.h"
+#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
 #import <UIKit/UIKit.h>
+#elif defined TARGET_OS_MAC
+#import <Cocoa/Cocoa.h>
+#endif
 
 @implementation SS (System)
 
-+ (NSS*)iOSVersion { return [[UIDevice currentDevice] systemVersion]; }
+#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
++ (NSS*)systemVersion { return [[UIDevice currentDevice] systemVersion]; }
+#elif defined TARGET_OS_MAC
++ (NSS*)systemVersion {
+ SInt32 versionMajor = 0;
+ SInt32 versionMinor = 0;
+ SInt32 versionBugFix = 0;
+ Gestalt( gestaltSystemVersionMajor, &versionMajor );
+ Gestalt( gestaltSystemVersionMinor, &versionMinor );
+ Gestalt( gestaltSystemVersionBugFix, &versionBugFix );
+ return [NSString stringWithFormat:@"%d.%d.%d", versionMajor, versionMinor, versionBugFix];
+}
+#endif
+
+#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
++ (B)macSystem { return NO; }
++ (B)iOSSystem { return YES; }
+#elif defined TARGET_OS_MAC
++ (B)macSystem { return YES; }
++ (B)iOSSystem { return NO; }
+#endif
 
 + (A*)_runningTaskList
 {
@@ -62,7 +88,7 @@
     dispatch_queue_t dispatchQueue;
     
     if (background) {
-      if (SS.iOSVersion.VersionLessThan(@"5.0"))
+      if (SS.iOSSystem && SS.systemVersion.VersionLessThan(@"5.0"))
         dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0UL);
       else
         dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0UL);

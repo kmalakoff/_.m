@@ -52,7 +52,7 @@ static char* const SSIsBooleanKey = "IsBoolean";
 + (N*(^)(I value))I
 {
   return ^(I value) {
-    return [N numberWithInt:value];
+    return [N numberWithInteger:value];
   };
 }
 - (I)I { return self.integerValue; }
@@ -60,7 +60,7 @@ static char* const SSIsBooleanKey = "IsBoolean";
 + (N*(^)(UI value))UI
 {
   return ^(UI value) {
-    return [N numberWithInt:value];
+    return [N numberWithUnsignedInteger:value];
   };
 }
 - (UI)UI { return self.unsignedIntegerValue; }

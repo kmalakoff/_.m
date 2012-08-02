@@ -30,4 +30,7 @@
 #import "SSTypes.h"
 
 @interface SS : NSObject
+
++ (NSS*)VERSION;
+
 @end

@@ -29,5 +29,10 @@
 
 #import "SS.h"
 
+static NSS* SSVERSION = @"0.1.0";
+
 @implementation SS
+
++ (NSS*)VERSION { return SSVERSION; }
+
 @end

@@ -95,8 +95,8 @@
     ARGS_AO(defaults, default1);
 
     _.each(defaults, ^(NSD* source, ... /* KEY, LIST */) {
-      [source enumerateKeysAndObjectsUsingBlock:^(NSO* key, id value, B *stop) {
-        if (!key.in(obj)) [obj setObject:value forKey:key];
+      [source enumerateKeysAndObjectsUsingBlock:^(id key, id value, B *stop) {
+        if (![obj valueForKey:key]) [obj setObject:value forKey:key];
       }];
     });
     return obj;

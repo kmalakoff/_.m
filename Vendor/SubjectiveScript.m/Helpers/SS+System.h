@@ -31,7 +31,9 @@
 
 @interface SS (System)
 
-+ (NSS*)iOSVersion;
++ (NSS*)systemVersion;
++ (B)macSystem;
++ (B)iOSSystem;
 
 + (SSTaskId*(^)(SSTaskIdBlock block, I waitNS, BOOL background))addTask;
 + (void(^)(SSTaskId* taskId))stopTask;
