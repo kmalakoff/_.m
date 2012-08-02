@@ -15,9 +15,9 @@
 - (void)test_collections
 {
   // each
-  _.each(AI(1, 2, 3), ^(N* num, ...){ SS.alert(num); });
-  _.each(OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)}), ^(N* num, ...){ SS.alert(num); });
-  _.eachWithStop(AI(1, 2, 3), ^B(N* num, ...){ SS.alert(num); return (num.I<3); });
+  _.each(AI(1, 2, 3), ^(N* num, ...){ /*SS.alert(num);*/ });
+  _.each(OKV({@"one", N.I(1)}, {@"two", N.I(2)}, {@"three", N.I(3)}), ^(N* num, ...){ /*SS.alert(num);*/ });
+  _.eachWithStop(AI(1, 2, 3), ^B(N* num, ...){ /*SS.alert(num);*/ return (num.I<3); });
 
   // map
   A* nums = _.map(AI(1, 2, 3), ^(N* num, ...){ return N.I(num.I * 3); });
@@ -230,12 +230,12 @@
   
   // defer
   asyncTest(^{
-    _.defer(^{ SS.alert(@"deferred"); ok(true, @"defer"); start(); });
+    _.defer(^{ /*SS.alert(@"deferred");*/ ok(true, @"defer"); start(); });
   });
 
   // deferBackground
   asyncTest(^{
-    _.deferBackground(^{ SS.alert(@"deferred"); ok(true, @"deferBackground"); start(); });
+    _.deferBackground(^{ /*SS.alert(@"deferBackground");*/ ok(true, @"deferBackground"); start(); });
   });
   
   // throttle
@@ -307,13 +307,13 @@
   // tap
   NSA* tap = (NSA*) _.chain(AI(1,2,3,200))
     .filter(^B(N* num, ...) { return num.I % 2 == 0; })
-    .tap(SS.alert)
+    .tap(^(id value){/*SS.alert*/})
     .map(^(N* num, ...) { return N.I(num.I * num.I); })
     .value();
   equal(tap, AI(4, 40000), @"tap");
   tap = _.chain(AI(1,2,3,200))
     .filter(^B(N* num, ...) { return num.I % 2 == 0; })
-    .tap(SS.alert)
+    .tap(^(id value){/*SS.alert*/})
     .map(^(N* num, ...) { return N.I(num.I * num.I); })
     .NSA;
   equal(tap, AI(4, 40000), @"tap");

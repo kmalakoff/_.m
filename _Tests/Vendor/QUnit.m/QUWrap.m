@@ -29,7 +29,7 @@
     case _C_UINT:
     case _C_LNG:
     case _C_ULNG:
-      return [NSNumber numberWithInt:(NSInteger)value];
+      return [NSNumber numberWithInteger:(NSInteger)value];
     case _C_CHR:
     case _C_BOOL:
       return [NSNumber numberWithBool:(BOOL)value];

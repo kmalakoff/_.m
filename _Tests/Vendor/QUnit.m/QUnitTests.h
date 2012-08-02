@@ -32,13 +32,13 @@
 
 @interface QUnitTests : NSObject
 
-+ (void)equal:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict;
-+ (void)deepEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber;
++ (void)equal:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber strict:(BOOL)strict;
++ (void)deepEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber;
 
-+ (void)notEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict;
++ (void)notEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber strict:(BOOL)strict;
 
-+ (void)ok:(SenTestCase*)testCase result:(BOOL)result expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber;
++ (void)ok:(SenTestCase*)testCase result:(BOOL)result expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber;
 
-+ (void)raises:(SenTestCase*)testCase callback:(void(^)())callback expectedExceptionName:(NSString*)expectedExceptionName expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber;
++ (void)raises:(SenTestCase*)testCase callback:(void(^)())callback expectedExceptionName:(NSString*)expectedExceptionName expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber;
 
 @end

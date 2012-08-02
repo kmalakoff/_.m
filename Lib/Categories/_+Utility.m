@@ -63,9 +63,9 @@
 {
   return ^(NSS* prefix) {
     static I theId = 0; theId++;
-#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
     return prefix ? [NSString stringWithFormat:@"%@%d", prefix, theId] : [NSString stringWithFormat:@"%d", theId];
-#elif defined TARGET_OS_MAC
+#elif TARGET_OS_MAC
     return prefix ? [NSString stringWithFormat:@"%@%ld", prefix, theId] : [NSString stringWithFormat:@"%ld", theId];
 #endif
   };

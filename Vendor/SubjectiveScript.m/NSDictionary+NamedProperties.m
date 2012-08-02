@@ -9,9 +9,9 @@
 #import "NSDictionary+NamedProperties.h"
 #import <objc/runtime.h>
 
-#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #define BLOCK_TO_IMPL(_b) imp_implementationWithBlock((void*)CFBridgingRetain(_b))
-#elif defined TARGET_OS_MAC
+#elif TARGET_OS_MAC
 #define BLOCK_TO_IMPL(_b) imp_implementationWithBlock(_b)
 #endif
 

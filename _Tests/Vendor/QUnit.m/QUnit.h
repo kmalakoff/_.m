@@ -30,6 +30,10 @@
 #import "QUnitTests.h"
 #import "QUWrap.h"
 
+@interface QUnit : NSObject
++ (NSString*)VERSION;
+@end
+
 /////////////////////////////
 // Equality
 /////////////////////////////

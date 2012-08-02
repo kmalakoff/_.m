@@ -35,7 +35,12 @@
 #import "SS+Types.h"
 #import "SSArguments.h"
 
-//#import <UIKit/UIKit.h> // TODO: make mac compliant and test-safe version
+#import "TargetConditionals.h"
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#import <UIKit/UIKit.h>
+#elif TARGET_OS_MAC
+#import <Cocoa/Cocoa.h>
+#endif
 
 const NSS* SSJSTypeOfObject = @"object";
 const NSS* SSJSTypeOfString = @"string";
@@ -130,10 +135,13 @@ const NSS* SSJSTypeOfBoolean = @"boolean";
 + (void(^)(NSO* message))alert
 {
   return ^(NSO* message) {
-    // TODO: make mac compliant and test-safe version
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"alert" message:message.toString() delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//    [alertView show];
-    NSLog(@"%@", message.toString());
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"alert" message:message.toString() delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+  [alertView show];
+#elif TARGET_OS_MAC
+  NSAlert *alert = [NSAlert alertWithMessageText:@"alert" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", message.toString()];
+  [alert beginSheetModalForWindow:NSApplication.sharedApplication.mainWindow modalDelegate:nil didEndSelector:nil contextInfo:nil];
+#endif
   };
 }
 

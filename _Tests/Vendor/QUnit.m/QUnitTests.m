@@ -31,7 +31,7 @@
 
 @implementation QUnitTests
 
-+ (void)equal:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict
++ (void)equal:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber strict:(BOOL)strict
 {
   @try {
     if (actual == expected)
@@ -56,7 +56,7 @@
   }
 }
 
-+ (void)deepEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber
++ (void)deepEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber
 {
   if ([actual isKindOfClass:[NSArray class]]) {
     NSArray *actualArray = actual;
@@ -80,7 +80,7 @@
     [QUnitTests equal:testCase actual:actual expected:expected expression:expression description:description filename:filename lineNumber:lineNumber strict:YES];
 }
 
-+ (void)notEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber strict:(BOOL)strict
++ (void)notEqual:(SenTestCase*)testCase actual:(id)actual expected:(id)expected expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber strict:(BOOL)strict
 {
   @try {
     if (actual != expected)
@@ -105,7 +105,7 @@
   }
 }
 
-+ (void)ok:(SenTestCase*)testCase result:(BOOL)result expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber
++ (void)ok:(SenTestCase*)testCase result:(BOOL)result expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber
 {
   if (result)
     return;
@@ -113,7 +113,7 @@
  [testCase failWithException:([NSException failureInCondition:expression isTrue:result inFile:filename atLine:lineNumber withDescription:description])];
 }
 
-+ (void)raises:(SenTestCase*)testCase callback:(void(^)())callback expectedExceptionName:(NSString*)expectedExceptionName expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(NSUInteger)lineNumber
++ (void)raises:(SenTestCase*)testCase callback:(void(^)())callback expectedExceptionName:(NSString*)expectedExceptionName expression:(NSString*)expression description:(NSString*)description filename:(NSString*)filename lineNumber:(int)lineNumber
 {
   @try {
     callback();

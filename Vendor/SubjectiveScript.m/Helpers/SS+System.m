@@ -33,17 +33,17 @@
 #import "NSString+Versioning.h"
 
 #include "TargetConditionals.h"
-#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #import <UIKit/UIKit.h>
-#elif defined TARGET_OS_MAC
+#elif TARGET_OS_MAC
 #import <Cocoa/Cocoa.h>
 #endif
 
 @implementation SS (System)
 
-#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 + (NSS*)systemVersion { return [[UIDevice currentDevice] systemVersion]; }
-#elif defined TARGET_OS_MAC
+#elif TARGET_OS_MAC
 + (NSS*)systemVersion {
  SInt32 versionMajor = 0;
  SInt32 versionMinor = 0;
@@ -55,10 +55,10 @@
 }
 #endif
 
-#if defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 + (B)macSystem { return NO; }
 + (B)iOSSystem { return YES; }
-#elif defined TARGET_OS_MAC
+#elif TARGET_OS_MAC
 + (B)macSystem { return YES; }
 + (B)iOSSystem { return NO; }
 #endif
