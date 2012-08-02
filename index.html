@@ -1,0 +1,503 @@
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8"><title>_.m Home</title><link rel="stylesheet" href="vendor/stylesheets/normalize.css"><link rel="stylesheet" href="vendor/stylesheets/bootstrap.min.css"><link rel="stylesheet" href="stylesheets/index.css"></head><body><div class="page navbar"><div class="page github_fork_me"><a href="https://github.com/kmalakoff/_.m" class="github_fork_me"><img style="position:fixed; top:0; right:0; border:0; z-index:9999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a></div><header class="page"></header><content class="page"><nav class="sidebar"><a href="#install" class="toc_title">Install</a><ul class="toc_section"><li>- <a href="#install_github">From GitHub</a></li><li>- <a href="#install_cocoapods">From CocoaPods</a></li></ul><a href="#collections" class="toc_title">Collections</a><ul class="toc_section"><li>- <a href="#each">each</a></li><li>- <a href="#eachWithStop">eachWithStop</a> <span class='label label-warning'>new<span></li><li>- <a href="#map">map</a></li><li>- <a href="#reduce">reduce</a></li><li>- <a href="#reduceRight">reduceRight</a></li><li>- <a href="#find">find</a></li><li>- <a href="#filter">filter</a></li><li>- <a href="#reject">reject</a></li><li>- <a href="#all">all</a></li><li>- <a href="#any">any</a></li><li>- <a href="#include">include</a></li><li>- <a href="#invoke">invoke</a></li><li>- <a href="#pluck">pluck</a></li><li>- <a href="#max">max</a></li><li>- <a href="#min">min</a></li><li>- <a href="#sortBy">sortBy</a></li><li>- <a href="#groupBy">groupBy</a></li><li>- <a href="#sortedIndex">sortedIndex</a></li><li>- <a href="#shuffle">shuffle</a></li><li>- <a href="#toArray">toArray</a></li><li>- <a href="#size">size</a></li></ul><a href="#arrays" class="toc_title">Arrays</a><ul class="toc_section"><li>- <a href="#first">first</a></li><li>- <a href="#firstIterator">firstIterator</a> <span class='label label-warning'>new<span></li><li>- <a href="#initial">initial</a></li><li>- <a href="#initialIterator">initialIterator</a> <span class='label label-warning'>new<span></li><li>- <a href="#last">last</a></li><li>- <a href="#lastIterator">lastIterator</a> <span class='label label-warning'>new<span></li><li>- <a href="#rest">rest</a></li><li>- <a href="#restIterator">restIterator</a> <span class='label label-warning'>new<span></li><li>- <a href="#compact">compact</a></li><li>- <a href="#flatten">flatten</a></li><li>- <a href="#without">without</a></li><li>- <a href="#union">union</a></li><li>- <a href="#intersection">intersection</a></li><li>- <a href="#difference">difference</a></li><li>- <a href="#uniq">uniq</a></li><li>- <a href="#uniqAdvanced">uniqAdvanced</a> <span class='label label-warning'>new<span></li><li>- <a href="#zip">zip</a></li><li>- <a href="#zipObject">zipObject</a></li><li>- <a href="#indexOf">indexOf</a></li><li>- <a href="#indexOfSorted">indexOfSorted</a> <span class='label label-warning'>new<span></li><li>- <a href="#lastIndexOf">lastIndexOf</a></li><li>- <a href="#range">range</a></li><li>- <a href="#rangeSimple">rangeSimple</a> <span class='label label-warning'>new<span></li></ul><a href="#functions" class="toc_title">Functions</a><ul class="toc_section"><li class="not_supported">- <a href="#bind">bind</a></li><li class="not_supported">- <a href="#bindAll">bindAll</a></li><li>- <a href="#memoize">memoize</a></li><li>- <a href="#delay">delay</a></li><li>- <a href="#delayBackground">delayBackground</a> <span class='label label-warning'>new<span></li><li>- <a href="#defer">defer</a></li><li>- <a href="#deferBackground">deferBackground</a> <span class='label label-warning'>new<span></li><li>- <a href="#throttle">throttle</a></li><li>- <a href="#debounce">debounce</a></li><li>- <a href="#once">once</a></li><li>- <a href="#after">after</a></li><li>- <a href="#wrap">wrap</a></li><li>- <a href="#compose">compose</a></li></ul><a href="#objects" class="toc_title">Objects</a><ul class="toc_section"><li>- <a href="#keys">keys</a></li><li>- <a href="#values">values</a></li><li>- <a href="#object-functions">functions</a></li><li>- <a href="#extend">extend</a></li><li>- <a href="#pick">pick</a></li><li>- <a href="#defaults">defaults</a></li><li>- <a href="#clone">clone</a></li><li>- <a href="#tap">tap</a></li><li>- <a href="#has">has</a></li><li>- <a href="#isEqual">isEqual</a></li><li>- <a href="#isEmpty">isEmpty</a></li><li class="not_supported">- <a href="#isElement">isElement</a></li><li>- <a href="#isArray">isArray</a></li><li>- <a href="#isObject">isObject</a></li><li>- <a href="#isArguments">isArguments</a></li><li>- <a href="#isFunction">isFunction</a></li><li>- <a href="#isString">isString</a></li><li>- <a href="#isNumber">isNumber</a></li><li>- <a href="#isFinite">isFinite</a></li><li>- <a href="#isBoolean">isBoolean</a></li><li>- <a href="#isDate">isDate</a></li><li class="not_supported">- <a href="#isRegExp">isRegExp</a></li><li>- <a href="#isNaN">isNaN</a></li><li>- <a href="#isNull">isNull</a></li><li class="not_supported">- <a href="#isUndefined">isUndefined</a></li></ul><a href="#utility" class="toc_title">Utility</a><ul class="toc_section"><li class="not_supported">- <a href="#noConflict">noConflict</a></li><li>- <a href="#identity">identity</a></li><li>- <a href="#identityTruthy">identityTruthy</a> <span class='label label-warning'>new<span></li><li>- <a href="#times">times</a></li><li class="not_supported">- <a href="#mixin">mixin</a></li><li>- <a href="#uniqueId">uniqueId</a></li><li class="not_supported">- <a href="#escape">escape</a></li><li>- <a href="#result">result</a></li><li class="not_supported">- <a href="#template">template</a></li></ul><a href="#chaining" class="toc_title">Chaining</a><ul class="toc_section"><li>- <a href="#oo_wrapper">__() OO-Wrapper</a> <span class='label label-warning'>new<span></li><li>- <a href="#chain">chain</a></li><li>- <a href="#value">value</a></li></ul><a href="#extensions" class="toc_title">Extensions</a><ul class="toc_section"><li>- <a href="#isTruthy">isTruthy</a> <span class='label label-warning'>new<span></li><li>- <a href="#isFalsy">isFalsy</a> <span class='label label-warning'>new<span></li><li>- <a href="#isDictionary">isDictionary</a> <span class='label label-warning'>new<span></li><li>- <a href="#isBlock">isBlock</a> <span class='label label-warning'>new<span></li><li>- <a href="#valueTester">valueTester</a> <span class='label label-warning'>new<span></li><li>- <a href="#valueStringTester">valueStringTester</a> <span class='label label-warning'>new<span></li><li>- <a href="#setProps">setProps</a> <span class='label label-warning'>new<span></li><li>- <a href="#classNames">classNames</a> <span class='label label-warning'>new<span></li></ul><a href="#other" class="toc_title">Other</a><ul class="toc_section"><li>- <a href="#helper_api">Helper API</a></li><li>- <a href="#underscorejs_differences">Underscore.js Compatibility</a></li><li>- <a href="#javascript_differences">JavaScript differences</a></li></ul></nav><div class="container"><p></p><p></p><h1>_.m</h1><p></p><p>_.m is a port of <a href='http://underscorejs.org/'>Underscore.js</a> to Objective-C. It strives to provide the fullest feature set possible in a way that is familiar to JavaScript developers (despite the differences between JavaScript and Objective-C).</p><p>To help achieve this vision, _.m uses <a href='https://github.com/kmalakoff/SubjectiveScript.m'>SubjectiveScript.m</a> to bring JavaScript-like syntax and features into Objective-C, and <a href='https://github.com/kmalakoff/QUnit.m'>QUnit.m</a> to port unit tests from JavaScript to Objective-C. You should check them out, too!</p><div class="page-header"><h2 id="install">Installation</h2><h4 id="install_github">Install From GitHub Source</h4><ul><li>Clone the <a href='https://github.com/kmalakoff/_.m'>_.m from GitHub</a></li><li>Add all the files from the Lib directory to your project</li><li>Add all of the files from the Vendor directory (SubjectiveScript.m) to your project or get them from <a href='https://github.com/kmalakoff/SubjectiveScript.m'>SubjectiveScript.m on Github</a></li><li>Include Underscore.h in your project where you need it and away you go!</li></ul><h4 id="install_cocoapods">Install From CocoaPods</h4><ul><li>Install <a href='http://www.ruby-lang.org/en/downloads/'>Ruby</a> and <a href='http://cocoapods.org/#install'>CocoaPods</a></li><li><a href='http://cocoapods.org/#get_started'>Configure a Podfile</a> in the root directory of your XCode project. For example:<pre>platform :ios
+pod '_.m',                  '~&gt; 0.1.0'
+pod 'SubjectiveScript.m',   '~&gt; 0.1.0'</pre></li><li>Install the pods from the Podfile <code>pod install {YourProject}.xcodeproj</code></li><li>Use the generated <code>{YourProject}.xcworkspace</code> file instead of {YourProject}.xcodeproj</li></ul><p></p><strong>Note:</strong> _.m and Subjective-Script requires ARC to be enabled in your Objective-C project.</div><div class="page-header"><h2>Making Objective-C more Scripty!</h2></div><p>Subjective-Script helps get rid of [tooMany squareBrackets], compresses construction of objects and numbers, and implements a JavaScript-like syntax and feature set. Check out the <a href='https://github.com/kmalakoff/SubjectiveScript.m'>GitHub Page</a> for more details. An example....</p><h4>Objective-C:</h4><pre>_.compact([NSArray arrayWithObjects:[NSNumber numberWithInteger:0], [NSNumber numberWithInteger:1], [NSNumber numberWithInteger:2], nil]);
+// [1,2]</pre><h4>Subjective-Script:</h4><pre>_.compact(AI(0, 1, 2));
+// [1,2]
+</pre><div class="page-header"><h2>Comparing Underscore.js and _.m</h2><p><i><strong>Note:</strong> Most of the following examples of Underscore.js are directly from the <a href="http://underscore.org">Underscore.js website</a></i> to ease understanding.</p><h3 id="collections">Collection Functions (Arrays or Objects)</h3><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3></div><div class="span6"><h3 class="library_title">_.m</h3></div></div><p id="each"></p><div class="row"><div class="span6"><b class="header">each</b><span class="alias">Alias: <b>forEach</b></span><div class="no_specs"></div><p><code>_.each(list, iterator, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#each">docs</a></span></p><p></p><pre>_.each([1, 2, 3], function(num){ alert(num); });
+=&gt; alerts each number in turn...
+_.each({one : 1, two : 2, three : 3}, function(num, key){ alert(num); });
+=&gt; alerts each number in turn...</pre></div><div class="span6"><b class="header">each</b><span class="alias">Alias: <b>forEach</b></span><span class="returns">Returns: <b>void</b></span><p class="arg">Arg: <b>_EachBlock => ^(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.each(id list, _EachBlock iterator)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>_.each(AI(1, 2, 3), ^(N* num, ...){ SS.alert(num); });
+=&gt; alerts each number in turn...
+_.each(OKV({@&quot;one&quot;, N.I(1)}, {@&quot;two&quot;, N.I(2)}, {@&quot;three&quot;, N.I(3)}), ^(N* num, ...){ SS.alert(num); });
+=&gt; alerts each number in turn...
+</pre><b id="eachWithStop" class="header">eachWithStop</b><span class="returns">Returns: <b>void</b></span><p class="arg">Arg: <b>_EachWithStopBlock => ^B(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code class='small'>_.eachWithStop(id list, _EachWithStopBlock iterator)</code> <span class='label label-success'>specialized<span></p><p></p><pre>_.eachWithStop(AI(1, 2, 3), ^B(N* num, ...){ SS.alert(num); return (num.I&lt;3); });
+=&gt; alerts each number under 3 in turn...
+</pre></div></div><p id="map"></p><div class="row"><div class="span6"><b class="header">map</b><span class="alias">Alias: <b>collect</b></span><div class="no_specs"></div><p><code>_.map(list, iterator, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#map">docs</a></span></p><p></p><pre>_.map([1, 2, 3], function(num){ return num * 3; });
+=&gt; [3, 6, 9]
+_.map({one : 1, two : 2, three : 3}, function(num, key){ return num * 3; });
+=&gt; [3, 6, 9]</pre></div><div class="span6"><b class="header">map</b><span class="alias">Alias: <b>collect</b></span><span class="returns">Returns: <b>A*</b></span><p class="arg">Arg: <b>_MapBlock => ^id(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.map(id list, _MapBlock iterator)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>_.map(AI(1, 2, 3), ^(N* num, ...){ return N.I(num.I * 3); });
+=&gt; [3, 6, 9]
+_.map(OKV({@&quot;one&quot;, N.I(1)}, {@&quot;two&quot;, N.I(2)}, {@&quot;three&quot;, N.I(3)}), ^id(N* num, ...){ return N.I(num.I * 3); });
+=&gt; [3, 6, 9]
+</pre></div></div><p id="reduce"></p><div class="row"><div class="span6"><b class="header">reduce</b><span class="alias">Aliases: <b>inject, foldl</b></span><div class="no_specs"></div><p><code>_.reduce(list, iterator, memo, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#reduce">docs</a></span></p><p></p><pre>var sum = _.reduce([1, 2, 3], function(memo, num){ return memo + num; }, 0);
+=&gt; 6</pre></div><div class="span6"><b class="header">reduce</b><span class="alias">Aliases: <b>inject, foldl</b></span><span class="returns">Returns: <b>id</b></span><p class="arg">Arg: <b>_ReduceBlock => ^id(id memo, id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.reduce(id list, _ReduceBlock iterator, id memo)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>N* sum = _.reduce(AI(1, 2, 3), ^(N* memo, N* num, ...){ return N.I(memo.I + num.I); }, N.I(0));
+=&gt; 6
+</pre></div></div><p id="reduceRight"></p><div class="row"><div class="span6"><b class="header">reduceRight</b><span class="alias">Alias: <b>foldr</b></span><div class="no_specs"></div><p><code>_.reduceRight(list, iterator, memo, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#reduceRight">docs</a></span></p><p></p><pre>var list = [[0, 1], [2, 3], [4, 5]];
+var flat = _.reduceRight(list, function(a, b) { return a.concat(b); }, []);
+=&gt; [4, 5, 2, 3, 0, 1]</pre></div><div class="span6"><b class="header">reduceRight</b><span class="alias">Alias: <b>foldr</b></span><span class="returns">Returns: <b>id</b></span><p class="arg">Arg: <b>_ReduceBlock => ^id(id memo, id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.reduceRight(id list, _ReduceBlock iterator, id memo)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>A* list = AO(AI(0, 1), AI(2, 3), AI(4, 5));
+A* flat = _.reduceRight(list, ^(A* a, A* b, ...) { return a.concat(b); }, A.new);
+=&gt; [4, 5, 2, 3, 0, 1]
+</pre></div></div><p id="find"></p><div class="row"><div class="span6"><b class="header">find</b><span class="alias">Alias: <b>detect</b></span><p><code>_.find(list, iterator, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#find">docs</a></span></p><p></p><pre>var even = _.find([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+=&gt; 2</pre></div><div class="span6"><b class="header">find</b><span class="alias">Alias: <b>detect</b></span><span class="returns">Returns: <b>id</b></span><span class="arg">Arg: <b>_FindBlock => ^B(id value)</b></span><p><code>_.find(id list, _FindBlock iterator)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>N* even = _.find(AI(1, 2, 3, 4, 5, 6), ^B(N* num){ return num.I % 2 == 0; });
+=&gt; 2
+</pre></div></div><p id="filter"></p><div class="row"><div class="span6"><b class="header">filter</b><span class="alias">Alias: <b>select</b></span><div class="no_specs"></div><p><code>_.filter(list, iterator, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#filter">docs</a></span></p><p></p><pre>var evens = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+=&gt; [2, 4, 6]</pre></div><div class="span6"><b class="header">filter</b><span class="alias">Alias: <b>select</b></span><span class="returns">Returns: <b>A*</b></span><p class="arg">Arg: <b>_ItemTestBlock => ^B(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.filter(id list, _ItemTestBlock iterator)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>A* evens = _.filter(AI(1, 2, 3, 4, 5, 6), ^B(N* num, ...){ return num.I % 2 == 0; });
+=&gt; [2, 4, 6]
+</pre></div></div><p id="reject"></p><div class="row"><div class="span6"><b class="header">reject</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.reject(list, iterator, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#reject">docs</a></span></p><p></p><pre>var odds = _.reject([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+=&gt; [1, 3, 5]</pre></div><div class="span6"><b class="header">reject</b><span class="returns">Returns: <b>A*</b></span><p class="arg">Arg: <b>_ItemTestBlock => ^B(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.reject(id list, _ItemTestBlock iterator)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>A* odds = _.reject(AI(1, 2, 3, 4, 5, 6), ^B(N* num, ...){ return num.I % 2 == 0; });
+=&gt; [1, 3, 5]
+</pre></div></div><p id="all"></p><div class="row"><div class="span6"><b class="header">all</b><span class="alias">Alias: <b>every</b></span><div class="no_specs"></div><p><code>_.all(list, iterator, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#all">docs</a></span></p><p></p><pre>_.all([true, 1, null, 'yes'], _.identity);
+=&gt; false</pre></div><div class="span6"><b class="header">all</b><span class="alias">Alias: <b>every</b></span><span class="returns">Returns: <b>B</b></span><p class="arg">Arg: <b>_ItemTestBlock => ^B(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.all(id list, _ItemTestBlock iterator)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>_.all(AO(N.B(true), N.I(1), nil, @&quot;yes&quot;), _.identityTruthy)
+=&gt; false
+</pre></div></div><p id="any"></p><div class="row"><div class="span6"><b class="header">any</b><span class="alias">Alias: <b>some</b></span><div class="no_specs"></div><p><code>_.any(list, [iterator], [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#any">docs</a></span></p><p></p><pre>_.any([null, 0, 'yes', false]);
+=&gt; true</pre></div><div class="span6"><b class="header">any</b><span class="alias">Alias: <b>some</b></span><span class="returns">Returns: <b>B</b></span><p class="arg">Arg: <b>_ItemTestBlock => ^B(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.any(id list, _ItemTestBlock iterator)</code> <span class='label label-inverse'>no context</span></p><p></p><pre>_.any(AO(nil, N.I(0), @&quot;yes&quot;, N.B(false)), nil);
+=&gt; true
+</pre></div></div><p id="include"></p><div class="row"><div class="span6"><b class="header">include</b><span class="alias">Alias: <b>contains</b></span><p><code>_.include(list, value)</code><span class="docs label label-info"><a href="http://underscorejs.org/#include">docs</a></span></p><p></p><pre>_.include([1, 2, 3], 3);
+=&gt; true</pre></div><div class="span6"><b class="header">include</b><span class="alias">Alias: <b>contains</b></span><span class="returns">Returns: <b>B</b></span><p><code>_.include(id list, id target)</code></p><p></p><pre>_.include(AI(1, 2, 3), N.I(3));
+=&gt; true
+</pre></div></div><p id="invoke"></p><div class="row"><div class="span6"><b class="header">invoke</b><div class="no_specs"></div><p><code>_.invoke(list, methodName, [*arguments])</code><span class="docs label label-info"><a href="http://underscorejs.org/#invoke">docs</a></span></p><p></p><pre>_.invoke([[5, 1, 7], [3, 2, 1]], 'sort');
+=&gt; [[1, 5, 7], [1, 2, 3]]</pre></div><div class="span6"><b class="header">invoke</b><span class="returns">Returns: <b>id</b></span><p><code>_.invoke(id list, NSS* methodName, id arg1, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_.invoke(AO(AI(5, 1, 7), AI(3, 2, 1)), @&quot;sort&quot;, nil);
+=&gt; [[1, 5, 7], [1, 2, 3]]
+</pre></div></div><p id="pluck"></p><div class="row"><div class="span6"><b class="header">pluck</b><div class="no_specs"></div><p><code>_.pluck(list, propertyName)</code><span class="docs label label-info"><a href="http://underscorejs.org/#pluck">docs</a></span></p><p></p><pre>var stooges = [{name : 'moe', age : 40}, {name : 'larry', age : 50}, {name : 'curly', age : 60}];
+_.pluck(stooges, 'name');
+=&gt; [&quot;moe&quot;, &quot;larry&quot;, &quot;curly&quot;]</pre></div><div class="span6"><b class="header">pluck</b><span class="returns">Returns: <b>NSO*</b></span><p><code>_.pluck(id list, NSString *propertyName)</code></p><p></p><pre>A* stooges = AO(OKV({@&quot;name&quot;, @&quot;moe&quot;}, {@&quot;age&quot;, N.I(40)}), OKV({@&quot;name&quot;, @&quot;larry&quot;}, {@&quot;age&quot;, N.I(50)}), OKV({@&quot;name&quot;, @&quot;curly&quot;}, {@&quot;age&quot;, N.I(60)}));
+_.pluck(stooges, @&quot;name&quot;);
+=&gt; [&quot;moe&quot;, &quot;larry&quot;, &quot;curly&quot;]
+</pre></div></div><p id="max"></p><div class="row"><div class="span6"><b class="header">max</b><div class="no_specs"></div><p><code>_.max(list, [iterator], [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#max">docs</a></span></p><p></p><pre>var stooges = [{name : 'moe', age : 40}, {name : 'larry', age : 50}, {name : 'curly', age : 60}];
+_.max(stooges, function(stooge){ return stooge.age; });
+=&gt; {name : 'curly', age : 60};</pre></div><div class="span6"><b class="header">max</b><span class="returns">Returns: <b>id</b></span><span class="arg">Arg: <b>_MaxBlock => ^id(id value)</b></span><p><code>_.max(id list, _MaxBlock iterator)</code></p><p></p><pre>A* stooges = AO(OKV({@&quot;name&quot;, @&quot;moe&quot;}, {@&quot;age&quot;, N.I(40)}), OKV({@&quot;name&quot;, @&quot;larry&quot;}, {@&quot;age&quot;, N.I(50)}), OKV({@&quot;name&quot;, @&quot;curly&quot;}, {@&quot;age&quot;, N.I(60)}));
+// you can use stooge.age if you use SubjectiveScript's NamedProperties
+_.max(stooges, ^(O* stooge){ return stooge.get(@&quot;age&quot;); });
+=&gt; {name : 'curly', age : 60};
+</pre></div></div><p id="min"></p><div class="row"><div class="span6"><b class="header">min</b><div class="no_specs"></div><p><code>_.min(list, [iterator], [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#min">docs</a></span></p><p></p><pre>var numbers = [10, 5, 100, 2, 1000];
+_.min(numbers);
+=&gt; 2</pre></div><div class="span6"><b class="header">min</b><span class="returns">Returns: <b>id</b></span><span class="arg">Arg: <b>_MinBlock => ^id(id value)</b></span><p><code>_.min(id list, _MinBlock iterator)</code></p><p></p><pre>A* numbers = AI(10, 5, 100, 2, 1000);
+_.min(numbers, nil);
+=&gt; 2
+</pre></div></div><p id="sortBy"></p><div class="row"><div class="span6"><b class="header">sortBy</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.sortBy(list, iterator, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#sortBy">docs</a></span></p><p></p><div class="no_specs"></div><pre>_.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); });
+=&gt; [5, 4, 6, 3, 1, 2]</pre></div><div class="span6"><b class="header">sortBy</b><span class="returns">Returns: <b>id</b></span><p class="arg">Arg: <b>_SortByBlock => ^id(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.sortBy(id list, id iteratorOrKey)</code> <span class='label label-warning'>_SortByBlock or id</span> <br> <span class='label label-inverse'>no context</span></p><p></p><pre>_.sortBy(AI(1, 2, 3, 4, 5, 6), ^(N* num, ...){ return N.F(sin(num.I)); });
+=&gt; [5, 4, 6, 3, 1, 2]
+</pre></div></div><p id="groupBy"></p><div class="row"><div class="span6"><b class="header">groupBy</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.groupBy(list, iterator)</code><span class="docs label label-info"><a href="http://underscorejs.org/#groupBy">docs</a></span></p><p></p><div class="no_specs"></div><pre>_.groupBy([1.3, 2.1, 2.4], function(num){ return Math.floor(num); });
+=&gt; {1: [1.3], 2: [2.1, 2.4]}
+
+_.groupBy(['one', 'two', 'three'], 'length');
+=&gt; {3: [&quot;one&quot;, &quot;two&quot;], 5: [&quot;three&quot;]}</pre></div><div class="span6"><b class="header">groupBy</b><span class="returns">Returns: <b>O*</b></span><p class="arg">Arg: <b>_GroupByBlock => ^id(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.groupBy(id list, id iteratorOrKey)</code> <span class='label label-warning'>_GroupByBlock or id</span> <br> <span class='label label-inverse'>no context</span></p><p></p><pre>_.groupBy(AF(1.3, 2.1, 2.4), ^(N* num, ...){ return N.I(floor(num.F)); });
+=&gt; {1: [1.3], 2: [2.1, 2.4]}
+
+_.groupBy(AO(@&quot;one&quot;, @&quot;two&quot;, @&quot;three&quot;), @&quot;length&quot;);
+=&gt; {3: [&quot;one&quot;, &quot;two&quot;], 5: [&quot;three&quot;]}
+</pre></div></div><p id="sortedIndex"></p><div class="row"><div class="span6"><b class="header">sortedIndex</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.sortedIndex(list, value, [iterator])</code><span class="docs label label-info"><a href="http://underscorejs.org/#sortedIndex">docs</a></span></p><p></p><pre>_.sortedIndex([10, 20, 30, 40, 50], 35);
+=&gt; 3</pre></div><div class="span6"><b class="header">sortedIndex</b><span class="returns">Returns: <b>UI</b></span><p class="arg">Arg: <b>_SortedIndexBlock => ^id(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code class='small'>_.sortedIndex(NSA* array, id list, _SortedIndexBlock iterator)</code></p><p></p><pre>_.sortedIndex(AI(10, 20, 30, 40, 50), N.I(35), nil);
+=&gt; 3
+</pre></div></div><p id="shuffle"></p><div class="row"><div class="span6"><b class="header">shuffle</b><div class="no_specs"></div><p><code>_.shuffle(list)</code><span class="docs label label-info"><a href="http://underscorejs.org/#shuffle">docs</a></span></p><p></p><pre>_.shuffle([1, 2, 3, 4, 5, 6]);
+=&gt; [4, 1, 6, 3, 5, 2]</pre></div><div class="span6"><b class="header">shuffle</b><span class="returns">Returns: <b>A*</b></span><p><code>_.shuffle(id list)</code></p><p></p><pre>_.shuffle(AI(1, 2, 3, 4, 5, 6));
+=&gt; [4, 1, 6, 3, 5, 2]
+</pre></div></div><p id="toArray"></p><div class="row"><div class="span6"><b class="header">toArray</b><div class="no_specs"></div><p><code>_.toArray(list)</code><span class="docs label label-info"><a href="http://underscorejs.org/#toArray">docs</a></span></p><p></p><pre>(function(){ return _.toArray(arguments).slice(1); })(1, 2, 3, 4);
+=&gt; [2, 3, 4]</pre></div><div class="span6"><b class="header">toArray</b><span class="returns">Returns: <b>NSA*</b></span><p><code>_.toArray(id list)</code></p><p></p><pre>(^(I arg1, ...){ ARGS_AI(arguments, arg1); return _.toArray(arguments).slice(1, 0); })(1, 2, 3, 4, AI_END);
+=&gt; [2, 3, 4]
+</pre></div></div><p id="size"></p><div class="row"><div class="span6"><b class="header">size</b><div class="no_specs"></div><p><code>_.size(list)</code><span class="docs label label-info"><a href="http://underscorejs.org/#size">docs</a></span></p><p></p><pre>_.size({one : 1, two : 2, three : 3});
+=&gt; 3</pre></div><div class="span6"><b class="header">size</b><span class="returns">Returns: <b>UI</b></span><p><code>_.size(id list)</code></p><p></p><pre>_.size(OKV({@&quot;one&quot;, N.I(1)}, {@&quot;two&quot;, N.I(2)}, {@&quot;three&quot;, N.I(3)}));
+=&gt; 3
+
+</pre></div></div><h2 id="arrays">Array Functions</h2><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3></div><div class="span6"><h3 class="library_title">_.m</h3></div></div><p id="first"></p><div class="row"><div class="span6"><b class="header">first</b><span class="alias">Alias: <b>head, take</b></span><p><code>_.first(array, [n])</code><span class="docs label label-info"><a href="http://underscorejs.org/#first">docs</a></span></p><p></p><pre>_.first([5, 4, 3, 2, 1]);
+=&gt; 5</pre></div><div class="span6"><b class="header">first</b><span class="alias">Alias: <b>head, take</b></span><span class="returns">Returns: <b>NSO*</b></span><p><code>_.first(NSA* array, I n)</code> <span class='label label-warning'>n<0 for optional</span></p><p></p><pre>_.first(AI(5, 4, 3, 2, 1), -1);
+=&gt; 5</pre><b id="firstIterator" class="header">firstIterator</b><span class="returns">Returns: <b>NSO*</b></span><p><code>_.firstIterator(NSA* array, ...)</code> <span class='label label-success'>specialized</span> <span class='label label-warning'>... => id key, id list</span></p><p></p><pre>_.map(AO(AI(2, 1), AI(3, 1)), _.firstIterator);
+=&gt; [2, 3]
+</pre></div></div><p id="initial"></p><div class="row"><div class="span6"><b class="header">initial</b><div class="no_specs"></div><p><code>_.initial(array, [n])</code><span class="docs label label-info"><a href="http://underscorejs.org/#initial">docs</a></span></p><p></p><pre>_.initial([5, 4, 3, 2, 1]);
+=&gt; [5, 4, 3, 2]</pre></div><div class="span6"><b class="header">initial</b><span class="returns">Returns: <b>NSA*</b></span><p><code>_.initial(NSA* array, I n)</code> <span class='label label-warning'>n<0 for optional</span></p><p></p><pre>_.initial(AI(5, 4, 3, 2, 1), -1);
+=&gt; [5, 4, 3, 2]</pre><b id="initialIterator" class="header">initialIterator</b><span class="returns">Returns: <b>NSA*</b></span><p><code>_.initialIterator(NSA* array, ...)</code> <span class='label label-success'>specialized</span> <span class='label label-warning'>... => id key, id list</span></p><p></p><pre>_.map(AO(AI(2, 1, 3), AI(3, 1, 2)), _.initialIterator);
+=&gt; [[2, 1], [3, 1]]
+</pre></div></div><p id="last"></p><div class="row"><div class="span6"><b class="header">last</b><div class="no_specs"></div><p><code>_.last(array, [n])</code><span class="docs label label-info"><a href="http://underscorejs.org/#last">docs</a></span></p><p></p><pre>_.last([5, 4, 3, 2, 1]);
+=&gt; 1</pre></div><div class="span6"><b class="header">last</b><span class="returns">Returns: <b>NSO*</b></span><p><code>_.last(NSA* array, I n)</code> <span class='label label-warning'>n<0 for optional</span></p><p></p><pre>_.last(AI(5, 4, 3, 2, 1), -1);
+=&gt; 1</pre><b id="lastIterator" class="header">lastIterator</b><span class="returns">Returns: <b>NSO*</b></span><p><code>_.lastIterator(NSA* array, ...)</code> <span class='label label-success'>specialized</span> <span class='label label-warning'>... => id key, id list</span></p><p></p><pre>_.map(AO(AI(2, 1), AI(3, 1)), _.lastIterator);
+=&gt; [1, 1]
+</pre></div></div><p id="rest"></p><div class="row"><div class="span6"><b class="header">rest</b><span class="alias">Alias: <b>tail</b></span><p><code>_.rest(array, [index])</code><span class="docs label label-info"><a href="http://underscorejs.org/#rest">docs</a></span></p><p></p><pre>_.rest([5, 4, 3, 2, 1]);
+=&gt; [4, 3, 2, 1]</pre></div><div class="span6"><b class="header">rest</b><span class="alias">Alias: <b>tail</b></span><span class="returns">Returns: <b>NSA*</b></span><p><code>_.rest(NSA* array, I index)</code> <span class='label label-warning'>n<0 for optional</span></p><p></p><pre>_.rest(AI(5, 4, 3, 2, 1), -1);
+=&gt; [4, 3, 2, 1]</pre><b id="restIterator" class="header">restIterator</b><span class="returns">Returns: <b>NSA*</b></span><p><code>_.restIterator(NSA* array, ...)</code> <span class='label label-success'>specialized</span> <span class='label label-warning'>... => id key, id list</span></p><p></p><pre>_.map(AO(AI(2, 1, 3), AI(3, 1, 2)), _.restIterator);
+=&gt; [[1, 3], [1, 2]]
+</pre></div></div><p id="compact"></p><div class="row"><div class="span6"><b class="header">compact</b><div class="no_specs"></div><p><code>_.compact(array)</code><span class="docs label label-info"><a href="http://underscorejs.org/#compact">docs</a></span></p><p></p><pre>_.compact([0, 1, false, 2, '', 3]);
+=&gt; [1, 2, 3]</pre></div><div class="span6"><b class="header">compact</b><span class="returns">Returns: <b>A*</b></span><p><code>_.compact(NSA* array)</code></p><p></p><pre>_.compact(AO(N.I(0), N.I(1), N.B(false), N.I(2), @&quot;&quot;, N.I(3)));
+=&gt; [1, 2, 3]
+</pre></div></div><p id="flatten"></p><div class="row"><div class="span6"><b class="header">flatten</b><div class="no_specs"></div><p><code>_.flatten(array, [shallow])</code><span class="docs label label-info"><a href="http://underscorejs.org/#flatten">docs</a></span></p><p></p><pre>_.flatten([1, [2], [3, [[4]]]]);
+=&gt; [1, 2, 3, 4];
+
+_.flatten([1, [2], [3, [[4]]]], true);
+=&gt; [1, 2, 3, [[4]]];</pre></div><div class="span6"><b class="header">flatten</b><div class="no_specs"></div><span class="returns">Returns: <b>A*</b></span><p><code>_.flatten(NSA* array, B shallow)</code></p><p></p><pre>_.flatten(AO(N.I(1), AI(2), AO(N.I(3), AO(AI(4)))), false);
+=&gt; [1, 2, 3, 4];
+
+_.flatten(AO(N.I(1), AI(2), AO(N.I(3), AO(AI(4)))), true);
+=&gt; [1, 2, 3, [[4]]];
+</pre></div></div><p id="without"></p><div class="row"><div class="span6"><b class="header">without</b><div class="no_specs"></div><p><code>_.without(array, [*values])</code><span class="docs label label-info"><a href="http://underscorejs.org/#without">docs</a></span></p><p></p><pre>_.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
+=&gt; [2, 3, 4]</pre></div><div class="span6"><b class="header">without</b><span class="returns">Returns: <b>A*</b></span><p><code>_.without(NSA* array, id value1, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_.without(AI(1, 2, 1, 0, 3, 1, 4), N.I(0), N.I(1), nil);
+=&gt; [2, 3, 4]
+</pre></div></div><p id="union"></p><div class="row"><div class="span6"><b class="header">union</b><div class="no_specs"></div><p><code>_.union(*arrays)</code><span class="docs label label-info"><a href="http://underscorejs.org/#union">docs</a></span></p><p></p><pre>_.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+=&gt; [1, 2, 3, 101, 10]</pre></div><div class="span6"><b class="header">union</b><span class="returns">Returns: <b>A*</b></span><p><code>_.union_(NSA* array, ...)</code> <span class='label label-important'>nil terminated</span> <span class='label label-inverse'>reserved => union_</span></p><p></p><pre>_.union_(AI(1, 2, 3), AI(101, 2, 1, 10), AI(2, 1), nil);
+=&gt; [1, 2, 3, 101, 10]
+</pre></div></div><p id="intersection"></p><div class="row"><div class="span6"><b class="header">intersection</b><div class="no_specs"></div><p><code>_.intersection(*arrays)</code><span class="docs label label-info"><a href="http://underscorejs.org/#intersection">docs</a></span></p><p></p><pre>_.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+=&gt; [1, 2]</pre></div><div class="span6"><b class="header">intersection</b><span class="returns">Returns: <b>A*</b></span><p><code>_.intersection(NSA* array, NSA* array1, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_.intersection(AI(1, 2, 3), AI(101, 2, 1, 10), AI(2, 1), nil);
+=&gt; [1, 2]
+</pre></div></div><p id="difference"></p><div class="row"><div class="span6"><b class="header">difference</b><div class="no_specs"></div><p><code>_.difference(array, *others)</code><span class="docs label label-info"><a href="http://underscorejs.org/#difference">docs</a></span></p><p></p><pre>_.difference([1, 2, 3, 4, 5], [5, 2, 10]);
+=&gt; [1, 3, 4]</pre></div><div class="span6"><b class="header">difference</b><span class="returns">Returns: <b>A*</b></span><p><code>_.difference(NSA* array, NSA* other1, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_.difference(AI(1, 2, 3, 4, 5), AI(5, 2, 10), nil);
+=&gt; [1, 3, 4]
+</pre></div></div><p id="uniq"></p><div class="row"><div class="span6"><b class="header">uniq</b><span class="alias">Alias: <b>unique</b></span><p><code>_.uniq(array, [isSorted], [iterator])</code><span class="docs label label-info"><a href="http://underscorejs.org/#uniq">docs</a></span></p><p></p><pre>_.uniq([1, 2, 1, 3, 1, 4]);
+=&gt; [1, 2, 3, 4]</pre></div><div class="span6"><b class="header">uniq</b><span class="alias">Alias: <b>unique</b></span><span class="returns">Returns: <b>A*</b></span><p><code>_.uniq(NSA* array)</code></p><p></p><pre>_.uniq(AI(1, 2, 1, 3, 1, 4));
+=&gt; [1, 2, 3, 4]</pre><b id="uniqAdvanced" class="header">uniqAdvanced</b><span class="alias">Alias: <b>uniqueAdvanced</b></span><span class="returns">Returns: <b>A*</b></span><p class="arg">Arg: <b>_MapBlock => ^id(id value, ...)</b> <span class='label label-warning'>... => id key, id list</span></p><p><code>_.uniqAdvanced(NSA* array, B isSorted, _MapBlock iterator)</code> </code> <span class='label label-success'>specialized</span></p><p></p><pre>_.uniqAdvanced(AI(1, 2, 2, 3, 4, 4), true, ^(N* value, ...) { return N.I(value.I + 1); });
+=&gt; [1, 2, 3, 4]
+</pre></div></div><p id="zip"></p><div class="row"><div class="span6"><b class="header">zip</b><div class="no_specs"></div><p><code>_.zip(*arrays)</code><span class="docs label label-info"><a href="http://underscorejs.org/#zip">docs</a></span></p><p></p><pre>_.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
+=&gt; [[&quot;moe&quot;, 30, true], [&quot;larry&quot;, 40, false], [&quot;curly&quot;, 50, false]]</pre></div><div class="span6"><b class="header">zip</b><span class="returns">Returns: <b>A*</b></span><p><code>_.zip(NSA* array, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_.zip(AO(@&quot;moe&quot;, @&quot;larry&quot;, @&quot;curly&quot;), AI(30, 40, 50), AB(true, false, false), nil);
+=&gt; [[&quot;moe&quot;, 30, true], [&quot;larry&quot;, 40, false], [&quot;curly&quot;, 50, false]]
+</pre></div></div><p id="zipObject"></p><div class="row"><div class="span6"><b class="header">zipObject</b><div class="no_specs"></div><p><code>_.zipObject(keys, values)</code></p><p></p><pre>_.zipObject(['moe', 'larry', 'curly], [30, 40, 50]);
+=&gt; {moe:30,larry:40,curly:50}</pre></div><div class="span6"><b class="header">zipObject</b><span class="returns">Returns: <b>O*</b></span><p><code>_.zipObject((NSA* keys, NSA* values)</code></p><p></p><pre>_.zipObject(AO(@&quot;moe&quot;, @&quot;larry&quot;, @&quot;curly&quot;), AI(30, 40, 50));
+=&gt; {moe:30,larry:40,curly:50}
+</pre></div></div><p id="indexOf"></p><div class="row"><div class="span6"><b class="header">indexOf</b><div class="no_specs"></div><p><code>_.indexOf(array, value, [isSorted])</code><span class="docs label label-info"><a href="http://underscorejs.org/#indexOf">docs</a></span></p><p></p><pre>_.indexOf([1, 2, 3], 2);
+=&gt; 1</pre></div><div class="span6"><b class="header">indexOf</b><span class="returns">Returns: <b>I</b></span><p><code>_.indexOf(NSA* array, id value)</code></p><p></p><pre>_.indexOf(AI(1, 2, 3), N.I(2));
+=&gt; 1</pre><b id="indexOfSorted" class="header">indexOfSorted</b><span class="returns">Returns: <b>I</b></span><p><code>_.indexOfSorted(NSA* array, id value)</code> <span class='label label-success'>specialized</span></p><p></p><pre>_.indexOfSorted(AI(10, 20, 30, 40, 50), N.I(30));
+=&gt; 2
+</pre></div></div><p id="lastIndexOf"></p><div class="row"><div class="span6"><b class="header">lastIndexOf</b><div class="no_specs"></div><p><code>_.lastIndexOf(array, value)</code><span class="docs label label-info"><a href="http://underscorejs.org/#lastIndexOf">docs</a></span></p><p></p><pre>_.lastIndexOf([1, 2, 3, 1, 2, 3], 2);
+=&gt; 4</pre></div><div class="span6"><b class="header">lastIndexOf</b><span class="returns">Returns: <b>I</b></span><p><code>_.lastIndexOf(NSA* array, id value)</code></p><p></p><pre>_.lastIndexOf(AI(1, 2, 3, 1, 2, 3), N.I(2));
+=&gt; 4
+</pre></div></div><p id="range"></p><div class="row"><div class="span6"><b class="header">range</b><div class="no_specs"></div><p><code>_.range([start], stop, [step])</code><span class="docs label label-info"><a href="http://underscorejs.org/#range">docs</a></span></p><p></p><pre>_.range(10);
+=&gt; [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+_.range(1, 11);
+=&gt; [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+_.range(0, 30, 5);
+=&gt; [0, 5, 10, 15, 20, 25]
+_.range(0, -10, -1);
+=&gt; [0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
+_.range(0);
+=&gt; []</pre></div><div class="span6"><b class="header">range</b><span class="returns">Returns: <b>A*</b></span><p><code>_.range(I start, I stop, I step)</code></p><p></p><pre>_.range(1, 11, 1);
+=&gt; [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+_.range(0, 30, 5);
+=&gt; [0, 5, 10, 15, 20, 25]
+_.range(0, -10, -1);
+=&gt; [0, -1, -2, -3, -4, -5, -6, -7, -8, -9]</pre><b id="rangeSimple" class="header">rangeSimple</b><span class="returns">Returns: <b>A*</b></span><p><code>_.rangeSimple(I stop)</code> <span class='label label-success'>specialized</span></p><p></p><pre>_.rangeSimple(10);
+=&gt; [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+_.rangeSimple(0);
+=&gt; []
+</pre></div></div><h2 id="functions">Function (uh, ahem) Functions</h2><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3></div><div class="span6"><h3 class="library_title">_.m</h3></div></div><p id="bind"></p><div class="row"><div class="span6"><b class="header">bind</b><p><code>_.bind(function, object, [*arguments])</code><span class="docs label label-info"><a href="http://underscorejs.org/#bind">docs</a></span></p><p></p><pre>var func = function(greeting){ return greeting + ': ' + this.name };
+func = _.bind(func, {name : 'moe'}, 'hi');
+func();
+=&gt; 'hi: moe'</pre></div><div class="span6"><b class="header">bind</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><p id="bindAll"></p><div class="row"><div class="span6"><b class="header">bindAll</b><p><code>_.bindAll(object, [*methodNames])</code><span class="docs label label-info"><a href="http://underscorejs.org/#bindAll">docs</a></span></p><p></p><pre>var buttonView = {
+label   : 'underscore',
+onClick : function(){ alert('clicked: ' + this.label); },
+onHover : function(){ console.log('hovering: ' + this.label); }
+};
+_.bindAll(buttonView);
+jQuery('#underscore_button').bind('click', buttonView.onClick);
+=&gt; When the button is clicked, this.label will have the correct value...</pre></div><div class="span6"><b class="header">bindAll</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><p id="memoize"></p><div class="row"><div class="span6"><b class="header">memoize</b><div class="no_specs"></div><div class="no_specs"></div><div class="no_specs"></div><p><code>_.memoize(function, [hashFunction])</code><span class="docs label label-info"><a href="http://underscorejs.org/#memoize">docs</a></span></p><p></p><pre>var fibonacci = _.memoize(function(n) {
+return n &lt; 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+});</pre></div><div class="span6"><b class="header">memoize</b><span class="returns">Returns: <b>_MemoizedBlock => ^NSO*(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></span><p class="arg">Arg: <b>_MemoizeBlock => ^id(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></p><span class="arg">Arg: <b>_MemoizeHashBlock => ^id(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></span><p><code>_.memoize(_MemoizeBlock func, _MemoizeHashBlock hasher)</code></p><p></p><pre>__block _MemoizedBlock fibonacci = _.memoize(^N*(N* n, ...) {
+  return n.I &lt; 2 ? n : N.I(fibonacci(N.I(n.I - 1), nil).I + fibonacci(N.I(n.I - 2), nil).I);
+}, nil);
+</pre></div></div><p id="delay"></p><div class="row"><div class="span6"><b class="header">delay</b><div class="no_specs"></div><p><code>_.delay(function, wait, [*arguments])</code><span class="docs label label-info"><a href="http://underscorejs.org/#delay">docs</a></span></p><p></p><pre>var log = _.bind(console.log, console);
+_.delay(log, 1000, 'logged later');
+=&gt; 'logged later' // Appears after one second.</pre></div><div class="span6"><b class="header">delay</b><span class="returns">Returns: <b>void</b></span><span class="arg">Arg: <b>_DelayBlock => ^()</b></span><p><code>_.delay(_DelayBlock func, I waitNS)</code>  <span class='label label-important'>no arguments</span></p><p></p><pre>_.delay(^{ NSLog(@&quot;%d&quot;, 1000); }, NSEC_PER_SEC*1);
+=&gt; 'logged later' // Appears after one second.</pre><b class="header">delayBackground</b><span class="returns">Returns: <b>void</b></span><span class="arg">Arg: <b>_DelayBlock => ^()</b></span><p><code>_.delayBackground(_DelayBlock func, I waitNS)</code>  <span class='label label-warning'>added</span></p><p></p><pre>_.delayBackground(^{ NSLog(@&quot;%d&quot;, 1000); }, NSEC_PER_SEC*1);
+=&gt; 'logged later' // Appears after one second.
+</pre></div></div><p id="defer"></p><div class="row"><div class="span6"><b class="header">defer</b><div class="no_specs"></div><p><code>_.defer(function, [*arguments])</code><span class="docs label label-info"><a href="http://underscorejs.org/#defer">docs</a></span></p><p></p><pre>_.defer(function(){ alert('deferred'); });
+// Returns from the function before the alert runs.</pre></div><div class="span6"><b class="header">defer</b><span class="returns">Returns: <b>void</b></span><span class="arg">Arg: <b>_DeferBlock => ^()</b></span><p><code>_.defer(_DeferBlock func)</code> <span class='label label-important'>no arguments</span></p><p></p><pre>_.defer(^{ SS.alert(@&quot;deferred&quot;); });
+// Returns from the function before the alert runs.</pre><b class="header">deferBackground</b><span class="returns">Returns: <b>void</b></span><span class="arg">Arg: <b>_DeferBlock => ^()</b></span><p><code>_.deferBackground(_DeferBlock func)</code>  <span class='label label-warning'>added</span></p><p></p><pre>_.deferBackground(^{ SS.alert(@&quot;deferred&quot;); });
+// Returns from the function before the alert runs.
+</pre></div></div><p id="throttle"></p><div class="row"><div class="span6"><b class="header">throttle</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.throttle(function, wait)</code><span class="docs label label-info"><a href="http://underscorejs.org/#throttle">docs</a></span></p><p></p><pre>var throttled = _.throttle(updatePosition, 100);
+$(window).scroll(throttled);</pre></div><div class="span6"><b class="header">throttle</b><span class="returns">Returns: <b>_ThrottledBlock =>^id()</b></span><p class="arg">Arg: <b>_ThrottleBlock => ^id(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></p><p><code>_.throttle(_ThrottleBlock func, I waitNS, id arg1, ...)</code> <br> <span class='label label-important'>nil terminated</span></p><p></p><pre>_ThrottledBlock throttled = _.throttle(^id(id arg1, ...){ /* updatePosition */ return nil; }, 100, nil);
+</pre></div></div><p id="debounce"></p><div class="row"><div class="span6"><b class="header">debounce</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.debounce(function, wait, [immediate])</code><span class="docs label label-info"><a href="http://underscorejs.org/#debounce">docs</a></span></p><p></p><pre>var lazyLayout = _.debounce(calculateLayout, 300);
+$(window).resize(lazyLayout);</pre></div><div class="span6"><b class="header">debounce</b><span class="returns">Returns: <b>_DebouncedBlock => ^()</b></span><p class="arg">Arg: <b>_DebounceBlock => ^(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></p><p><code class='small'>_.debounce(_DebounceBlock func, I waitNS, B immediate, id arg1, ...)</code> <br> <span class='label label-important'>nil terminated</span></p><p></p><pre>_DebouncedBlock lazyLayout = _.debounce(^(id arg1, ...){ /* calculateLayout */ }, 300, true, nil);
+</pre></div></div><p id="once"></p><div class="row"><div class="span6"><b class="header">once</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.once(function)</code><span class="docs label label-info"><a href="http://underscorejs.org/#once">docs</a></span></p><p></p><pre>var initialize = _.once(createApplication);
+initialize();
+initialize();
+// Application is only created once.</pre></div><div class="span6"><b class="header">once</b><span class="returns">Returns: <b>_OncedBlock => ^id()</b></span><p class="arg">Arg: <b>_OnceBlock => ^id(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></p><p><code>_.once(_OnceBlock func, id arg1, ...)</code> </code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_OncedBlock initialize = _.once(^id(id arg1, ...){ /* createApplication */ return nil; }, nil);
+initialize(nil);
+initialize(nil);
+// Application is only created once.
+</pre></div></div><p id="after"></p><div class="row"><div class="span6"><b class="header">after</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.after(count, function)</code><span class="docs label label-info"><a href="http://underscorejs.org/#after">docs</a></span></p><p></p><pre>var renderNotes = _.after(notes.length, render);
+_.each(notes, function(note) {
+note.asyncSave({success: renderNotes});
+});
+// renderNotes is run once, after all notes have saved.</pre></div><div class="span6"><b class="header">after</b><span class="returns">Returns: <b>_AfteredBlock => ^id(id arg1, ...)</b> </code> </code> <span class='label label-important'>nil terminated</span></span><p class="arg">Arg: <b>_AfterBlock => ^id(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></p><p><code>_.after(I times, _AfterBlock func, id arg1, ...)</code> </code> </code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_AfteredBlock renderNotes = _.after(notes.length, ^id(id arg1, ...){ /* render */ return nil; }, nil);
+_.each(notes, ^(Note* note, ...) {
+  note.asyncSave(OKV({@&quot;success&quot;, renderNotes}));
+});
+// renderNotes is run once, after all notes have saved.
+</pre></div></div><p id="wrap"></p><div class="row"><div class="span6"><b class="header">wrap</b><div class="no_specs"></div><div class="no_specs"></div><div class="no_specs"></div><p><code>_.wrap(function, wrapper)</code><span class="docs label label-info"><a href="http://underscorejs.org/#wrap">docs</a></span></p><p></p><pre>var hello = function(name) { return &quot;hello: &quot; + name; };
+hello = _.wrap(hello, function(func) {
+return &quot;before, &quot; + func(&quot;moe&quot;) + &quot;, after&quot;;
+});
+hello();
+=&gt; 'before, hello: moe, after'</pre></div><div class="span6"><b class="header">wrap</b><span class="returns">Returns: <b>_WrappedBlock => ^id(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></span><p class="arg">Arg: <b>_WrapBlock => ^id(_WrappedBlock wrapped, id arg1, ...)</b> <br> <span class='label label-important'>nil terminated</span></p><p><code>_.wrap(_WrappedBlock func, _WrapBlock wrapper)</code></p><p></p><pre>_WrappedBlock hello = ^NSS*(NSS* name, ...) { return @&quot;hello: &quot;.add(name); };
+hello = _.wrap(hello, ^NSS*(_WrappedBlock func, id arg1, ...) {
+  return @&quot;before, &quot;.add(func(@&quot;moe&quot;, nil)).add(@&quot;, after&quot;);
+});
+hello(nil, nil);
+=&gt; 'before, hello: moe, after'
+</pre></div></div><p id="compose"></p><div class="row"><div class="span6"><b class="header">compose</b><div class="no_specs"></div><div class="no_specs"></div><p><code>_.compose(*functions)</code><span class="docs label label-info"><a href="http://underscorejs.org/#compose">docs</a></span></p><p></p><pre>var greet    = function(name){ return &quot;hi: &quot; + name; };
+var exclaim  = function(statement){ return statement + &quot;!&quot;; };
+var welcome = _.compose(exclaim, greet);
+welcome('moe');
+=&gt; 'hi: moe!'</pre></div><div class="span6"><b class="header">compose</b><span class="returns">Returns: <b>_ComposedBlock => ^id(id arg1, ...)</b> </code> <span class='label label-important'>nil terminated</span></span><p class="arg">Arg: <b>_ComposeBlock => ^id(id arg1, ...)</b> <span class='label label-important'>nil terminated</span></p><p><code>_.compose(_ComposeBlock func1, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_ComposeBlock greet = ^(NSS* name, ...){ return @&quot;hi: &quot;.add(name); };
+_ComposeBlock exclaim  = ^(NSS* statement, ...){ return statement.add(@&quot;!&quot;); };
+_ComposedBlock welcome = _.compose(exclaim, greet, nil);
+welcome(@&quot;moe&quot;);
+=&gt; 'hi: moe!'
+</pre></div></div><h2 id="objects">Object Functions</h2><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3></div><div class="span6"><h3 class="library_title">_.m</h3></div></div><p id="keys"></p><div class="row"><div class="span6"><b class="header">keys</b><div class="no_specs"></div><p><code>_.keys(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#keys">docs</a></span></p><p></p><pre>_.keys({one : 1, two : 2, three : 3});
+=&gt; [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;]</pre></div><div class="span6"><b class="header">keys</b><span class="returns">Returns: <b>A*</b></span><p><code>_.keys(NSD* obj)</code></p><p></p><pre>_.keys(OKV({@&quot;one&quot;, N.I(1)}, {@&quot;two&quot;, N.I(2)}, {@&quot;three&quot;, N.I(3)}));
+=&gt; [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;]
+</pre></div></div><p id="values"></p><div class="row"><div class="span6"><b class="header">values</b><div class="no_specs"></div><p><code>_.values(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#values">docs</a></span></p><p></p><pre>_.values({one : 1, two : 2, three : 3});
+=&gt; [1, 2, 3]</pre></div><div class="span6"><b class="header">values</b><span class="returns">Returns: <b>A*</b></span><p><code>_.values(NSD* obj)</code></p><p></p><pre>_.values(OKV({@&quot;one&quot;, N.I(1)}, {@&quot;two&quot;, N.I(2)}, {@&quot;three&quot;, N.I(3)}));
+=&gt; [1, 2, 3]
+</pre></div></div><p id="object-functions"></p><div class="row"><div class="span6"><b class="header">functions</b><span class="alias">Alias: <b>methods</b></span><p><code>_.functions(list, iterator, [context])</code><span class="docs label label-info"><a href="http://underscorejs.org/#functions">docs</a></span></p><p></p><pre>_.functions(_);
+=&gt; [&quot;all&quot;, &quot;any&quot;, &quot;bind&quot;, &quot;bindAll&quot;, &quot;clone&quot;, &quot;compact&quot;, &quot;compose&quot; ...</pre></div><div class="span6"><b class="header">functions</b><span class="alias">Alias: <b>methods</b></span><span class="returns">Returns: <b>A*</b></span><p><code>_.functions(NSD* obj)</code> </code> <span class='label label-important'>no iterator</span></p><p></p><pre>_.functions(OKV({@&quot;map&quot;, _.map}, {@&quot;reduce&quot;, _.reduce}));
+=&gt; [&quot;map&quot;, &quot;reduce&quot;]</pre></div></div><p><strong>Note:</strong> _.functions does not yet collect function names from classes. It only collects functions from an NSDictionary in block form.</p><p id="extend"></p><div class="row"><div class="span6"><b class="header">extend</b><div class="no_specs"></div><p><code>_.extend(destination, *sources)</code><span class="docs label label-info"><a href="http://underscorejs.org/#extend">docs</a></span></p><p></p><pre>_.extend({name : 'moe'}, {age : 50});
+=&gt; {name : 'moe', age : 50}</pre></div><div class="span6"><b class="header">extend</b><span class="returns">Returns: <b>O*</b></span><p><code>_.extend(O* destination, NSD* source1, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_.extend(OKV({@&quot;name&quot;, @&quot;moe&quot;}), OKV({@&quot;age&quot;, N.I(50)}), nil);
+=&gt; {name : 'moe', age : 50}
+</pre></div></div><p id="pick"></p><div class="row"><div class="span6"><b class="header">pick</b><div class="no_specs"></div><p><code>_.pick(object, *keys)</code><span class="docs label label-info"><a href="http://underscorejs.org/#pick">docs</a></span></p><p></p><pre>_.pick({name : 'moe', age: 50, userid : 'moe1'}, 'name', 'age');
+=&gt; {name : 'moe', age : 50}</pre></div><div class="span6"><b class="header">pick</b><span class="returns">Returns: <b>O*</b></span><p><code>_.pick(O* obj, id key1, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>_.pick(OKV({@&quot;name&quot;, @&quot;moe&quot;}, {@&quot;age&quot;, N.I(50)}, {@&quot;userid&quot;, @&quot;moe1&quot;}), @&quot;name&quot;, @&quot;age&quot;, nil);
+=&gt; {name : 'moe', age : 50}
+</pre></div></div><p id="defaults"></p><div class="row"><div class="span6"><b class="header">defaults</b><div class="no_specs"></div><p><code>_.defaults(object, *defaults)</code><span class="docs label label-info"><a href="http://underscorejs.org/#defaults">docs</a></span></p><p></p><pre>var iceCream = {flavor : &quot;chocolate&quot;};
+_.defaults(iceCream, {flavor : &quot;vanilla&quot;, sprinkles : &quot;lots&quot;});
+=&gt; {flavor : &quot;chocolate&quot;, sprinkles : &quot;lots&quot;}</pre></div><div class="span6"><b class="header">defaults</b><span class="returns">Returns: <b>O*</b></span><p><code>_.defaults(O* obj, NSD* default1, ...)</code> <span class='label label-important'>nil terminated</span></p><p></p><pre>O* iceCream = OKV({@&quot;flavor&quot;, @&quot;chocolate&quot;});
+_.defaults(iceCream, OKV({@&quot;flavor&quot;, @&quot;vanilla&quot;}, {@&quot;sprinkles&quot;, @&quot;lots&quot;}), nil);
+=&gt; {flavor : &quot;chocolate&quot;, sprinkles : &quot;lots&quot;}
+</pre></div></div><p id="clone"></p><div class="row"><div class="span6"><b class="header">clone</b><div class="no_specs"></div><p><code>_.clone(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#clone">docs</a></span></p><p></p><pre>_.clone({name : 'moe'});
+=&gt; {name : 'moe'};</pre></div><div class="span6"><b class="header">clone</b><span class="returns">Returns: <b>id</b> <span class='label label-warning'>mutable (if possible)</span></span><p><code>_.clone(NSO* obj)</code></p><p></p><pre>_.clone(OKV({@&quot;name&quot;, @&quot;moe&quot;}));
+=&gt; {name : 'moe'};
+</pre></div></div><p id="tap"></p><div class="row"><div class="span6"><b class="header">tap</b><div class="no_specs"></div><p><code>_.tap(object, interceptor)</code><span class="docs label label-info"><a href="http://underscorejs.org/#tap">docs</a></span></p><p></p><pre>_.chain([1,2,3,200])
+  .filter(function(num) { return num % 2 == 0; })
+  .tap(alert)
+  .map(function(num) { return num * num })
+  .value();
+=&gt; // [2, 200] (alerted)
+=&gt; [4, 40000]</pre></div><div class="span6"><b class="header">tap</b><span class="returns">Returns: <b>NSO*</b></span><span class="arg">Arg: <b>_TapBlock => ^(id obj)</b></span><p><code>_.tap(NSO* obj, _TapBlock interceptor)</code></p><p></p><pre>_.chain(AI(1,2,3,200))
+  .filter(^B(N* num, ...) { return num.I % 2 == 0; })
+  .tap(SS.alert)
+  .map(^(N* num, ...) { return N.I(num.I * num.I); })
+  .value();
+=&gt; // [2, 200] (alerted)
+=&gt; [4, 40000]</pre><p>OR:</p><pre>_.chain(AI(1,2,3,200))
+  .filter(^B(N* num, ...) { return num.I % 2 == 0; })
+  .tap(SS.alert)
+  .map(^(N* num, ...) { return N.I(num.I * num.I); })
+  .NSA;
+=&gt; // [2, 200] (alerted)
+=&gt; [4, 40000]
+</pre></div></div><p id="has"></p><div class="row"><div class="span6"><b class="header">has</b><div class="no_specs"></div><p><code>_.has(object, key)</code><span class="docs label label-info"><a href="http://underscorejs.org/#has">docs</a></span></p><p></p><pre>_.has({a: 1, b: 2, c: 3}, &quot;b&quot;);
+=&gt; true</pre></div><div class="span6"><b class="header">has</b><span class="returns">Returns: <b>B</b></span><p><code>_.has(NSO* obj, id key)</code></p><p></p><pre>_.has(OKV({@&quot;a&quot;, N.I(1)}, {@&quot;b&quot;, N.I(2)}, {@&quot;c&quot;, N.I(3)}), @&quot;b&quot;);
+=&gt; true
+</pre></div></div><p id="isEqual"></p><div class="row"><div class="span6"><b class="header">isEqual</b><div class="no_specs"></div><p><code>_.isEqual(object, other)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isEqual">docs</a></span></p><p></p><pre>var moe   = {name : 'moe', luckyNumbers : [13, 27, 34]};
+var clone = {name : 'moe', luckyNumbers : [13, 27, 34]};
+moe == clone;
+=&gt; false
+_.isEqual(moe, clone);
+=&gt; true</pre></div><div class="span6"><b class="header">isEqual</b><span class="returns">Returns: <b>B</b></span><p><code>_.isEqual(id a, id b)</code></p><p></p><pre>O* moe = OKV({@&quot;name&quot;, @&quot;moe&quot;}, {@&quot;luckyNumbers&quot;, AI(13, 27, 34)});
+O* clone = OKV({@&quot;name&quot;, @&quot;moe&quot;}, {@&quot;luckyNumbers&quot;, AI(13, 27, 34)});
+moe == clone;
+=&gt; false
+_.isEqual(moe, clone);
+=&gt; true
+</pre></div></div><p id="isEmpty"></p><div class="row"><div class="span6"><b class="header">isEmpty</b><div class="no_specs"></div><p><code>_.isEmpty(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isEmpty">docs</a></span></p><p></p><pre>_.isEmpty([1, 2, 3]);
+=&gt; false
+_.isEmpty({});
+=&gt; true</pre></div><div class="span6"><b class="header">isEmpty</b><span class="returns">Returns: <b>B</b></span><p><code>_.isEmpty(NSO* obj)</code></p><p></p><pre>_.isEmpty(AI(1, 2, 3));
+=&gt; false
+_.isEmpty(O.new);
+=&gt; true
+</pre></div></div><p id="isElement"></p><div class="row"><div class="span6"><b class="header">isElement</b><p><code>_.isElement(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isElement">docs</a></span></p><p></p><pre>_.isElement(jQuery('body')[0]);
+=&gt; true</pre></div><div class="span6"><b class="header">isElement</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><p id="isArray"></p><div class="row"><div class="span6"><b class="header">isArray</b><div class="no_specs"></div><p><code>_.isArray(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isArray">docs</a></span></p><p></p><pre>(function(){ return _.isArray(arguments); })();
+=&gt; false
+_.isArray([1,2,3]);
+=&gt; true</pre></div><div class="span6"><b class="header">isArray</b><span class="returns">Returns: <b>B</b></span><p><code>_.isArray(id obj)</code> <span class='label label-important'>difference: arguments are arrays</span></p><p></p><pre>(^(id arg1, ...){ ARGS_AO(arguments, arg1); _.isArray(arguments); })(nil);
+=&gt; true // DIFFERENT - arguments are arrays!
+_.isArray(AI(1,2,3));
+=&gt; true
+</pre></div></div><p id="isObject"></p><div class="row"><div class="span6"><b class="header">isObject</b><div class="no_specs"></div><p><code>_.isObject(value)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isObject">docs</a></span></p><p></p><pre>_.isObject({});
+=&gt; true
+_.isObject(1);
+=&gt; false</pre></div><div class="span6"><b class="header">isObject</b><span class="returns">Returns: <b>B</b></span><p><code>_.isObject(id obj)</code></p><p></p><pre>_.isObject(O.new);
+=&gt; true
+_.isObject(N.I(1));
+=&gt; false
+</pre></div></div><p id="isArguments"></p><div class="row"><div class="span6"><b class="header">isArguments</b><div class="no_specs"></div><p><code>_.isArguments(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isArguments">docs</a></span></p><p></p><pre>(function(){ return _.isArguments(arguments); })(1, 2, 3);
+=&gt; true
+_.isArguments([1,2,3]);
+=&gt; false</pre></div><div class="span6"><b class="header">isArguments</b><span class="returns">Returns: <b>B</b></span><p><code>_.isArguments(id obj)</code></p><p></p><pre>(^(I arg1, ...){ ARGS_AI(arguments, arg1); _.isArguments(arguments); })(1, 2, 3, AI_END);
+=&gt; true
+_.isArguments(AI(1,2,3));
+=&gt; false
+</pre></div></div><p id="isFunction"></p><div class="row"><div class="span6"><b class="header">isFunction</b><div class="no_specs"></div><p><code>_.isFunction(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isFunction">docs</a></span></p><p></p><pre>_.isFunction(alert);
+=&gt; true</pre></div><div class="span6"><b class="header">isFunction</b><span class="returns">Returns: <b>B</b></span><p><code>_.isFunction(id obj, id target)</code> <span class='label label-important'>difference: added argument</span></p><p></p><pre>_.isFunction(_.isFunction, nil);
+=&gt; true
+</pre></div></div><p id="isString"></p><div class="row"><div class="span6"><b class="header">isString</b><div class="no_specs"></div><p><code>_.isString(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isString">docs</a></span></p><p></p><pre>_.isString(&quot;moe&quot;);
+=&gt; true</pre></div><div class="span6"><b class="header">isString</b><span class="returns">Returns: <b>B</b></span><p><code>_.isString(id obj)</code></p><p></p><pre>_.isString(@&quot;moe&quot;);
+=&gt; true
+</pre></div></div><p id="isNumber"></p><div class="row"><div class="span6"><b class="header">isNumber</b><div class="no_specs"></div><p><code>_.isNumber(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isNumber">docs</a></span></p><p></p><pre>_.isNumber(8.4 * 5);
+=&gt; true</pre></div><div class="span6"><b class="header">isNumber</b><span class="returns">Returns: <b>B</b></span><p><code>_.isNumber(id obj)</code></p><p></p><pre>_.isNumber(N.F(8.4 * 5));
+=&gt; true
+</pre></div></div><p id="isFinite"></p><div class="row"><div class="span6"><b class="header">isFinite</b><div class="no_specs"></div><p><code>_.isFinite(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isFinite">docs</a></span></p><p></p><pre>_.isFinite(-101);
+=&gt; true
+
+_.isFinite(-Infinity);
+=&gt; false</pre></div><div class="span6"><b class="header">isFinite</b><span class="returns">Returns: <b>B</b></span><p><code>_.isFinite(id obj)</code></p><p></p><pre>_.isFinite(N.I(-101));
+=&gt; true
+
+_.isFinite(NF_NEG_INFINITY);
+=&gt; false
+</pre></div></div><p id="isBoolean"></p><div class="row"><div class="span6"><b class="header">isBoolean</b><div class="no_specs"></div><p><code>_.isBoolean(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isBoolean">docs</a></span></p><p></p><pre>_.isBoolean(null);
+=&gt; false</pre></div><div class="span6"><b class="header">isBoolean</b><span class="returns">Returns: <b>B</b></span><p><code>_.isBoolean(id obj)</code></p><p></p><pre>_.isBoolean(nil);
+=&gt; false
+</pre></div></div><p id="isDate"></p><div class="row"><div class="span6"><b class="header">isDate</b><div class="no_specs"></div><p><code>_.isDate(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isDate">docs</a></span></p><p></p><pre>_.isDate(new Date());
+=&gt; true</pre></div><div class="span6"><b class="header">isDate</b><span class="returns">Returns: <b>B</b></span><p><code>_.isDate(id obj)</code></p><p></p><pre>_.isDate(Date.new);
+=&gt; true
+</pre></div></div><p id="isRegExp"></p><div class="row"><div class="span6"><b class="header">isRegExp</b><p><code>_.isRegExp(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isRegExp">docs</a></span></p><p></p><pre>_.isRegExp(/moe/);
+=&gt; true</pre></div><div class="span6"><b class="header">isRegExp</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><p id="isNaN"></p><div class="row"><div class="span6"><b class="header">isNaN</b><div class="no_specs"></div><p><code>_.isNaN(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isNaN">docs</a></span></p><p></p><pre>_.isNaN(NaN);
+=&gt; true
+isNaN(undefined);
+=&gt; true
+_.isNaN(undefined);
+=&gt; false</pre></div><div class="span6"><b class="header">isNaN</b><span class="returns">Returns: <b>B</b></span><p><code>_.isNaN(id obj)</code></p><p></p><pre>_.isNaN(NF_NaN);
+=&gt; true
+</pre></div></div><p id="isNull"></p><div class="row"><div class="span6"><b class="header">isNull</b><div class="no_specs"></div><p><code>_.isNull(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isNull">docs</a></span></p><p></p><pre>_.isNull(null);
+=&gt; true
+_.isNull(undefined);
+=&gt; false</pre></div><div class="span6"><b class="header">isNull</b><span class="returns">Returns: <b>B</b></span><p><code>_.isNull(id obj)</code></p><p></p><pre>_.isNull(nil);
+=&gt; true
+_.isNull(NSNull.null);
+=&gt; true
+</pre></div></div><p id="isUndefined"></p><div class="row"><div class="span6"><b class="header">isUndefined</b><p><code>_.isUndefined(variable)</code><span class="docs label label-info"><a href="http://underscorejs.org/#isUndefined">docs</a></span></p><p></p><pre>_.isUndefined(window.missingVariable);
+=&gt; true</pre></div><div class="span6"><b class="header">isUndefined</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><h2 id="utility">Utility Functions</h2><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3></div><div class="span6"><h3 class="library_title">_.m</h3></div></div><p id="noConflict"></p><div class="row"><div class="span6"><b class="header">noConflict</b><p><code>_.noConflict()</code><span class="docs label label-info"><a href="http://underscorejs.org/#noConflict">docs</a></span></p><p></p><pre>var underscore = _.noConflict();</pre></div><div class="span6"><b class="header">noConflict</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><p id="identity"></p><div class="row"><div class="span6"><b class="header">identity</b><div class="no_specs"></div><p><code>_.identity(value)</code><span class="docs label label-info"><a href="http://underscorejs.org/#identity">docs</a></span></p><p></p><pre>var moe = {name : 'moe'};
+moe === _.identity(moe);
+=&gt; true</pre></div><div class="span6"><b class="header">identity</b><span class="returns">Returns: <b>_IdentityBlock => ^id(id value)</b></span><p><code>_.identity(value)</code></p><p></p><pre>O* moe = OKV({@&quot;name&quot;, @&quot;moe&quot;});
+moe === _.identity(moe);
+=&gt; true</pre><b id="identityTruthy" class="header">identityTruthy</b><span class="returns">Returns: <b>_ItemTestBlock => ^B(id value, ...)</b> <span class='label label-success'>specialized</span> <span class='label label-warning'>... => id key, id list</span></span><p><code>_.identityTruthy(value)</code></p><p></p><pre>O* moe = OKV({@&quot;name&quot;, @&quot;moe&quot;});
+_.identityTruthy(moe);
+=&gt; true
+</pre></div></div><p id="times"></p><div class="row"><div class="span6"><b class="header">times</b><div class="no_specs"></div><p><code>_.times(n, iterator)</code><span class="docs label label-info"><a href="http://underscorejs.org/#times">docs</a></span></p><p></p><pre>_(3).times(function(){ genie.grantWish(); });</pre></div><div class="span6"><b class="header">times</b><span class="returns">Returns: <b>void</b></span><span class="arg">Arg: <b>_TimesBlock => ^(I index)</b></span><p><code>_.times(UI n, _TimesBlock iterator)</code></p><p></p><pre>__(N.I(3)).times(^(UI index){ genie.grantWish(); });
+</pre></div></div><p id="mixin"></p><div class="row"><div class="span6"><b class="header">mixin</b><p><code>_.mixin(object)</code><span class="docs label label-info"><a href="http://underscorejs.org/#mixin">docs</a></span></p><p></p><pre>_.mixin({
+  capitalize : function(string) {
+    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+  }
+});
+_(&quot;fabio&quot;).capitalize();
+=&gt; &quot;Fabio&quot;</pre></div><div class="span6"><b class="header">mixin</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><p id="uniqueId"></p><div class="row"><div class="span6"><b class="header">uniqueId</b><div class="no_specs"></div><p><code>_.uniqueId([prefix])</code><span class="docs label label-info"><a href="http://underscorejs.org/#uniqueId">docs</a></span></p><p></p><pre>_.uniqueId('contact_');
+=&gt; 'contact_104'</pre></div><div class="span6"><b class="header">uniqueId</b><span class="returns">Returns: <b>S*</b></span><p><code>_.uniqueId(NSS* prefix)</code> <span class='label label-warning'>prefix or nil</span></p><p></p><pre>_.uniqueId(@&quot;contact_&quot;);
+=&gt; 'contact_104'
+</pre></div></div><p id="escape"></p><div class="row"><div class="span6"><b class="header">escape</b><p><code>_.escape(string)</code><span class="docs label label-info"><a href="http://underscorejs.org/#escape">docs</a></span></p><p></p><pre>_.escape('Curly, Larry &amp; Moe');
+=&gt; &quot;Curly, Larry &amp;amp; Moe&quot;</pre></div><div class="span6"><b class="header">escape</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><p id="result"></p><div class="row"><div class="span6"><b class="header">result</b><div class="no_specs"></div><p><code>_.result(object, property)</code><span class="docs label label-info"><a href="http://underscorejs.org/#result">docs</a></span></p><p></p><pre>var object = {cheese: 'crumpets', stuff: function(){ return 'nonsense'; }};
+_.result(object, 'cheese');
+=&gt; &quot;crumpets&quot;
+_.result(object, 'stuff');
+=&gt; &quot;nonsense&quot;</pre></div><div class="span6"><b class="header">result</b><span class="returns">Returns: <b>NSO*</b></span><p><code>_.result(NSO* object, id property)</code></p><p></p><pre>O* object = OKV({@&quot;cheese&quot;, @&quot;crumpets&quot;}, {@&quot;stuff&quot;, ^(){ return @&quot;nonsense&quot;; }});
+_.result(object, @&quot;cheese&quot;);
+=&gt; &quot;crumpets&quot;
+_.result(object, @&quot;stuff&quot;);
+=&gt; &quot;nonsense&quot;
+</pre></div></div><p id="template"></p><div class="row"><div class="span6"><b class="header">template</b><p><code>_.template(templateString, [data], [settings])</code><span class="docs label label-info"><a href="http://underscorejs.org/#template">docs</a></span></p><p></p><pre>var compiled = _.template(&quot;hello: &lt;%= name %&gt;&quot;);
+compiled({name : 'moe'});
+=&gt; &quot;hello: moe&quot;</pre></div><div class="span6"><b class="header">template</b><p><code>X</code><span class='label label-inverse'>JavaScript only</span></p></div></div><h2 id="chaining">Chaining</h2><p><You>can use Underscore in either an object-oriented or a functional style, depending on your preference. The following two lines of code are identical ways to double a list of numbers.</You></p><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3><code>_(value)</code><pre>_.map([1, 2, 3], function(n){ return n * 2; });
+_([1, 2, 3]).map(function(n){ return n * 2; });
+</pre></div><div class="span6"><h3 class="library_title">_.m</h3><code>__(id value)</code> <span class='label label-important'>change</span><pre>_.map(AI(1, 2, 3), ^(N* n, ...){ return N.I(n.I * 2); });
+__(AI(1, 2, 3)).map(^(N* n, ...){ return N.I(n.I * 2); });
+</pre></div></div><p>In addition, the <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/prototypeArray"> prototype's methods</a> are proxied through the chained Underscore object.</p><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3><p><code>push</code><code>reverse</code><code>shift</code><code>sort</code>
+<br>
+<code>splice</code><code>unshift</code><code>concat</code><code>join</code><code>slice</code></p></div><div class="span6"><h3 class="library_title">_.m</h3><p><code>pop</code><code>push</code><code>reverse</code><code>shift</code><code>sort</code>
+<br>
+<code>splice</code><code>unshift</code><code>concat</code><code>join</code><code>slice</code></p></div></div><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3></div><div class="span6"><h3 class="library_title">_.m</h3></div></div><p id="chain"></p><div class="row"><div class="span6"><b class="header">chain</b><div class="no_specs"></div><p><code>_.chain(obj)</code><span class="docs label label-info"><a href="http://underscorejs.org/#chain">docs</a></span></p><p></p><pre>var stooges = [{name : 'curly', age : 25}, {name : 'moe', age : 21}, {name : 'larry', age : 23}];
+var youngest = _.chain(stooges)
+.sortBy(function(stooge){ return stooge.age; })
+.map(function(stooge){ return stooge.name + ' is ' + stooge.age; })
+.first()
+.value();
+=&gt; &quot;moe is 21&quot;</pre></div><div class="span6"><b class="header">chain</b><span class="returns">Returns: <b>_Wrapper => wrapped _</b></span><p><code>_.chain(id obj)</code></p><p></p><pre>A* stooges = AO(OKV({@&quot;name&quot;, @&quot;curly&quot;}, {@&quot;age&quot;, N.I(25)}), OKV({@&quot;name&quot;, @&quot;moe&quot;}, {@&quot;age&quot;, N.I(21)}), OKV({@&quot;name&quot;, @&quot;larry&quot;}, {@&quot;age&quot;, N.I(23)}));
+_.chain(stooges)
+  .sortBy(^(O* stooge, ...){ return stooge.get(@&quot;age&quot;); })
+  .map(^(O* stooge, ...){ return stooge.get(@&quot;name&quot;).add(@&quot; is &quot;).add((NSS*)stooge.get(@&quot;age&quot;)); })
+  .first(-1)
+  .value();
+=&gt; &quot;moe is 21&quot;</pre><p>OR</p><pre>A* stooges = AO(OKV({@&quot;name&quot;, @&quot;curly&quot;}, {@&quot;age&quot;, N.I(25)}), OKV({@&quot;name&quot;, @&quot;moe&quot;}, {@&quot;age&quot;, N.I(21)}), OKV({@&quot;name&quot;, @&quot;larry&quot;}, {@&quot;age&quot;, N.I(23)}));
+youngest = _.chain(stooges)
+  .sortBy(^(O* stooge, ...){ return stooge.get(@&quot;age&quot;); })
+  .map(^(O* stooge, ...){ return stooge.get(@&quot;name&quot;).add(@&quot; is &quot;).add((NSS*)stooge.get(@&quot;age&quot;)); })
+  .first(-1)
+  .O;
+=&gt; &quot;moe is 21&quot;
+</pre></div></div><p id="value"></p><div class="row"><div class="span6"><b class="header">value</b><div class="no_specs"></div><p><code>_(obj).value()</code><span class="docs label label-info"><a href="http://underscorejs.org/#value">docs</a></span></p><p></p><pre>_([1, 2, 3]).value();
+=&gt; [1, 2, 3]</pre></div><div class="span6"><b class="header">value</b><span class="returns">Returns: <b>NSO*</b></span><p><code>__(obj).value()</code> <span class='label label-important'>change</span></p><p id="oo_wrapper"></p><pre>__([1, 2, 3]).value();
+=&gt; [1, 2, 3]</pre><p><code>__(obj).I</code> <code>__(obj).UI</code> <code>__(obj).B</code> <code>__(obj).F</code> <code>__(obj).D</code> <span class='label label-success'>specialized<span></p><p></p><pre>__(N.I(-1)).I;
+=&gt; -1
+
+__(N.I(1)).UI;
+=&gt; 1
+
+__(N.B(true)).B;
+=&gt; true
+
+__(N.F(1.2f)).F;
+=&gt; 1.2
+
+__(N.D(3.14159)).D;
+=&gt; 3.14159
+</pre><p><code>__(obj).NSS</code> <code>__(obj).S</code> <span class='label label-info'>toMutable</span> <br> <code>__(obj).NSA</code> <code>__(obj).A</code> <span class='label label-info'>toMutable</span> <br> <code>__(obj).NSD</code> <code>__(obj).O</code> <span class='label label-info'>toMutable</span> <br> <code>__(obj).Date</code> <span class='label label-success'>specialized<span></p><p></p><pre>__(@&quot;bob&quot;).NSS;
+=&gt; @&quot;bob&quot;
+
+__(@&quot;bob&quot;).S;
+=&gt; @&quot;bob&quot;
+
+__(AI(1, 2, 3)).NSA;
+=&gt; [1, 2, 3]
+
+__(AI(1, 2, 3)).A;
+=&gt; [1, 2, 3]
+
+__(OKV({@&quot;key&quot;, N.I(1)})).NSD;
+=&gt; {key: 1}
+
+__(OKV({@&quot;key&quot;, N.I(1)})).O;
+=&gt; {key: 1}
+
+__(Date.new).Date;
+=&gt; now
+</pre></div></div><h2 id="extensions">Extensions</h2><div class="row"><div class="span6"><h3 class="library_title">Underscore.js</h3></div><div class="span6"><h3 class="library_title">_.m</h3></div></div><p id="isTruthy"></p><div class="row"><div class="span6"><b class="header">isTruthy</b><p><code>X</code><span class='label label-inverse'>_.m only</span></p></div><div class="span6"><b class="header">isTruthy</b><p>isTruthy checks for things that are not nil, not empty, etc.</p><span class="returns">Returns: <b>B</b></span><p><code>_.isTruthy(id obj)</code></p><p></p><pre>_.isTruthy(@&quot;hello&quot;);
+=&gt; true
+_.isTruthy(@&quot;&quot;);
+=&gt; false
+</pre></div></div><p id="isFalsy"></p><div class="row"><div class="span6"><b class="header">isFalsy</b><p><code>X</code><span class='label label-inverse'>_.m only</span></p></div><div class="span6"><b class="header">isFalsy</b><p>isTruthy checks for things that are nil, empty, etc.</p><span class="returns">Returns: <b>B</b></span><p><code>_.isFalsy(id obj)</code></p><p></p><pre>_.isFalsy(@&quot;&quot;);
+=&gt; true
+_.isFalsy(@&quot;hello&quot;);
+=&gt; false
+</pre></div></div><p id="isDictionary"></p><div class="row"><div class="span6"><b class="header">isDictionary</b><p><code>X</code><span class='label label-inverse'>_.m only</span></p></div><div class="span6"><b class="header">isDictionary</b><p>isTruthy checks whether something is an NSDictionary or NSMutableDictionary.</p><span class="returns">Returns: <b>B</b></span><p><code>_.isDictionary(id obj)</code></p><p></p><pre>_.isDictionary(NSD.new);
+=&gt; true
+_.isDictionary(O.new);
+=&gt; true
+_.isDictionary(N.B(true));
+=&gt; false
+</pre></div></div><p id="isBlock"></p><div class="row"><div class="span6"><b class="header">isBlock</b><p><code>X</code><span class='label label-inverse'>_.m only</span></p></div><div class="span6"><b class="header">isBlock</b><p>isTruthy checks whether something is a block.</p><span class="returns">Returns: <b>B</b></span><p><code>_.isBlock(id obj)</code></p><p></p><pre>_.isBlock(^{});
+=&gt; true
+_.isBlock(N.B(true));
+=&gt; false
+</pre></div></div><p id="valueTester"></p><div class="row"><div class="span6"><b class="header">valueTester</b><p><code>X</code><span class='label label-inverse'>_.m only</span></p></div><div class="span6"><b class="header">valueTester</b><p>Generates an _ItemTestBlock that can be used to test arrays by a non-string property value (for example: _.filter, _.reject, _.all, _.any).</p><span class="returns">Returns: <b>_ItemTestBlock => ^B(id value, ...)</b></span><p><code>_.valueTester(NSS* key, id match)</code></p><p></p><pre>A* objects = AO(OKV({@&quot;name&quot;, @&quot;bob&quot;}, {@&quot;owner&quot;, owner1}), OKV({@&quot;name&quot;, @&quot;george&quot;}, {@&quot;owner&quot;, owner2}), OKV({@&quot;name&quot;, @&quot;fred&quot;}, {@&quot;owner&quot;, owner1}));
+_.pluck(_.filter(objects, _.valueTester(@&quot;owner&quot;, owner1)), @&quot;name&quot;);
+=&gt; [&quot;bob&quot;, &quot;fred&quot;]
+</pre></div></div><p id="valueStringTester"></p><div class="row"><div class="span6"><b class="header">valueStringTester</b><p><code>X</code><span class='label label-inverse'>_.m only</span></p></div><div class="span6"><b class="header">valueStringTester</b><p>Generates an _ItemTestBlock that can be used to test arrays by a string property value (for example: _.filter, _.reject, _.all, _.any).</p><span class="returns">Returns: <b>_ItemTestBlock => ^B(id value, ...)</b></span><p><code>_.valueStringTester(NSS* key, NSS* match)</code></p><p></p><pre>A* objects = AO(OKV({@&quot;name&quot;, @&quot;bob&quot;}, {@&quot;owner&quot;, @&quot;this guy&quot;}), OKV({@&quot;name&quot;, @&quot;george&quot;}, {@&quot;owner&quot;, @&quot;that guy&quot;}), OKV({@&quot;name&quot;, @&quot;fred&quot;}, {@&quot;owner&quot;, @&quot;this guy&quot;}));
+_.pluck(_.filter(objects, _.valueStringTester(@&quot;owner&quot;, @&quot;this guy&quot;)), @&quot;name&quot;);
+=&gt; [&quot;bob&quot;, &quot;fred&quot;]
+</pre></div></div><p id="setProps"></p><div class="row"><div class="span6"><b class="header">setProps</b><p><code>X</code><span class='label label-inverse'>_.m only</span></p></div><div class="span6"><b class="header">setProps</b><p>Sets all the given properties to a given value.</p><span class="returns">Returns: <b>void</b></span><p><code>_.setProps(NSA* array, NSS* key, id value)</code></p><p></p><pre>A* objects = AO(OKV({@&quot;name&quot;, @&quot;bob&quot;}, {@&quot;owner&quot;, owner1}), OKV({@&quot;name&quot;, @&quot;george&quot;}, {@&quot;owner&quot;, owner2}), OKV({@&quot;name&quot;, @&quot;fred&quot;}, {@&quot;owner&quot;, owner1}));
+_.setProps(objects, @&quot;owner&quot;, nil);
+SS.stringify(_.pluck(objects, @&quot;owner&quot;));
+=&gt; [null,null,null]
+</pre></div></div><p id="classNames"></p><div class="row"><div class="span6"><b class="header">classNames</b><p><code>X</code><span class='label label-inverse'>_.m only</span></p></div><div class="span6"><b class="header">classNames</b><p>Returns an array with all the class names in array. Useful for debugging.</p><span class="returns">Returns: <b>A*</b></span><p><code>_.classNames(NSA* array)</code></p><p></p><pre>A* objects = AO(ValueOwner.new, ValueOwner.new);
+_.classNames(objects).join(@&quot;,&quot;)
+=&gt; ValueOwner,ValueOwner
+</pre></div></div><div id="other"></div><p id="helper_api"></p><div class="page-header"><h3>Helper API</h3></div><h4>Value, Key, Collection Arguments (_.each, _.map, etc) - No Terminators</h4><pre>ARGS_KEY(value): id key = {2nd arg};
+ARGS_KEY_LIST(value, LIST_NAME): id key = {2nd arg}; id LIST_NAME = {3rd arg};
+ARGS_INDEX(value): I index = {2nd arg};
+ARGS_INDEX_LIST(value, LIST_NAME): I index = {2nd arg}; id LIST_NAME = {3rd arg};
+ARGS_LIST(value, LIST_NAME): id LIST_NAME = {3rd arg};
+ARGS_LIST(value, LIST_NAME): id LIST_NAME = {3rd arg};
+</pre><h4>Variable Arguments (_.without, _.intersection, _.difference, etc) - Terminators Required</h4><pre>ARGS_AO(NAME, lastNamedArg): A* NAME = {all ids after lastNamedArgument (inclusive)}; // nil
+ARGS_AI(NAME, lastNamedArg): A* NAME = {all Is after lastNamedArgument (inclusive)}; // AI_END
+</pre><h4>One Variable Argument - No Terminators Required</h4><pre>ARG_B(NAME, lastNamedArg): B NAME = {one bool after lastNamedArgument};
+ARG_I(NAME, lastNamedArg): I NAME = {one integer after lastNamedArgument};
+ARG_UI(NAME, lastNamedArg): UI NAME = {one unsigned integer after lastNamedArgument};
+ARG_F(NAME, lastNamedArg): F NAME = {one float after lastNamedArgument};
+ARG_D(NAME, lastNamedArg): D NAME = {one double after lastNamedArgument};
+ARG_N(NAME, lastNamedArg): N* NAME = {one NSNumber after lastNamedArgument};
+ARG_NSO(NAME, lastNamedArg): NSO* NAME = {one NSObject or id after lastNamedArgument};
+</pre><p id="underscorejs_differences"></p><div class="page-header"><h3>Differences with Underscore.js</h3></div><ul><li><strong>'this' context</strong>: doesn't exist in Objective-C</li><li><strong>undefined (_.isUndefined)</strong>: doesn't exist in Objective-C</li><li><strong>prototype modifications</strong>: not simple in Objective-C</li><li><strong>native functions (like indexOf)</strong>: doesn't exist in Objective-C</li><li><strong>arguments not an array</strong>: they are an array in Objective-C (using the Argument macros)</li><li><strong>DOM-related (_.template, _.isElement)</strong>: no browser in Objective-C</li><li><strong>JavaScript-related (_.noConflict, _.bind, _.bindAll, _.mixin)</strong>: JavaScript-only workarounds or features</li><li><strong>HTML escaping</strong>: could be added, but adds size to the library</li><li><strong>regex (_.isRegExp)</strong>: could be supported. Just submit a pull request!</li><li><strong>equality of self-referencing objects</strong>: could be supported. Just submit a pull request!</li><li><strong>_.isFunction(name, object)</strong>: added an optional second parameter to find the function</li></ul><p id="javascript_differences"></p><div class="page-header"></div><div class="page-header"><h3>Differences Between Objective-C and JavaScript</h3></div><p><strong>Variable Arguments:</strong> JavaScript allows arguments to be skipped, but Objective-C requires explicit declarations. To allow for the flexibility of Underscore.js, I used the C-style variable argument list: 'someFunction(id value ...)'.</p><p>For example, _.map optionally provides the key and collection.</p><h4>You Can Ignore Them</h4><pre>A* doubled = _.map(AI(1, 2, 3), ^(N* num, ...){ return N.I(num.I * 2); });</pre><h4>You Can Use Them</h4><pre>__block A* keys = A.new;
+A* values = _.map(AO({@&quot;int&quot;, N.I(1)}, {@&quot;string&quot;, @&quot;hello&quot;}), ^(id value, ...){
+  ARGS_KEY(value); // helper macro to save the key in 'id key' variable;
+  keys.push(key);
+  return value;
+});
+// keys = [@&quot;int&quot;, string]
+// values = [1,@&quot;hello&quot;]
+</pre><p>Or if you want to get extract variable arguments, you need to provide a nil terminator:</p><pre>A* result = (A*) (^(id arg1, ...){ ARGS_AO(arguments, arg1); return _.flatten(arguments, false); })(N.I(1), AI(2), AO(N.I(3), AO(AO(AI(4)))), /* NIL_TERMINATION */ nil);
+// result = [1,2,3,4]
+</pre></div><div class="page-header"><h2>Please Contribute to _.m!</h2><p>_.m is still young but it already has much of the Underscore.js goodness! Please feel free to submit bug fixes and feature requests on <a href='https://github.com/kmalakoff/_/m/issues'>GitHub</a></p></div></div></content><footer class="page"></footer></div></body></html>

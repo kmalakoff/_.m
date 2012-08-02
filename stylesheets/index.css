@@ -1,0 +1,22 @@
+body{background-color:#F0F5F5;}
+nav.sidebar{background-color:white;position:fixed;left:0;top:0px;bottom:0px;width:150px;overflow-y:scroll;overflow-x:hidden;box-shadow:2px 5px 20px #cccccc;-moz-box-shadow:2px 5px 20px #cccccc;-webkit-box-shadow:2px 5px 20px #cccccc;padding:15px 0 30px 30px;}nav.sidebar a.toc_title,nav.sidebar a.toc_title:visited{display:block;color:black;font-weight:bold;margin-top:15px;}
+nav.sidebar a.toc_title:hover{text-decoration:underline;}
+nav.sidebar #sidebar .version{font-size:10px;font-weight:normal;}
+nav.sidebar ul.toc_section{font-size:11px;line-height:14px;margin:5px 0 0 0;padding-left:0px;list-style-type:none;font-family:Lucida Grande;}
+nav.sidebar .toc_section li{cursor:pointer;margin:0 0 3px 0;}
+nav.sidebar .toc_section li a{text-decoration:none;color:black;}
+nav.sidebar .toc_section li a:hover{text-decoration:underline;}
+nav.sidebar .not_supported{text-decoration:line-through;}
+.library_title{color:#848D8D;font-style:italic;}
+span.alias,span.returns,span.arg,p.arg,span.specialized{font-size:14px;font-style:italic;margin-left:20px;}
+p.arg{margin-bottom:0;}
+.no_specs{height:20px;}
+span.docs{margin-left:20px;margin-left:20px;}span.docs a,span.docs a:hover{text-decoration:none;color:white;}
+code,pre,tt{font-family:Monaco,Consolas,"Lucida Console",monospace;font-size:12px;line-height:18px;font-style:normal;}
+tt{padding:0px 3px;background:#fff;border:1px solid #ddd;zoom:1;}
+code{margin:20px 10px;line-height:40px;padding:5px 10px;background-color:white;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;box-shadow:2px 5px 2px #bccaca;-moz-box-shadow:2px 5px 2px #bccaca;-webkit-box-shadow:2px 5px 2px #bccaca;}
+code.small{font-size:10px;}
+pre{font-size:10px;padding:2px 0 2px 15px;border-left:5px solid #bbb;margin:0px 0 30px;}
+content.page .container{margin-left:200px;margin-right:30px;}
+b.header{display:block;border-top:1px solid #BCCACA;}
+footer.underscore_credits{position:fixed;left:0;right:0;bottom:0;}footer.underscore_credits .navbar{margin-bottom:0;}footer.underscore_credits .navbar .brand{margin:0, auto;font-size:14px;}footer.underscore_credits .navbar .brand a:visited,footer.underscore_credits .navbar .brand a:hover{color:white;}
