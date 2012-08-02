@@ -7,7 +7,6 @@
 //
 
 #import "_Wrapper+JavaScript.h"
-#import "_Wrapper+Private.h"
 #import "_+Objects.h"
 #import "SubjectiveScript.h"
 

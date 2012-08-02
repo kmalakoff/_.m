@@ -70,6 +70,7 @@
 + (id(^)(id list, _MinBlock iterator))min;
 
 + (id(^)(id list, id iteratorOrKey /* _SortByBlock or id */))sortBy;
+
 + (O*(^)(id list, id iteratorOrKey /* _GroupByBlock or id */))groupBy;
 
 + (UI(^)(NSA* array, id list, _SortedIndexBlock iterator))sortedIndex;

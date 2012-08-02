@@ -12,9 +12,6 @@
 		0A2A8C6115C7D5C9002A71DE /* _.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A2A8C0415C7D5C8002A71DE /* _.h */; };
 		0A2A8C6215C7D5C9002A71DE /* _.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A8C0515C7D5C8002A71DE /* _.m */; };
 		0A2A8C6315C7D5C9002A71DE /* _.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A8C0515C7D5C8002A71DE /* _.m */; };
-		0A2A8C6415C7D5C9002A71DE /* _Wrapper+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A2A8C0715C7D5C8002A71DE /* _Wrapper+Private.h */; };
-		0A2A8C6515C7D5C9002A71DE /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A8C0815C7D5C8002A71DE /* _Wrapper+Private.m */; };
-		0A2A8C6615C7D5C9002A71DE /* _Wrapper+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A8C0815C7D5C8002A71DE /* _Wrapper+Private.m */; };
 		0A2A8C6715C7D5C9002A71DE /* _Types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A2A8C0915C7D5C8002A71DE /* _Types.h */; };
 		0A2A8C6815C7D5C9002A71DE /* _Wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A2A8C0A15C7D5C8002A71DE /* _Wrapper.h */; };
 		0A2A8C6915C7D5C9002A71DE /* _Wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A8C0B15C7D5C8002A71DE /* _Wrapper.m */; };
@@ -154,6 +151,7 @@
 		0A58434615B8FC7A000BC230 /* _Wrapper+UtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433615B8FC7A000BC230 /* _Wrapper+UtilityTests.m */; };
 		0A58434815B8FC7A000BC230 /* _WrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A58433915B8FC7A000BC230 /* _WrapperTests.m */; };
 		0A8D935515C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D935415C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m */; };
+		0A91F0A615C9F7EA00BEBF53 /* _+ExtensionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A91F0A515C9F7EA00BEBF53 /* _+ExtensionsTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,8 +171,6 @@
 		0A02E1A815C69E07006BD268 /* QUWrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUWrap.m; sourceTree = "<group>"; };
 		0A2A8C0415C7D5C8002A71DE /* _.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _.h; sourceTree = "<group>"; };
 		0A2A8C0515C7D5C8002A71DE /* _.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _.m; sourceTree = "<group>"; };
-		0A2A8C0715C7D5C8002A71DE /* _Wrapper+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+Private.h"; sourceTree = "<group>"; };
-		0A2A8C0815C7D5C8002A71DE /* _Wrapper+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+Private.m"; sourceTree = "<group>"; };
 		0A2A8C0915C7D5C8002A71DE /* _Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Types.h; sourceTree = "<group>"; };
 		0A2A8C0A15C7D5C8002A71DE /* _Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Wrapper.h; sourceTree = "<group>"; };
 		0A2A8C0B15C7D5C8002A71DE /* _Wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Wrapper.m; sourceTree = "<group>"; };
@@ -291,6 +287,8 @@
 		0A58433915B8FC7A000BC230 /* _WrapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WrapperTests.m; sourceTree = "<group>"; };
 		0A8D935315C4CCAB00B07CCE /* _Wrapper+JavaScriptTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_Wrapper+JavaScriptTests.h"; sourceTree = "<group>"; };
 		0A8D935415C4CCAC00B07CCE /* _Wrapper+JavaScriptTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_Wrapper+JavaScriptTests.m"; sourceTree = "<group>"; };
+		0A91F0A415C9F7E900BEBF53 /* _+ExtensionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "_+ExtensionsTests.h"; sourceTree = "<group>"; };
+		0A91F0A515C9F7EA00BEBF53 /* _+ExtensionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "_+ExtensionsTests.m"; sourceTree = "<group>"; };
 		0AC0449315B9675C006C4984 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		0AC0449415B9675C006C4984 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		0AF192D215C5328F00937CC7 /* QUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUnit.h; sourceTree = "<group>"; };
@@ -330,18 +328,8 @@
 				0A2A8C0C15C7D5C8002A71DE /* Categories */,
 				0A2A8C1915C7D5C8002A71DE /* Underscore.h */,
 				0A2A8C1A15C7D5C8002A71DE /* WrapperCategories */,
-				0A2A8C0615C7D5C8002A71DE /* _Private */,
 			);
 			path = Lib;
-			sourceTree = "<group>";
-		};
-		0A2A8C0615C7D5C8002A71DE /* _Private */ = {
-			isa = PBXGroup;
-			children = (
-				0A2A8C0715C7D5C8002A71DE /* _Wrapper+Private.h */,
-				0A2A8C0815C7D5C8002A71DE /* _Wrapper+Private.m */,
-			);
-			path = _Private;
 			sourceTree = "<group>";
 		};
 		0A2A8C0C15C7D5C8002A71DE /* Categories */ = {
@@ -351,14 +339,14 @@
 				0A2A8C0E15C7D5C8002A71DE /* _+Arrays.m */,
 				0A2A8C0F15C7D5C8002A71DE /* _+Collections.h */,
 				0A2A8C1015C7D5C8002A71DE /* _+Collections.m */,
-				0A2A8C1115C7D5C8002A71DE /* _+Extensions.h */,
-				0A2A8C1215C7D5C8002A71DE /* _+Extensions.m */,
 				0A2A8C1315C7D5C8002A71DE /* _+Functions.h */,
 				0A2A8C1415C7D5C8002A71DE /* _+Functions.m */,
 				0A2A8C1515C7D5C8002A71DE /* _+Objects.h */,
 				0A2A8C1615C7D5C8002A71DE /* _+Objects.m */,
 				0A2A8C1715C7D5C8002A71DE /* _+Utility.h */,
 				0A2A8C1815C7D5C8002A71DE /* _+Utility.m */,
+				0A2A8C1115C7D5C8002A71DE /* _+Extensions.h */,
+				0A2A8C1215C7D5C8002A71DE /* _+Extensions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -580,6 +568,8 @@
 				0A58432315B8FC7A000BC230 /* _+ObjectsTests.m */,
 				0A58432415B8FC7A000BC230 /* _+UtilityTests.h */,
 				0A58432515B8FC7A000BC230 /* _+UtilityTests.m */,
+				0A91F0A415C9F7E900BEBF53 /* _+ExtensionsTests.h */,
+				0A91F0A515C9F7EA00BEBF53 /* _+ExtensionsTests.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -630,7 +620,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2A8C6115C7D5C9002A71DE /* _.h in Headers */,
-				0A2A8C6415C7D5C9002A71DE /* _Wrapper+Private.h in Headers */,
 				0A2A8C6715C7D5C9002A71DE /* _Types.h in Headers */,
 				0A2A8C6815C7D5C9002A71DE /* _Wrapper.h in Headers */,
 				0A2A8C6B15C7D5C9002A71DE /* _+Arrays.h in Headers */,
@@ -777,7 +766,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2A8C6215C7D5C9002A71DE /* _.m in Sources */,
-				0A2A8C6515C7D5C9002A71DE /* _Wrapper+Private.m in Sources */,
 				0A2A8C6915C7D5C9002A71DE /* _Wrapper.m in Sources */,
 				0A2A8C6C15C7D5C9002A71DE /* _+Arrays.m in Sources */,
 				0A2A8C6F15C7D5C9002A71DE /* _+Collections.m in Sources */,
@@ -839,7 +827,6 @@
 				0A02E1A915C69E07006BD268 /* QUnitTests.m in Sources */,
 				0A02E1AA15C69E07006BD268 /* QUWrap.m in Sources */,
 				0A2A8C6315C7D5C9002A71DE /* _.m in Sources */,
-				0A2A8C6615C7D5C9002A71DE /* _Wrapper+Private.m in Sources */,
 				0A2A8C6A15C7D5C9002A71DE /* _Wrapper.m in Sources */,
 				0A2A8C6D15C7D5C9002A71DE /* _+Arrays.m in Sources */,
 				0A2A8C7015C7D5C9002A71DE /* _+Collections.m in Sources */,
@@ -879,6 +866,7 @@
 				0A2A8CD815C7D5C9002A71DE /* NSObject+SS.m in Sources */,
 				0A2A8CDB15C7D5C9002A71DE /* NSString+SS.m in Sources */,
 				0A410A2A15C93019005E65CA /* _WebsiteTests.m in Sources */,
+				0A91F0A615C9F7EA00BEBF53 /* _+ExtensionsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

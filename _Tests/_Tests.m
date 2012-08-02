@@ -14,7 +14,7 @@
 
 - (void)test_version
 {
-  ok(_.VERSION.VersionGreaterThanOrEqualTo(@"0.0.1"), @"expected version");
+  ok(_.VERSION.VersionGreaterThanOrEqualTo(@"0.1.0"), @"expected version");
 }
 
 @end

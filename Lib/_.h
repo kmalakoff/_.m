@@ -34,7 +34,7 @@
 
 @interface _ : NSObject
 
-+ (NSString*)VERSION;
++ (NSS*)VERSION;
 
 + (_Wrapper*(^)(id obj))chain;
 

@@ -10,8 +10,6 @@
 
 @interface _ (Extensions)
 
-// TODO: add tests
-
 // value
 + (B(^)(id obj))isTruthy;
 + (B(^)(id obj))isFalsy;
@@ -19,8 +17,8 @@
 + (B(^)(id obj))isBlock;
 
 // object
-+ (_FindBlock(^)(NSS* key, id match))propTester;
-+ (_FindBlock(^)(NSS* key, NSS* match))propStringTester;
++ (_ItemTestBlock(^)(NSS* key, id match))valueTester;
++ (_ItemTestBlock(^)(NSS* key, NSS* match))valueStringTester;
 
 // array
 + (void(^)(NSA* array, NSS* key, id value))setProps;

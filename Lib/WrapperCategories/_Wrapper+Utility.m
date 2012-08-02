@@ -28,7 +28,6 @@
 //
 
 #import "_Wrapper+Utility.h"
-#import "_Wrapper+Private.h"
 #import "_+Utility.h"
 
 @implementation _Wrapper (Utility)

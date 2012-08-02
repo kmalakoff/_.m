@@ -30,21 +30,21 @@
 + (B(^)(id obj))isDictionary  { return ^B(id obj) { return [obj isKindOfClass:[NSDictionary class]]; }; } 
 + (B(^)(id obj))isBlock       { return ^B(id obj) { return [obj isKindOfClass:NSClassFromString(@"NSBlock")]; }; } 
 
-+ (_FindBlock(^)(NSString* key, id match))propTester;
++ (_ItemTestBlock(^)(NSString* key, id match))valueTester;
 {
   return ^(NSString* key, id match) {
-    return ^B(NSD* obj)
+    return ^B(NSD* obj, ...)
     {
-      NSString *value = [obj valueForKey:key];
-      return (value == match);
+      id value = [obj valueForKey:key];
+      return [value isEqual:match];
     };
   };
 }
 
-+ (_FindBlock(^)(NSString* key, NSString *match))propStringTester;
++ (_ItemTestBlock(^)(NSString* key, NSString *match))valueStringTester;
 {
   return ^(NSString* key, NSString *match) {
-    return ^(NSD* obj)
+    return ^B(NSD* obj, ...)
     {
       NSString *value = [obj valueForKey:key];
       return [value isEqualToString:match];

@@ -28,13 +28,29 @@
 //
 
 #import "_.h"
-#import "_Wrapper+Private.h"
+#import "_Wrapper.h"
 
-static NSS* _VERSION = @"0.0.1";
+@interface _Wrapper (Private)
+- (id)initWithObject:(NSO*)obj;
+@property (readwrite, retain) NSO* _wrapped;
+@end
+
+@implementation _Wrapper (Private)
+@dynamic _wrapped;
+- (id)initWithObject:(NSO*)obj
+{
+  self = [super init];
+  if (!self) return self;
+  self._wrapped = obj;
+  return self;
+}
+@end
+
+static NSS* _VERSION = @"0.1.0";
 
 @implementation _
 
-+ (NSString*)VERSION { return _VERSION; }
++ (NSS*)VERSION { return _VERSION; }
 
 + (_Wrapper*(^)(id obj))chain;
 {

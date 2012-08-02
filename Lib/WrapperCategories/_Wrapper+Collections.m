@@ -28,7 +28,6 @@
 //
 
 #import "_Wrapper+Collections.h"
-#import "_Wrapper+Private.h"
 #import "_+Collections.h"
 #import "_+Objects.h"
 #import "SubjectiveScript.h"
