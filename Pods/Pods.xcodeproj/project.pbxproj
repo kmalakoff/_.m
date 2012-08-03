@@ -665,7 +665,7 @@
 			baseConfigurationReference = 2CBB3AD5CFED4F44AB56ADD3 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
@@ -702,7 +702,7 @@
 			baseConfigurationReference = 2CBB3AD5CFED4F44AB56ADD3 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -802,7 +802,7 @@
 			baseConfigurationReference = 2CBB3AD5CFED4F44AB56ADD3 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -835,8 +835,10 @@
 		75226BE3514545EDBB38A3D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				SDKROOT = "";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				VALID_ARCHS = "i386 x86_64 armv6 armv7";
 			};
@@ -847,7 +849,7 @@
 			baseConfigurationReference = 2CBB3AD5CFED4F44AB56ADD3 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -873,8 +875,10 @@
 		A5002A4C8E6B42278E91F1EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				SDKROOT = "";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				VALID_ARCHS = "i386 x86_64 armv6 armv7";
 			};
