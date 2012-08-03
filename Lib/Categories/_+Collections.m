@@ -289,7 +289,6 @@
 {
   return ^(id list, NSS* methodName, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
-
     if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
     return _.map(list, ^(NSO* value, ... /* KEY, LIST */) {

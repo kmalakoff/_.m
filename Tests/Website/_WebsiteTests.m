@@ -290,7 +290,7 @@
   _ComposeBlock greet = ^(NSS* name, ...){ return @"hi: ".add(name); };
   _ComposeBlock exclaim  = ^(NSS* statement, ...){ return statement.add(@"!"); };
   _ComposedBlock welcome = _.compose(exclaim, greet, nil);
-  NSS* compose = welcome(@"moe");
+  NSS* compose = welcome(@"moe", nil);
   equal(compose, @"hi: moe!", @"compose")
 }
 

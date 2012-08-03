@@ -28,6 +28,7 @@
 //
 
 #import "NSMutableArray+SS.h"
+#import "TargetConditionals.h"
 
 // any number of arguments of type id or NSObject terminated with nil
 #define ARGS_AO(_name, _lastNamedArg) \
@@ -38,7 +39,8 @@
     for (NSO* arg = _lastNamedArg; arg != nil; arg = va_arg(argList, NSO*)) { [_name addObject:arg]; } \
     va_end(argList); \
   }
-  
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 // any number of arguments of type NSInteger terminated with AI_END
 #define AI_END (I)NSNotFound
 #define ARGS_AI(_name, _lastNamedArg) \
@@ -49,6 +51,18 @@
     for (I arg = _lastNamedArg; arg != AI_END; arg = va_arg(argList, I)) { [_name addObject:N.I(arg)]; } \
     va_end(argList); \
   }
+#elif TARGET_OS_MAC
+// any number of arguments of type NSInteger terminated with AI_END
+#define AI_END (int)NSNotFound
+#define ARGS_AI(_name, _lastNamedArg) \
+  A* _name = A.newArguments; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    for (int arg = (int) _lastNamedArg; arg != AI_END; arg = va_arg(argList, int)) { [_name addObject:N.I((I)arg)]; } \
+    va_end(argList); \
+  }
+#endif
 
 // one argument of type BOOL
 #define ARG_B(_name, _lastNamedArg) \
@@ -60,6 +74,7 @@
     va_end(argList); \
   }
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 // one argument of type NSInteger
 #define ARG_I(_name, _lastNamedArg) \
   I _name; \
@@ -79,6 +94,26 @@
     _name = va_arg(argList, UI); \
     va_end(argList); \
   }
+#elif TARGET_OS_MAC
+// one argument of type NSInteger
+#define ARG_I(_name, _lastNamedArg) \
+  I _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = (I) va_arg(argList, int); \
+    va_end(argList); \
+  }
+// one argument of type NSUInteger
+#define ARG_UI(_name, _lastNamedArg) \
+  UI _name; \
+  { \
+    va_list argList; \
+    va_start(argList, _lastNamedArg); \
+    _name = (UI) va_arg(argList, unsigned int); \
+    va_end(argList); \
+  }
+#endif
 
 // one argument of type float
 #define ARG_F(_name, _lastNamedArg) \

@@ -16,3 +16,8 @@ xcuserdata
 # svn & cvs
 .svn
 CVS
+
+# cocoapods (keep libraries since the pod install doesn't configure what I need)
+Pods/build/*
+Pods/Headers/*
+Pods/Documentation/*

@@ -93,6 +93,7 @@
 {
   return ^(_ThrottleBlock func, I waitNS, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
     __block B throttling;
     __block B more;
@@ -123,7 +124,7 @@
 {
   return ^(_DebounceBlock func, I waitNS, B immediate, id arg1, ... /* NIL_TERMINATION */) {
     ARGS_AO(arguments, arg1);
-      if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
+    if (arguments.length < 1) arguments.push(NSNull.null); // requires at least one argument to match the block signature (id arg1, ... /* NIL_TERMINATION */)
 
     __block _Timeout* timeout;
     return ^{

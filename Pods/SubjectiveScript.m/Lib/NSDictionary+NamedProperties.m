@@ -30,6 +30,7 @@
 #import "NSDictionary+NamedProperties.h"
 #import <objc/runtime.h>
 
+#import "TargetConditionals.h"
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #define BLOCK_TO_IMPL(_b) imp_implementationWithBlock((void*)CFBridgingRetain(_b))
 #elif TARGET_OS_MAC
@@ -211,7 +212,7 @@ static const char* NamedPropertiesKey = "SSNP";
       implementation = BLOCK_TO_IMPL(^(NSDictionary* obj, id value) {
         [obj.getPropertiesContainer setValue:value forKey:name];
       });
-    else if ((attrs[1]==_C_CHR) || (attrs[1]==_C_UCHR) || (attrs[1]==_C_USHT) || (attrs[1]==_C_INT) || (attrs[1]==_C_UINT) || (attrs[1]==_C_LNG) || (attrs[1]==_C_ULNG)|| (attrs[1]==_C_LNG_LNG) || (attrs[1]==_C_ULNG_LNG))
+    else if ((attrs[1]==_C_CHR) || (attrs[1]==_C_UCHR) || (attrs[1]==_C_USHT) || (attrs[1]==_C_INT) || (attrs[1]==_C_UINT) || (attrs[1]==_C_LNG) || (attrs[1]==_C_ULNG) || (attrs[1]==_C_LNG_LNG) || (attrs[1]==_C_ULNG_LNG))
       implementation = BLOCK_TO_IMPL(^(NSDictionary* obj, NSInteger value) {
         [obj.getPropertiesContainer setValue:[NSNumber numberWithInteger:value] forKey:name];
       });
@@ -237,7 +238,7 @@ static const char* NamedPropertiesKey = "SSNP";
       implementation = BLOCK_TO_IMPL(^(NSDictionary* obj) {
         return [obj.getPropertiesContainer valueForKey:name];
       });
-    else if ((attrs[1]==_C_CHR) || (attrs[1]==_C_UCHR) || (attrs[1]==_C_USHT) || (attrs[1]==_C_INT) || (attrs[1]==_C_UINT) || (attrs[1]==_C_LNG) || (attrs[1]==_C_ULNG)|| (attrs[1]==_C_LNG_LNG) || (attrs[1]==_C_ULNG_LNG))
+    else if ((attrs[1]==_C_CHR) || (attrs[1]==_C_UCHR) || (attrs[1]==_C_USHT) || (attrs[1]==_C_INT) || (attrs[1]==_C_UINT) || (attrs[1]==_C_LNG) || (attrs[1]==_C_ULNG) || (attrs[1]==_C_LNG_LNG) || (attrs[1]==_C_ULNG_LNG))
       implementation = BLOCK_TO_IMPL(^(NSDictionary* obj) {
         NSNumber* value = [obj.getPropertiesContainer valueForKey:name];
         return value ? value.integerValue : 0;

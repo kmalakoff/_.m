@@ -44,8 +44,8 @@ Installing
 #Install From GitHub Source
   + Clone the [_.m from GitHub](https://github.com/kmalakoff/_.m)
   + Add all the files from the Lib directory to your project
-  + Add all of the files from the Pods/SubjectiveScript.m folder to your project or get them from [SubjectiveScript.m on Github](https://github.com/kmalakoff/SubjectiveScript.m)
-  + Include Underscore.h in your project where you need it and away you go!
+  + Clone the [SubjectiveScript.m from GitHub](hhttps://github.com/kmalakoff/SubjectiveScript.m)
+  + Add all the files from the Lib directory to your project
 
 #Install From CocoaPods
   + Install [Ruby](http://www.ruby-lang.org/en/downloads/) and [CocoaPods](href='http://cocoapods.org/#install)

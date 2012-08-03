@@ -32,6 +32,8 @@
 #import "_+Objects.h"
 #import "SubjectiveScript.h"
 
+#import "TargetConditionals.h"
+
 @implementation _ (Utility)
 
 //noConflict /* NOT SUPPORTED: JavaScript-only */

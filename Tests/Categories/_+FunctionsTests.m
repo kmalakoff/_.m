@@ -278,10 +278,10 @@
   _ComposeBlock greet = ^S*(NSS* name, ... /* NIL_TERMINATION */){ return @"hi: ".add(name); };
   _ComposeBlock exclaim = ^S*(NSS* sentence, ... /* NIL_TERMINATION */){ return sentence.add(@"!"); };
   _ComposeBlock composed = _.compose(exclaim, greet, /* NIL TERMINATION */ nil);
-  equal(composed(@"moe"), @"hi: moe!", @"can compose a function that takes another");
+  equal(composed(@"moe", nil), @"hi: moe!", @"can compose a function that takes another");
 
   composed = _.compose(greet, exclaim, /* REQUIRED */ nil);
-  equal(composed(@"moe"), @"hi: moe!", @"in this case, the functions are also commutative");
+  equal(composed(@"moe", nil), @"hi: moe!", @"in this case, the functions are also commutative");
 }
 
 - (void)test_after {
