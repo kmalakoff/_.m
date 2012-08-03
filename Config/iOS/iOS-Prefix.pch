@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the '_iOS' target in the '_iOS' project
+//
+
+#ifdef __OBJC__
+  #import <Foundation/Foundation.h>
+#endif

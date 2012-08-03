@@ -1,5 +1,0 @@
-PODS:
-  - SubjectiveScript.m (0.1.0)
-
-DEPENDENCIES:
-  - SubjectiveScript.m (~> 0.1.0)
