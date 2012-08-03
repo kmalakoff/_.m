@@ -1,5 +1,3 @@
-[![Build Status](https:secure.travis-ci.org/kmalakoff/SubjectiveScript.m.png)](http:travis-ci.org/kmalakoff/SubjectiveScript.m)
-
 ````
 SubjectiveScript.m
 ````
@@ -309,6 +307,6 @@ Please Contribute to SubjectiveScript.m
 
 Currently, this is still early days and there is a lot to add and test. Please help out!
 
-If there is anything else you would like added, just implement it in a good place, write the appropriate tests, and submit a pull request on [GitHub]((https://github.com/kmalakoff/_.m))
+If there is anything else you would like added, just implement it in a good place, write the appropriate tests, and submit a pull request on [GitHub](https://github.com/kmalakoff/SubjectiveScript.m/pulls).
 
 Also, feel free to submit your favorite features from other languages as long as they are easy to remember and help speed up development!

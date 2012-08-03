@@ -29,7 +29,7 @@
 
 #import "QUnit.h"
 
-static NSString* QUVERSION = @"0.1.0";
+static NSString* QUVERSION = @"0.1.1";
 
 @implementation QUnit
 

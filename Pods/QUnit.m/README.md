@@ -1,4 +1,3 @@
-[![Build Status](https:secure.travis-ci.org/kmalakoff/QUnit.m.png)](http:travis-ci.org/kmalakoff/QUnit.m)
 
 ````
 QUnit.m
