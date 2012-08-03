@@ -53,8 +53,8 @@ Installing
 
 ```
       platform :ios
-      pod '_.m',                  '~> 0.1.0'
-      pod 'SubjectiveScript.m',   '~> 0.1.0'
+      pod '_.m',                  '~> 0.1.1'
+      pod 'SubjectiveScript.m',   '~> 0.1.1'
 ```
 
   + Install the pods from the Podfile 'pod install {YourProject}.xcodeproj'

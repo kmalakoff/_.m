@@ -46,7 +46,7 @@
 }
 @end
 
-static NSS* _VERSION = @"0.1.0";
+static NSS* _VERSION = @"0.1.1";
 
 @implementation _
 
