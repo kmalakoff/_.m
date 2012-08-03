@@ -1,0 +1,9 @@
+PODS:
+  - QUnit.m (0.1.0)
+  - SubjectiveScript.m (0.1.0)
+
+DEPENDENCIES:
+  - QUnit.m (~> 0.1.0)
+  - QUnit.m (~> 0.1.0)
+  - SubjectiveScript.m (~> 0.1.0)
+  - SubjectiveScript.m (~> 0.1.0)

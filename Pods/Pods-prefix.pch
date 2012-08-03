@@ -1,0 +1,8 @@
+#ifdef __OBJC__
+#include "TargetConditionals.h"
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#import <Foundation/Foundation.h>
+#elif TARGET_OS_MAC
+#import <Cocoa/Cocoa.h>
+#endif
+#endif

@@ -1,0 +1,1 @@
+../../SubjectiveScript.m/Lib/Helpers/NSString+Versioning.h
