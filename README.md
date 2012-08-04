@@ -6,7 +6,7 @@ _.m is a port of [Underscore.js](http://underscorejs.org/) to Objective-C. It st
 
 To help achieve this vision, _.m uses [SubjectiveScript.m](https://github.com/kmalakoff/SubjectiveScript.m) to bring JavaScript-like syntax and features into Objective-C, and [QUnit.m](https://github.com/kmalakoff/QUnit.m) to port unit tests from JavaScript to Objective-C. You should check them out, too!
 
-Full documentation can be found on the [_.m Website](http://http://kmalakoff.github.com/_.m/)
+Full documentation can be found on the [_.m Website](http://kmalakoff.github.com/_.m/)
 
 A Quick Taster
 ------------
