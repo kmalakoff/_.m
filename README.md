@@ -44,7 +44,7 @@ Installing
 #Install From GitHub Source
   + Clone the [_.m from GitHub](https://github.com/kmalakoff/_.m)
   + Add all the files from the Lib directory to your project
-  + Clone the [SubjectiveScript.m from GitHub](hhttps://github.com/kmalakoff/SubjectiveScript.m)
+  + Clone the [SubjectiveScript.m from GitHub](https://github.com/kmalakoff/SubjectiveScript.m)
   + Add all the files from the Lib directory to your project
 
 #Install From CocoaPods
