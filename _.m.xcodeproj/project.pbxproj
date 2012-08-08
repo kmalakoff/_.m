@@ -218,6 +218,7 @@
 		406795C459F74FA5971B60EA /* libPods-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A445E9CF4E54D8C92630F83 /* libPods-_.m-iosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-_.m-iosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5314D91927E24967B0048693 /* libPods-_.m-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-_.m-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60515585E616447F851274EE /* Pods-_.m-osx.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-_.m-osx.xcconfig"; path = "Pods/Pods-_.m-osx.xcconfig"; sourceTree = SOURCE_ROOT; };
 		802B3415327D45C1AF7CFBBF /* libPods-osx_tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-osx_tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8903B852C7E497F96CAA271 /* Pods-_.m-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-_.m-ios.xcconfig"; path = "Pods/Pods-_.m-ios.xcconfig"; sourceTree = SOURCE_ROOT; };
 		E8A7AF49A2064C85BC5CD143 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,6 +285,7 @@
 				FA352298A32E47C8A4503E55 /* Pods-_.m-iosTests.xcconfig */,
 				0BC247A6BE8E4C0EB46E9C1A /* Pods-_.m-osx.xcconfig */,
 				F997870442BD4EAEA98FB41B /* Pods-_.m-osxTests.xcconfig */,
+				60515585E616447F851274EE /* Pods-_.m-osx.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -305,10 +307,10 @@
 				0A9BDA6C15CB715F00D38189 /* Cocoa.framework */,
 				0A32614815B8FB4800237F52 /* Foundation.framework */,
 				0A32615615B8FB4900237F52 /* SenTestingKit.framework */,
-				0A7427DA15D2563D00221ACC /* libPods-_.m-osxTests.a */,
-				0A3F7DC415D254BA000774DF /* libPods-_.m-osx.a */,
 				5314D91927E24967B0048693 /* libPods-_.m-ios.a */,
 				4A445E9CF4E54D8C92630F83 /* libPods-_.m-iosTests.a */,
+				0A3F7DC415D254BA000774DF /* libPods-_.m-osx.a */,
+				0A7427DA15D2563D00221ACC /* libPods-_.m-osxTests.a */,
 				E8A7AF49A2064C85BC5CD143 /* libPods-ios.a */,
 				F26F28F7A1EE43AD8C3C0CDA /* libPods-ios_tests.a */,
 				406795C459F74FA5971B60EA /* libPods-osx.a */,
@@ -559,6 +561,7 @@
 				0ACE7EA015D24F9700621441 /* Frameworks */,
 				0ACE7EA115D24F9700621441 /* Headers */,
 				BD0DA43E496E491196D8CAAB /* Copy Pods Resources */,
+				84B790AB8ECF48DEA2BAD88A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -704,6 +707,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-_.m-ios-resources.sh\"\n";
+		};
+		84B790AB8ECF48DEA2BAD88A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-_.m-osx-resources.sh\"\n";
 		};
 		BD0DA43E496E491196D8CAAB /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -976,7 +993,7 @@
 		};
 		0ACE7EC415D24F9700621441 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BC247A6BE8E4C0EB46E9C1A /* Pods-_.m-osx.xcconfig */;
+			baseConfigurationReference = 60515585E616447F851274EE /* Pods-_.m-osx.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -994,7 +1011,7 @@
 		};
 		0ACE7EC515D24F9700621441 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BC247A6BE8E4C0EB46E9C1A /* Pods-_.m-osx.xcconfig */;
+			baseConfigurationReference = 60515585E616447F851274EE /* Pods-_.m-osx.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
