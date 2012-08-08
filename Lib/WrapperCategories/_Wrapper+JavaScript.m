@@ -54,7 +54,7 @@
 // Add all mutator Array functions to the wrapper.
 - (_Wrapper*(^)())pop
 {
-  return ^() {
+  return ^{
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"pop expecting NSArray");
 #endif
@@ -82,7 +82,7 @@
 
 - (_Wrapper*(^)())reverse
 {
-  return ^() {
+  return ^{
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"reverse expecting NSArray");
 #endif
@@ -144,7 +144,7 @@
 
 - (_Wrapper*(^)())shift
 {
-  return ^() {
+  return ^{
 #ifdef DEBUG
     NSAssert(_.isArray(self.value()), @"unshift expecting NSArray");
 #endif

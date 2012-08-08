@@ -17,10 +17,5 @@ xcuserdata
 .svn
 CVS
 
-# cocoapods (keep libraries since the pod install doesn't configure what I need for QUnit.m - build-only dependency)
-Pods/build/*
-Pods/Headers/*
-Pods/Documentation/*
-Pods/SubjectiveScript.m/*
-Pods/QUnit.m/*
-Pods/Documentation/*
+# pods
+Pods/*

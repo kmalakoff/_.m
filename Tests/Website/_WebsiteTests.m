@@ -421,7 +421,7 @@
   ok(uniqueId.startsWith(@"contact_"), @"uniqueId");
   
   // result
-  O* object = OKV({@"cheese", @"crumpets"}, {@"stuff", ^(){ return @"nonsense"; }});
+  O* object = OKV({@"cheese", @"crumpets"}, {@"stuff", ^{ return @"nonsense"; }});
   id result = _.result(object, @"cheese");
   equal(result, @"crumpets", @"result crumpets");
   result = _.result(object, @"stuff");

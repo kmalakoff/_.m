@@ -74,8 +74,8 @@
 //- (void)test_bindAll {
 //  var curly = {name : "curly"}, moe = {
 //    name    : "moe",
-//    getName : ^() { return "name: " + this.name; },
-//    sayHi   : ^() { return "hi: " + this.name; }
+//    getName : ^{ return "name: " + this.name; },
+//    sayHi   : ^{ return "hi: " + this.name; }
 //  };
 //  curly.getName = moe.getName;
 //  _.bindAll(moe, @"getName", @"sayHi");
@@ -86,15 +86,16 @@
 //  curly = {name : "curly"};
 //  moe = {
 //    name    : "moe",
-//    getName : ^() { return "name: " + this.name; },
-//    sayHi   : ^() { return "hi: " + this.name; }
+//    getName : ^{ return "name: " + this.name; },
+//    sayHi   : ^{ return "hi: " + this.name; }
 //  };
 //  _.bindAll(moe);
 //  curly.sayHi = moe.sayHi;
 //  equal(curly.sayHi(), @"hi: moe", @"calling bindAll with no arguments binds all functions to the object");
 //}
 
-- (void)test_memoize {
+- (void)test_memoize
+{
   __block _MemoizeBlock fib = ^N*(N* nNumber, ... /* NIL_TERMINATION */) {
     I n = nNumber.I;
     if (n < 2) return nNumber;
@@ -117,11 +118,11 @@
 
 - (void)test_delay 
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block B delayed = false;
-    _.delay(^(){ delayed = true; }, 100);
-    SS.setTimeout(^(){ ok(!delayed, @"didn't delay the function quite yet"); }, 50);
-    SS.setTimeout(^(){ ok(delayed, @"delayed the function"); start(); }, 150);
+    _.delay(^{ delayed = true; }, 100);
+    SS.setTimeout(^{ ok(!delayed, @"didn't delay the function quite yet"); }, 50);
+    SS.setTimeout(^{ ok(delayed, @"delayed the function"); start(); }, 150);
     
     return N.I(2);
   });
@@ -129,17 +130,17 @@
 
 - (void)test_defer 
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block B deferred = false;
 //    _.defer(^(B value){ deferred = value; }, true);   /* NOT SUPPORTED: to simplify the API rather than specializing a version with and without arguments or making the common case (without arguments) require arguments. Try without argument using block capture and if it doesn't work, submit a feature request) */
-    _.defer(^(){ deferred = true; });
-    _.delay(^(){ ok(deferred, @"deferred the function"); start(); }, 50);
+    _.defer(^{ deferred = true; });
+    _.delay(^{ ok(deferred, @"deferred the function"); start(); }, 50);
   });
 }
 
 - (void)test_throttle 
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block UI counter = 0;
     _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* REQUIRED */ return nil; };
     _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil);
@@ -150,36 +151,36 @@
     SS.setTimeout(^{ throttledIncr(); }, 190);
     SS.setTimeout(^{ throttledIncr(); }, 220);
     SS.setTimeout(^{ throttledIncr(); }, 240);
-    _.delay(^(){ 
+    _.delay(^{ 
       equal(counter, 1, @"incr was called immediately"); 
     }, 30);
-    _.delay(^(){ equal(counter, 4, @"incr was throttled"); start(); }, 400);
+    _.delay(^{ equal(counter, 4, @"incr was throttled"); start(); }, 400);
   });
 }
 
 - (void)test_throttle_arguments 
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block N* value = nil;
     _ThrottleBlock update = ^id(N* val, ... /* NIL_TERMINATION */){ value = val; /* REQUIRED */ return nil; };
     _ThrottledBlock throttledUpdate = _.throttle(update, 100, /* REQUIRED */ nil);
     throttledUpdate(N.I(1), nil); throttledUpdate(N.I(2), nil); throttledUpdate(N.I(3), nil);
-    SS.setTimeout(^(){ throttledUpdate(N.I(4)); }, 120);
-    SS.setTimeout(^(){ throttledUpdate(N.I(5)); }, 140);
-    SS.setTimeout(^(){ throttledUpdate(N.I(6)); }, 250);
-    _.delay(^(){ equal(value, N.I(1), @"updated to latest value"); }, 40);
-    _.delay(^(){ equal(value, N.I(6), @"updated to latest value"); start(); }, 400);
+    SS.setTimeout(^{ throttledUpdate(N.I(4)); }, 120);
+    SS.setTimeout(^{ throttledUpdate(N.I(5)); }, 140);
+    SS.setTimeout(^{ throttledUpdate(N.I(6)); }, 250);
+    _.delay(^{ equal(value, N.I(1), @"updated to latest value"); }, 40);
+    _.delay(^{ equal(value, N.I(6), @"updated to latest value"); start(); }, 400);
   });
 }
 
 - (void)test_throttle_once
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block UI counter = 0;
     _ThrottleBlock incr = ^N*(id arg1, ... /* NIL_TERMINATION */){ return N.I(++counter); };
     _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil);
     N* result = throttledIncr();
-    _.delay(^(){
+    _.delay(^{
       equal(result.I, 1, @"throttled ^s return their value");
       equal(counter, 1, @"incr was called once"); start();
     }, 220);
@@ -188,18 +189,18 @@
 
 - (void)test_throttle_twice
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block I  counter = 0;
     _ThrottleBlock incr = ^id(id arg1, ... /* NIL_TERMINATION */){ counter++; /* REQUIRED */ return nil; };
     _ThrottledBlock throttledIncr = _.throttle(incr, 100, /* REQUIRED */ nil);
     throttledIncr(); throttledIncr();
-    _.delay(^(){ equal(counter, 2, @"incr was called twice"); start(); }, 220);
+    _.delay(^{ equal(counter, 2, @"incr was called twice"); start(); }, 220);
   });
 }
 
 - (void)test_throttle_debounce
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block I  counter = 0;
     _DebounceBlock incr = ^(id arg1, ... /* NIL_TERMINATION */){ counter++; };
     _DebouncedBlock debouncedIncr = _.debounce(incr, 50, /* REQUIRED */ false, /* NIL_TERMINATION */ nil);
@@ -209,13 +210,13 @@
     SS.setTimeout(^{ debouncedIncr(); }, 90);
     SS.setTimeout(^{ debouncedIncr(); }, 120);
     SS.setTimeout(^{ debouncedIncr(); }, 150);
-    _.delay(^(){ equal(counter, 1, @"incr was debounced"); start(); }, 220);
+    _.delay(^{ equal(counter, 1, @"incr was debounced"); start(); }, 220);
   });
 }
 
 - (void)test_throttle_asap
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block UI counter = 0;
     _DebounceBlock incr = ^(id arg1, ... /* NIL_TERMINATION */){ 
       counter++; 
@@ -228,25 +229,26 @@
     SS.setTimeout(^{ debouncedIncr(); }, 90);
     SS.setTimeout(^{ debouncedIncr(); }, 120);
     SS.setTimeout(^{ debouncedIncr(); }, 150);
-    _.delay(^(){ equal(counter, 1, @"incr was debounced"); start(); }, 220);
+    _.delay(^{ equal(counter, 1, @"incr was debounced"); start(); }, 220);
   });
 }
 
 - (void)test_throttle_asap_recursively
 {
-  asyncTest(^() {
+  asyncTest(^{
     __block UI counter = 0;
     __block _DebouncedBlock debouncedIncr = _.debounce(^(id arg1, ... /* NIL_TERMINATION */){
       counter++;
-      if (counter < 5) debouncedIncr();
+//      if (counter < 5) debouncedIncr();  /* NOT SUPPORTED: cannot immediately call recursive function - hasn't been assigned to variable yet */
     }, 50, true, /* NIL_TERMINATION */ nil);
     debouncedIncr();
     equal(counter, 1, @"incr was called immediately");
-    _.delay(^(){ equal(counter, 1, @"incr was debounced"); start(); }, 70);
+    _.delay(^{ equal(counter, 1, @"incr was debounced"); start(); }, 70);
   });
 }
 
-- (void)test_once {
+- (void)test_once
+{
   __block I num = 0;
   _OncedBlock increment = _.once(^id(id arg1, ... /* NIL_TERMINATION */){ num++; /* REQUIRED */ return nil; }, /* NIL_TERMINATION */ nil);
   increment();
@@ -254,7 +256,8 @@
   equal(num, 1, @"once");
 }
 
-- (void)test_wrap {
+- (void)test_wrap
+{
   _WrappedBlock greet = ^S*(NSS* name, ... /* NIL_TERMINATION */){ return @"hi: ".add(name); };
   _WrappedBlock backwards = _.wrap(greet, ^S*(_WrappedBlock func, NSS* name, ... /* NIL_TERMINATION */){
     return ((S*)func(name)).append(@" ").add(name.split(@"").reverse().join(@""));
@@ -274,7 +277,8 @@
   deepEqual(ret, AO(noop, AO(@"whats", @"your"), @"vector", @"victor"), @"deep wrapping");
 }
 
-- (void)test_compose {
+- (void)test_compose
+{
   _ComposeBlock greet = ^S*(NSS* name, ... /* NIL_TERMINATION */){ return @"hi: ".add(name); };
   _ComposeBlock exclaim = ^S*(NSS* sentence, ... /* NIL_TERMINATION */){ return sentence.add(@"!"); };
   _ComposeBlock composed = _.compose(exclaim, greet, /* NIL TERMINATION */ nil);
@@ -284,7 +288,8 @@
   equal(composed(@"moe", nil), @"hi: moe!", @"in this case, the functions are also commutative");
 }
 
-- (void)test_after {
+- (void)test_after
+{
   _AfterBlock testAfter = ^(N* afterAmount, ... /* NIL_TERMINATION */) {
     ARG_N(timesCalled, afterAmount); 
     __block N* afterCalled = N.I(0);

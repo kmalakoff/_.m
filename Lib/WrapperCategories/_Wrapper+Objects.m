@@ -38,28 +38,28 @@
 
 - (_Wrapper*(^)())keys
 {
-  return ^() {
+  return ^{
     return _.chain(_.keys(self.NSD));
   };
 }
 
 - (_Wrapper*(^)())values
 {
-  return ^() {
+  return ^{
     return _.chain(_.values(self.NSD));
   };
 }
 
 - (_Wrapper*(^)())functions
 {
-  return ^() {
+  return ^{
     return _.chain(_.functions(self.NSD));
   };
 }
 
 - (_Wrapper*(^)())methods
 {
-  return ^() {
+  return ^{
     return _.chain(_.methods(self.NSD));
   };
 }
@@ -125,7 +125,7 @@
 
 - (_Wrapper*(^)())clone /* RETURNS MUTABLE IF POSSIBLE */
 {
-  return ^() {
+  return ^{
     return _.chain(_.clone(self.value()));
   };
 }
@@ -154,7 +154,7 @@
 
 - (_Wrapper*(^)())isEmpty
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isEmpty(self.value())));
   };
 }
@@ -163,21 +163,21 @@
 
 - (_Wrapper*(^)())isArray
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isArray(self.value())));
   };
 }
 
 - (_Wrapper*(^)())isObject
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isObject(self.value())));
   };
 }
 
 - (_Wrapper*(^)())isArguments
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isArguments(self.value())));
   };
 }
@@ -191,35 +191,35 @@
 
 - (_Wrapper*(^)())isString
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isString(self.value())));
   };
 }
 
 - (_Wrapper*(^)())isNumber
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isNumber(self.value())));
   };
 }
 
 - (_Wrapper*(^)())isFinite
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isFinite(self.value())));
   };
 }
 
 - (_Wrapper*(^)())isBoolean
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isBoolean(self.value())));
   };
 }
 
 - (_Wrapper*(^)())isDate
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isDate(self.value())));
   };
 }
@@ -228,14 +228,14 @@
 
 - (_Wrapper*(^)())isNaN
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isNaN(self.value())));
   };
 }
 
 - (_Wrapper*(^)())isNull
 {
-  return ^() {
+  return ^{
     return _.chain(N.B(_.isNull(self.value())));
   };
 }

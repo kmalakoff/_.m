@@ -176,21 +176,21 @@
 
 - (_Wrapper*(^)())shuffle
 {
-  return ^() {
+  return ^{
     return _.chain(_.shuffle(self.value()));
   };
 }
 
 - (_Wrapper*(^)())toArray
 {
-  return ^() {
+  return ^{
     return _.chain(_.toArray(self.value()));
   };
 }
 
 - (_Wrapper*(^)())size
 {
-  return ^() {
+  return ^{
     return _.chain(N.UI(_.size(self.value())));
   };
 }

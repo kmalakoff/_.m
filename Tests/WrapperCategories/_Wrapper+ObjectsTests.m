@@ -39,11 +39,11 @@
   // the test above is not safe because it relies on for-in enumeration order
   A* a = A.new; a.setAt(1, N.I(0));
 //  equal(_.keys(a).join(@", "), @"1", @"is not fooled by sparse arrays; see issue #95"); /* NOT SUPPORTED: strict type checking */
-  raises(^() { _.chain(nil).keys(); }, @"TypeError", @"throws an error for `null` values");
-//  raises(^() { _.keys(void 0); }, TypeError, @"throws an error for `undefined` values"); /* NOT SUPPORTED: JavaScript-only because of undefined */
-//  raises(^() { _.keys(1); }, TypeError, @"throws an error for number primitives");
-//  raises(^() { _.keys(@"a"); }, TypeError, @"throws an error for string primitives");
-//  raises(^() { _.keys(true); }, TypeError, @"throws an error for boolean primitives"); /* NOT SUPPORTED: strict type checking */
+  raises(^{ _.chain(nil).keys(); }, @"TypeError", @"throws an error for `null` values");
+//  raises(^{ _.keys(void 0); }, TypeError, @"throws an error for `undefined` values"); /* NOT SUPPORTED: JavaScript-only because of undefined */
+//  raises(^{ _.keys(1); }, TypeError, @"throws an error for number primitives");
+//  raises(^{ _.keys(@"a"); }, TypeError, @"throws an error for string primitives");
+//  raises(^{ _.keys(true); }, TypeError, @"throws an error for boolean primitives"); /* NOT SUPPORTED: strict type checking */
 }
 
 - (void)test_values
@@ -57,8 +57,8 @@
   ok(_.isEqual(AO(@"b", @"d"), _.chain(obj).functions().NSA), @"can grab the function names of any passed-in object");
 
   /* NOT SUPPORTED: JavaScript-only because of prototype */
-//  void(^Animal)() = ^(){};
-//  Animal.prototype.run = ^(){};
+//  void(^Animal)() = ^{};
+//  Animal.prototype.run = ^{};
 //  equal(_.functions(new Animal).join(@""), @"run", @"also looks up functions on the prototype");
 }
 
@@ -148,7 +148,7 @@
 
   ok(!_.chain(@"Curly").isEqual(@"Larry").B, @"String primitives with different values are not equal");
   ok(!_.chain(S.newS(@"Curly")).isEqual(S.newS(@"Larry")).B, @"String objects with different primitive values are not equal");
-  ok(!_.chain(S.newS(@"Curly")).isEqual(OKV({@"toString", ^(){ return "Curly"; }})).B, @"String objects and objects with a custom `toString` method are not equal");
+  ok(!_.chain(S.newS(@"Curly")).isEqual(OKV({@"toString", ^{ return "Curly"; }})).B, @"String objects and objects with a custom `toString` method are not equal");
 
   // Number object and primitive comparisons.
 //  ok(_.isEqual(75, 75), @"Identical number primitives are equal");
@@ -159,7 +159,7 @@
 //  ok(!_.isEqual(0, new Number(-0)), @"Commutative equality is implemented for `new Number(0)` and `-0`"); /* NOT SUPPORTED: JavaScript-only because of primitives */
 
   ok(!_.chain(N.I(75)).isEqual(N.I(63)).B, @"Number objects with different primitive values are not equal");
-  ok(!_.chain(N.I(63)).isEqual(OKV({@"Of", ^(){ return 63; }})).B, @"Number objects and objects with a `Of` method are not equal");
+  ok(!_.chain(N.I(63)).isEqual(OKV({@"Of", ^{ return 63; }})).B, @"Number objects and objects with a `Of` method are not equal");
 
   // Comparisons involving `NaN`.
   ok(_.chain(NF_NaN).isEqual(NF_NaN).B, @"`NaN` is equal to `NaN`");
@@ -189,7 +189,7 @@
   ok(_.chain(Date.newYMD(2009, 9, 25)).isEqual(Date.newYMD(2009, 9, 25)).B, @"Date objects referencing identical times are equal");
   ok(!_.chain(Date.newYMD(2009, 9, 25)).isEqual(Date.newYMD(2009, 11, 13)).B, @"Date objects referencing different times are not equal");
   ok(!_.chain(Date.newYMD(2009, 11, 13)).isEqual(OKV({
-    @"getTime", ^(){
+    @"getTime", ^{
       return 12606876e5;
     }
   })).B, @"Date objects and objects with a `getTime` method are not equal");
@@ -367,7 +367,7 @@
 //  ok(!_.isEqual(@"Au revoir", localized_string1), @"comparing different typed instances with different values");
 
 //  // Custom `isEqual` methods - comparing with serialized data
-//  Date.prototype.toJSON = ^() {
+//  Date.prototype.toJSON = ^{
 //    return {
 //      _type:"Date",
 //      year:this.getUTCFullYear(),
@@ -425,11 +425,11 @@
 //iDoc.write(
 //  "<script>\
 //    parent.iElement   = document.createElement(@"div");\
-//    parent.iArguments = (^(){ return arguments; })(1, 2, 3);\
+//    parent.iArguments = (^{ return arguments; })(1, 2, 3);\
 //    parent.iArray     = [1, 2, 3];\
 //    parent.iString    = S.newS(@"hello");\
 //    parent.iNumber    = new Number(100);\
-//    parent.iFunction  = (^(){});\
+//    parent.iFunction  = (^{});\
 //    parent.iDate      = new Date();\
 //    parent.iRegExp    = /hi/;\
 //    parent.iNaN       = NaN;\

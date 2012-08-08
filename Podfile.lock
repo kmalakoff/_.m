@@ -3,7 +3,7 @@ PODS:
   - SubjectiveScript.m (0.1.1)
 
 DEPENDENCIES:
-  - QUnit.m (~> 0.1.1)
-  - QUnit.m (~> 0.1.1)
-  - SubjectiveScript.m (~> 0.1.1)
-  - SubjectiveScript.m (~> 0.1.1)
+  - QUnit.m
+  - QUnit.m
+  - SubjectiveScript.m
+  - SubjectiveScript.m
