@@ -27,7 +27,7 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <.h>
+#import <SenTestingKit/SenTestingKit.h>
 
 @interface __FunctionsTests : SenTestCase
 
