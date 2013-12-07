@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A3F7DC515D254BA000774DF /* libPods-_.m-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3F7DC415D254BA000774DF /* libPods-_.m-osx.a */; };
 		0A3F7DC815D254E6000774DF /* lib_.m-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACE7E7B15D24F8100621441 /* lib_.m-ios.a */; };
 		0A7427DC15D2569D00221ACC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A32615615B8FB4900237F52 /* SenTestingKit.framework */; };
 		0A7427FF15D257EE00221ACC /* _Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7427DF15D257EE00221ACC /* _Tests.m */; };
@@ -40,6 +39,7 @@
 		0A74286F15D2598A00221ACC /* _Wrapper+UtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74286515D2598A00221ACC /* _Wrapper+UtilityTests.m */; };
 		0A74287215D259B500221ACC /* _+FunctionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74287115D259B500221ACC /* _+FunctionsTests.m */; };
 		0A74287315D259B500221ACC /* _+FunctionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A74287115D259B500221ACC /* _+FunctionsTests.m */; };
+		0A9D62DD1853ED3000E1F6A0 /* lib_.m-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACE7EA315D24F9700621441 /* lib_.m-osx.a */; };
 		0AADE5F21853EB560092F34E /* _.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AADE5D41853EB560092F34E /* _.h */; };
 		0AADE5F31853EB560092F34E /* _.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADE5D51853EB560092F34E /* _.m */; };
 		0AADE5F41853EB560092F34E /* _.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADE5D51853EB560092F34E /* _.m */; };
@@ -248,9 +248,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A9D62DD1853ED3000E1F6A0 /* lib_.m-osx.a in Frameworks */,
 				0A7427DC15D2569D00221ACC /* SenTestingKit.framework in Frameworks */,
 				0ACE7EB615D24F9700621441 /* Cocoa.framework in Frameworks */,
-				0A3F7DC515D254BA000774DF /* libPods-_.m-osx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
