@@ -1,19 +1,19 @@
 target '_.m-ios' do
-  platform :ios, "4.0"
-  pod 'SubjectiveScript.m'
+  platform :ios, "5.0"
+  pod 'SubjectiveScript.m', '~> 0.1.2'
 end
 
 target '_.m-iosTests' do
-  platform :ios, "4.0"
-  pod 'QUnit.m'
+  platform :ios, "5.0"
+  pod 'QUnit.m', '~> 0.1.2'
 end
 
 target '_.m-osx' do
-  platform :osx
-  pod 'SubjectiveScript.m'
+  platform :osx, "10.7"
+  pod 'SubjectiveScript.m', '~> 0.1.2'
 end
 
 target '_.m-osxTests' do
-  platform :osx
-  pod 'QUnit.m'
+  platform :osx, "10.7"
+  pod 'QUnit.m', '~> 0.1.2'
 end

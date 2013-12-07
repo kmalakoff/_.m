@@ -1,9 +1,14 @@
 PODS:
-  - QUnit.m (0.1.1)
-  - SubjectiveScript.m (0.1.1)
+  - QUnit.m (0.1.2)
+  - SubjectiveScript.m (0.1.2):
+    - QUnit.m (~> 0.1.2)
 
 DEPENDENCIES:
-  - QUnit.m
-  - QUnit.m
-  - SubjectiveScript.m
-  - SubjectiveScript.m
+  - QUnit.m (~> 0.1.2)
+  - SubjectiveScript.m (~> 0.1.2)
+
+SPEC CHECKSUMS:
+  QUnit.m: 0e85f53bf3b37da090044e998c80b87a1825db11
+  SubjectiveScript.m: ad3c096ee0745815cfd342aa1954abfba76d4d8a
+
+COCOAPODS: 0.28.0

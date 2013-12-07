@@ -27,7 +27,7 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <.h>
 
 @interface _Wrapper_JavaScriptTests : SenTestCase
 

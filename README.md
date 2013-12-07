@@ -1,6 +1,7 @@
-````
-_.m
-````
+# _.m
+
+[![Version](http://cocoapod-badges.herokuapp.com/v/_.m/badge.png)](http://cocoadocs.org/docsets/_.m)
+[![Platform](http://cocoapod-badges.herokuapp.com/p/_.m/badge.png)](http://cocoadocs.org/docsets/_.m)
 
 _.m is a port of [Underscore.js](http://underscorejs.org/) to Objective-C. It strives to provide the fullest feature set possible in a way that is familiar to JavaScript developers (despite the differences between JavaScript and Objective-C).
 
@@ -8,8 +9,7 @@ To help achieve this vision, _.m uses [SubjectiveScript.m](https://github.com/km
 
 Full documentation can be found on the [_.m Website](http://kmalakoff.github.com/_.m/)
 
-A Quick Taster
-------------
+### A Quick Taster
 
 You can use familiar Underscore.js functions:
 
@@ -38,24 +38,23 @@ O* counts = (O*) __(lyrics)
 ok(counts.get(@"a").I == 16 && counts.get(@"e").I == 10, @"counted all the letters in the song");
 ```
 
-Installing
----------
+## Usage
 
-#Install From GitHub Source
-  + Clone the [_.m from GitHub](https://github.com/kmalakoff/_.m)
-  + Add all the files from the Lib directory to your project
-  + Clone the [SubjectiveScript.m from GitHub](https://github.com/kmalakoff/SubjectiveScript.m)
-  + Add all the files from the Lib directory to your project
+To run the example project; clone the repo, and run `pod install` from the Project directory first.
 
-#Install From CocoaPods
-  + Install [Ruby](http://www.ruby-lang.org/en/downloads/) and [CocoaPods](href='http://cocoapods.org/#install)
-  + [Configure a Podfile](href='http://cocoapods.org/#get_started) in the root directory of your XCode project. For example:
+## Requirements
 
-```
-      platform :ios
-      pod '_.m',                  '~> 0.1.1'
-      pod 'SubjectiveScript.m',   '~> 0.1.1'
-```
+## Installation
 
-  + Install the pods from the Podfile 'pod install {YourProject}.xcodeproj'
-  + Use the generated '{YourProject}.xcworkspace' file instead of '{YourProject}.xcodeproj'
+_.m is available through [CocoaPods](http://cocoapods.org), to install
+it simply add the following line to your Podfile:
+
+    pod "_.m"
+
+## Author
+
+Kevin Malakoff, kmalakoff@gmail.com
+
+## License
+
+_.m is available under the MIT license. See the LICENSE file for more info.
