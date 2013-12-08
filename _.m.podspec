@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "_.m"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "_.m is a port of Underscore.jsto Objective-C."
   s.description  = <<-DESC
                     _.m is a port of [Underscore.js](http://underscorejs.org/) to Objective-C. It strives to provide the fullest feature set possible in a way that is familiar to JavaScript developers (despite the differences between JavaScript and Objective-C).
